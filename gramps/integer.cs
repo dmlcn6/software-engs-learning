@@ -64,3 +64,49 @@ switch (rand2)
 
 
 Console.WriteLine($"{rand1} {operation} {rand3} = {answer}{message}");
+
+object() - Type
+
+
+public class Vehicle
+//accessModifier class ClassName
+{
+    private string Make;
+    public string Model;
+}
+
+public class Car : Vehicle
+{
+    
+}
+
+public class Motorcycle : Vehicle
+{
+    public double GetTopSpeed()
+    //accessModifier returnType FunctionName (parameters1, parameters2)
+    {
+        return 2150;
+    }
+
+    public void FixTire()
+    {
+        // here is where we fix the tire
+        
+    }
+ 
+    static void Main()
+    {
+        Motorcycle hondaMoto = new Motorcycle();
+        Motorcycle redMoto = new Motorcycle();
+        Motorcycle moto = new Motorcycle();
+        //type variableName = value;
+
+        moto.StartEngine();
+        moto.AddGas(15);
+        moto.Drive(5, 20);
+        double speed = moto.GetTopSpeed();
+        moto.Model = "500cc";
+        moto.FixTire();
+        Console.WriteLine($"My top speed is {speed}");
+    }
+}
