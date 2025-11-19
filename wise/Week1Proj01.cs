@@ -25,6 +25,27 @@ var Eq = m;
 
 
 Console.WriteLine($"{Qa}+{Qb}={Eq}");
+//
+// dotnet new console -o MyConsoleApp
+//
+//accessModifier returnType functionName (parameter1, parameter2)
+//accessModifier Class ClassName
+
+
+
+int a = 2;
+int b = 5;
+
+
+public class Math
+{
+
+public void Test()
+    {
+        
+    }
+
+}
 
 
 
