@@ -22,7 +22,7 @@ Random rnd1 = new();
 int rand1 = rnd.Next(100);
 int rand2 = rnd.Next(operations.Length);
 int rand3 = rnd.Next(100);
-
+ 
 float answer = 0;
 string message = "";
 
@@ -42,14 +42,14 @@ switch (rand2)
         break;
     // div
     case 2:
+        operation = "/";
         if (rand3 == 0)
         {
-            message = "cannot divide by 0!";
+            message = " Cannot divide by 0!";
         }
         else
         {
             answer = rand1 / rand3;
-            operation = "/";
         }
         break;
     // multi
@@ -63,5 +63,4 @@ switch (rand2)
     
 
 
-
-Console.WriteLine($"{rand1} {operation} {rand3} = {answer}{(string.IsNullOrWhiteSpace(message) ? message : "")}");
+Console.WriteLine($"{rand1} {operation} {rand3} = {answer}{message}");
