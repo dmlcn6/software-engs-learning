@@ -19,3 +19,7 @@ Rocket has something of a rough around the edges attitude. Rocket is a brash, ho
 
 This week went really well!
 I'm having a blast brushing up on my coding skills!
+
+T-Rex late changes.....Sickle Cell Sucks but I can smoke Weed!!!
+Let's Code
+
