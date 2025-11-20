@@ -65,26 +65,46 @@ switch (rand2)
 
 Console.WriteLine($"{rand1} {operation} {rand3} = {answer}{message}");
 
-object() - Type
 
 
 public class Vehicle
 //accessModifier class ClassName
 {
-    private string Make;
-    public string Model;
+    private string Make_M;
+    string ModelOf; //if no access modifier; default is private
+
+    func1();
+    public string ReadMake_M()
+    {
+        return Make_M;
+    }
 }
+
+
 
 public class Car : Vehicle
 {
     
 }
 
+// accessModifiers
+// - public
+// - private
+
+// Types
+// - int, strings, arrays, double, bool
+
+
+
 public class Motorcycle : Vehicle
 {
-    public double GetTopSpeed()
-    //accessModifier returnType FunctionName (parameters1, parameters2)
+    public double GetTopSpeed(bool brit)
+    //accessModifier Type FunctionName (Type, Type)
     {
+        if (brit)
+        {
+            return 2150 * 18.3;
+        }
         return 2150;
     }
 
@@ -95,7 +115,7 @@ public class Motorcycle : Vehicle
     }
  
     static void Main()
-    {
+    { 
         Motorcycle hondaMoto = new Motorcycle();
         Motorcycle redMoto = new Motorcycle();
         Motorcycle moto = new Motorcycle();
@@ -104,8 +124,8 @@ public class Motorcycle : Vehicle
         moto.StartEngine();
         moto.AddGas(15);
         moto.Drive(5, 20);
-        double speed = moto.GetTopSpeed();
-        moto.Model = "500cc";
+        double speed = moto.GetTopSpeed(false);
+        moto.ModelOf = "500cc";
         moto.FixTire();
         Console.WriteLine($"My top speed is {speed}");
     }
