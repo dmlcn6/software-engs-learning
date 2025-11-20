@@ -12,9 +12,7 @@ Console.WriteLine("It's Mathematical!");
 string[] operation = new string [4] {"+","-","*","/"};
 SimpCalc math = new SimpCalc();
 int add = math.Add;
-int sub = math.Sub;
-int mult = math.Mult;
-int div = math.Div;
+
 
 
 
