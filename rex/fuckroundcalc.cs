@@ -8,25 +8,28 @@
 
 //accessModifier returnType FunctionName(parameterType1, parameterType2)
 
+Console.WriteLine("Still in deveolpement phase 1.0");
+
+
 namespace rexSimpleCalculator
 {   
     
     public class Integer
     {
-        public var add()
+        public void add()
         {
             string name = "+";
         }
-        public var subtract()
+        public void subtract()
         {
             string name = "-";
         }
-        public var multiply()
+        public void multiply()
         {
             string name = "*";
         }
         
-        public var divide()
+        public void divide()
         {
             string name = "/";
         }
@@ -36,5 +39,4 @@ namespace rexSimpleCalculator
 
 }
 
-Console.Writeline("Still in deveolpement phase 1.0");
 
