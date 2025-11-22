@@ -11,8 +11,9 @@
 Console.WriteLine("It's Mathematical!");
 string[] operation = new string [4] {"+","-","*","/"};
 SimpCalc math = new SimpCalc();
-int add = math.Add;
+var add = math.Add;
 
+Console.WriteLine(math.Add);
 
 
 
@@ -20,7 +21,7 @@ public class SimpCalc
 {
     Random rand1 = new Random(); 
     Random rand2 = new Random();
-    public double answer;
+    public int answer;
 
      public int Add(int rand1, int rand2)
     {
