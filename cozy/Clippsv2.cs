@@ -8,36 +8,45 @@
 
 // accessModifier returnType FunctionName (parameters1, parameters2)
 
-Console.WriteLine("It's Mathematical!");
-string[] operation = new string [4] {"+","-","*","/"};
 SimpCalc math = new SimpCalc();
-var add = math.Add;
+//var add = math.Add();
 
-Console.WriteLine(math.Add);
+
+Console.WriteLine("Simple Calculator ;)");
+//Console.WriteLine(add);
 
 
 
 public class SimpCalc
 {
-    Random rand1 = new Random(); 
-    Random rand2 = new Random();
-    public int answer;
-
-     public int Add(int rand1, int rand2)
+    Random Randle = new Random(); 
+    int rand1;
+    int rand2;
+    int Answer;
+    
+    public SimpCalc()
     {
-        return answer = rand1 + rand2;
+        rand1 = Randle.Next(100);
+        rand2 = Randle.Next(100);
     }
-    public int Sub(int rand1, int rand2)
+     public void Add()
     {
-        return answer = rand1 - rand2;
+        Answer = rand1 + rand2; 
     }
-    public int Mult(int rand1, int rand2)
+    public int Sub()
     {
-        return answer = rand1 * rand2;
+        Answer = rand1 - rand2;
+        return Answer;
     }
-    public int Div(int rand1, int rand2)
+    public int Mult()
     {
-        return answer = rand1 / rand2;
+        Answer = rand1 * rand2;
+        return Answer;
+    }
+    public int Div()
+    {
+        Answer = rand1 / rand2;
+        return Answer;
     }
 }        
 
