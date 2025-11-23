@@ -9,12 +9,10 @@
 // accessModifier returnType FunctionName (parameters1, parameters2)
 
 SimpCalc math = new SimpCalc();
-//var add = math.Add();
-
+//var add = math.Add(); error CS0815: Cannot assign void to an implicitly-typed variable
+math.Add();
 
 Console.WriteLine("Simple Calculator ;)");
-//Console.WriteLine(add);
-
 
 
 public class SimpCalc
@@ -32,6 +30,7 @@ public class SimpCalc
      public void Add()
     {
         Answer = rand1 + rand2; 
+        Console.WriteLine(Answer);      
     }
     public int Sub()
     {
