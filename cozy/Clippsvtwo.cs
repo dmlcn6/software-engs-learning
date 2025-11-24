@@ -29,7 +29,7 @@ public class SimpCalc
     public int rand1;
     public int rand2;
     int Answer;
-    //int deci;
+    float deci;
     
     public SimpCalc()
     {
@@ -59,8 +59,8 @@ public class SimpCalc
         }
         else
         {
-            Answer = rand1 / rand2;
-            Console.WriteLine($"{rand1}/{rand2}={(double)Answer}");
+            deci = rand1 / rand2;
+            Console.WriteLine($"{rand1}/{rand2}={deci.ToString("f2")}");
         }    
     }
 }
