@@ -20,15 +20,38 @@
 
 
 
-Calculator math = new Calculator();
-int sum = math.Equations(3,5,"add");
-Console.WriteLine(sum);
+
+
+
+
+
+
+
+
+
+
+
+
+
+int NumA = 2;
+int NumB = 5;
+string EQ = "multi";
+
+
+
+
+
+
+
+Calculator start = new Calculator();
+int sum = start.FunctionA(NumA,NumB,EQ);
+Console.WriteLine(sum);                     //Not neccsary {prints the answer a second time}
 
 
 public class Calculator ()
 {
 
-    public int Equations (int intA, int intB, string SymB)
+    public int FunctionA (int intA, int intB, string SymB)
     {
 
         int answer;
@@ -37,7 +60,8 @@ public class Calculator ()
         if (SymB == "add")
         {
             answer = intA + intB;
-            Console.WriteLine($"{intA}+{intB}={answer}");
+
+            //Console.WriteLine($"{intA}+{intB}={answer}");
         }
         else if (SymB == "sub")
         {
@@ -63,4 +87,3 @@ public class Calculator ()
         return answer;
     }
 }
-
