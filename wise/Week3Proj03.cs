@@ -32,9 +32,9 @@
 
 
 
-int NumA = 8;
-int NumB = 10;
-string EQ = "multi";
+double EntreeA = 63.5;
+double EntreeB = 8.2;
+string EQ = "divi";
 
 
 
@@ -43,34 +43,42 @@ string EQ = "multi";
 
 
 Calculator start = new Calculator();
-start.FunctionA(NumA,NumB,EQ);
+start.FunctionA(EntreeA,EntreeB,EQ);
 //Console.WriteLine($"{output}");                     //Not neccsary {prints the answer a second time}
 
 
 public class Calculator ()
 {
 
-    public string FunctionA (int intA, int intB, string EQ)
+    public string FunctionA (double numA, double numB, string EQ)
     {
 
+        double additionNum = numA+numB;
+        double subtractionNum = numA-numB;
+        double multiplicationNum = numA*numB;
+        double divisionNum = numA/numB;
+
+        string additionStr = additionNum.ToString("f2");
+        string subtractionStr = subtractionNum.ToString("f2");
+        string multiplicationStr = multiplicationNum.ToString("f2");
+        string divisionStr = divisionNum.ToString("f2");
 
 
         if (EQ == "add")
         {
-            AnswerB($"{intA}+{intB}={intA+intB}");
-            //Console.WriteLine($"{intA}+{intB}={answer}");
+            AnswerB($"{numA} + {numB} = {additionStr}");
         }
         else if (EQ == "sub")
         {
-            AnswerB($"{intA}-{intB}={intA-intB}");
+            AnswerB($"{numA} - {numB} = {subtractionStr}");
         }
         else if (EQ == "multi")
         {
-            AnswerB($"{intA}x{intB}={intA*intB}");
+            AnswerB($"{numA} x {numB} = {multiplicationStr}");
         }
         else if (EQ == "divi")
         {
-            AnswerB($"{intA}/{intB}={intA/intB}");
+            AnswerB($"{numA} / {numB} = {divisionStr}");
         }
         else
         {
