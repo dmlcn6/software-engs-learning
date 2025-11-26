@@ -32,8 +32,8 @@
 
 
 
-double EntreeA = 63.5;
-double EntreeB = 8.2;
+double EntreeA = 17.25;
+double EntreeB = 66.66;
 string EQ = "divi";
 
 
@@ -43,7 +43,10 @@ string EQ = "divi";
 
 
 Calculator start = new Calculator();
-start.FunctionA(EntreeA,EntreeB,EQ);
+start.FunctionA(EntreeA,EntreeB,"add");
+start.FunctionA(EntreeA,EntreeB,"sub");
+start.FunctionA(EntreeA,EntreeB,"multi");
+start.FunctionA(EntreeA,EntreeB,"divi");
 //Console.WriteLine($"{output}");                     //Not neccsary {prints the answer a second time}
 
 
