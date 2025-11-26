@@ -36,7 +36,7 @@
 
 
 double EntreeA = 17.25;
-double EntreeB = 66.66;
+double EntreeB = 0;
 string EQ = "divi";
 
 
@@ -84,11 +84,19 @@ public class Calculator ()
         }
         else if (EQ == "divi")
         {
-            AnswerB($"{numA} / {numB} = {divisionStr}");
+            if(numB == 0)
+            {
+                Console.WriteLine($"You CANNOT divide {numA} By 0 MF");
+            }
+
+            else
+            {
+                AnswerB($"{numA} / {numB} = {divisionStr}");
+            }
         }
         else
         {
-            Console.WriteLine("Something Went Wrong");
+            Console.WriteLine("please enter a valid operation");
         }
         return "Something Went Wrong";
     }
