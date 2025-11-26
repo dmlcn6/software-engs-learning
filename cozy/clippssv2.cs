@@ -9,15 +9,7 @@
 // accessModifier returnType FunctionName (parameters1, parameters2)
 
 SimpCalc math = new SimpCalc();
-var add = math.Add();
-var sub = math.Sub();
-var mult = math.Mult();
-
-
-
-
-
-Console.WriteLine("Super Scuffed Simple Calculator :P");
+Console.WriteLine("Super Satisfactory Simple Calculator :D");
 math.Add();
 math.Sub();
 math.Mult();
@@ -41,8 +33,7 @@ public class SimpCalc
         rand1 = Randle.Next(100);
         rand2 = Randle.Next(100);
         Answer = rand1 + rand2; 
-        Console.Writeline($)
-
+        Console.WriteLine($"{rand1}+{rand2}={Answer}");
         return Answer;      
     }
     public int Sub()
@@ -50,6 +41,7 @@ public class SimpCalc
         rand1 = Randle.Next(100);
         rand2 = Randle.Next(100);
         Answer = rand1 - rand2;
+        Console.WriteLine($"{rand1}-{rand2}={Answer}");
         return Answer;
     }
     public int Mult()
@@ -57,6 +49,7 @@ public class SimpCalc
         rand1 = Randle.Next(100);
         rand2 = Randle.Next(100);
         Answer = rand1 * rand2;
+        Console.WriteLine($"{rand1}*{rand2}={Answer}");
         return Answer;
     }
     public void Div()
@@ -65,7 +58,7 @@ public class SimpCalc
         rand2 = Randle.Next(100);
         if (rand2 == 0)
         {
-            Console.WriteLine("Cannot divide by zero!");
+            Console.WriteLine($"{rand1}/{rand2}: Cannot divide by zero!");
         }
         else
         {
