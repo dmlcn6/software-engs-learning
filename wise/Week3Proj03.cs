@@ -12,6 +12,9 @@
 
 //dotnet run <filename>
 
+//Console.WriteLine($"{(double)intA+intB.ToString("f2")}");
+
+//Console.WriteLine($"{(intA+intB).ToString("f2")}");
 
 //int int1 = 4;
 //int int2 = 6;
