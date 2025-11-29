@@ -4,13 +4,21 @@ The repo for up and coming SWEs
 
 
 here is what we covered so far
-- **Week 1: Development Environment & Version Control**
+- **Week 1: Development Environment & Version Control and Variables and Data Types**
     - Set up IDE, terminal, and command line tools
       - Resources
     - Git fundamentals: clone, commit, push, pull, branches
     - GitHub workflow and collaboration basics
     - *Project: Create first repository and practice branching practiced merging and PRs*
-
+- **Sprint 1: Control Flow & Logic, Functions & Methods, Arrays & Collections, Strings, OOP **
+    - We successfully created calculators that followed this AC:
+    - AC - Acceptance Criteria
+      4 functions - Add Div Subtract Multi
+      Display output to user
+      disply equation
+      display divide by 0 error
+      2 point decimal outputs for division
+      Show use of classes/functions to organize code
 
 
 Tyree made this Change 11/14/25
