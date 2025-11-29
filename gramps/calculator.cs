@@ -14,7 +14,9 @@ var calc = new Calc();
 
 
 calc.Add();
-calc.Add(1, 3);
+calc.Divide();
+calc.Subtract();
+calc.Multiply();
 
 namespace Test
 {
@@ -47,15 +49,50 @@ namespace Test
 
         public void Subtract(int number1, int number2)
         {
-            LogAnswer($"{number1} * {number2} = {number1*number2}");
+            LogAnswer($"{number1} - {number2} = {number1-number2}");
         }
+        public void Subtract()
+        {
+            LogAnswer($"{rand1} - {rand2} = {rand1-rand2}");
+        }
+
         public void Divide(int number1, int number2)
         {
-            LogAnswer($"{number1} * {number2} = {number1*number2}");
+            string message = "";
+            if (number2 == 0)
+            {
+                message = "cannot divide by 0";
+            }
+            else
+            {
+                message = $"{number1} / {number2} = {(double)number1/number2}";    
+            }
+            LogAnswer(message);
         }
+
+        public void Divide()
+        {
+            string message = "";
+            if (rand2 == 0)
+            {
+                message = "cannot divide by 0";
+            }
+            else
+            {
+                //result = (double)rand1/rand2;
+                message = $"{rand1} / {rand2} = {(double)rand1/rand2}";    
+            }
+            LogAnswer(message);
+        }
+
         public void Multiply(int number1, int number2)
         {
             LogAnswer($"{number1} * {number2} = {number1*number2}");
+        }
+
+        public void Multiply()
+        {
+            LogAnswer($"{rand1} * {rand2} = {rand1*rand2}");
         }
 
         private void LogAnswer(string message)
