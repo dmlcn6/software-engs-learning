@@ -7,24 +7,13 @@
 
 //  Show use of classes/functions to organize code
 
-using Test;
-
-var calc = new Calc();
-// Console.WriteLine(calc.name);  cant use this directly with dot notation (.) becuase it is private access modifier
-
-
-calc.Add();
-calc.Divide();
-calc.Subtract();
-calc.Multiply();
-
 namespace Test
 {
     public class Calc
     {
         Random randGenerator = new Random();
-        public int rand1;
-        public int rand2;
+        static public int rand1;
+        static public int rand2;
         string name = "Calculator v1.0";
  
         // THIS IS A CONSTRUCTOR
@@ -33,6 +22,18 @@ namespace Test
             Console.WriteLine($"Welcome to {name}");
             rand1 = randGenerator.Next(100);
             rand2 = randGenerator.Next(100);
+        }
+
+        static void Main()
+        {
+            
+            // Console.WriteLine(calc.name);  cant use this directly with dot notation (.) becuase it is private access modifier
+            var calc = new Calc();
+
+            calc.Add(1,2);
+            // calc.Divide();
+            // calc.Subtract();
+            // calc.Multiply();
         }
 
         // functions are unique based on accessModifer returnType input paramters
@@ -47,16 +48,16 @@ namespace Test
             LogAnswer($"{rand1} + {rand2} = {rand1+rand2}");
         }
 
-        public void Subtract(int number1, int number2)
+        static public void Subtract(int number1, int number2)
         {
             LogAnswer($"{number1} - {number2} = {number1-number2}");
         }
-        public void Subtract()
+        static public void Subtract()
         {
             LogAnswer($"{rand1} - {rand2} = {rand1-rand2}");
         }
 
-        public void Divide(int number1, int number2)
+        static public void Divide(int number1, int number2)
         {
             string message = "";
             if (number2 == 0)
@@ -70,7 +71,7 @@ namespace Test
             LogAnswer(message);
         }
 
-        public void Divide()
+        static public void Divide()
         {
             string message = "";
             if (rand2 == 0)
@@ -85,17 +86,17 @@ namespace Test
             LogAnswer(message);
         }
 
-        public void Multiply(int number1, int number2)
+        static public void Multiply(int number1, int number2)
         {
             LogAnswer($"{number1} * {number2} = {number1*number2}");
         }
 
-        public void Multiply()
+        static public void Multiply()
         {
             LogAnswer($"{rand1} * {rand2} = {rand1*rand2}");
         }
 
-        private void LogAnswer(string message)
+        static private void LogAnswer(string message)
         {
             Console.WriteLine(message);
         }
