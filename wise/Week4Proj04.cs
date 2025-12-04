@@ -23,40 +23,32 @@ public class GameBase
 
 
 
-
-
-
-
-
     private static void Main()
     {
         Console.WriteLine("We Have Begun");
         var newIns = new GameBase();
-        string newUser = newIns.GetUsername();
+        string newUser = newIns.Intro();
     }
 
-    public string GetUsername()
+    public string Intro()
     {
-        // Instructs user to enter their name.
-        Console.WriteLine("Enter Your Name");
 
-        // In case the user does not enter a value.
-        string? username;
+        Console.WriteLine("Enter Your Name");   // Instructs user to enter their name.
+
+        string? name;
         do
         {
-            // Get the user's name and put it into a variable.
-            username = Console.ReadLine();
+            name = Console.ReadLine();
 
         // Make the user repeat if they do not enter a value. 
-        } while (username == "");
+        } while (name == "");
 
 
         // Restate the user's name.
-        Console.WriteLine($"{username}. This U?");
+        Console.WriteLine($"{name}. This U?");
         
         // Instruct the user of their options.
-        Console.WriteLine("1. YES");
-        Console.WriteLine("2. NO");
+        GameDialogue.CloseEnded();
 
        string? result;
        result = PlayerDialogue.CloseEnded();
@@ -98,6 +90,7 @@ public class GameEnvi
     public string stage1_4 = "";
     public string stage1_5 = "";
     //Thread.Sleep(10000);
+    //string? username;
     //do {} while (closeEnded != "NO" || closeEnded != "YES");
     //do {} while (closeEnded != "NO" && closeEnded != "YES");
 }
@@ -142,6 +135,17 @@ public class PlayerDialogue
         } while (input != "1" && input != "2");
 
         return input;
+    }
+
+}
+
+public class GameDialogue
+{
+    public static void CloseEnded()
+    {
+        Console.WriteLine("1. YES");
+        Console.WriteLine("2. NO");
+        return;
     }
 
 }
