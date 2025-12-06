@@ -14,7 +14,7 @@ public class CozyGame
     public static int Start;
     public static void Main()
     {    
-        // Intro to the greatest text based game made this year
+        // Get player name and start the game
 
         Console.WriteLine("Hi, My name is Cozy :)");
         Thread.Sleep(4000);
@@ -37,8 +37,7 @@ public class CozyGame
         Start = Console.ReadLine();    
     } 
     
-    public void StartGame(string Start)
-    {
-        
-    }
+        // Have player decide if they want to play or not
+        // Start the game. Player begins the adventure.
+        // Flow chart of game events.
 }
