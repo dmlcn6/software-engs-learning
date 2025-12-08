@@ -7,7 +7,7 @@ public class Program
         Console.WriteLine("Program has started");
 
         var S1 = new Stage1();
-        S1.StageAnnoucement1();
+        S1.StageOneAnnoucement();
     }
 }
 
@@ -15,18 +15,18 @@ public class Program
 
 public class Stage1
 {
-    public string StageAnnoucement1()
+    public string StageOneAnnoucement()
     {
         Console.WriteLine("Stage 1 has started");
 
         var S1 = new Stage1();
-        S1.Base1();
+        S1.Wave1();
         
         return "StageAnnoucement1 Completed";
     }
 
 
-    public string Base1()
+    public string Wave1()
     {
         Console.WriteLine("Welcome to Nucular Warfare!");
 
@@ -34,9 +34,9 @@ public class Stage1
         plyrInfo.GetPlayerName();
         
         var S2 = new Stage2();
-        S2.StageAnnoucement2();
+        S2.StageTwoAnnoucement();
 
-        return "Base1";
+        return "Wave1";
     }
 
 }
@@ -45,12 +45,12 @@ public class Stage1
 
 public class Stage2
 {
-    public string StageAnnoucement2()
+    public string StageTwoAnnoucement()
     {
         Console.WriteLine("Stage 2 has started");
 
         var S3 = new Stage3();
-        S3.StageAnnoucement3();
+        S3.StageThreeAnnoucement();
 
         return "StageAnnoucement2 Completed";
     }
@@ -60,7 +60,7 @@ public class Stage2
 
 public class Stage3
 {
-    public string StageAnnoucement3()
+    public string StageThreeAnnoucement()
     {
         Console.WriteLine("Stage 3 has started");
 
@@ -81,27 +81,88 @@ public class PlayerInfo
         string? nameTemp1;
         do
         {
-            Console.WriteLine("What is your name");
+            var stageOpen = new StageDia1();
+            Console.WriteLine($"{stageOpen.DialoguePrompt(0)}");   
             nameTemp1 = Console.ReadLine();
             
         } while (nameTemp1 == "");
 
         
-        string? nameConf;
+        string? nameConf = "empty";
         do
         {
-            Console.WriteLine($"Is your name ({nameTemp1})?");
+            var stageOpen = new StageDia1();
+            Console.WriteLine($"{stageOpen.DialoguePrompt(1)} ({nameTemp1})?");
             Console.WriteLine("A. YES");
             Console.WriteLine("B. NO");
             nameConf = Console.ReadLine();
+
+            if(nameConf != "A" && nameConf != "B")
+            {
+                Console.WriteLine("Please Either Enter (A) for YES. |OR| (B) for NO.");
+            }
+            
         } while (nameConf != "A" && nameConf != "B");
+
+
+        if (nameConf == "A")
+        {
+            nameConf = nameTemp1;
+            Console.WriteLine(".....");
+            Console.WriteLine("EW");
+            Console.WriteLine("You may continue");
+        }
+
+        else if ( nameConf == "B")
+        {
+            nameConf = "empty";
+            Console.WriteLine("Okay then");
+            Console.WriteLine("I have one question for you");
+            var startOver = new PlayerInfo();
+            startOver.GetPlayerName();
+        }
+        
+        else
+        {
+            nameConf = "empty";
+            Console.WriteLine("Something went wrong");
+            var startOver = new PlayerInfo();
+            startOver.GetPlayerName();
+        }
+
         
         
-        return "hello";
+        return nameConf;
     }
 
     
     
+}
+
+
+
+
+
+public class StageDia1
+{
+
+    string[] diaTreePrompt = {"What is your name", "Is your name", "test3"};
+
+    string stage = "test";
+    public string DialoguePrompt (int placeHolder)
+    {
+
+
+        //string[] stage1 = {"test1", "test2", "test3"};
+        string stage = diaTreePrompt[placeHolder];
+
+        return stage;
+    }
+
+
+
+
+
 }
 
 
