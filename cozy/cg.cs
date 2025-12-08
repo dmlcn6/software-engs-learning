@@ -11,33 +11,60 @@
 public class CozyGame
 {
     public static string PlayerName;
-    public static int Start;
+    public static string Choice;
     public static void Main()
     {    
         // Get player name and start the game
 
         Console.WriteLine("Hi, My name is Cozy :)");
-        Thread.Sleep(4000);
+        Thread.Sleep(1000);
         Console.WriteLine("Let's play a game");
-        Thread.Sleep(4000);
+        Thread.Sleep(1000);
         Console.WriteLine("Don't worry, it'll be fun...");
-        Thread.Sleep(4000);
+        Thread.Sleep(1000);
         Console.WriteLine("Before we get started, I need to know what to call you.");
-        Thread.Sleep(4000);
+        Thread.Sleep(1000);
         Console.WriteLine("What is your name?");
         PlayerName = Console.ReadLine();
         Console.WriteLine($"So your name is {PlayerName}? That's cute lol");
-        Thread.Sleep(4000);
+        Thread.Sleep(1000);
         Console.WriteLine($"Today you'll embark on an adventure, {PlayerName}, to decide your fate!");
-        Thread.Sleep(4000);
+        Thread.Sleep(1000);
         Console.WriteLine("Every decision you make will determine the outcome of your story.");
-        Thread.Sleep(4000);
+        Thread.Sleep(1000);
         Console.WriteLine("Do you think you have what it takes to make it to the end?");
-        Console.WriteLine("Please type 1 for Yes or 2 for No");
-        Start = Console.ReadLine();    
+        Console.WriteLine("Please type Yes or No");
+        Choice = Console.ReadLine();
+        CozyGame.Begin();
+
+
+
     } 
-    
-        // Have player decide if they want to play or not
-        // Start the game. Player begins the adventure.
-        // Flow chart of game events.
+    // Have player decide if they want to play or not
+    public static void Begin()
+    {
+        if (Choice == "Yes")
+        {
+            Console.WriteLine("I thought you looked brave. Let's get started :)");
+            CozyGame.Gameplay();
+        }    
+        else if (Choice == "No")
+        {
+            Console.WriteLine("That's disappointing.");
+            Thread.Sleep(1000);
+            Console.WriteLine("Welp, Goodbye...");
+        }
+        else
+        {
+            Console.WriteLine("Please type Yes or No");
+            Choice = Console.ReadLine();
+            CozyGame.Begin();
+        }
+    }
+    // Start the game. Player begins the adventure.
+    public static void Gameplay()
+    {
+        
+    }
+    // Flow chart of game events.
 }
