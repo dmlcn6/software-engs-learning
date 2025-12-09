@@ -8,8 +8,107 @@ namespace AdventureGame
 
         public static void Main(string[] args)
         {
+            //i want a player
+            var player1 = new Player();
+            // i want to know how many enemies the player has killed
+            var killCount = 0;
+            // i want the player to fight until the end
+            var keepFighting = true;
+            do
+            {
+                // create a tinymonster the first 4 kills, then fight the boss for your final battle
+                Character enemy;
+                if (killCount < 4)
+                {
+                    enemy = new TinyMonster();
+                }
+                else
+                {
+                    enemy = new Boss();
+                }
+
+                // run the encounter, until someone dies
+                var player1SurvivedFight = EnemyEncounter(player1, enemy);
+
+                // keepfighting is true when the player survived the encounter and did not get 5 kills yet
+                // if the player died in the enemey encounter or their kills count is 5 or more
+                // then keepfighting will be false
+                keepFighting = player1SurvivedFight && killCount < 5;
+
+                // after each encounter, checke if the player won
+                if (killCount == 5)
+                {
+                    Console.WriteLine("You've endured your first set of Trials! and deserve a new Weapon");
+                    Console.WriteLine("You've won!");
+                    return;
+                }
+
+            } while (keepFighting);
+
+            Console.WriteLine("You have died! Get a 5 monster kill streak to proceede.");
+            Console.WriteLine("GAMEOVER!");
+        }
+
+        private static bool EnemyEncounter(Player player1, Character enemy)
+        {
+            // I want to alternate attacking, starting with the player 
+            // until someone dies
+
+            do
+            {
+                player1.ViewStats();
+                enemy.ViewStats();
+                Console.WriteLine("Select your action: number");
+                Console.WriteLine("1. Attack");
+                Console.WriteLine("2. Use Item");
+                var isChoice = int.TryParse(Console.ReadLine(), out int choice);
+
+                if (isChoice)
+                {
+                    switch (choice)
+                    {
+                        case 1:
+                            player1.Attack(enemy);
+                            break;
+                        case 2:
+
+                            Console.WriteLine("Here is your inventory: ");
+                            var localInventory = player1._inventory;
+                            for (var i = 0; i < localInventory.Count; i++)
+                            {
+                                Console.WriteLine($"{i}: {localInventory[i].name}");
+                            }
+                            Console.WriteLine("Select your item number: ");
+                            var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
+
+                            if (isItemChoice)
+                            {
+                                player1._inventory[itemChoice].Use(player1);
+                                Console.WriteLine("Item used successfully");
+                                player1.ViewStats();
+                            }
+                            else
+                            {
+                                // you didnt provide a proper choice
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    // you didnt provide a proper choise
+                }
+
+                if (enemy.IsAlive())
+                {
+                    enemy.Attack(player1);
+                }
+
+            } while (player1.IsAlive() && enemy.IsAlive());
 
 
+            // returns if the player survived the encounter
+            return player1.IsAlive();
         }
     }
     #endregion
@@ -18,36 +117,62 @@ namespace AdventureGame
 
     public abstract class Character
     {
-        private int dmg = 4;
+        public int _dmg = 4;
 
-        private int hp = 20;
+        public int _hp = 20;
 
-        public abstract string name;
+        public string _name;
 
-        public List<UsableItem> inventory;
+        public List<UsableItem> _inventory;
+
+        public bool _dead = false;
 
         public Character()
         {
             // create players new inventory
-            inventory = new List<UsableItem>();
+            _inventory = new List<UsableItem>();
 
             // player spawn with base item
-            inventory.Add(new Sword());
+            _inventory.Add(new Sword());
         }
 
         public void ViewStats()
         {
-            Console.WriteLine($"DMG: {dmg}, HP: {hp}");
+            Console.WriteLine($"{_name} Stats:  DMG: {_dmg}, HP: {_hp}");
         }
 
-        public void AttackedBy(Character attacker)
+        public bool AttackedBy(Character attacker)
         {
-            hp = hp - attacker.dmg;
+            _hp -= attacker.GetDmg();  // same as _hp = _hp - attacker.dmg
+
+            ViewStats();
+            attacker.ViewStats();
+
+            if (_hp <= 0)
+            {
+                Dead();
+                return true;
+            }
+
+
+            return false;
         }
 
-        public void Attack(Character victim)
+        public abstract void Attack(Character victim);
+
+        public int GetDmg()
         {
-            victim.AttackedBy(this);
+            return _inventory[0].amountOfEffectToHp + _dmg;
+        }
+
+        public virtual void Dead()
+        {
+            Console.WriteLine($"[{_name}]: I i Wait please help me! im Dying ple- Please, i cant fe- .....");
+        }
+
+        public bool IsAlive()
+        {
+            return !_dead;
         }
     }
 
@@ -55,8 +180,24 @@ namespace AdventureGame
     {
         public Player()
         {
-            name = "Player 1";
-            inventory.Add(new Potion());
+            _name = "Player 1";
+            _inventory.Add(new Potion());
+        }
+
+        public override void Attack(Character victim)
+        {
+            var victimIsDead = victim.AttackedBy(this);
+            if (victimIsDead)
+            {
+                // everytime Player kills a monster, they get 1 health potion
+                _inventory.Add(new Potion());
+            }
+        }
+
+        public override void Dead()
+        {
+            Console.WriteLine($"[{_name}]: I will never stop! ...");
+            _dead = true;
         }
     }
 
@@ -64,7 +205,46 @@ namespace AdventureGame
     {
         public TinyMonster()
         {
-            name = "Tiny Monster";
+            _name = "Tiny Monster";
+        }
+
+        public override void Attack(Character victim)
+        {
+            Console.WriteLine($"[{_name}]: ** in high pitch ** THIS IS GOnNA HURT!!");
+            var victimIsDead = victim.AttackedBy(this);
+            if (victimIsDead)
+            {
+                // everytime a TinyMonster kills a character, they scream
+                Console.WriteLine($"[{_name}]: ** in high pitch ** DIE DIE DIE!!");
+            }
+        }
+
+
+    }
+
+    public class Boss : Character
+    {
+        public Boss()
+        {
+            _name = "First FInal Boss";
+            _dmg = 50;
+            _hp = 100;
+        }
+
+        public override void Attack(Character victim)
+        {
+            var victimIsDead = victim.AttackedBy(this);
+            if (victimIsDead)
+            {
+                // everytime a Boss kills a character, they scream
+                Console.WriteLine($"[{_name}]: GOODBYE ONCE AND FOR ALL {victim._name}! ");
+            }
+        }
+
+        public override void Dead()
+        {
+            Console.WriteLine($"[{_name}]: **NOooo NO N)O@!, i'll never y-yi-YIEield! Iim THE lORD of EvilL! !!!");
+            _dead = true;
         }
     }
 
@@ -73,8 +253,10 @@ namespace AdventureGame
     #region ITEMS
     public abstract class UsableItem
     {
-        public abstract int amountOfEffectToHp;
-        public abstract int Use(DamagableObject victim);
+        public abstract int amountOfEffectToHp { get; set; }
+        public abstract int Use(Character victim);
+
+        public abstract string name { get; set; }
 
         public void Alert()
         {
@@ -84,27 +266,37 @@ namespace AdventureGame
 
     public class Potion : UsableItem
     {
+        public override int amountOfEffectToHp { get; set; }
+        public override string name { get; set; }
+
         public Potion()
         {
             amountOfEffectToHp = 10;
+            name = "Potion";
         }
 
-        public override void Use(Character player)
+        public override int Use(Character player)
         {
-            player.hp = amountOfEffectToHp + player.hp;
+            player._hp = amountOfEffectToHp + player._hp;
+            return player._hp;
         }
     }
 
     public class Sword : UsableItem
     {
+        public override int amountOfEffectToHp { get; set; }
+        public override string name { get; set; }
+
         public Sword()
         {
             amountOfEffectToHp = 10;
+            name = "Sword";
         }
 
-        public void Use(Character player)
+        public override int Use(Character player)
         {
-            player.hp = player.hp - amountOfEffectToHp;
+            player._hp -= amountOfEffectToHp;
+            return player._hp;
         }
     }
     #endregion
