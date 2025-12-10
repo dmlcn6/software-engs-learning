@@ -16,9 +16,9 @@ namespace AdventureGame
             var keepFighting = true;
             do
             {
-                // create a tinymonster the first 4 kills, then fight the boss for your final battle
+                // create a tinymonster for the first 4 kills, then fight the boss for your final battle
                 Character enemy;
-                if (killCount < 4)
+                if (player1.killCount < 4)
                 {
                     enemy = new TinyMonster();
                 }
@@ -33,10 +33,10 @@ namespace AdventureGame
                 // keepfighting is true when the player survived the encounter and did not get 5 kills yet
                 // if the player died in the enemey encounter or their kills count is 5 or more
                 // then keepfighting will be false
-                keepFighting = player1SurvivedFight && killCount < 5;
+                keepFighting = player1SurvivedFight && player1.killCount < 5;
 
                 // after each encounter, checke if the player won
-                if (killCount == 5)
+                if (player1.killCount == 5)
                 {
                     Console.WriteLine("You've endured your first set of Trials! and deserve a new Weapon");
                     Console.WriteLine("You've won!");
@@ -51,14 +51,14 @@ namespace AdventureGame
 
         private static bool EnemyEncounter(Player player1, Character enemy)
         {
-            // I want to alternate attacking, starting with the player 
+            // I want to alternate attacking/ item use, starting with the player 
             // until someone dies
 
             do
             {
-                player1.ViewStats();
-                enemy.ViewStats();
+                Console.WriteLine("");
                 Console.WriteLine("Select your action: number");
+                Console.WriteLine("");
                 Console.WriteLine("1. Attack");
                 Console.WriteLine("2. Use Item");
                 var isChoice = int.TryParse(Console.ReadLine(), out int choice);
@@ -71,19 +71,21 @@ namespace AdventureGame
                             player1.Attack(enemy);
                             break;
                         case 2:
-
+                            Console.WriteLine("");
                             Console.WriteLine("Here is your inventory: ");
                             var localInventory = player1._inventory;
                             for (var i = 0; i < localInventory.Count; i++)
                             {
                                 Console.WriteLine($"{i}: {localInventory[i].name}");
                             }
+                            Console.WriteLine("");
                             Console.WriteLine("Select your item number: ");
                             var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
 
                             if (isItemChoice)
                             {
                                 player1._inventory[itemChoice].Use(player1);
+                                Console.WriteLine("");
                                 Console.WriteLine("Item used successfully");
                                 player1.ViewStats();
                             }
@@ -103,7 +105,6 @@ namespace AdventureGame
                 {
                     enemy.Attack(player1);
                 }
-
             } while (player1.IsAlive() && enemy.IsAlive());
 
 
@@ -118,6 +119,7 @@ namespace AdventureGame
     public abstract class Character
     {
         public int _dmg = 4;
+
 
         public int _hp = 20;
 
@@ -136,9 +138,13 @@ namespace AdventureGame
             _inventory.Add(new Sword());
         }
 
+        public abstract void Attack(Character victim);
+
         public void ViewStats()
         {
+            Console.WriteLine("");
             Console.WriteLine($"{_name} Stats:  DMG: {_dmg}, HP: {_hp}");
+            Console.WriteLine("");
         }
 
         public bool AttackedBy(Character attacker)
@@ -158,8 +164,6 @@ namespace AdventureGame
             return false;
         }
 
-        public abstract void Attack(Character victim);
-
         public int GetDmg()
         {
             return _inventory[0].amountOfEffectToHp + _dmg;
@@ -168,6 +172,7 @@ namespace AdventureGame
         public virtual void Dead()
         {
             Console.WriteLine($"[{_name}]: I i Wait please help me! im Dying ple- Please, i cant fe- .....");
+            _dead = true;
         }
 
         public bool IsAlive()
@@ -178,6 +183,7 @@ namespace AdventureGame
 
     public class Player : Character
     {
+        public int killCount = 0;
         public Player()
         {
             _name = "Player 1";
@@ -189,8 +195,12 @@ namespace AdventureGame
             var victimIsDead = victim.AttackedBy(this);
             if (victimIsDead)
             {
+
+                killCount += 1;
                 // everytime Player kills a monster, they get 1 health potion
                 _inventory.Add(new Potion());
+
+                _dmg += 11;
             }
         }
 
@@ -228,7 +238,7 @@ namespace AdventureGame
         {
             _name = "First FInal Boss";
             _dmg = 50;
-            _hp = 100;
+            _hp = 200;
         }
 
         public override void Attack(Character victim)
@@ -271,14 +281,15 @@ namespace AdventureGame
 
         public Potion()
         {
-            amountOfEffectToHp = 10;
+            amountOfEffectToHp = 50;
             name = "Potion";
         }
 
-        public override int Use(Character player)
+        public override int Use(Character character)
         {
-            player._hp = amountOfEffectToHp + player._hp;
-            return player._hp;
+            character._hp = amountOfEffectToHp + character._hp;
+            character._inventory.Remove(this);
+            return character._hp;
         }
     }
 
@@ -293,10 +304,10 @@ namespace AdventureGame
             name = "Sword";
         }
 
-        public override int Use(Character player)
+        public override int Use(Character character)
         {
-            player._hp -= amountOfEffectToHp;
-            return player._hp;
+            character._hp -= amountOfEffectToHp;
+            return character._hp;
         }
     }
     #endregion
