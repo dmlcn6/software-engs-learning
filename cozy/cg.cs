@@ -8,6 +8,9 @@
 // meter, counter, hp, progress tracking, 
 // combat/competition
 // Usable items in inventory
+using System.Runtime.CompilerServices;
+using Microsoft.VisualBasic;
+
 namespace Game
 {
     public class CozyGame
@@ -16,8 +19,8 @@ namespace Game
         public static string choice;
         public static void Main()
         {
-            CozyGame.Intro();
-            CozyGame.Begin();
+            //CozyGame.Intro();
+            //CozyGame.Begin();
             CozyGame.Gameplay();
         }
         // Get player name and start the game
@@ -60,7 +63,7 @@ namespace Game
             else
             {
                 Console.WriteLine("Please type Yes or No");
-                Choice = Console.ReadLine();
+                choice = Console.ReadLine();
                 CozyGame.Begin();
             }
         }
@@ -72,21 +75,28 @@ namespace Game
             //Different events happen on different spaces
             //Player has 5 Lives to survive until the end
             //Four different events: Loot, Enemy, Stranger, Hazard
+            //Create New Gameboard
+            GameBoard gameBoard = new GameBoard();
             //Player begins by rolling 6 sided dice
+            gameBoard.DiceRoll();
 
 
         }
-        public class GameBoard()
+        public class GameBoard
         {
             //Gameboard has 20 spaces
             //Player rolls dice for position on board
             public int playerPos;
+            public int random;
+            public string item;
+
             public GameBoard()
             {
-
+                playerPos = 0;
             }
             public void BoardEvents()
             {
+                Random random = new Random();
                 switch (playerPos)
                 {
                     //Loot
@@ -95,6 +105,29 @@ namespace Game
                     case 7:
                     case 12:
                     case 18:
+                        lootItem = random.Next(4);
+                        UsableItems item;
+                        Console.WriteLine("You found an item!");
+
+                        if (lootItem == 0)
+                        {
+                            item = new Yercs();
+                        }
+                        else if (lootItem == 1)
+                        {
+                            item = new Armor();
+                        }
+                        else if (lootItem == 2)
+                        {
+                            item = new Sword();
+                        }
+                        else
+                        {
+                            item = new Blick();
+                        }
+
+                        inventory.Add(item);
+                        Console.WriteLine($"{item} was added to your inventory.");
 
                         break;
                     //Stranger
@@ -103,6 +136,7 @@ namespace Game
                     case 11:
                     case 17:
                     case 20:
+
 
                         break;
                     //Hazard
@@ -125,7 +159,13 @@ namespace Game
             }
             public void DiceRoll()
             {
-
+                Console.WriteLine($"Current Position: {playerPos}");
+                Random random = new Random();
+                //roll the dice
+                int sixDice = random.Next(1, 6);
+                playerPos = playerPos + sixDice;
+                Console.WriteLine($"You rolled a {sixDice}!");
+                Console.WriteLine($"New Position: {playerPos}");
             }
         }
         public abstract class UsableItems
@@ -133,6 +173,7 @@ namespace Game
             public int dmgBuff;
             public int healing;
             public int shield;
+
         }
         public class Sword : UsableItems
         {
@@ -169,7 +210,6 @@ namespace Game
             private int health = 100;
             private int damage = 7;
             public string name;
-
             public Character()
             {
 
@@ -177,12 +217,20 @@ namespace Game
         }
         public abstract class Player : Character
         {
+            public List<UsableItems> inventory = new List<UsableItems>();
             public Player()
             {
-                name = CozyGame.playerName;
+                name = playerName;
+
             }
         }
 
-
+        public abstract class Enemy : Character
+        {
+            public Enemy()
+            {
+                name = "Bandit";
+            }
+        }
     }
 }
