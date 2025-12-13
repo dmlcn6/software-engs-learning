@@ -178,20 +178,15 @@ public class Gamelobby
             }
             else
             {
-                topRaider.health -= topArc.damage;
                 Console.WriteLine("-----");
                 Console.WriteLine("*SYSTEM MESSAGE*");
                 Console.WriteLine($"The Arc's health is now {topArc.health}");
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("");
                 Thread.Sleep(5000);
-                Console.WriteLine("");
-                Console.WriteLine("----------------------------");
-                Console.WriteLine("The arc lines up it's turrent to your body and begins to shoot");
+                topArc.AttackBase(topRaider);
+                topRaider.health -= topArc.damage;
                 Console.WriteLine($"Your health is now {topRaider.health}");
-                Console.WriteLine("----------------------------");
-                Console.WriteLine("");
-
             }
 
         } while (topArc.health > 0);
@@ -314,6 +309,17 @@ public class Arc : Character
         name = "Arc";
         health = 20;
         damage = 5;
+    }
+
+
+    public void AttackBase(Character target)
+    {
+        Console.WriteLine("");
+        Console.WriteLine("----------------------------");
+        Console.WriteLine("The arc lines up it's turrent to your body and begins to shoot");
+        Console.WriteLine($"The Arc has shot the {target} for {damage}");
+        Console.WriteLine("----------------------------");
+        Console.WriteLine("");
     }
 }
 
