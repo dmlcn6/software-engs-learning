@@ -97,3 +97,14 @@ things to think about
 - break up thoughts, logic, conditionals, functions into small pieces that are managable
 
 ---
+
+12/14 Retro
+
+What went well?
+
+
+What didnt go well?
+
+Things to think about?
+
+---

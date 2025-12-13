@@ -65,11 +65,34 @@ namespace AdventureGame
 
                 if (isChoice)
                 {
-                    switch (choice)
+                    switch (space)
                     {
                         case 1:
+                        case 3:
+                        case 5:
+                        case 7:
                             player1.Attack(enemy);
                             break;
+
+                            UsableItem item;
+                            var lostItem = 0;
+                            if (lostItem == 0)
+                            {
+                                item = new Potion();
+
+                            }
+                            else if (lostItem == 1)
+                            {
+                                item = new Sword();
+                            }
+                            else
+                            {
+
+                            }
+
+                            item.name = "alsdfk"
+                            player1._inventory.Add(item);
+
                         case 2:
                             Console.WriteLine("");
                             Console.WriteLine("Here is your inventory: ");
@@ -149,6 +172,7 @@ namespace AdventureGame
 
         public bool AttackedBy(Character attacker)
         {
+            //int _hp = 0;
             _hp -= attacker.GetDmg();  // same as _hp = _hp - attacker.dmg
 
             ViewStats();
@@ -264,9 +288,12 @@ namespace AdventureGame
     public abstract class UsableItem
     {
         public abstract int amountOfEffectToHp { get; set; }
-        public abstract int Use(Character victim);
 
         public abstract string name { get; set; }
+
+        public abstract int Use(Character victim);
+
+        public abstract void Enchant();
 
         public void Alert()
         {
@@ -291,6 +318,22 @@ namespace AdventureGame
             character._inventory.Remove(this);
             return character._hp;
         }
+
+        public override void Enchant()
+        {
+            return;
+        }
+    }
+
+    public class HiPotion : Potion
+    {
+
+
+        public override void Enchant()
+        {
+            // only enchant a HiPotion
+            amountOfEffectToHp += 100;
+        }
     }
 
     public class Sword : UsableItem
@@ -308,6 +351,11 @@ namespace AdventureGame
         {
             character._hp -= amountOfEffectToHp;
             return character._hp;
+        }
+
+        public override void Enchant()
+        {
+            amountOfEffectToHp += 100;
         }
     }
     #endregion
