@@ -61,7 +61,7 @@ public class GameBase
         else
         {
             // Give the user feedback that they have succesfully entered a name.
-            Console.WriteLine("It's okay... I have a terrible name too. Move forward");
+            Console.WriteLine("It's okay... I have a terrible name too. Moveing forward");
         }
 
         //Console.WriteLine($"{new GameEnvi().stage1_1}");
@@ -91,6 +91,7 @@ public class GameEnvi
     public string stage1_5 = "";
     //Thread.Sleep(10000);
     //string? username;
+    //string[] array1 = {"test1" , "test2" , "test3"}
     //do {} while (closeEnded != "NO" || closeEnded != "YES");
     //do {} while (closeEnded != "NO" && closeEnded != "YES");
 }
