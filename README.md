@@ -1,8 +1,7 @@
 # software-engs-learning
 The repo for up and coming SWEs
 
-
-
+---
 here is what we covered so far
 - **Week 1: Development Environment & Version Control and Variables and Data Types**
     - Set up IDE, terminal, and command line tools
@@ -20,6 +19,7 @@ here is what we covered so far
       2 point decimal outputs for division
       Show use of classes/functions to organize code
 - **Sprint 2: 
+    - Sun 11/30: Start
     - Tue 12/2: we are creating AC for our work item
       - user must be identified by player name (input)
       - at least 5 prompts before one of the endings
@@ -32,7 +32,10 @@ here is what we covered so far
         - meter, counter, hp, progress tracking, 
         - combat/competition
         - Usable items in inventory
-
+- **Sprint 3:
+    - Sun 12/14: Start the week with reps on variable creation class creation accessMods keywords
+    - We will dive heavier into 4 OOP principels while finishing our text based adventure  game
+---
 
 Tyree made this Change 11/14/25
 
