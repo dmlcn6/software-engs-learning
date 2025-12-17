@@ -102,6 +102,8 @@ public class Gamelobby
     {
         var topRaider = new Raider();
         var topArc = new Arc();
+        var gameOverCheck = topArc.DamageReciever;
+        int endGame = 1;
 
 
         Console.WriteLine("");
@@ -149,10 +151,11 @@ public class Gamelobby
                 Console.WriteLine("");
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("*SYSTEM MESSAGE*");
-                topRaider.AttackBase(topArc);
+                int raiDmg = topRaider.AttackBase(topArc);
+                topArc.DamageReciever(raiDmg);
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("");
-                topArc.health -= topRaider.damage;
+
             }
 
             if (topChoiceConf == "B")
@@ -167,35 +170,39 @@ public class Gamelobby
 
 
 
-
-            if (topArc.health < 1)
+            if (topArc.gameEnd == 0)
             {
                 Console.WriteLine("-----");
                 Console.WriteLine("*SYSTEM MESSAGE*");
                 Console.WriteLine("The Arc has now been destroyed");
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("");
+                GameOver();
             }
             else
             {
-                Console.WriteLine("-----");
-                Console.WriteLine("*SYSTEM MESSAGE*");
-                Console.WriteLine($"The Arc's health is now {topArc.health}");
+                Thread.Sleep(5000);
+                int arcDmg = topArc.AttackBase(topRaider);
+                topRaider.DamageReciever(arcDmg);
+
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("");
-                Thread.Sleep(5000);
-                topArc.AttackBase(topRaider);
-                topRaider.health -= topArc.damage;
-                Console.WriteLine($"Your health is now {topRaider.health}");
             }
 
-        } while (topArc.health > 0);
+        } while (topArc.gameEnd == 1);
 
 
 
 
 
     }
+
+    public void GameOver()
+    {
+        Console.WriteLine("Its over");
+    }
+
+
 
     public void InventoryMenu()
     {
@@ -239,12 +246,17 @@ public abstract class Character
 {
     public string name = "blank";
 
-    public int health = 20;
+    private int health = 20;
 
     public int damage = 0;
 
     public int inventorySpace = 0;
     public Items[] inventory = new Items[5] { new Available(), new Available(), new Available(), new Available(), new Available() };
+    public int CallHealthAmount()
+    {
+
+        return health;
+    }
 
 }
 
@@ -278,14 +290,16 @@ public class Raider : Character
     {
 
         name = "Raider";
-        health = 80;
-        damage = 8;
+        damage = 11; //8
 
         inventory[0] = new Rattler();
     }
 
+    int health = 80;
+    int damage = 8;
 
-    public void AttackBase(Character target)
+    // send damage to the victim and annouce the attack
+    public int AttackBase(Character target)
     {
         Console.WriteLine("You take a deep breath to steady your aim");
         Console.WriteLine("");
@@ -293,11 +307,23 @@ public class Raider : Character
         Console.WriteLine("----------------------------");
         Console.WriteLine("");
 
+
         Console.WriteLine($"You have successfully shot the {target} for {damage} damage");
         Console.WriteLine("");
         Console.WriteLine("----------------------------");
 
+        return damage;
     }
+
+
+    // take health away from the raider and annouce the amount left
+    public void DamageReciever(int damageAmount)
+    {
+        health -= damageAmount;
+        Console.WriteLine($"Raider currenlty has {health} health remaining");
+    }
+
+
 
 }
 
@@ -307,19 +333,35 @@ public class Arc : Character
     public Arc()
     {
         name = "Arc";
-        health = 20;
-        damage = 5;
     }
 
+    int health = 20;
+    int damage = 5;
+    public int gameEnd = 1;
 
-    public void AttackBase(Character target)
+    // send damage to the victim and annouce the attack
+    public int AttackBase(Character target)
     {
         Console.WriteLine("");
         Console.WriteLine("----------------------------");
-        Console.WriteLine("The arc lines up it's turrent to your body and begins to shoot");
-        Console.WriteLine($"The Arc has shot the {target} for {damage}");
-        Console.WriteLine("----------------------------");
-        Console.WriteLine("");
+        Console.WriteLine("The Arc lines up it's turrent to your body and begins to shoot");
+        Console.WriteLine($"The Arc has successfully shot you for {damage} damage");
+
+        return damage;
+    }
+
+    // take health away from the arc and annouce the amount left
+    public int DamageReciever(int damageAmount)
+    {
+        health -= damageAmount;
+        Console.WriteLine($"Arc currenlty has {health} health remaining");
+
+        if (health < 0)
+        {
+            gameEnd = 0;
+        }
+
+        return health;
     }
 }
 
