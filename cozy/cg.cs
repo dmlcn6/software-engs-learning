@@ -9,22 +9,27 @@
 // combat/competition
 // Usable items in inventory
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualBasic;
 
 namespace Game
 {
     public class CozyGame
     {
-        public static string playerName;
+        public static Player player;
         public static string choice;
+        public static int playerPos;
+        public int random;
+        public string item;
         public static void Main()
         {
-            //CozyGame.Intro();
+            player = new Player();
+            //CozyGame.Intro(user);
             //CozyGame.Begin();
             CozyGame.Gameplay();
         }
         // Get player name and start the game
-        public static void Intro()
+        public static void Intro(Player uno)
         {
             Console.WriteLine("Hi, My name is Cozy :)");
             Thread.Sleep(1000);
@@ -35,10 +40,10 @@ namespace Game
             Console.WriteLine("Before we get started, I need to know what to call you.");
             Thread.Sleep(1000);
             Console.WriteLine("What is your name?");
-            playerName = Console.ReadLine();
-            Console.WriteLine($"So your name is {playerName}? That's cute lol");
+            uno.playerName = Console.ReadLine();
+            Console.WriteLine($"So your name is {uno.playerName}? That's cute lol");
             Thread.Sleep(1000);
-            Console.WriteLine($"Today you'll embark on an adventure, {playerName}, to decide your fate!");
+            Console.WriteLine($"Today you'll embark on an adventure, {uno.playerName}, to decide your fate!");
             Thread.Sleep(1000);
             Console.WriteLine("Every decision you make will determine the outcome of your story.");
             Thread.Sleep(1000);
@@ -75,162 +80,154 @@ namespace Game
             //Different events happen on different spaces
             //Player has 5 Lives to survive until the end
             //Four different events: Loot, Enemy, Stranger, Hazard
-            //Create New Gameboard
-            GameBoard gameBoard = new GameBoard();
             //Player begins by rolling 6 sided dice
-            gameBoard.DiceRoll();
+            DiceRoll();
+            BoardEvents();
 
 
         }
-        public class GameBoard
+        public static void BoardEvents()
         {
-            //Gameboard has 20 spaces
-            //Player rolls dice for position on board
-            public int playerPos;
-            public int random;
-            public string item;
-
-            public GameBoard()
+            int lootItem;
+            Random random = new Random();
+            switch (playerPos)
             {
-                playerPos = 0;
-            }
-            public void BoardEvents()
-            {
-                Random random = new Random();
-                switch (playerPos)
-                {
-                    //Loot
-                    case 2:
-                    case 3:
-                    case 7:
-                    case 12:
-                    case 18:
-                        lootItem = random.Next(4);
-                        UsableItems item;
-                        Console.WriteLine("You found an item!");
+                //Loot
+                case 2:
+                case 3:
+                case 7:
+                case 12:
+                case 18:
+                    lootItem = random.Next(4);
+                    UsableItems item;
+                    Console.WriteLine("You found an item!");
 
-                        if (lootItem == 0)
-                        {
-                            item = new Yercs();
-                        }
-                        else if (lootItem == 1)
-                        {
-                            item = new Armor();
-                        }
-                        else if (lootItem == 2)
-                        {
-                            item = new Sword();
-                        }
-                        else
-                        {
-                            item = new Blick();
-                        }
+                    if (lootItem == 0)
+                    {
+                        item = new Yercs();
+                    }
+                    else if (lootItem == 1)
+                    {
+                        item = new Armor();
+                    }
+                    else if (lootItem == 2)
+                    {
+                        item = new Sword();
+                    }
+                    else
+                    {
+                        item = new Blick();
+                    }
+                    player.inventory.Add(item);
+                    Console.WriteLine($"{item} was added to your inventory.");
 
-                        inventory.Add(item);
-                        Console.WriteLine($"{item} was added to your inventory.");
-
-                        break;
-                    //Stranger
-                    case 4:
-                    case 9:
-                    case 11:
-                    case 17:
-                    case 20:
+                    break;
+                //Stranger
+                case 4:
+                case 9:
+                case 11:
+                case 17:
+                case 20:
 
 
-                        break;
-                    //Hazard
-                    case 1:
-                    case 8:
-                    case 13:
-                    case 14:
-                    case 19:
+                    break;
+                //Hazard
+                case 1:
+                case 8:
+                case 13:
+                case 14:
+                case 19:
 
-                        break;
-                    //Enemy
-                    case 5:
-                    case 6:
-                    case 10:
-                    case 15:
-                    case 16:
+                    Console.WriteLine("Rats! You Got Caught in a BoobyTrap!");
+                    Console.WriteLine("You lost 10HP!");
 
-                        break;
-                }
-            }
-            public void DiceRoll()
-            {
-                Console.WriteLine($"Current Position: {playerPos}");
-                Random random = new Random();
-                //roll the dice
-                int sixDice = random.Next(1, 6);
-                playerPos = playerPos + sixDice;
-                Console.WriteLine($"You rolled a {sixDice}!");
-                Console.WriteLine($"New Position: {playerPos}");
+                    break;
+                //Enemy
+                case 5:
+                case 6:
+                case 10:
+                case 15:
+                case 16:
+
+                    break;
             }
         }
-        public abstract class UsableItems
+        public static void DiceRoll()
         {
-            public int dmgBuff;
-            public int healing;
-            public int shield;
-
-        }
-        public class Sword : UsableItems
-        {
-            Sword()
-            {
-                dmgBuff = 10;
-            }
-        }
-        public class Blick : UsableItems
-        {
-            public Blick()
-            {
-                dmgBuff = 20;
-            }
-
-        }
-        public class Armor : UsableItems
-        {
-            public Armor()
-            {
-                shield = 50;
-            }
-        }
-        public class Yercs : UsableItems
-        {
-            public Yercs()
-            {
-                healing = 20;
-            }
-        }
-
-        public abstract class Character
-        {
-            private int health = 100;
-            private int damage = 7;
-            public string name;
-            public Character()
-            {
-
-            }
-        }
-        public abstract class Player : Character
-        {
-            public List<UsableItems> inventory = new List<UsableItems>();
-            public Player()
-            {
-                name = playerName;
-
-            }
-        }
-
-        public abstract class Enemy : Character
-        {
-            public Enemy()
-            {
-                name = "Bandit";
-            }
+            Console.WriteLine($"Current Position: {playerPos}");
+            Random random = new Random();
+            //roll the dice
+            int sixDice = random.Next(1, 6);
+            playerPos = playerPos + sixDice;
+            Console.WriteLine($"You rolled a {sixDice}!");
+            Console.WriteLine($"New Position: {playerPos}");
         }
     }
+
+    public abstract class UsableItems
+    {
+        public int dmgBuff;
+        public int healing;
+        public int shield;
+
+    }
+    public class Sword : UsableItems
+    {
+        public Sword()
+        {
+            dmgBuff = 10;
+        }
+    }
+    public class Blick : UsableItems
+    {
+        public Blick()
+        {
+            dmgBuff = 20;
+        }
+
+    }
+    public class Armor : UsableItems
+    {
+        public Armor()
+        {
+            shield = 50;
+        }
+    }
+    public class Yercs : UsableItems
+    {
+        public Yercs()
+        {
+            healing = 20;
+        }
+    }
+
+    public abstract class Character
+    {
+        public int health = 100;
+        public int damage = 7;
+        public string name;
+        public Character()
+        {
+
+        }
+    }
+    public class Player : Character
+    {
+        public string playerName;
+        public List<UsableItems> inventory = new List<UsableItems>();
+        public Player()
+        {
+
+
+        }
+    }
+
+    public class Enemy : Character
+    {
+        public Enemy()
+        {
+            name = "Bandit";
+        }
+    }
+
 }
