@@ -107,11 +107,13 @@ class VaseChild02 : VaseParent
         {
             Operation = "A";
             VaseInside(changeNum, Operation);
+            Console.WriteLine("How many Vases would you like to break?");
         }
         else if (Operation == "B" || Operation == "b")
         {
             Operation = "B";
             VaseInside(changeNum, Operation);
+            Console.WriteLine("How many Vases would you like to buy?");
         }
         else
         {
