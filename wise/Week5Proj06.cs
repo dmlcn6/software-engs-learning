@@ -290,7 +290,7 @@ public class Raider : Character
     {
 
         name = "Raider";
-        damage = 11; //8
+        damage = 8;
 
         inventory[0] = new Rattler();
     }
