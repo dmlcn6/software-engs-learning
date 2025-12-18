@@ -17,6 +17,8 @@ namespace Game
     public class CozyGame
     {
         public static Player player;
+        public static Stranger stranger;
+        public static Enemy bandito;
         public static string choice;
         public static int playerPos;
         public int random;
@@ -24,12 +26,12 @@ namespace Game
         public static void Main()
         {
             player = new Player();
-            //CozyGame.Intro(user);
-            //CozyGame.Begin();
+            CozyGame.Intro();
+            CozyGame.Begin();
             CozyGame.Gameplay();
         }
         // Get player name and start the game
-        public static void Intro(Player uno)
+        public static void Intro()
         {
             Console.WriteLine("Hi, My name is Cozy :)");
             Thread.Sleep(1000);
@@ -40,10 +42,10 @@ namespace Game
             Console.WriteLine("Before we get started, I need to know what to call you.");
             Thread.Sleep(1000);
             Console.WriteLine("What is your name?");
-            uno.playerName = Console.ReadLine();
-            Console.WriteLine($"So your name is {uno.playerName}? That's cute lol");
+            player.playerName = Console.ReadLine();
+            Console.WriteLine($"So your name is {player.playerName}? That's cute lol");
             Thread.Sleep(1000);
-            Console.WriteLine($"Today you'll embark on an adventure, {uno.playerName}, to decide your fate!");
+            Console.WriteLine($"Today you'll embark on an adventure, {player.playerName}, to decide your fate!");
             Thread.Sleep(1000);
             Console.WriteLine("Every decision you make will determine the outcome of your story.");
             Thread.Sleep(1000);
@@ -98,7 +100,7 @@ namespace Game
                 case 7:
                 case 12:
                 case 18:
-                    lootItem = random.Next(4);
+                    lootItem = random.Next(5);
                     UsableItems item;
                     Console.WriteLine("You found an item!");
 
@@ -114,12 +116,16 @@ namespace Game
                     {
                         item = new Sword();
                     }
-                    else
+                    else if (lootItem == 3)
                     {
                         item = new Blick();
                     }
+                    else
+                    {
+                        item = new Potion();
+                    }
                     player.inventory.Add(item);
-                    Console.WriteLine($"{item} was added to your inventory.");
+                    Console.WriteLine($"{item.itemName} was added to your inventory.");
 
                     break;
                 //Stranger
@@ -128,8 +134,25 @@ namespace Game
                 case 11:
                 case 17:
                 case 20:
+                    Console.WriteLine("You have encountered a stranger...attack?");
+                    Console.WriteLine("Please type Yes or No");
+                    choice = Console.ReadLine();
 
-
+                    if (choice == "Yes")
+                    {
+                        Combat(player, stranger);
+                    }
+                    else if (choice == "No")
+                    {
+                        Console.WriteLine($"Hello, {player.playerName}. I have something for you...");
+                        Thread.Sleep(1000);
+                        Console.WriteLine("You gained a potion!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please type Yes or No");
+                        choice = Console.ReadLine();
+                    }
                     break;
                 //Hazard
                 case 1:
@@ -137,10 +160,9 @@ namespace Game
                 case 13:
                 case 14:
                 case 19:
-
                     Console.WriteLine("Rats! You Got Caught in a BoobyTrap!");
-                    Console.WriteLine("You lost 10HP!");
-
+                    Console.WriteLine("You lost 15 HP!");
+                    player.health = player.health - 10;
                     break;
                 //Enemy
                 case 5:
@@ -148,7 +170,8 @@ namespace Game
                 case 10:
                 case 15:
                 case 16:
-
+                    Console.WriteLine("You've encountered an enemy!");
+                    Combat(player, bandito);
                     break;
             }
         }
@@ -162,27 +185,44 @@ namespace Game
             Console.WriteLine($"You rolled a {sixDice}!");
             Console.WriteLine($"New Position: {playerPos}");
         }
+        public static void Combat(Character player, Character enemy)
+        {
+            //create a conditional for combat between the player and an opponent
+            //Fights are to the DEATH
+            Console.WriteLine("Get ready for battle!");
+        }
     }
-
     public abstract class UsableItems
     {
         public int dmgBuff;
         public int healing;
         public int shield;
-
+        public string itemName;
+        public int playerHP;
+        public abstract void Equip(Character character);
     }
     public class Sword : UsableItems
     {
         public Sword()
         {
+            itemName = "Sword";
             dmgBuff = 10;
+        }
+        public override void Equip(Character character)
+        {
+            character.damage = character.damage + dmgBuff;
         }
     }
     public class Blick : UsableItems
     {
         public Blick()
         {
+            itemName = "Blick";
             dmgBuff = 20;
+        }
+        public override void Equip(Character character)
+        {
+            character.damage = character.damage + dmgBuff;
         }
 
     }
@@ -190,17 +230,38 @@ namespace Game
     {
         public Armor()
         {
-            shield = 50;
+            itemName = "Armor";
+            shield = 100;
+        }
+        public override void Equip(Character character)
+        {
+            character.health = character.health + shield;
         }
     }
     public class Yercs : UsableItems
     {
         public Yercs()
         {
+            itemName = "Yercs";
             healing = 20;
         }
+        public override void Equip(Character character)
+        {
+            character.health = character.health + healing;
+        }
     }
-
+    public class Potion : UsableItems
+    {
+        public Potion()
+        {
+            itemName = "Potion";
+            healing = 50;
+        }
+        public override void Equip(Character character)
+        {
+            character.health = character.health + healing;
+        }
+    }
     public abstract class Character
     {
         public int health = 100;
@@ -221,13 +282,23 @@ namespace Game
 
         }
     }
-
     public class Enemy : Character
     {
+        public List<UsableItems> weapon = new List<UsableItems>() { new Sword() };
         public Enemy()
         {
             name = "Bandit";
+            weapon[0].Equip(this);
         }
     }
-
+    public class Stranger : Character
+    {
+        public List<UsableItems> tote = new List<UsableItems>() { new Blick(), new Armor() };
+        public Stranger()
+        {
+            name = "???";
+            tote[0].Equip(this);
+            tote[1].Equip(this);
+        }
+    }
 }
