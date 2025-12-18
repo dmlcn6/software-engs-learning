@@ -5,11 +5,13 @@ namespace AdventureGame
     #region GAME LOGIC
     public class Game
     {
+        // player declaration lives on the class
+        public static Player player1;
 
         public static void Main(string[] args)
         {
-            //i want a player
-            var player1 = new Player();
+            //i want to fill in the class variable with the new instance
+            player1 = new Player();
             // i want to know how many enemies the player has killed
             var killCount = 0;
             // i want the player to fight until the end
@@ -28,7 +30,7 @@ namespace AdventureGame
                 }
 
                 // run the encounter, until someone dies
-                var player1SurvivedFight = EnemyEncounter(player1, enemy);
+                var player1SurvivedFight = EnemyEncounter(enemy);
 
                 // keepfighting is true when the player survived the encounter and did not get 5 kills yet
                 // if the player died in the enemey encounter or their kills count is 5 or more
@@ -49,7 +51,7 @@ namespace AdventureGame
             Console.WriteLine("GAMEOVER!");
         }
 
-        private static bool EnemyEncounter(Player player1, Character enemy)
+        private static bool EnemyEncounter(Character enemy)
         {
             // I want to alternate attacking/ item use, starting with the player 
             // until someone dies
@@ -65,7 +67,7 @@ namespace AdventureGame
 
                 if (isChoice)
                 {
-                    switch (space)
+                    switch (choice)
                     {
                         case 1:
                         case 3:
@@ -73,25 +75,6 @@ namespace AdventureGame
                         case 7:
                             player1.Attack(enemy);
                             break;
-
-                            UsableItem item;
-                            var lostItem = 0;
-                            if (lostItem == 0)
-                            {
-                                item = new Potion();
-
-                            }
-                            else if (lostItem == 1)
-                            {
-                                item = new Sword();
-                            }
-                            else
-                            {
-
-                            }
-
-                            item.name = "alsdfk"
-                            player1._inventory.Add(item);
 
                         case 2:
                             Console.WriteLine("");
