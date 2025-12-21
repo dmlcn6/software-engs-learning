@@ -23,10 +23,11 @@ namespace Game
         public static int playerPos;
         public int random;
         public string item;
-        public bool alive = true;
+        public static bool alive = true;
         public static void Main()
         {
             player = new Player();
+            bandito = new Enemy();
             CozyGame.Intro();
             CozyGame.Begin();
         }
@@ -198,6 +199,9 @@ namespace Game
             //enemy attacks after player takes turn
             //this continues until death
             Console.WriteLine("Get ready for battle!");
+            Console.WriteLine($"Your stats: {player.ViewStats()}");
+            Console.WriteLine($"Enemy stats: {enemy.ViewStats()}");
+
 
         }
 
