@@ -1,6 +1,5 @@
 
-// player lives
-// add item per arc kill
+
 
 
 //Introduction to the game
@@ -104,7 +103,6 @@ public class Gamelobby
         var topRaider = new Raider();
 
         var topArc = new Arc();
-        var oldArc = new Arc();
         int arcDestroyed = 0;
         int gameController = 1;
 
@@ -117,8 +115,6 @@ public class Gamelobby
 
         do
         {
-            //topArc = oldArc;
-            //Console.WriteLine($"Old arc health is {topArc.CallHealthAmount()}");
             if (topArc.CallHealthAmount() < 1)
             {
                 topArc = new Arc();
@@ -180,13 +176,20 @@ public class Gamelobby
 
 
 
-            if (topArc.CallHealthAmount() < 1 && arcDestroyed == 2)
+            if (topRaider.CallHealthAmount() < 1)
+            {
+                Console.WriteLine("You have failed!");
+                gameController = 0;
+                GameOver();
+            }
+            else if (topArc.CallHealthAmount() < 1 && arcDestroyed == 2)
             {
                 Console.WriteLine("-----");
                 Console.WriteLine("*SYSTEM MESSAGE*");
                 Console.WriteLine("The Arc has now been destroyed");
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("");
+                Console.WriteLine("You have won");
                 arcDestroyed += 1;
                 gameController = 0;
                 GameOver();
@@ -207,9 +210,7 @@ public class Gamelobby
                 topArc.AttackBase(topRaider);
 
                 Console.WriteLine("----------------------------");
-                Console.WriteLine("Something went wrong");
                 Console.WriteLine("");
-                TopSideMenu();
             }
 
         } while (gameController == 1);
@@ -281,7 +282,7 @@ public abstract class Character
         return health;
     }
 
-    public abstract int DamageReciever(int damageAmount);
+    public abstract int DamageReciever(Character attacker, int attackerDamage);
 
 }
 
@@ -332,7 +333,7 @@ public class Raider : Character
         Console.WriteLine("----------------------------");
         Console.WriteLine("");
 
-        target.DamageReciever(damage);
+        target.DamageReciever(this, damage);
         Console.WriteLine($"You have successfully shot the {target} for {damage} damage");
         Console.WriteLine("");
         Console.WriteLine("----------------------------");
@@ -342,17 +343,38 @@ public class Raider : Character
 
 
     // take health away from the raider and annouce the amount left
-    public override int DamageReciever(int damageAmount)
+    public override int DamageReciever(Character attacker, int attackerDamage)
     {
-        damageAmount = 0;
 
-        health -= damageAmount;
+        DamageRecieverAction(attacker, attackerDamage);
+
+        if (health < 1)
+        {
+            Console.WriteLine("You have failed!");
+        }
         Console.WriteLine($"Raider currenlty has {health} health remaining");
 
-        return damageAmount;
+
+        return health;
     }
 
 
+
+    private void DamageRecieverAction(Character attacker, int attackerDamage)
+    {
+        health -= attackerDamage;
+
+        if (health < 1)
+        {
+            attacker.inventory[1] = new Rattler();
+        }
+    }
+
+    public int CallHealthAmount()
+    {
+
+        return health;
+    }
 
 }
 
@@ -365,7 +387,7 @@ public class Arc : Character
     }
 
     int health = 20;
-    int damage = 5;
+    int damage = 3;
 
     // send damage to the victim and annouce the attack
     public int AttackBase(Character target)
@@ -373,26 +395,38 @@ public class Arc : Character
         Console.WriteLine("");
         Console.WriteLine("----------------------------");
         Console.WriteLine("The Arc lines up it's turrent to your body and begins to shoot");
-        target.DamageReciever(damage);
+        target.DamageReciever(this, damage);
         Console.WriteLine($"The Arc has successfully shot you for {damage} damage");
 
         return damage;
     }
 
     // take health away from the arc and annouce the amount left
-    public override int DamageReciever(int damageAmount)
+    public override int DamageReciever(Character attacker, int attackerDamage)
     {
-        //health -= damageAmount;
-        Blank(damageAmount);
-        Console.WriteLine($"Arc currenlty has {health} health remaining");
+        DamageRecieverAction(attacker, attackerDamage);
 
+        if (health < 1)
+        {
+            Console.WriteLine($"Arc currenlty has {health} health remaining");
+        }
 
         return health;
     }
 
-    private void Blank(int damage)
+    private void DamageRecieverAction(Character attacker, int attackerDamage)
     {
-        health -= damage;
+        health -= attackerDamage;
+        if (health < 1)
+        {
+            attacker.inventory[1] = new Rattler();
+        }
+    }
+
+    public int CallHealthAmount()
+    {
+
+        return health;
     }
 
 
@@ -431,7 +465,7 @@ public class Available : Items
 
 //inventory[0] = new Rattler();
 //inventory.SetValue(old Rattler(), 0);
-// add item per arc kill
+
 
 
 
