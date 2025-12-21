@@ -23,12 +23,12 @@ namespace Game
         public static int playerPos;
         public int random;
         public string item;
+        public bool alive = true;
         public static void Main()
         {
             player = new Player();
             CozyGame.Intro();
             CozyGame.Begin();
-            CozyGame.Gameplay();
         }
         // Get player name and start the game
         public static void Intro()
@@ -51,17 +51,20 @@ namespace Game
             Thread.Sleep(1000);
             Console.WriteLine("Do you think you have what it takes to make it to the end?");
             Console.WriteLine("Please type Yes or No");
-            choice = Console.ReadLine();
+            choice = Console.ReadLine().ToLower();
         }
         // Have player decide if they want to play or not
         public static void Begin()
         {
-            if (choice == "Yes")
+            if (choice == "yes")
             {
                 Console.WriteLine("I thought you looked brave. Let's get started :)");
-                CozyGame.Gameplay();
+                do
+                {
+                    CozyGame.Gameplay();
+                } while (alive);
             }
-            else if (choice == "No")
+            else if (choice == "no")
             {
                 Console.WriteLine("That's disappointing.");
                 Thread.Sleep(1000);
@@ -70,7 +73,7 @@ namespace Game
             else
             {
                 Console.WriteLine("Please type Yes or No");
-                choice = Console.ReadLine();
+                choice = Console.ReadLine().ToLower();
                 CozyGame.Begin();
             }
         }
@@ -83,6 +86,8 @@ namespace Game
             //Player has 5 Lives to survive until the end
             //Four different events: Loot, Enemy, Stranger, Hazard
             //Player begins by rolling 6 sided dice
+            Console.WriteLine("Please press enter to roll the dice.");
+            Console.ReadLine();
             DiceRoll();
             BoardEvents();
 
@@ -136,13 +141,13 @@ namespace Game
                 case 20:
                     Console.WriteLine("You have encountered a stranger...attack?");
                     Console.WriteLine("Please type Yes or No");
-                    choice = Console.ReadLine();
+                    choice = Console.ReadLine().ToLower();
 
-                    if (choice == "Yes")
+                    if (choice == "yes")
                     {
                         Combat(player, stranger);
                     }
-                    else if (choice == "No")
+                    else if (choice == "no")
                     {
                         Console.WriteLine($"Hello, {player.playerName}. I have something for you...");
                         Thread.Sleep(1000);
@@ -151,7 +156,7 @@ namespace Game
                     else
                     {
                         Console.WriteLine("Please type Yes or No");
-                        choice = Console.ReadLine();
+                        choice = Console.ReadLine().ToLower();
                     }
                     break;
                 //Hazard
@@ -189,8 +194,13 @@ namespace Game
         {
             //create a conditional for combat between the player and an opponent
             //Fights are to the DEATH
+            //player either attacks or uses an item
+            //enemy attacks after player takes turn
+            //this continues until death
             Console.WriteLine("Get ready for battle!");
+
         }
+
     }
     public abstract class UsableItems
     {
@@ -271,6 +281,19 @@ namespace Game
         {
 
         }
+        public void ViewStats()
+        {
+            Console.WriteLine($"DMG: {damage}, HP: {health}");
+        }
+        public void Attacked(Character attacker)
+        {
+            health = health - attacker.damage;
+        }
+        public void Attack(Character victim)
+        {
+            victim.Attacked(this);
+        }
+
     }
     public class Player : Character
     {
