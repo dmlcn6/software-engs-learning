@@ -1,22 +1,23 @@
 
-
 //- **Sprint 2: 
-//- Tue 12/2: we are creating AC for our work item
-//- user must be identified by player name (input)
-//- at least 5 prompts before one of the endings
-//- 2 endings: Win or Lose//
-//- show use of constructors, static classes
-//- 4 Object Oriented Programming principles (inheritance, encapsulation, poly, abstraction) 
-//- player (with or without hp)
-//- meter, counter, hp, progress tracking, 
-//- combat/competition
+//- Tue 12/2: we are creating AC for our work item 
+//- user must be identified by player name (input) ^
+//- at least 5 prompts before one of the endings ^
+//- 2 endings: Win or Lose ^
+//- show use of constructors, static classes ^
+//- 3 Object Oriented Programming principles (inheritance, encapsulation, abstraction) ^
+//- player (with or without hp) ^
+//- meter, counter, hp, progress tracking, ^
+//- combat/competition ^
 //- Usable items in inventory
+
+
 
 //Introduction to the game
 using System.Net.Quic;
 using System.Security.Cryptography.X509Certificates;
 
-public class ProgramStart
+public static class ProgramStart
 {
 
     private static void Main()
@@ -26,7 +27,9 @@ public class ProgramStart
         Console.WriteLine("In this game you will...");
 
         var startGame = new Gamelobby();
-        startGame.MainMenu();
+        var player = new Raider();
+        player.GetPlayerName();
+        startGame.MainMenu(player);
     }
 
 }
@@ -36,11 +39,10 @@ public class ProgramStart
 // Check if the player has died or won the game ends + Main game Loop
 public class Gamelobby
 {
-    public void MainMenu()
+    public void MainMenu(Raider addRaider)
     {
 
         var start = new Gamelobby();
-        var addRaider = new Raider();
         var addArc = new Arc();
         string? mainChoice;
         do
@@ -84,7 +86,7 @@ public class Gamelobby
             //ReadyForPost Thread.Sleep(2000);
 
 
-            start.TopSideMenu();
+            start.TopSideMenu(addRaider);
         }
         else if (mainChoiceConf == "B")
         {
@@ -103,14 +105,13 @@ public class Gamelobby
             Console.WriteLine("");
             Console.WriteLine("Lets try this again");
 
-            start.MainMenu();
+            start.MainMenu(addRaider);
         }
 
     }
 
-    public void TopSideMenu()
+    public void TopSideMenu(Raider topRaider)
     {
-        var topRaider = new Raider();
 
         var topArc = new Arc();
         int arcDestroyed = 0;
@@ -280,12 +281,24 @@ public abstract class Character
 {
     public string name = "blank";
 
-    private int health = 20;
+    private int health = 0;
 
     public int damage = 0;
 
     public int inventorySpace = 0;
     public Items[] inventory = new Items[5] { new Available(), new Available(), new Available(), new Available(), new Available() };
+    public int HealthInital(int startAmount)
+    {
+        health = startAmount;
+
+        return health;
+    }
+    public int HealthChange(int changeAmount)
+    {
+        health -= changeAmount;
+
+        return health;
+    }
     public int CallHealthAmount()
     {
 
@@ -325,26 +338,37 @@ public class Raider : Character
     public Raider()
     {
 
-        name = "Raider";
+        name = "blank";
         damage = 8;
+        HealthInital(80);
+
 
         inventory[0] = new Rattler();
     }
 
-    int health = 80;
-    int damage = 8;
+
+    // Get the player's name
+    public string GetPlayerName()
+    {
+        Console.WriteLine("What is your name?");
+        name = Console.ReadLine();
+        Console.WriteLine($"your player name is {name}");
+
+        return name;
+    }
+
 
     // send damage to the victim and annouce the attack
     public int AttackBase(Character target)
     {
-        Console.WriteLine("You take a deep breath to steady your aim");
+        Console.WriteLine($" {name} takes a deep breath to steady their aim");
         Console.WriteLine("");
         Console.WriteLine("BANG!");
         Console.WriteLine("----------------------------");
         Console.WriteLine("");
 
         target.DamageReciever(this, damage);
-        Console.WriteLine($"You have successfully shot the {target} for {damage} damage");
+        Console.WriteLine($"{name} has successfully shot the {target} for {damage} damage");
         Console.WriteLine("");
         Console.WriteLine("----------------------------");
 
@@ -358,33 +382,23 @@ public class Raider : Character
 
         DamageRecieverAction(attacker, attackerDamage);
 
-        if (health < 1)
-        {
-            Console.WriteLine("You have failed!");
-        }
-        Console.WriteLine($"Raider currenlty has {health} health remaining");
 
-
-        return health;
+        return 1001;
     }
 
 
 
     private void DamageRecieverAction(Character attacker, int attackerDamage)
     {
-        health -= attackerDamage;
+        HealthChange(attackerDamage);
 
-        if (health < 1)
+        if (CallHealthAmount() < 1)
         {
-            attacker.inventory[1] = new Rattler();
+            Console.WriteLine("You have failed!");
         }
+        Console.WriteLine($"{name} currenlty has {CallHealthAmount()} health remaining");
     }
 
-    public int CallHealthAmount()
-    {
-
-        return health;
-    }
 
 }
 
@@ -394,10 +408,10 @@ public class Arc : Character
     public Arc()
     {
         name = "Arc";
+        damage = 3;
+        HealthInital(20);
     }
 
-    int health = 20;
-    int damage = 3;
 
     // send damage to the victim and annouce the attack
     public int AttackBase(Character target)
@@ -416,28 +430,23 @@ public class Arc : Character
     {
         DamageRecieverAction(attacker, attackerDamage);
 
-        if (health < 1)
+        if (CallHealthAmount() > 1)
         {
-            Console.WriteLine($"Arc currenlty has {health} health remaining");
+            Console.WriteLine($"Arc currenlty has {CallHealthAmount()} health remaining");
         }
 
-        return health;
+        return 1001;
     }
 
     private void DamageRecieverAction(Character attacker, int attackerDamage)
     {
-        health -= attackerDamage;
-        if (health < 1)
+        HealthChange(attackerDamage);
+        if (CallHealthAmount() < 1)
         {
             attacker.inventory[1] = new Rattler();
         }
     }
 
-    public int CallHealthAmount()
-    {
-
-        return health;
-    }
 
 
 }
