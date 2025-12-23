@@ -1,9 +1,9 @@
 // AC for our work item
 // user must be identified by player name (input) DONE
 // at least 5 prompts before one of the endings DONE
-// 2 endings: Win or Lose 
+// 2 endings: Win or Lose DONE
 // show use of constructors, static classes DONE
-// 4 Object Oriented Programming principles (inheritance, encapsulation, poly, abstraction) 
+// 4 Object Oriented Programming principles (inheritance, encapsulation, poly, abstraction) DONE
 // player (with or without hp) DONE
 // meter, counter, hp, progress tracking, DONE 
 // combat/competition DONE
