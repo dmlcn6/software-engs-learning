@@ -9,7 +9,7 @@
 //- player (with or without hp) ^
 //- meter, counter, hp, progress tracking, ^
 //- combat/competition ^
-//- Usable items in inventory
+//- Usable items in inventory^
 
 
 
@@ -180,9 +180,39 @@ public class Gamelobby
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("*SYSTEM MESSAGE*");
                 Console.WriteLine("Inventory is still under maintenance");
-                Console.WriteLine($"{topRaider.inventory[0]}, {topRaider.inventory[1]}, {topRaider.inventory[2]}, {topRaider.inventory[3]}, {topRaider.inventory[4]}");
+                Console.WriteLine($"1. {topRaider.inventory[0]},      2. {topRaider.inventory[1]},      3. {topRaider.inventory[2]},      4. {topRaider.inventory[3]},      5. {topRaider.inventory[4]}");
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("");
+                string tempChoice = Console.ReadLine();
+
+                // Give the player a buff or nurf depending on the item they choose.
+                if (tempChoice == "1")
+                {
+
+                    int giveChange = topRaider.inventory[0].damage;
+                    topRaider.DamageBuff(giveChange);
+                }
+                else if (tempChoice == "2")
+                {
+                    int giveChange = topRaider.inventory[1].damage;
+                    topRaider.DamageBuff(giveChange);
+                }
+                else if (tempChoice == "3")
+                {
+                    int giveChange = topRaider.inventory[2].damage;
+                    topRaider.DamageBuff(giveChange);
+                }
+                else if (tempChoice == "4")
+                {
+                    int giveChange = topRaider.inventory[3].damage;
+                    topRaider.DamageBuff(giveChange);
+                }
+                else if (tempChoice == "5")
+                {
+                    int giveChange = topRaider.inventory[4].damage;
+                    topRaider.DamageBuff(giveChange);
+                }
+
             }
 
 
@@ -397,6 +427,12 @@ public class Raider : Character
             Console.WriteLine("You have failed!");
         }
         Console.WriteLine($"{name} currenlty has {CallHealthAmount()} health remaining");
+    }
+
+    public int DamageBuff(int buffAmount)
+    {
+        damage += buffAmount;
+        return damage;
     }
 
 
