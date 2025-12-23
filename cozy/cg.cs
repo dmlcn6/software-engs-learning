@@ -1,13 +1,14 @@
 // AC for our work item
 // user must be identified by player name (input) DONE
-// at least 5 prompts before one of the endings
-// 2 endings: Win or Lose
+// at least 5 prompts before one of the endings DONE
+// 2 endings: Win or Lose 
 // show use of constructors, static classes DONE
 // 4 Object Oriented Programming principles (inheritance, encapsulation, poly, abstraction) 
-// player (with or without hp)
-// meter, counter, hp, progress tracking, 
-// combat/competition
-// Usable items in inventory
+// player (with or without hp) DONE
+// meter, counter, hp, progress tracking, DONE 
+// combat/competition DONE
+// Usable items in inventory DONE
+using System.Net.Mail;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualBasic;
@@ -23,11 +24,11 @@ namespace Game
         public static int playerPos;
         public int random;
         public string item;
-        public static bool alive = true;
         public static void Main()
         {
             player = new Player();
             bandito = new Enemy();
+            stranger = new Stranger();
             CozyGame.Intro();
             CozyGame.Begin();
         }
@@ -63,7 +64,21 @@ namespace Game
                 do
                 {
                     CozyGame.Gameplay();
-                } while (alive);
+                } while (player.alive && playerPos <= 21);
+                if (player.alive == false)
+                {
+                    Console.WriteLine("You Died!");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("Better Luck Next Time!");
+                }
+                else
+                {
+                    Console.WriteLine("Congratulations!");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("You have completed the game!");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("I knew you could do it! :)");
+                }
             }
             else if (choice == "no")
             {
@@ -191,141 +206,203 @@ namespace Game
             Console.WriteLine($"You rolled a {sixDice}!");
             Console.WriteLine($"New Position: {playerPos}");
         }
-        public static void Combat(Character player, Character enemy)
+        public static void Combat(Player player, Character enemy)
         {
             //create a conditional for combat between the player and an opponent
             //Fights are to the DEATH
             //player either attacks or uses an item
             //enemy attacks after player takes turn
             //this continues until death
-            Console.WriteLine("Get ready for battle!");
-            Console.WriteLine($"Your stats: {player.ViewStats()}");
-            Console.WriteLine($"Enemy stats: {enemy.ViewStats()}");
+            do
+            {
+                Console.WriteLine("Get ready for battle!");
+                Console.WriteLine($"Your stats: {player.ViewStats()}");
+                Console.WriteLine($"Enemy stats: {enemy.ViewStats()}");
+                Console.WriteLine("");
+                Console.WriteLine("Enter a number to select an action");
+                Console.WriteLine("");
+                Console.WriteLine("1. Attack");
+                Console.WriteLine("2. Use Item");
+                var isChoice = int.TryParse(Console.ReadLine(), out int choice);
+
+                if (isChoice)
+                {
+                    switch (choice)
+                    {
+                        case 1:
+                            player.Attack(enemy);
+                            break;
+                        case 2:
+                            Console.WriteLine("");
+                            Console.WriteLine("Here is your inventory: ");
+                            var localInventory = player.inventory;
+                            for (var i = 0; i < localInventory.Count; i++)
+                            {
+                                Console.WriteLine($"{i}: {localInventory[i].itemName}");
+                            }
+                            Console.WriteLine("");
+                            Console.WriteLine("Select your item number: ");
+                            var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
+
+                            if (isItemChoice)
+                            {
+                                player.inventory[itemChoice].Equip(player);
+                                Console.WriteLine("");
+                                Console.WriteLine("Item used successfully");
+                                player.ViewStats();
+                            }
+                            break;
+                    }
+
+                }
+                if (enemy.alive)
+                {
+                    enemy.Attack(player);
+                }
+            } while (player.alive && enemy.alive);
 
 
         }
-
-    }
-    public abstract class UsableItems
-    {
-        public int dmgBuff;
-        public int healing;
-        public int shield;
-        public string itemName;
-        public int playerHP;
-        public abstract void Equip(Character character);
-    }
-    public class Sword : UsableItems
-    {
-        public Sword()
+        public abstract class UsableItems
         {
-            itemName = "Sword";
-            dmgBuff = 10;
+            public int dmgBuff;
+            public int healing;
+            public int shield;
+            public string itemName;
+            public int playerHP;
+            public abstract void Equip(Character character);
         }
-        public override void Equip(Character character)
+        public class Knife : UsableItems
         {
-            character.damage = character.damage + dmgBuff;
+            public Knife()
+            {
+                itemName = "Knife";
+                dmgBuff = 5;
+            }
+            public override void Equip(Character character)
+            {
+                character.damage = character.damage + dmgBuff;
+            }
         }
-    }
-    public class Blick : UsableItems
-    {
-        public Blick()
+        public class Sword : UsableItems
         {
-            itemName = "Blick";
-            dmgBuff = 20;
+            public Sword()
+            {
+                itemName = "Sword";
+                dmgBuff = 15;
+            }
+            public override void Equip(Character character)
+            {
+                character.damage = character.damage + dmgBuff;
+            }
         }
-        public override void Equip(Character character)
+        public class Blick : UsableItems
         {
-            character.damage = character.damage + dmgBuff;
-        }
-
-    }
-    public class Armor : UsableItems
-    {
-        public Armor()
-        {
-            itemName = "Armor";
-            shield = 100;
-        }
-        public override void Equip(Character character)
-        {
-            character.health = character.health + shield;
-        }
-    }
-    public class Yercs : UsableItems
-    {
-        public Yercs()
-        {
-            itemName = "Yercs";
-            healing = 20;
-        }
-        public override void Equip(Character character)
-        {
-            character.health = character.health + healing;
-        }
-    }
-    public class Potion : UsableItems
-    {
-        public Potion()
-        {
-            itemName = "Potion";
-            healing = 50;
-        }
-        public override void Equip(Character character)
-        {
-            character.health = character.health + healing;
-        }
-    }
-    public abstract class Character
-    {
-        public int health = 100;
-        public int damage = 7;
-        public string name;
-        public Character()
-        {
+            public Blick()
+            {
+                itemName = "Blick";
+                dmgBuff = 30;
+            }
+            public override void Equip(Character character)
+            {
+                character.damage = character.damage + dmgBuff;
+            }
 
         }
-        public void ViewStats()
+        public class Armor : UsableItems
         {
-            Console.WriteLine($"DMG: {damage}, HP: {health}");
+            public Armor()
+            {
+                itemName = "Armor";
+                shield = 100;
+            }
+            public override void Equip(Character character)
+            {
+                character.health = character.health + shield;
+            }
         }
-        public void Attacked(Character attacker)
+        public class Yercs : UsableItems
         {
-            health = health - attacker.damage;
+            public Yercs()
+            {
+                itemName = "Yercs";
+                healing = 20;
+            }
+            public override void Equip(Character character)
+            {
+                character.health = character.health + healing;
+            }
         }
-        public void Attack(Character victim)
+        public class Potion : UsableItems
         {
-            victim.Attacked(this);
+            public Potion()
+            {
+                itemName = "Potion";
+                healing = 50;
+            }
+            public override void Equip(Character character)
+            {
+                character.health = character.health + healing;
+            }
         }
+        public abstract class Character
+        {
+            public int health = 100;
+            public int damage = 7;
+            public string name;
+            public bool alive = true;
+            public Character()
+            {
 
-    }
-    public class Player : Character
-    {
-        public string playerName;
-        public List<UsableItems> inventory = new List<UsableItems>();
-        public Player()
-        {
+            }
+            public string ViewStats()
+            {
+                return $"DMG: {damage}, HP: {health}";
+            }
+            public void Attacked(Character attacker)
+            {
+                health = health - attacker.damage;
+
+                if (health <= 0)
+                {
+                    alive = false;
+                }
+
+            }
+            public void Attack(Character victim)
+            {
+                victim.Attacked(this);
+            }
 
 
         }
-    }
-    public class Enemy : Character
-    {
-        public List<UsableItems> weapon = new List<UsableItems>() { new Sword() };
-        public Enemy()
+        public class Player : Character
         {
-            name = "Bandit";
-            weapon[0].Equip(this);
+            public string playerName;
+            public List<UsableItems> inventory = new List<UsableItems>() { new Sword() };
+            public Player()
+            {
+                inventory[0].Equip(this);
+            }
         }
-    }
-    public class Stranger : Character
-    {
-        public List<UsableItems> tote = new List<UsableItems>() { new Blick(), new Armor() };
-        public Stranger()
+        public class Enemy : Character
         {
-            name = "???";
-            tote[0].Equip(this);
-            tote[1].Equip(this);
+            public List<UsableItems> weapon = new List<UsableItems>() { new Knife() };
+            public Enemy()
+            {
+                name = "Bandit";
+                weapon[0].Equip(this);
+            }
+        }
+        public class Stranger : Character
+        {
+            public List<UsableItems> tote = new List<UsableItems>() { new Blick(), new Armor() };
+            public Stranger()
+            {
+                name = "???";
+                tote[0].Equip(this);
+                tote[1].Equip(this);
+            }
         }
     }
 }
