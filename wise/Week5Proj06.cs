@@ -9,7 +9,7 @@
 //- player (with or without hp) ^
 //- meter, counter, hp, progress tracking, ^
 //- combat/competition ^
-//- Usable items in inventory^
+//- Usable items in inventory ^
 
 
 
@@ -383,6 +383,7 @@ public class Raider : Character
         Console.WriteLine("What is your name?");
         name = Console.ReadLine();
         Console.WriteLine($"your player name is {name}");
+
 
         return name;
     }
