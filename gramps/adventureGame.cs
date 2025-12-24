@@ -3,7 +3,7 @@
 namespace AdventureGame
 {
     #region GAME LOGIC
-    public class Game
+    public static class Game
     {
         // player declaration lives on the class
         public static Player player1;
@@ -26,6 +26,7 @@ namespace AdventureGame
                 }
                 else
                 {
+                    player1._inventory.Add(new HiPotion());
                     enemy = new Boss();
                 }
 
@@ -63,6 +64,11 @@ namespace AdventureGame
                 Console.WriteLine("");
                 Console.WriteLine("1. Attack");
                 Console.WriteLine("2. Use Item");
+
+                // get the users input w ConsoleReadLine
+                // try to parse it to an integer
+                // whether the parse is succ or not, the function TryParse() returns a bool the bool is captured in isChoice
+                // if the parse is successful, TryParse() will output the parsed string into the new variable type
                 var isChoice = int.TryParse(Console.ReadLine(), out int choice);
 
                 if (isChoice)
@@ -70,22 +76,25 @@ namespace AdventureGame
                     switch (choice)
                     {
                         case 1:
-                        case 3:
-                        case 5:
-                        case 7:
                             player1.Attack(enemy);
                             break;
 
                         case 2:
                             Console.WriteLine("");
                             Console.WriteLine("Here is your inventory: ");
+
+
                             var localInventory = player1._inventory;
+
+
                             for (var i = 0; i < localInventory.Count; i++)
                             {
                                 Console.WriteLine($"{i}: {localInventory[i].name}");
                             }
                             Console.WriteLine("");
                             Console.WriteLine("Select your item number: ");
+
+
                             var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
 
                             if (isItemChoice)
@@ -276,8 +285,6 @@ namespace AdventureGame
 
         public abstract int Use(Character victim);
 
-        public abstract void Enchant();
-
         public void Alert()
         {
             Console.WriteLine("Alert");
@@ -301,21 +308,24 @@ namespace AdventureGame
             character._inventory.Remove(this);
             return character._hp;
         }
-
-        public override void Enchant()
-        {
-            return;
-        }
     }
 
-    public class HiPotion : Potion
+    public class HiPotion : UsableItem
     {
+        public override int amountOfEffectToHp { get; set; }
+        public override string name { get; set; }
 
-
-        public override void Enchant()
+        public HiPotion()
         {
-            // only enchant a HiPotion
-            amountOfEffectToHp += 100;
+            amountOfEffectToHp = 150;
+            name = "Hi Potion";
+        }
+
+        public override int Use(Character character)
+        {
+            character._hp = amountOfEffectToHp + character._hp;
+            character._inventory.Remove(this);
+            return character._hp;
         }
     }
 
@@ -334,11 +344,6 @@ namespace AdventureGame
         {
             character._hp -= amountOfEffectToHp;
             return character._hp;
-        }
-
-        public override void Enchant()
-        {
-            amountOfEffectToHp += 100;
         }
     }
     #endregion
