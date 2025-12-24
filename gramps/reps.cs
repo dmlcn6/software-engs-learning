@@ -1,8 +1,11 @@
 // declare a new variable of each type with a value;
 // - string, int, decimal, char, array, list, 
 
+<<<<<<< HEAD
 using System.ComponentModel;
 
+=======
+>>>>>>> 469e51e5f1d5969b37fb25b0000949d7070bffbd
 string myStringVariable = "test string";
 int myIntVariable = 2;
 decimal myDecimal = 1.476;
@@ -43,6 +46,27 @@ static class MyStaticClass
 // Encapsulation:
 // - show 1 class that encapsulates the modification of a private class variable through the use of a function
 
+<<<<<<< HEAD
+=======
+public class Player
+{
+    private int numberOfDeaths = 0;
+
+
+    public void IncrementDeaths()
+    {
+        //conditional logic potentially for who can call this function
+        AddDeaths();
+    }
+
+    private void AddDeaths()
+    {
+
+        numberOfDeaths += 1;
+    }
+}
+
+>>>>>>> 469e51e5f1d5969b37fb25b0000949d7070bffbd
 
 // Inheritance:
 // - show 2 classes; one parent and one child;
@@ -74,6 +98,7 @@ public class MyClass
         myNumberList = new List<int>();
         myClassString = "New Class";
     }
+<<<<<<< HEAD
 }
 
 // an abstract class that has 1 fully defined class variables
@@ -157,3 +182,7 @@ else
     // do this if conditional is not met
 }
 
+=======
+
+}
+>>>>>>> 469e51e5f1d5969b37fb25b0000949d7070bffbd

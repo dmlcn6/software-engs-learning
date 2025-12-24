@@ -101,10 +101,33 @@ things to think about
 12/14 Retro
 
 What went well?
-
+- teamwork
+	- 1:1 troubleshooting with one dev actually helps other devs
+	- sharing streams helps seeing code
+- links on 4 OOP were helpful, as needed
+- segmented troubleshooting/pair programming is working!
+- still a lot of good questions
+- example code went to good use!!
 
 What didnt go well?
+- waste time not asking for help
+	- express **quickly** when blocked
+	- knowing when to listen in on the troubleshooting and when to keep heads down on code
+		- this will lessen the need to repeat something
+
+- lot of jumping around in the code, when a wall was hit 
+	- saw parts of unfinished code that affected other parts
+	- added confusion to the project and delayed progress
+	- unlike how the calculator went where the clases were built, and then used in a business logic
+
+- "psuedocode, psuedocode, psuedo fucking code" - Cozy  
+
+- scared to delete some psuedo(code) because there was no comments left for the code
 
 Things to think about?
+- try to listen in for keywords that maybe relevant
 
+- for next 2 weeks
+	- sunday, dec 21st will be 1pm CT
+	- monday, will be class to replace wednesday
 ---

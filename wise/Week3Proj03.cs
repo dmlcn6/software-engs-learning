@@ -7,8 +7,9 @@
 
 // Show use of classes functions to organize code.
 
-//accessModifier Class ClassName
-//accessModifier returnType functionName (parameter1, parameter2)
+//class = accessModifier Class ClassName
+//function = accessModifier returnType functionName (parameter1, parameter2)
+//constructor = acessModifier constructorName ()
 
 //dotnet run <filename>
 
