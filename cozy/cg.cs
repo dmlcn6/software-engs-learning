@@ -155,6 +155,7 @@ namespace Game
                 case 11:
                 case 17:
                 case 20:
+                    Potion potion = new Potion();
                     Console.WriteLine("You have encountered a stranger...attack?");
                     Console.WriteLine("Please type Yes or No");
                     choice = Console.ReadLine().ToLower();
@@ -168,6 +169,7 @@ namespace Game
                         Console.WriteLine($"Hello, {player.playerName}. I have something for you...");
                         Thread.Sleep(1000);
                         Console.WriteLine("You gained a potion!");
+                        player.inventory.Add(potion);
                     }
                     else
                     {
@@ -253,7 +255,6 @@ namespace Game
                             }
                             break;
                     }
-
                 }
                 if (enemy.alive)
                 {
@@ -359,16 +360,7 @@ namespace Game
             {
                 return $"DMG: {damage}, HP: {health}";
             }
-            public void Attacked(Character attacker)
-            {
-                health = health - attacker.damage;
-
-                if (health <= 0)
-                {
-                    alive = false;
-                }
-
-            }
+            public abstract void Attacked(Character attacker);
             public void Attack(Character victim)
             {
                 victim.Attacked(this);
@@ -384,6 +376,18 @@ namespace Game
             {
                 inventory[0].Equip(this);
             }
+            public override void Attacked(Character attacker)
+            {
+                health = health - attacker.damage;
+
+                if (health <= 0)
+                {
+                    alive = false;
+                    Console.WriteLine("GAME OVER! You have died.");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("It seems I overestimated you...");
+                }
+            }
         }
         public class Enemy : Character
         {
@@ -392,6 +396,15 @@ namespace Game
             {
                 name = "Bandit";
                 weapon[0].Equip(this);
+            }
+            public override void Attacked(Character attacker)
+            {
+                health = health - attacker.damage;
+
+                if (health <= 0)
+                {
+                    alive = false;
+                }
             }
         }
         public class Stranger : Character
@@ -402,6 +415,15 @@ namespace Game
                 name = "???";
                 tote[0].Equip(this);
                 tote[1].Equip(this);
+            }
+            public override void Attacked(Character attacker)
+            {
+                health = health - attacker.damage;
+
+                if (health <= 0)
+                {
+                    alive = false;
+                }
             }
         }
     }
