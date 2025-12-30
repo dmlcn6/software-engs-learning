@@ -35,6 +35,10 @@ here is what we covered so far
 - **Sprint 3:
     - Sun 12/14: Start the week with reps on variable creation class creation accessMods keywords
     - We will dive heavier into 4 OOP principels while finishing our text based adventure  game
+    - finished out our sprint by finishing the commmand line adventrure games with 4 oop principles
+
+- **Sprint 4:
+    - Sun 12/28: We are skipping Data Structure and Advanced Data Strucutres for now to progress to HTML and beyond
 ---
 
 Tyree made this Change 11/14/25

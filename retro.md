@@ -129,5 +129,32 @@ Things to think about?
 
 - for next 2 weeks
 	- sunday, dec 21st will be 1pm CT
-	- monday, will be class to replace wednesday
+	- monday, will be class to replace wednesday for Christmas
+
+
+---
+
+12/28 Retro
+
+What went well?
+- reps reps reps
+	- throughout the sprint
+- finished the games and AC
+- testing out code locally
+	- allows team to  play the game and give critiques
+- using the reps as documentaion
+
+What didnt do well?
+- reactive coding
+- not wanting to leave code not working, meant not committing as much
+- clear focus of 1 thing to achieve per meeting
+- more psuedo code
+- changing of schedules for holiday has left us a bit dizzy
+- not testing in between small code changes, allows for more errors, more time spent debugging
+
+Things to think about?
+- more consistent reps!! will build up the notes
+- we should be done before Holidays 2026!
+- monday, will be class to replace wednesday for New Years
+
 ---
