@@ -1,4 +1,13 @@
+using System.ComponentModel;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Linq.Expressions;
+using System.Net.NetworkInformation;
+using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.VisualBasic;
 
 namespace RepsUp
 {
@@ -81,8 +90,15 @@ namespace RepsUp
     {
         public static void Main()
         {
-            AnimeMans goat = new AnimeMans();
-            goat.MyHero();
+            //AnimeMans goat = new AnimeMans();
+            //goat.MyHero();
+            MoreLoops loops = new MoreLoops();
+            loops.FirstLoop();
+            Console.WriteLine("-----------------------------");
+            loops.SecondLoop();
+            Console.WriteLine("-----------------------------");
+            loops.ThirdLoop();
+
 
         }
 
@@ -147,6 +163,44 @@ namespace RepsUp
                 case 4:
                     // thinks its time to do something else
                     break;
+            }
+        }
+    }
+    public class MoreLoops
+    {
+        // iterate thru lists
+        // loop thru list elements
+        // for every element in list, increment + 1
+        // console log the result     
+        List<int> myList = [1, 2, 3, 4];
+        // while loop
+        public void FirstLoop()
+        {
+            int numbers = 0;
+            while (numbers < myList.Count)
+            {
+                myList[numbers] += 1;
+                Console.WriteLine(myList[numbers]);
+                numbers++;
+            }
+        }
+        // for loop
+        public void SecondLoop()
+        {
+            for (var index = 0; index < myList.Count; index++)
+            {
+                myList[index] += 1;
+                Console.WriteLine(myList[index]);
+            }
+        }
+        // for each loop
+        public void ThirdLoop()
+        {
+            foreach (var number in myList)
+            {
+                int nums = number;
+                nums += 1;
+                Console.WriteLine(nums);
             }
         }
     }
