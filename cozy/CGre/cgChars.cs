@@ -1,4 +1,4 @@
-namespace GameCharacters
+namespace cozy.CGre
 {
     public abstract class Character
     {

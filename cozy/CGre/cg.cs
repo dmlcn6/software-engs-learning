@@ -12,9 +12,10 @@ using System.Net.Mail;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualBasic;
+using Cozy.CGre;
 
 
-namespace Game
+namespace Cozy.CGre
 {
     public class CozyGame
     {

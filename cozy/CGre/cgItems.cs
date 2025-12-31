@@ -1,4 +1,4 @@
-namespace Items
+namespace Cozy.CGre
 {
     public abstract class UsableItems
     {
