@@ -1,3 +1,4 @@
+using AdventureGame;
 
 
 namespace AdventureGame
@@ -129,153 +130,6 @@ namespace AdventureGame
     }
     #endregion
 
-    #region CHARACTERS
-
-    public abstract class Character
-    {
-        public int _dmg = 4;
-
-
-        public int _hp = 20;
-
-        public string _name;
-
-        public List<UsableItem> _inventory;
-
-        public bool _dead = false;
-
-        public Character()
-        {
-            // create players new inventory
-            _inventory = new List<UsableItem>();
-
-            // player spawn with base item
-            _inventory.Add(new Sword());
-        }
-
-        public abstract void Attack(Character victim);
-
-        public void ViewStats()
-        {
-            Console.WriteLine("");
-            Console.WriteLine($"{_name} Stats:  DMG: {_dmg}, HP: {_hp}");
-            Console.WriteLine("");
-        }
-
-        public bool AttackedBy(Character attacker)
-        {
-            //int _hp = 0;
-            _hp -= attacker.GetDmg();  // same as _hp = _hp - attacker.dmg
-
-            ViewStats();
-            attacker.ViewStats();
-
-            if (_hp <= 0)
-            {
-                Dead();
-                return true;
-            }
-
-
-            return false;
-        }
-
-        public int GetDmg()
-        {
-            return _inventory[0].amountOfEffectToHp + _dmg;
-        }
-
-        public virtual void Dead()
-        {
-            Console.WriteLine($"[{_name}]: I i Wait please help me! im Dying ple- Please, i cant fe- .....");
-            _dead = true;
-        }
-
-        public bool IsAlive()
-        {
-            return !_dead;
-        }
-    }
-
-    public class Player : Character
-    {
-        public int killCount = 0;
-        public Player()
-        {
-            _name = "Player 1";
-            _inventory.Add(new Potion());
-        }
-
-        public override void Attack(Character victim)
-        {
-            var victimIsDead = victim.AttackedBy(this);
-            if (victimIsDead)
-            {
-
-                killCount += 1;
-                // everytime Player kills a monster, they get 1 health potion
-                _inventory.Add(new Potion());
-
-                _dmg += 11;
-            }
-        }
-
-        public override void Dead()
-        {
-            Console.WriteLine($"[{_name}]: I will never stop! ...");
-            _dead = true;
-        }
-    }
-
-    public class TinyMonster : Character
-    {
-        public TinyMonster()
-        {
-            _name = "Tiny Monster";
-        }
-
-        public override void Attack(Character victim)
-        {
-            Console.WriteLine($"[{_name}]: ** in high pitch ** THIS IS GOnNA HURT!!");
-            var victimIsDead = victim.AttackedBy(this);
-            if (victimIsDead)
-            {
-                // everytime a TinyMonster kills a character, they scream
-                Console.WriteLine($"[{_name}]: ** in high pitch ** DIE DIE DIE!!");
-            }
-        }
-
-
-    }
-
-    public class Boss : Character
-    {
-        public Boss()
-        {
-            _name = "First FInal Boss";
-            _dmg = 50;
-            _hp = 200;
-        }
-
-        public override void Attack(Character victim)
-        {
-            var victimIsDead = victim.AttackedBy(this);
-            if (victimIsDead)
-            {
-                // everytime a Boss kills a character, they scream
-                Console.WriteLine($"[{_name}]: GOODBYE ONCE AND FOR ALL {victim._name}! ");
-            }
-        }
-
-        public override void Dead()
-        {
-            Console.WriteLine($"[{_name}]: **NOooo NO N)O@!, i'll never y-yi-YIEield! Iim THE lORD of EvilL! !!!");
-            _dead = true;
-        }
-    }
-
-    #endregion
-
     #region ITEMS
     public abstract class UsableItem
     {
@@ -347,4 +201,15 @@ namespace AdventureGame
         }
     }
     #endregion
+
+    // DESTROY THE MONOLITH!!!!!! CREATING MODULARIZATION
+    // separate all interfaces/abstracts into separate files
+    // rename them properly
+    // separate all derived class into one file
+    // ITEMS
+    // CHARACTERS   
+    // re organize main function into one main cs file
+    // this will help us learn using statements
+    // have a file called Program.cs that is the entry point to your game
+    // have a folder that encloses your full game and all its code
 }
