@@ -1,4 +1,6 @@
-﻿namespace Reup.Items
+﻿using Reup.Characters;
+
+namespace Reup.Items
 {
     public abstract class IUsableItems
     {
@@ -7,6 +9,6 @@
         public int shield;
         public string itemName;
         public int playerHP;
-        public abstract void Equip(Character character);
+        public abstract void Equip(ICharacter character);
     }
 }

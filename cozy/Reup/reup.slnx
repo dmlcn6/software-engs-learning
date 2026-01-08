@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Characters/">
+    <Project Path="Characters/characters.csproj" />
+  </Folder>
+  <Folder Name="/Items/">
+    <Project Path="Items/items.csproj" />
+  </Folder>
+  <Project Path="Program/program.csproj" />
+</Solution>

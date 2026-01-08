@@ -1,5 +1,4 @@
-﻿using Reup.Characters;
-namespace Reup.Characters
+﻿namespace Reup.Characters
 {
     public abstract class ICharacter
     {

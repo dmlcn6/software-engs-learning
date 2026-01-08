@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "characters/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/characters.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/characters.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "characters/1.0.0": {
+      "type": "project",
+      "path": "../Characters/characters.csproj",
+      "msbuildProject": "../Characters/characters.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "characters >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\albha\\.nuget\\packages\\": {}
@@ -13,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\items\\items.csproj",
+      "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj",
       "projectName": "items",
-      "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\items\\items.csproj",
+      "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj",
       "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\items\\obj\\",
+      "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -33,7 +52,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj": {
+              "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

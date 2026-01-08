@@ -1,4 +1,4 @@
-using Reup.Characters;
+using Reup.Items
 
 namespace Reup.Characters
 {
