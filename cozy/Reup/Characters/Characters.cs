@@ -1,3 +1,5 @@
+using Reup.Characters;
+
 namespace Reup.Characters
 {
     public class Player : ICharacter
