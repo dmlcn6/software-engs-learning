@@ -1,6 +1,6 @@
 namespace Cozy.CGre
 {
-    public abstract class UsableItems
+    public abstract class IUsableItems
     {
         public int dmgBuff;
         public int healing;
@@ -9,7 +9,7 @@ namespace Cozy.CGre
         public int playerHP;
         public abstract void Equip(Character character);
     }
-    public class Knife : UsableItems
+    public class Knife : IUsableItems
     {
         public Knife()
         {
@@ -21,7 +21,7 @@ namespace Cozy.CGre
             character.damage = character.damage + dmgBuff;
         }
     }
-    public class Sword : UsableItems
+    public class Sword : IUsableItems
     {
         public Sword()
         {
@@ -33,7 +33,7 @@ namespace Cozy.CGre
             character.damage = character.damage + dmgBuff;
         }
     }
-    public class Blick : UsableItems
+    public class Blick : IUsableItems
     {
         public Blick()
         {
@@ -46,7 +46,7 @@ namespace Cozy.CGre
         }
 
     }
-    public class Armor : UsableItems
+    public class Armor : IUsableItems
     {
         public Armor()
         {
@@ -58,7 +58,7 @@ namespace Cozy.CGre
             character.health = character.health + shield;
         }
     }
-    public class Yercs : UsableItems
+    public class Yercs : IUsableItems
     {
         public Yercs()
         {
@@ -70,7 +70,7 @@ namespace Cozy.CGre
             character.health = character.health + healing;
         }
     }
-    public class Potion : UsableItems
+    public class Potion : IUsableItems
     {
         public Potion()
         {
