@@ -22,7 +22,7 @@ namespace UnitBB
         public void Output()
         {
             var MainRaider = new Raider();
-            MainRaider.CallDamageAmount();
+            Console.WriteLine($"Raider's Damage is at {MainRaider.CallDamageAmount()}");
         }
     }
 }
