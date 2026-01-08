@@ -1,46 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {
-      "characters/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "compile": {
-          "bin/placeholder/characters.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/characters.dll": {}
-        }
-      },
-      "items/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "compile": {
-          "bin/placeholder/items.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/items.dll": {}
-        }
-      }
-    }
+    "net10.0": {}
   },
-  "libraries": {
-    "characters/1.0.0": {
-      "type": "project",
-      "path": "../Characters/characters.csproj",
-      "msbuildProject": "../Characters/characters.csproj"
-    },
-    "items/1.0.0": {
-      "type": "project",
-      "path": "../Items/items.csproj",
-      "msbuildProject": "../Items/items.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net10.0": [
-      "characters >= 1.0.0",
-      "items >= 1.0.0"
-    ]
+    "net10.0": []
   },
   "packageFolders": {
     "C:\\Users\\albha\\.nuget\\packages\\": {}
@@ -48,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\program\\program.csproj",
-      "projectName": "program",
-      "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\program\\program.csproj",
+      "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\items\\items.csproj",
+      "projectName": "items",
+      "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\items\\items.csproj",
       "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\program\\obj\\",
+      "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\items\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -68,14 +33,7 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {
-            "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj": {
-              "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj"
-            },
-            "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj": {
-              "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

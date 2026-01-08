@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj": {}
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj": {}
   },
   "projects": {
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj": {
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj",
-        "projectName": "characters",
-        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj",
+        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj",
+        "projectName": "items",
+        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj",
         "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\obj\\",
+        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",
