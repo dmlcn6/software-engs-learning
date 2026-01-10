@@ -1,14 +1,13 @@
-using Reup.Items
-
+using Reup.Items;
 namespace Reup.Characters
 {
     public class Player : ICharacter
     {
         public string playerName;
-        public List<UsableItems> inventory = new List<UsableItems>() { new Sword() };
+        public List<IUsableItems> inventory = new List<IUsableItems>() { new Sword() };
         public Player()
         {
-            inventory[0].Equip(this);
+            damage = inventory[0].Equip(damage);
         }
         public override void Attacked(ICharacter attacker)
         {
@@ -25,11 +24,11 @@ namespace Reup.Characters
     }
     public class Enemy : ICharacter
     {
-        public List<UsableItems> weapon = new List<UsableItems>() { new Knife() };
+        public List<IUsableItems> weapon = new List<IUsableItems>() { new Knife() };
         public Enemy()
         {
             name = "Bandit";
-            weapon[0].Equip(this);
+            damage = weapon[0].Equip(damage);
         }
         public override void Attacked(ICharacter attacker)
         {
@@ -43,12 +42,12 @@ namespace Reup.Characters
     }
     public class Stranger : ICharacter
     {
-        public List<UsableItems> tote = new List<UsableItems>() { new Blick(), new Armor() };
+        public List<IUsableItems> tote = new List<IUsableItems>() { new Blick(), new Armor() };
         public Stranger()
         {
             name = "???";
-            tote[0].Equip(this);
-            tote[1].Equip(this);
+            damage = tote[0].Equip(damage);
+            health = tote[1].Equip(health);
         }
         public override void Attacked(ICharacter attacker)
         {

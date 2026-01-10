@@ -1,4 +1,4 @@
-﻿using Reup.Characters;
+﻿
 
 namespace Reup.Items
 {
@@ -9,6 +9,6 @@ namespace Reup.Items
         public int shield;
         public string itemName;
         public int playerHP;
-        public abstract void Equip(ICharacter character);
+        public abstract int Equip(int stat);
     }
 }

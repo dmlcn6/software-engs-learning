@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\characters\characters.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
