@@ -1,0 +1,16 @@
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\Characters.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\Characters.AssemblyInfoInputs.cache
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\Characters.AssemblyInfo.cs
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\Characters.csproj.CoreCompileInputs.cache
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\Characters.sourcelink.json
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\bin\Debug\net10.0\Characters.deps.json
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\bin\Debug\net10.0\Characters.dll
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\bin\Debug\net10.0\Characters.pdb
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\bin\Debug\net10.0\Items.dll
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\bin\Debug\net10.0\Items.pdb
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\Characters.csproj.AssemblyReference.cache
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\Characters.csproj.Up2Date
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\Characters.dll
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\refint\Characters.dll
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\Characters.pdb
+C:\Users\darry\src\software-engs-learning\gramps\TestHH\Characters\obj\Debug\net10.0\ref\Characters.dll
