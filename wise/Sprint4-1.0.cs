@@ -1,6 +1,6 @@
 // create a function that stores the players last inventory status, health status, AND damage status.
 // A loop that leads back to the menu
-// 
+// Last Progression1/11/26-1.0
 
 using CharactersBase;
 using ItemsBase;
@@ -36,6 +36,9 @@ namespace TopSide
             var OpenRaider = new Raider();
             Console.WriteLine($"Your players health: {OpenRaider.CallHealthAmount()}");
             Console.WriteLine($"Your players damage: {OpenRaider.CallDamageAmount()}");
+            Console.WriteLine("What is your name?");
+            OpenRaider.NameAdj(Console.ReadLine());
+            Console.WriteLine($"Is your name {OpenRaider.CallName()}?");
         }
     }
 }
@@ -74,6 +77,10 @@ namespace CharactersBase
 
         //------------------
 
+        public string CallName()
+        {
+            return name;
+        }
         public int CallHealthAmount()
         {
             return health;
@@ -84,6 +91,16 @@ namespace CharactersBase
         }
 
         //------------------
+
+
+        public string NameAdj(string changeName)
+        {
+            if (changeName != "")
+            {
+                name = changeName;
+            }
+            return name;
+        }
 
         public int HealthAdj(int amount, string oper)
         {
@@ -145,13 +162,13 @@ namespace CharactersBase
 
 
 
-
     }
     public class Raider : Characters
     {
 
         public Raider()
         {
+            Initname("The Player");
             IntiHealth(100);
             IntiDamage(10);
         }
@@ -374,3 +391,13 @@ namespace ItemsBase
     }
 
 }
+
+
+
+
+
+
+
+
+
+// Last Progression1/11/26-1.0
