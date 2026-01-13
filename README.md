@@ -9,7 +9,7 @@ here is what we covered so far
     - Git fundamentals: clone, commit, push, pull, branches
     - GitHub workflow and collaboration basics
     - *Project: Create first repository and practice branching practiced merging and PRs*
-- **Sprint 1: Control Flow & Logic, Functions & Methods, Arrays & Collections, Strings, OOP **
+- **Sprint 1: Control Flow & Logic, Functions & Methods, Arrays & Collections, Strings, OOP, Calculator **
     - We successfully created calculators that followed this AC:
     - AC - Acceptance Criteria
       4 functions - Add Div Subtract Multi
@@ -18,7 +18,8 @@ here is what we covered so far
       display divide by 0 error
       2 point decimal outputs for division
       Show use of classes/functions to organize code
-- **Sprint 2: 
+
+- **Sprint 2: Create Adventure Game **
     - Sun 11/30: Start
     - Tue 12/2: we are creating AC for our work item
       - user must be identified by player name (input)
@@ -32,14 +33,26 @@ here is what we covered so far
         - meter, counter, hp, progress tracking, 
         - combat/competition
         - Usable items in inventory
-- **Sprint 3:
+
+- **Sprint 3: Create Adventure Game w OOP principles **
     - Sun 12/14: Start the week with reps on variable creation class creation accessMods keywords
     - We will dive heavier into 4 OOP principels while finishing our text based adventure  game
     - finished out our sprint by finishing the commmand line adventrure games with 4 oop principles
 
-- **Sprint 4:
+- **Sprint 4: Refactor Adventure game **
     - Sun 12/28: We are skipping Data Structure and Advanced Data Strucutres for now to progress to HTML and beyond
     - Mon 12/29: Reps on for/each while loops; 
+    - Tue 12/30:
+    - Tue 1/6: 
+    - Wed 1/7: learned how to create a full solution / project c# strucutre
+    - Fri 1/9: learned how to get rid of circular dependencies
+    - the rest of the sprint was spent working on refactoring the adventure
+    - schedule update, shifted 1 day to the left one day 
+      - insted of Tue Wed Fri Sun
+      - its now   Mon Tue Thur Sat
+
+- **Sprint 5:  **
+    - Finishing up the 
 ---
 
 Tyree made this Change 11/14/25
