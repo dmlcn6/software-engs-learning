@@ -1,6 +1,6 @@
 // create a function that stores the players last inventory status, health status, AND damage status.
 // A loop that leads back to the menu
-// Last Progression1/11/26-1.0
+// Last Progression 1/13/26-1.2
 
 using CharactersBase;
 using ItemsBase;
@@ -34,11 +34,14 @@ namespace TopSide
         public void TestBB()
         {
             var OpenRaider = new Raider();
+            var rInventory = OpenRaider.inventory;
             Console.WriteLine($"Your players health: {OpenRaider.CallHealthAmount()}");
             Console.WriteLine($"Your players damage: {OpenRaider.CallDamageAmount()}");
             Console.WriteLine("What is your name?");
             OpenRaider.NameAdj(Console.ReadLine());
             Console.WriteLine($"Is your name {OpenRaider.CallName()}?");
+            Console.WriteLine($"Item 3 is {rInventory[2].CallName()}");
+
         }
     }
 }
@@ -51,9 +54,10 @@ namespace CharactersBase
 {
     public abstract class Characters
     {
-        string name = "--";
+        private string name = "--";
         private int health = 0;
         private int damage = 0;
+        public Items[] inventory = new Items[5] { new ArcCell(), new Available(), new Available(), new Available(), new Available() };
 
 
         public string Initname(string createdName)
@@ -171,9 +175,10 @@ namespace CharactersBase
             Initname("The Player");
             IntiHealth(100);
             IntiDamage(10);
+            inventory[0] = new ArcCell();
         }
 
-        List<Items> inventory = new() { new ArcCell(), new Available(), new Available(), new Available(), new Available() };
+
 
     }
 }
@@ -307,6 +312,13 @@ namespace ItemsBase
 
         //------------------
 
+        public string CallName()
+        {
+            return name;
+        }
+
+        //------------------
+
         public int BuffAdj(int amount, string oper)
         {
             switch (oper)
@@ -376,7 +388,7 @@ namespace ItemsBase
     {
         public Available()
         {
-            Initname("Open");
+            Initname("Empty");
             InitBuff(0);
             InitDebuff(0);
         }
@@ -385,6 +397,7 @@ namespace ItemsBase
     {
         public ArcCell()
         {
+            Initname("ArcCell");
             InitBuff(10);
             InitDebuff(0);
         }
@@ -400,4 +413,6 @@ namespace ItemsBase
 
 
 
-// Last Progression1/11/26-1.0
+
+
+// Last Progression1/13/26-1.2
