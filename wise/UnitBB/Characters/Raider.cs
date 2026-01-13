@@ -1,7 +1,5 @@
 using UnitBB.Characters;
 
-
-
 namespace UnitBB.Characters
 {
 

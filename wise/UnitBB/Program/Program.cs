@@ -1,6 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+
+
 using UnitBB.Characters;
+
 
 
 namespace UnitBB
@@ -11,18 +14,24 @@ namespace UnitBB
         private static void Main()
         {
             Console.WriteLine("Entry has started");
-            var startNext = new Test();
-            startNext.Output();
+            var startNext = new Stage1();
+            startNext.Menu();
         }
 
     }
-    class Test
+    class Stage1
     {
 
-        public void Output()
+        public void Menu()
         {
-            var MainRaider = new Raider();
-            Console.WriteLine($"Raider's Damage is at {MainRaider.CallDamageAmount()}");
+
         }
     }
 }
+
+
+
+
+
+
+// [RECENT COMMIT NAME]         git commit UnitBB -m "File Organization 01/07/26(2)"        [RECENT COMMIT NAME]

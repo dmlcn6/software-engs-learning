@@ -6,10 +6,18 @@ namespace UnitBB.Characters
     public abstract class ICharacters
     {
 
+        private string name = "--";
         private int health = 0;
         private int damage = 0;
+        public Items[] inventory = new Items[5] { new ArcCell(), new Available(), new Available(), new Available(), new Available() };
 
 
+        public string Initname(string createdName)
+        {
+            name = createdName;
+
+            return name;
+        }
         public int IntiHealth(int amount)
         {
             health = amount;
@@ -25,6 +33,10 @@ namespace UnitBB.Characters
 
         //------------------
 
+        public string CallName()
+        {
+            return name;
+        }
         public int CallHealthAmount()
         {
             return health;
@@ -35,6 +47,16 @@ namespace UnitBB.Characters
         }
 
         //------------------
+
+
+        public string NameAdj(string changeName)
+        {
+            if (changeName != "")
+            {
+                name = changeName;
+            }
+            return name;
+        }
 
         public int HealthAdj(int amount, string oper)
         {
@@ -94,9 +116,8 @@ namespace UnitBB.Characters
             return damage;
         }
 
-        //public Items[] inventory = new Items[5] { new Available(), new Available(), new Available(), new Available(), new Available() };
-
 
     }
+
 }
 

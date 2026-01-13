@@ -1,46 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {
-      "Characters/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "compile": {
-          "bin/placeholder/Characters.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Characters.dll": {}
-        }
-      },
-      "Items/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "compile": {
-          "bin/placeholder/Items.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Items.dll": {}
-        }
-      }
-    }
+    "net10.0": {}
   },
-  "libraries": {
-    "Characters/1.0.0": {
-      "type": "project",
-      "path": "../Characters/Characters.csproj",
-      "msbuildProject": "../Characters/Characters.csproj"
-    },
-    "Items/1.0.0": {
-      "type": "project",
-      "path": "../Items/Items.csproj",
-      "msbuildProject": "../Items/Items.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net10.0": [
-      "Characters >= 1.0.0",
-      "Items >= 1.0.0"
-    ]
+    "net10.0": []
   },
   "packageFolders": {
     "C:\\Users\\Tyree\\.nuget\\packages\\": {}
@@ -48,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Program\\Program.csproj",
-      "projectName": "Program",
-      "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Program\\Program.csproj",
+      "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\Items.csproj",
+      "projectName": "Items",
+      "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\Items.csproj",
       "packagesPath": "C:\\Users\\Tyree\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Program\\obj\\",
+      "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Tyree\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -66,14 +31,7 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {
-            "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Characters\\Characters.csproj": {
-              "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Characters\\Characters.csproj"
-            },
-            "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\Items.csproj": {
-              "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\Items.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
