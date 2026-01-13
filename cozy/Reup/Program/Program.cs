@@ -6,8 +6,9 @@ namespace Reup.Program
     {
         public static Player player;
         public static Stranger stranger;
-        public static Enemy bandito;
+        public static Bandit bandito;
         public static string choice;
+        public static string decision;
         public static int playerPos;
         public int random;
         public string item;
@@ -15,7 +16,7 @@ namespace Reup.Program
         public static void Main()
         {
             player = new Player();
-            bandito = new Enemy();
+            bandito = new Bandit();
             stranger = new Stranger();
             CozyGame.Intro();
             CozyGame.Begin();
@@ -87,12 +88,57 @@ namespace Reup.Program
             //Player has 5 Lives to survive until the end
             //Four different events: Loot, Enemy, Stranger, Hazard
             //Player begins by rolling 6 sided dice
-            Console.WriteLine("Please press enter to roll the dice.");
-            Console.ReadLine();
-            DiceRoll();
-            BoardEvents();
+            //player can use an item before and after they decide to roll
+            Console.WriteLine("Enter a number to select an action");
+            Console.WriteLine("");
+            Console.WriteLine("1. View inventory");
+            Console.WriteLine("2. Roll Dice");
+            var isDecision = int.TryParse(Console.ReadLine(), out int decision);
 
+            if (isDecision)
+            {
+                switch (decision)
+                {
+                    case 1:
+                        Console.WriteLine("");
+                        Console.WriteLine("Here is your inventory: ");
+                        var localInventory = player.inventory;
+                        for (var i = 0; i < localInventory.Count; i++)
+                        {
+                            Console.WriteLine($"{i}: {localInventory[i].itemName}");
+                        }
+                        Console.WriteLine("");
+                        Console.WriteLine("Select your item number: ");
+                        var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
 
+                        if (isItemChoice)
+                        {
+                            //grab the item
+                            //compare type of item
+                            var item = player.inventory[itemChoice];
+                            if (item.GetType().ToString().Contains("Potion") ||
+                                item.GetType().ToString().Contains("Armor") ||
+                                item.GetType().ToString().Contains("Yercs"))
+                            {
+                                item.Equip(player.health);
+                            }
+                            else
+                            {
+                                item.Equip(player.damage);
+                            }
+
+                            Console.WriteLine("");
+                            Console.WriteLine("Item used successfully");
+                            Console.WriteLine($"{player.ViewStats()}");
+                        }
+                        break;
+                    case 2:
+                        DiceRoll();
+                        BoardEvents();
+                        break;
+
+                }
+            }
         }
         public static void BoardEvents()
         {
@@ -243,7 +289,7 @@ namespace Reup.Program
 
                                 Console.WriteLine("");
                                 Console.WriteLine("Item used successfully");
-                                player.ViewStats();
+                                Console.WriteLine($"{player.ViewStats()}");
                             }
                             break;
                     }
@@ -253,8 +299,6 @@ namespace Reup.Program
                     enemy.Attack(player);
                 }
             } while (player.alive && enemy.alive);
-
-
         }
     }
 }

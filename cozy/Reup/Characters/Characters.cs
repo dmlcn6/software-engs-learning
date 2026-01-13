@@ -22,10 +22,10 @@ namespace Reup.Characters
             }
         }
     }
-    public class Enemy : ICharacter
+    public class Bandit : ICharacter
     {
         public List<IUsableItems> weapon = new List<IUsableItems>() { new Knife() };
-        public Enemy()
+        public Bandit()
         {
             name = "Bandit";
             damage = weapon[0].Equip(damage);
