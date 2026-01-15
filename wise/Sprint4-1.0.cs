@@ -2,10 +2,15 @@
 // A loop that leads back to the menu
 // Last Progression 1/13/26-1.2
 
+using System.Data;
+using System.Runtime.CompilerServices;
+using System.Security;
 using CharactersBase;
 using ItemsBase;
 using Microsoft.VisualBasic;
 using TopSide;
+
+
 
 namespace Menu
 {
@@ -16,8 +21,8 @@ namespace Menu
         static void Main()
         {
             Console.WriteLine("Program.Start.Main has begun");
-            var startNew = new TestAA();
-            startNew.TestBB();
+            var startNew = new TestA();
+            startNew.TestAA();
         }
     }
 
@@ -29,18 +34,109 @@ namespace Menu
 
 namespace TopSide
 {
-    public class TestAA
+    public class TestA
     {
-        public void TestBB()
+        public void TestAA()
         {
-            var OpenRaider = new Raider();
-            var rInventory = OpenRaider.inventory;
-            Console.WriteLine($"Your players health: {OpenRaider.CallHealthAmount()}");
-            Console.WriteLine($"Your players damage: {OpenRaider.CallDamageAmount()}");
+            var openRaider = new Raider();
+            var rInventory = openRaider.inventory;
+            Console.WriteLine($"Your players health: {openRaider.CallHealthAmount()}");
+            Console.WriteLine($"Your players damage: {openRaider.CallDamageAmount()}");
             Console.WriteLine("What is your name?");
-            OpenRaider.NameAdj(Console.ReadLine());
-            Console.WriteLine($"Is your name {OpenRaider.CallName()}?");
+            openRaider.NameAdj(Console.ReadLine());
+            Console.WriteLine($"Is your name {openRaider.CallName()}?");
             Console.WriteLine($"Item 3 is {rInventory[2].CallName()}");
+
+            var startNew = new TestB();
+            startNew.TestBB(openRaider);
+
+        }
+    }
+
+    public class TestB
+    {
+        public void TestBB(Characters openRaider)
+        {
+            //topLevel
+
+            Console.WriteLine("Welcome to Topside");
+            var openArc = new Arc();
+
+            do
+            {
+
+                if (openArc.CallHealthAmount() <= 0)
+                {
+                    openArc = new Arc();
+                }
+
+                bool? tempRule1 = false;
+                do
+                {
+
+                    Console.WriteLine("an enemy has appeared");
+                    Console.WriteLine("--stats menu--");
+                    Console.WriteLine("--stats--");
+                    Console.WriteLine($"Your stats HP:{openRaider.CallHealthAmount} DMG:{openRaider.CallDamageAmount}");
+                    Console.WriteLine($"The Arc's stats HP:{openArc.CallHealthAmount} DMG:{openArc.CallDamageAmount}");
+                    Console.WriteLine("----*----");
+                    Console.WriteLine("");
+                    Console.WriteLine("What would you like to do?");
+                    Console.WriteLine("(A): Go to your inventory");
+                    Console.WriteLine("(B): Attack the enemy");
+
+                    switch (Console.ReadLine())
+                    {
+                        case "a":
+                        case "A":
+                            tempRule1 = true;
+                            Console.WriteLine("you have chosen A");
+                            // player's attack qoute and send attack message to attacker to collect damage amount then send damage amount to damage reciever on victim to deliever damage (enemy does the same) then show stats
+
+                            break;
+                        case "b":
+                        case "B":
+                            tempRule1 = true;
+                            Console.WriteLine("you have chosen B");
+                            //var inv = openRaider.inventory();
+                            //foreach (int i in inv())
+                            //{
+                            //    Console.WriteLine($"{inv[i]}");
+                            //    i++;
+                            //}
+
+                            //// show player the player their inventory and have the enemy attack the player then show stats
+                            break;
+                        default:
+                            tempRule1 = false;
+                            Console.WriteLine("Please Either enter (A) or (B)");
+                            break;
+                    }
+                } while (tempRule1 == false);
+
+
+                Console.WriteLine("--stats--");
+                Console.WriteLine($"Your stats HP:{openRaider.CallHealthAmount} DMG:{openRaider.CallDamageAmount}");
+                Console.WriteLine($"The Arc's stats HP:{openArc.CallHealthAmount} DMG:{openArc.CallDamageAmount}");
+                Console.WriteLine("----*----");
+
+
+
+
+
+            } while (openRaider.IsAlive() == true && openRaider.CallKillCount() < 3);
+
+
+            if (openRaider.CallKillCount() == 3)
+            {
+                Console.WriteLine("You have WON!");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("You have Failed");
+                return;
+            }
 
         }
     }
@@ -57,7 +153,8 @@ namespace CharactersBase
         private string name = "--";
         private int health = 0;
         private int damage = 0;
-        public Items[] inventory = new Items[5] { new ArcCell(), new Available(), new Available(), new Available(), new Available() };
+        private int killcount = 0;
+        public List<Items> inventory = new() { new Available(), new Available(), new Available(), new Available(), new Available() };
 
 
         public string Initname(string createdName)
@@ -92,6 +189,22 @@ namespace CharactersBase
         public int CallDamageAmount()
         {
             return damage;
+        }
+        public int CallKillCount()
+        {
+            return killcount;
+        }
+        public bool IsAlive()
+        {
+
+            if (CallHealthAmount() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         //------------------
@@ -164,6 +277,17 @@ namespace CharactersBase
             return damage;
         }
 
+        public int KillCountAdj()
+        {
+            killcount++;
+
+            return killcount;
+        }
+
+        public abstract void AttackBase(Characters target);
+
+        public abstract int DamageRec(Characters attacker);
+
 
 
     }
@@ -172,12 +296,64 @@ namespace CharactersBase
 
         public Raider()
         {
-            Initname("The Player");
+            Initname("Raider");
             IntiHealth(100);
             IntiDamage(10);
             inventory[0] = new ArcCell();
         }
 
+        public override void AttackBase(Characters Target)
+        {
+            Console.WriteLine("take a deep breath... Bang!");
+            Console.WriteLine($"{CallName()} has hit the Arc for {CallDamageAmount}");
+            Target.DamageRec(this);
+
+        }
+        public override int DamageRec(Characters attacker)
+        {
+            HealthAdj(attacker.CallDamageAmount(), "-");
+            Console.WriteLine($"The {CallName()} health is currently {CallHealthAmount()}");
+
+            if (CallHealthAmount() <= 0)
+            {
+                attacker.KillCountAdj();
+            }
+
+            return CallHealthAmount();
+        }
+
+
+
+
+    }
+    public class Arc : Characters
+    {
+
+        public Arc()
+        {
+            Initname("Arc");
+            IntiHealth(100);
+            IntiDamage(10);
+        }
+
+        public override void AttackBase(Characters Target)
+        {
+            Console.WriteLine("zzzrrrzrzrzrz... Zap!");
+            Console.WriteLine($"{CallName()} has hit the Arc for {CallDamageAmount}");
+            Target.DamageRec(this);
+        }
+        public override int DamageRec(Characters attacker)
+        {
+            HealthAdj(attacker.CallDamageAmount(), "-");
+            Console.WriteLine($"The {CallName()} health is currently {CallHealthAmount()}");
+
+            if (CallHealthAmount() <= 0)
+            {
+                attacker.KillCountAdj();
+            }
+
+            return CallHealthAmount();
+        }
 
 
     }

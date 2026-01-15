@@ -1,8 +1,10 @@
-﻿namespace UnitBB.Items
+﻿
+
+
+namespace UnitBB.Items
 {
     public abstract class IItems
     {
-
         private string name = "--";
         private int buff = 0;
         private int debuff = 0;

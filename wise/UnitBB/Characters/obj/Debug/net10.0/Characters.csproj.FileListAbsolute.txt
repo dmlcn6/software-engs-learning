@@ -10,3 +10,7 @@ C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\obj\Deb
 C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\obj\Debug\net10.0\refint\Characters.dll
 C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\obj\Debug\net10.0\Characters.pdb
 C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\obj\Debug\net10.0\ref\Characters.dll
+C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\characters\obj\Debug\net10.0\Characters.csproj.AssemblyReference.cache
+C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\bin\Debug\net10.0\Items.dll
+C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\bin\Debug\net10.0\Items.pdb
+C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\obj\Debug\net10.0\Characters.csproj.Up2Date

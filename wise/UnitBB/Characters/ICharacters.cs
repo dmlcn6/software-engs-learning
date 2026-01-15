@@ -1,15 +1,18 @@
 ﻿
 
 
+using Microsoft.VisualBasic;
+using UnitBB.Items;
+
 namespace UnitBB.Characters
 {
     public abstract class ICharacters
     {
-
         private string name = "--";
         private int health = 0;
         private int damage = 0;
-        public Items[] inventory = new Items[5] { new ArcCell(), new Available(), new Available(), new Available(), new Available() };
+        private int killcount = 0;
+        public List<IItems> inventory = new() { new Available(), new Available(), new Available(), new Available(), new Available() };
 
 
         public string Initname(string createdName)
@@ -44,6 +47,22 @@ namespace UnitBB.Characters
         public int CallDamageAmount()
         {
             return damage;
+        }
+        public int CallKillCount()
+        {
+            return killcount;
+        }
+        public bool IsAlive()
+        {
+
+            if (CallHealthAmount() <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         //------------------
@@ -115,6 +134,18 @@ namespace UnitBB.Characters
 
             return damage;
         }
+
+        public int KillCountAdj()
+        {
+            killcount++;
+
+            return killcount;
+        }
+
+        public abstract void AttackBase(ICharacters target);
+
+        public abstract int DamageRec(ICharacters attacker);
+
 
 
     }
