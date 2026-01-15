@@ -39,6 +39,7 @@ here is what we covered so far
 
 - **Sprint 4:
     - Sun 12/28: We are skipping Data Structure and Advanced Data Strucutres for now to progress to HTML and beyond
+    - Mon 12/29: Reps on for/each while loops; 
 ---
 
 Tyree made this Change 11/14/25
