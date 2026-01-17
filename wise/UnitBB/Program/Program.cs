@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// Left Off Notes: I cannot call the Items folder inside of the ICharacter's file which will be neccsary in order to create a characters's inventory before beginning the game.
+// [RECENT COMMIT NAME]         git commit UnitBB -m "File Organization 01/15/26(1)"        [RECENT COMMIT NAME]
 
 
 using UnitBB.Characters;
@@ -138,4 +138,4 @@ namespace UnitBB
 
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "File Organization 01/07/26(2)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "File Organization 01/15/26(1)"        [RECENT COMMIT NAME]
