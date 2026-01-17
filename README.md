@@ -58,7 +58,7 @@ here is what we covered so far
     - 1/17 - We have identified the next sprint work! AC
       - 
 ---
-Path 1: The "Architectural" Refactor (Encapsulation & Interfaces)
+Path 1: The "Architectural" System (Encapsulation & Interfaces)
 1. **Enhance the Logging System** - Ability to log to console and/or local .txt file:
    - Using an ILogger interface and polymorphism on the Send()
 
@@ -76,6 +76,13 @@ Path 2: The "Equipment System" (Composition vs. Inheritance)
   - Split the concept of "Backpack" (List of items) vs "Equipped" (Active items).
   - Create a method EquipItem(int inventoryIndex) that moves an item from the backpack to the EquippedWeapon slot.
   - Update Dmg calculateion
+
+3. **Equipment System**
+  - Item Equipment System - Create an Equipment subclass (Armor, Helmets, Rings) that provide stat bonuses when equipped (not consumed). This teaches:
+
+  - Inheritance hierarchy beyond just consumables
+  - Active/passive effects vs consumable effects
+  - State management (equipped vs unequipped)
 
 
 Path 3: The "Dungeon Crawler" (2D Arrays & Coordinates)
