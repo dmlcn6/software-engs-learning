@@ -52,8 +52,66 @@ here is what we covered so far
       - its now   Mon Tue Thur Sat
 
 - **Sprint 5:  **
-    - Finishing up the 
+    - 1/14 - Wise missed 4 consecutive classes due to change of schedule and getting him caught up
+    - 1/14 - Cozy set up his env on the laptop
+    - 1/15 - Reps on DRY Code
+    - 1/17 - We have identified the next sprint work! AC
+      - 
 ---
+Path 1: The "Architectural" Refactor (Encapsulation & Interfaces)
+1. **Enhance the Logging System** - Ability to log to console and/or local .txt file:
+   - Using an ILogger interface and polymorphism on the Send()
+
+2. **Optimization Tasks**
+   - Rename Abstract Classes: Change ICharacter to CharacterBase and IUsableItem to ItemBase.
+   - Introduce Real Interfaces: Create an actual interface IDamageable that forces anything that can be attacked to have an ApplyDamage(int amount) method.
+   - Encapsulate Player _hp using public/private class members and getter/setters
+
+
+Path 2: The "Equipment System" (Composition vs. Inheritance)
+1. **Create specific Slots**
+  -  Add a property public IUsableItem EquippedWeapon { get; set; } to the Player class.
+
+2. **Modify the Inventory System**
+  - Split the concept of "Backpack" (List of items) vs "Equipped" (Active items).
+  - Create a method EquipItem(int inventoryIndex) that moves an item from the backpack to the EquippedWeapon slot.
+  - Update Dmg calculateion
+
+
+Path 3: The "Dungeon Crawler" (2D Arrays & Coordinates)
+1. **The Map**
+   - Create a 2D array in Program.cs. string[,] map = new string[5,5];
+   - Coordinates: Give the Player int x and int y properties.
+2. **The Game Loop**
+    - the main loop asks: "North, South, East, or West?"
+    - Update x and y based on input.
+    - Check map[x,y]. Is it an "Enemy"? If yes, trigger the EnemyEncounter function you already wrote.
+    - Is it a "Chest"? Trigger a new LootDrop function.
+
+3. **Shop/Upgrade System** - A between-battle menu where players spend resources:
+   - Currency system (gold drops from enemies or other spaces)
+   - buy items 
+
+4. Optional - **Skill/Ability System** - Let players unlock special attacks as they level up:
+   ```csharp
+   // New concept: polymorphic abilities
+   public interface IAbility {
+       void Execute(ICharacter target);
+       int CooldownTurns { get; }
+   }
+   
+   public class PowerAttack : IAbility { }
+   public class Heal : IAbility { }
+   ```
+5. Optional - **Difficulty Scaling** - Procedural enemy generation:
+   - Create enemies with random stats based on player level
+   - Teaches factory patterns and algorithm design
+---
+
+
+
+
+
 
 Tyree made this Change 11/14/25
 
