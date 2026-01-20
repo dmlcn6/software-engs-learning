@@ -173,3 +173,8 @@ else
     // do this if conditional is not met
 }
 
+// using AdventureGame.Player;
+// using AdventureGame.Potion;
+// Player player1 = new();
+// var potion1 = new Potion();
+
