@@ -1,6 +1,6 @@
 namespace Reup.Items
 {
-    public class Knife : IUsableItems
+    public class Knife : ItemBase
     {
         public Knife()
         {
@@ -13,7 +13,7 @@ namespace Reup.Items
             return stat;
         }
     }
-    public class Sword : IUsableItems
+    public class Sword : ItemBase
     {
         public Sword()
         {
@@ -26,7 +26,7 @@ namespace Reup.Items
             return stat;
         }
     }
-    public class Blick : IUsableItems
+    public class Blick : ItemBase
     {
         public Blick()
         {
@@ -40,7 +40,7 @@ namespace Reup.Items
         }
 
     }
-    public class Armor : IUsableItems
+    public class Armor : ItemBase
     {
         public Armor()
         {
@@ -53,7 +53,7 @@ namespace Reup.Items
             return stat;
         }
     }
-    public class Yercs : IUsableItems
+    public class Yercs : ItemBase
     {
         public Yercs()
         {
@@ -66,7 +66,7 @@ namespace Reup.Items
             return stat;
         }
     }
-    public class Potion : IUsableItems
+    public class Potion : ItemBase
     {
         public Potion()
         {

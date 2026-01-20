@@ -153,7 +153,7 @@ namespace Reup.Program
                 case 12:
                 case 18:
                     lootItem = random.Next(5);
-                    IUsableItems item;
+                    ItemBase item;
                     Console.WriteLine("You found an item!");
 
                     if (lootItem == 0)
@@ -238,7 +238,7 @@ namespace Reup.Program
             Console.WriteLine($"You rolled a {sixDice}!");
             Console.WriteLine($"New Position: {playerPos}");
         }
-        public static void Combat(Player player, ICharacter enemy)
+        public static void Combat(Player player, CharacterBase enemy)
         {
             do
             {

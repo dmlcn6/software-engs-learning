@@ -2,7 +2,7 @@
 
 namespace Reup.Items
 {
-    public abstract class IUsableItems
+    public abstract class ItemBase
     {
         public int dmgBuff;
         public int healing;

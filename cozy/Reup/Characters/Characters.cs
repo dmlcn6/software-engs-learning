@@ -1,15 +1,15 @@
 using Reup.Items;
 namespace Reup.Characters
 {
-    public class Player : ICharacter
+    public class Player : CharacterBase
     {
         public string playerName;
-        public List<IUsableItems> inventory = new List<IUsableItems>() { new Sword() };
+        public List<ItemBase> inventory = new List<ItemBase>() { new Sword() };
         public Player()
         {
             damage = inventory[0].Equip(damage);
         }
-        public override void Attacked(ICharacter attacker)
+        public override void Attacked(CharacterBase attacker)
         {
             health = health - attacker.damage;
 
@@ -22,15 +22,15 @@ namespace Reup.Characters
             }
         }
     }
-    public class Bandit : ICharacter
+    public class Bandit : CharacterBase
     {
-        public List<IUsableItems> weapon = new List<IUsableItems>() { new Knife() };
+        public List<ItemBase> weapon = new List<ItemBase>() { new Knife() };
         public Bandit()
         {
             name = "Bandit";
             damage = weapon[0].Equip(damage);
         }
-        public override void Attacked(ICharacter attacker)
+        public override void Attacked(CharacterBase attacker)
         {
             health = health - attacker.damage;
 
@@ -40,16 +40,16 @@ namespace Reup.Characters
             }
         }
     }
-    public class Stranger : ICharacter
+    public class Stranger : CharacterBase
     {
-        public List<IUsableItems> tote = new List<IUsableItems>() { new Blick(), new Armor() };
+        public List<ItemBase> tote = new List<ItemBase>() { new Blick(), new Armor() };
         public Stranger()
         {
             name = "???";
             damage = tote[0].Equip(damage);
             health = tote[1].Equip(health);
         }
-        public override void Attacked(ICharacter attacker)
+        public override void Attacked(CharacterBase attacker)
         {
             health = health - attacker.damage;
 
