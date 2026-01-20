@@ -57,64 +57,65 @@ here is what we covered so far
     - 1/15 - Reps on DRY Code
     - 1/17 - We have identified the next sprint work! AC
       - 
----
-Path 1: The "Architectural" System (Encapsulation & Interfaces)
-1. **Enhance the Logging System** - Ability to log to console and/or local .txt file:
-   - Using an ILogger interface and polymorphism on the Send()
+        ---
+        Path 1: The "Architectural" System (Encapsulation & Interfaces)
+        1. **Enhance the Logging System** - Ability to log to console and/or local .txt file:
+          - Using an ILogger interface and polymorphism on the Send()
 
-2. **Optimization Tasks**
-   - Rename Abstract Classes: Change ICharacter to CharacterBase and IUsableItem to ItemBase.
-   - Introduce Real Interfaces: Create an actual interface IDamageable that forces anything that can be attacked to have an ApplyDamage(int amount) method.
-   - Encapsulate Player _hp using public/private class members and getter/setters
-
-
-Path 2: The "Equipment System" (Composition vs. Inheritance)
-1. **Create specific Slots**
-  -  Add a property public IUsableItem EquippedWeapon { get; set; } to the Player class.
-
-2. **Modify the Inventory System**
-  - Split the concept of "Backpack" (List of items) vs "Equipped" (Active items).
-  - Create a method EquipItem(int inventoryIndex) that moves an item from the backpack to the EquippedWeapon slot.
-  - Update Dmg calculateion
-
-3. **Equipment System**
-  - Item Equipment System - Create an Equipment subclass (Armor, Helmets, Rings) that provide stat bonuses when equipped (not consumed). This teaches:
-
-  - Inheritance hierarchy beyond just consumables
-  - Active/passive effects vs consumable effects
-  - State management (equipped vs unequipped)
+        2. **Optimization Tasks**
+          - Rename Abstract Classes: Change ICharacter to CharacterBase and IUsableItem to ItemBase.
+          - Introduce Real Interfaces: Create an actual interface IDamageable that forces anything that can be attacked to have an ApplyDamage(int amount) method.
+          - Encapsulate Player _hp using public/private class members and getter/setters
 
 
-Path 3: The "Dungeon Crawler" (2D Arrays & Coordinates)
-1. **The Map**
-   - Create a 2D array in Program.cs. string[,] map = new string[5,5];
-   - Coordinates: Give the Player int x and int y properties.
-2. **The Game Loop**
-    - the main loop asks: "North, South, East, or West?"
-    - Update x and y based on input.
-    - Check map[x,y]. Is it an "Enemy"? If yes, trigger the EnemyEncounter function you already wrote.
-    - Is it a "Chest"? Trigger a new LootDrop function.
+        Path 2: The "Equipment System" (Composition vs. Inheritance)
+        1. **Create specific Slots**
+          -  Add a property public IUsableItem EquippedWeapon { get; set; } to the Player class.
 
-3. **Shop/Upgrade System** - A between-battle menu where players spend resources:
-   - Currency system (gold drops from enemies or other spaces)
-   - buy items 
+        2. **Modify the Inventory System**
+          - Split the concept of "Backpack" (List of items) vs "Equipped" (Active items).
+          - Create a method EquipItem(int inventoryIndex) that moves an item from the backpack to the EquippedWeapon slot.
+          - Update Dmg calculateion
 
-4. Optional - **Skill/Ability System** - Let players unlock special attacks as they level up:
-   ```csharp
-   // New concept: polymorphic abilities
-   public interface IAbility {
-       void Execute(ICharacter target);
-       int CooldownTurns { get; }
-   }
-   
-   public class PowerAttack : IAbility { }
-   public class Heal : IAbility { }
-   ```
-5. Optional - **Difficulty Scaling** - Procedural enemy generation:
-   - Create enemies with random stats based on player level
-   - Teaches factory patterns and algorithm design
----
+        3. **Equipment System**
+          - Item Equipment System - Create an Equipment subclass (Armor, Helmets, Rings) that provide stat bonuses when equipped (not consumed). This teaches:
 
+          - Inheritance hierarchy beyond just consumables
+          - Active/passive effects vs consumable effects
+          - State management (equipped vs unequipped)
+
+
+        Path 3: The "Dungeon Crawler" (2D Arrays & Coordinates)
+        1. **The Map**
+          - Create a 2D array in Program.cs. string[,] map = new string[5,5];
+          - Coordinates: Give the Player int x and int y properties.
+        2. **The Game Loop**
+            - the main loop asks: "North, South, East, or West?"
+            - Update x and y based on input.
+            - Check map[x,y]. Is it an "Enemy"? If yes, trigger the EnemyEncounter function you already wrote.
+            - Is it a "Chest"? Trigger a new LootDrop function.
+
+        3. **Shop/Upgrade System** - A between-battle menu where players spend resources:
+          - Currency system (gold drops from enemies or other spaces)
+          - buy items 
+
+        4. Optional - **Skill/Ability System** - Let players unlock special attacks as they level up:
+          ```csharp
+          // New concept: polymorphic abilities
+          public interface IAbility {
+              void Execute(ICharacter target);
+              int CooldownTurns { get; }
+          }
+          
+          public class PowerAttack : IAbility { }
+          public class Heal : IAbility { }
+          ```
+        5. Optional - **Difficulty Scaling** - Procedural enemy generation:
+          - Create enemies with random stats based on player level
+          - Teaches factory patterns and algorithm design
+        ---
+    - 1/19
+        - Today we are starting the game v2
 
 
 
