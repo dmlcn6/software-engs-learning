@@ -1,5 +1,6 @@
 ﻿using TestHH.Characters;
 using TestHH.Items;
+using TestHH.Logger;
 
 namespace TestHH
 {
@@ -7,9 +8,12 @@ namespace TestHH
     {
 
         public static Player player1;
+        public static ILogger logger;
 
         public static void Main(string[] args)
         {
+            logger = new Logger.Logger();
+
             //i want to fill in the class variable with the new instance
             player1 = new Player();
             // i want to know how many enemies the player has killed
@@ -41,15 +45,15 @@ namespace TestHH
                 // after each encounter, checke if the player won
                 if (player1.killCount == 5)
                 {
-                    Console.WriteLine("You've endured your first set of Trials! and deserve a new Weapon");
-                    Console.WriteLine("You've won!");
+                    logger.Log("You've endured your first set of Trials! and deserve a new Weapon");
+                    logger.Log("You've won!");
                     return;
                 }
 
             } while (keepFighting);
 
-            Console.WriteLine("You have died! Get a 5 monster kill streak to proceede.");
-            Console.WriteLine("GAMEOVER!");
+            logger.Log("You have died! Get a 5 monster kill streak to proceede.");
+            logger.Log("GAMEOVER!");
         }
 
 
@@ -60,11 +64,11 @@ namespace TestHH
 
             do
             {
-                Console.WriteLine("");
-                Console.WriteLine("Select your action: number");
-                Console.WriteLine("");
-                Console.WriteLine("1. Attack");
-                Console.WriteLine("2. Use Item");
+                logger.Log("");
+                logger.Log("Select your action: number");
+                logger.Log("");
+                logger.Log("1. Attack");
+                logger.Log("2. Use Item");
 
                 // get the users input w ConsoleReadLine
                 // try to parse it to an integer
@@ -81,8 +85,8 @@ namespace TestHH
                             break;
 
                         case 2:
-                            Console.WriteLine("");
-                            Console.WriteLine("Here is your inventory: ");
+                            logger.Log("");
+                            logger.Log("Here is your inventory: ");
 
 
                             var localInventory = player1._inventory;
@@ -90,10 +94,10 @@ namespace TestHH
 
                             for (var i = 0; i < localInventory.Count; i++)
                             {
-                                Console.WriteLine($"{i}: {localInventory[i].name}");
+                                logger.Log($"{i}: {localInventory[i].name}");
                             }
-                            Console.WriteLine("");
-                            Console.WriteLine("Select your item number: ");
+                            logger.Log("");
+                            logger.Log("Select your item number: ");
 
 
                             var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
@@ -108,8 +112,8 @@ namespace TestHH
                                     player1._inventory.Remove(item);
                                 }
 
-                                Console.WriteLine("");
-                                Console.WriteLine("Item used successfully");
+                                logger.Log("");
+                                logger.Log("Item used successfully");
                                 player1.ViewStats();
                             }
                             else
