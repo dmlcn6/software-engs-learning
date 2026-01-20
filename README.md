@@ -9,7 +9,7 @@ here is what we covered so far
     - Git fundamentals: clone, commit, push, pull, branches
     - GitHub workflow and collaboration basics
     - *Project: Create first repository and practice branching practiced merging and PRs*
-- **Sprint 1: Control Flow & Logic, Functions & Methods, Arrays & Collections, Strings, OOP **
+- **Sprint 1: Control Flow & Logic, Functions & Methods, Arrays & Collections, Strings, OOP, Calculator **
     - We successfully created calculators that followed this AC:
     - AC - Acceptance Criteria
       4 functions - Add Div Subtract Multi
@@ -18,7 +18,8 @@ here is what we covered so far
       display divide by 0 error
       2 point decimal outputs for division
       Show use of classes/functions to organize code
-- **Sprint 2: 
+
+- **Sprint 2: Create Adventure Game **
     - Sun 11/30: Start
     - Tue 12/2: we are creating AC for our work item
       - user must be identified by player name (input)
@@ -32,15 +33,93 @@ here is what we covered so far
         - meter, counter, hp, progress tracking, 
         - combat/competition
         - Usable items in inventory
-- **Sprint 3:
+
+- **Sprint 3: Create Adventure Game w OOP principles **
     - Sun 12/14: Start the week with reps on variable creation class creation accessMods keywords
     - We will dive heavier into 4 OOP principels while finishing our text based adventure  game
     - finished out our sprint by finishing the commmand line adventrure games with 4 oop principles
 
-- **Sprint 4:
+- **Sprint 4: Refactor Adventure game **
     - Sun 12/28: We are skipping Data Structure and Advanced Data Strucutres for now to progress to HTML and beyond
     - Mon 12/29: Reps on for/each while loops; 
----
+    - Tue 12/30:
+    - Tue 1/6: 
+    - Wed 1/7: learned how to create a full solution / project c# strucutre
+    - Fri 1/9: learned how to get rid of circular dependencies
+    - the rest of the sprint was spent working on refactoring the adventure
+    - schedule update, shifted 1 day to the left one day 
+      - insted of Tue Wed Fri Sun
+      - its now   Mon Tue Thur Sat
+
+- **Sprint 5:  **
+    - 1/14 - Wise missed 4 consecutive classes due to change of schedule and getting him caught up
+    - 1/14 - Cozy set up his env on the laptop
+    - 1/15 - Reps on DRY Code
+    - 1/17 - We have identified the next sprint work! AC
+      - 
+        ---
+        Path 1: The "Architectural" System (Encapsulation & Interfaces)
+        1. **Enhance the Logging System** - Ability to log to console and/or local .txt file:
+          - Using an ILogger interface and polymorphism on the Send()
+
+        2. **Optimization Tasks**
+          - Rename Abstract Classes: Change ICharacter to CharacterBase and IUsableItem to ItemBase.
+          - Introduce Real Interfaces: Create an actual interface IDamageable that forces anything that can be attacked to have an ApplyDamage(int amount) method.
+          - Encapsulate Player _hp using public/private class members and getter/setters
+
+
+        Path 2: The "Equipment System" (Composition vs. Inheritance)
+        1. **Create specific Slots**
+          -  Add a property public IUsableItem EquippedWeapon { get; set; } to the Player class.
+
+        2. **Modify the Inventory System**
+          - Split the concept of "Backpack" (List of items) vs "Equipped" (Active items).
+          - Create a method EquipItem(int inventoryIndex) that moves an item from the backpack to the EquippedWeapon slot.
+          - Update Dmg calculateion
+
+        3. **Equipment System**
+          - Item Equipment System - Create an Equipment subclass (Armor, Helmets, Rings) that provide stat bonuses when equipped (not consumed). This teaches:
+
+          - Inheritance hierarchy beyond just consumables
+          - Active/passive effects vs consumable effects
+          - State management (equipped vs unequipped)
+
+
+        Path 3: The "Dungeon Crawler" (2D Arrays & Coordinates)
+        1. **The Map**
+          - Create a 2D array in Program.cs. string[,] map = new string[5,5];
+          - Coordinates: Give the Player int x and int y properties.
+        2. **The Game Loop**
+            - the main loop asks: "North, South, East, or West?"
+            - Update x and y based on input.
+            - Check map[x,y]. Is it an "Enemy"? If yes, trigger the EnemyEncounter function you already wrote.
+            - Is it a "Chest"? Trigger a new LootDrop function.
+
+        3. **Shop/Upgrade System** - A between-battle menu where players spend resources:
+          - Currency system (gold drops from enemies or other spaces)
+          - buy items 
+
+        4. Optional - **Skill/Ability System** - Let players unlock special attacks as they level up:
+          ```csharp
+          // New concept: polymorphic abilities
+          public interface IAbility {
+              void Execute(ICharacter target);
+              int CooldownTurns { get; }
+          }
+          
+          public class PowerAttack : IAbility { }
+          public class Heal : IAbility { }
+          ```
+        5. Optional - **Difficulty Scaling** - Procedural enemy generation:
+          - Create enemies with random stats based on player level
+          - Teaches factory patterns and algorithm design
+        ---
+    - 1/19
+        - Today we are starting the game v2
+
+
+
+
 
 Tyree made this Change 11/14/25
 
