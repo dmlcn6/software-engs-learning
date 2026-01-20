@@ -1,0 +1,16 @@
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\bin\Debug\net10.0\characters.deps.json
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\bin\Debug\net10.0\characters.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\bin\Debug\net10.0\characters.pdb
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\bin\Debug\net10.0\items.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\bin\Debug\net10.0\items.pdb
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\characters.csproj.AssemblyReference.cache
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\characters.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\characters.AssemblyInfoInputs.cache
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\characters.AssemblyInfo.cs
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\characters.csproj.CoreCompileInputs.cache
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\characters.sourcelink.json
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\characters.csproj.Up2Date
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\characters.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\refint\characters.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\characters.pdb
+C:\Users\albha\src\software-engs-learning\cozy\reup\Characters\obj\Debug\net10.0\ref\characters.dll
