@@ -12,8 +12,10 @@ using System.Net.Mail;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualBasic;
+using Cozy.CGre;
 
-namespace Game
+
+namespace Cozy.CGre
 {
     public class CozyGame
     {
@@ -155,6 +157,7 @@ namespace Game
                 case 11:
                 case 17:
                 case 20:
+                    Potion potion = new Potion();
                     Console.WriteLine("You have encountered a stranger...attack?");
                     Console.WriteLine("Please type Yes or No");
                     choice = Console.ReadLine().ToLower();
@@ -168,6 +171,7 @@ namespace Game
                         Console.WriteLine($"Hello, {player.playerName}. I have something for you...");
                         Thread.Sleep(1000);
                         Console.WriteLine("You gained a potion!");
+                        player.inventory.Add(potion);
                     }
                     else
                     {
@@ -253,7 +257,6 @@ namespace Game
                             }
                             break;
                     }
-
                 }
                 if (enemy.alive)
                 {
@@ -359,16 +362,7 @@ namespace Game
             {
                 return $"DMG: {damage}, HP: {health}";
             }
-            public void Attacked(Character attacker)
-            {
-                health = health - attacker.damage;
-
-                if (health <= 0)
-                {
-                    alive = false;
-                }
-
-            }
+            public abstract void Attacked(Character attacker);
             public void Attack(Character victim)
             {
                 victim.Attacked(this);
@@ -384,6 +378,18 @@ namespace Game
             {
                 inventory[0].Equip(this);
             }
+            public override void Attacked(Character attacker)
+            {
+                health = health - attacker.damage;
+
+                if (health <= 0)
+                {
+                    alive = false;
+                    Console.WriteLine("GAME OVER! You have died.");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("It seems I overestimated you...");
+                }
+            }
         }
         public class Enemy : Character
         {
@@ -392,6 +398,15 @@ namespace Game
             {
                 name = "Bandit";
                 weapon[0].Equip(this);
+            }
+            public override void Attacked(Character attacker)
+            {
+                health = health - attacker.damage;
+
+                if (health <= 0)
+                {
+                    alive = false;
+                }
             }
         }
         public class Stranger : Character
@@ -403,6 +418,25 @@ namespace Game
                 tote[0].Equip(this);
                 tote[1].Equip(this);
             }
+            public override void Attacked(Character attacker)
+            {
+                health = health - attacker.damage;
+
+                if (health <= 0)
+                {
+                    alive = false;
+                }
+            }
         }
     }
+    // DESTROY THE MONOLITH!!!!!! CREATING MODULARIZATION
+    // separate all interfaces/abstracts into separate files
+    // rename them properly
+    // separate all derived class into one file
+    // ITEMS
+    // CHARACTERS
+    // re organize main function into one main cs file
+    // this will help us learn using statements
+    // have a file called Program.cs that is the entry point to your game
+    // have a folder that encloses your full game and all its code
 }

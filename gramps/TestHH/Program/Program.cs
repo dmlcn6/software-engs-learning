@@ -1,12 +1,11 @@
-using AdventureGame;
+﻿using TestHH.Characters;
+using TestHH.Items;
 
-
-namespace AdventureGame
+namespace TestHH
 {
-    #region GAME LOGIC
-    public static class Game
+    public class Program
     {
-        // player declaration lives on the class
+
         public static Player player1;
 
         public static void Main(string[] args)
@@ -20,7 +19,7 @@ namespace AdventureGame
             do
             {
                 // create a tinymonster for the first 4 kills, then fight the boss for your final battle
-                Character enemy;
+                ICharacter enemy;
                 if (player1.killCount < 4)
                 {
                     enemy = new TinyMonster();
@@ -53,7 +52,8 @@ namespace AdventureGame
             Console.WriteLine("GAMEOVER!");
         }
 
-        private static bool EnemyEncounter(Character enemy)
+
+        private static bool EnemyEncounter(ICharacter enemy)
         {
             // I want to alternate attacking/ item use, starting with the player 
             // until someone dies
@@ -100,7 +100,14 @@ namespace AdventureGame
 
                             if (isItemChoice)
                             {
-                                player1._inventory[itemChoice].Use(player1);
+                                var item = player1._inventory[itemChoice];
+                                player1._hp = item.Use(player1._hp);
+
+                                if (item.isConsumable)
+                                {
+                                    player1._inventory.Remove(item);
+                                }
+
                                 Console.WriteLine("");
                                 Console.WriteLine("Item used successfully");
                                 player1.ViewStats();
@@ -128,88 +135,5 @@ namespace AdventureGame
             return player1.IsAlive();
         }
     }
-    #endregion
-
-    #region ITEMS
-    public abstract class UsableItem
-    {
-        public abstract int amountOfEffectToHp { get; set; }
-
-        public abstract string name { get; set; }
-
-        public abstract int Use(Character victim);
-
-        public void Alert()
-        {
-            Console.WriteLine("Alert");
-        }
-    }
-
-    public class Potion : UsableItem
-    {
-        public override int amountOfEffectToHp { get; set; }
-        public override string name { get; set; }
-
-        public Potion()
-        {
-            amountOfEffectToHp = 50;
-            name = "Potion";
-        }
-
-        public override int Use(Character character)
-        {
-            character._hp = amountOfEffectToHp + character._hp;
-            character._inventory.Remove(this);
-            return character._hp;
-        }
-    }
-
-    public class HiPotion : UsableItem
-    {
-        public override int amountOfEffectToHp { get; set; }
-        public override string name { get; set; }
-
-        public HiPotion()
-        {
-            amountOfEffectToHp = 150;
-            name = "Hi Potion";
-        }
-
-        public override int Use(Character character)
-        {
-            character._hp = amountOfEffectToHp + character._hp;
-            character._inventory.Remove(this);
-            return character._hp;
-        }
-    }
-
-    public class Sword : UsableItem
-    {
-        public override int amountOfEffectToHp { get; set; }
-        public override string name { get; set; }
-
-        public Sword()
-        {
-            amountOfEffectToHp = 10;
-            name = "Sword";
-        }
-
-        public override int Use(Character character)
-        {
-            character._hp -= amountOfEffectToHp;
-            return character._hp;
-        }
-    }
-    #endregion
-
-    // DESTROY THE MONOLITH!!!!!! CREATING MODULARIZATION
-    // separate all interfaces/abstracts into separate files
-    // rename them properly
-    // separate all derived class into one file
-    // ITEMS
-    // CHARACTERS   
-    // re organize main function into one main cs file
-    // this will help us learn using statements
-    // have a file called Program.cs that is the entry point to your game
-    // have a folder that encloses your full game and all its code
 }
+
