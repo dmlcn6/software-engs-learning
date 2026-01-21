@@ -93,14 +93,16 @@ namespace UnitBB
                             foreach (IItems i in openRaider.inventory)
                             {
                                 Console.WriteLine($"{i.CallName()}");
+                                Console.WriteLine("Which item would you like to use?");
                             }
+
 
                             //// show player the player their inventory and have the enemy attack the player then show stats
                             openArc.AttackBase(openRaider);
                             break;
                         default:
                             tempRule1 = false;
-                            Console.WriteLine("Please Either enter (A) or (B)");
+                            Console.WriteLine("Please Either Enter (A) or (B)");
                             break;
                     }
                 } while (tempRule1 == false);
