@@ -4,8 +4,10 @@
 // [RECENT COMMIT NAME]         git commit UnitBB -m "File Organization 01/15/26(1)"        [RECENT COMMIT NAME]
 
 
+using Microsoft.VisualBasic;
 using UnitBB.Characters;
 using UnitBB.Items;
+using UnitBB.Logger;
 
 
 namespace UnitBB
@@ -14,9 +16,12 @@ namespace UnitBB
 
     class Start
     {
+
+
         static void Main()
         {
-            Console.WriteLine("Program.Start.Main has begun");
+            var to = new Logs();
+            to.Log($"Program.Start.Main has begun");
             var startNew = new TestA();
             startNew.TestAA();
         }
@@ -27,14 +32,15 @@ namespace UnitBB
     {
         public void TestAA()
         {
+            var to = new Logs();
             var openRaider = new Raider();
             var rInventory = openRaider.inventory;
-            Console.WriteLine($"Your players health: {openRaider.CallHealthAmount()}");
-            Console.WriteLine($"Your players damage: {openRaider.CallDamageAmount()}");
-            Console.WriteLine("What is your name?");
+            to.Log($"Your players health: {openRaider.CallHealthAmount()}");
+            to.Log($"Your players damage: {openRaider.CallDamageAmount()}");
+            to.Log("What is your name?");
             openRaider.NameAdj(Console.ReadLine());
-            Console.WriteLine($"Is your name {openRaider.CallName()}?");
-            Console.WriteLine($"Item 3 is {rInventory[2].CallName()}");
+            to.Log($"Is your name {openRaider.CallName()}?");
+            to.Log($"Item 3 is {rInventory[2].CallName()}");
 
             var startNew = new TestB();
             startNew.TestBB(openRaider);
@@ -47,8 +53,8 @@ namespace UnitBB
         public void TestBB(ICharacters openRaider)
         {
             //topLevel
-
-            Console.WriteLine("Welcome to Topside");
+            var to = new Logs();
+            to.Log("Welcome to Topside");
             var openArc = new Arc();
 
             do
@@ -63,22 +69,22 @@ namespace UnitBB
                 do
                 {
 
-                    Console.WriteLine("an enemy has appeared");
-                    Console.WriteLine("--stats--");
-                    Console.WriteLine($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
-                    Console.WriteLine($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
-                    Console.WriteLine("----*----");
-                    Console.WriteLine("");
-                    Console.WriteLine("What would you like to do?");
-                    Console.WriteLine("(A): Attack the enemy");
-                    Console.WriteLine("(B): Go to your inventory");
+                    to.Log("an enemy has appeared");
+                    to.Log("--stats--");
+                    to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
+                    to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
+                    to.Log("----*----");
+                    to.Log("");
+                    to.Log("What would you like to do?");
+                    to.Log("(A): Attack the enemy");
+                    to.Log("(B): Go to your inventory");
 
                     switch (Console.ReadLine())
                     {
                         case "a":
                         case "A":
                             tempRule1 = true;
-                            Console.WriteLine("you have chosen A");
+                            to.Log("you have chosen A");
                             // player's attack qoute and send attack message to attacker to collect damage amount then send damage amount to damage reciever on victim to deliever damage (enemy does the same) then show stats
                             openRaider.AttackBase(openArc);
                             openArc.AttackBase(openRaider);
@@ -87,13 +93,13 @@ namespace UnitBB
                         case "b":
                         case "B":
                             tempRule1 = true;
-                            Console.WriteLine("you have chosen B");
+                            to.Log("you have chosen B");
 
                             // create and put the raider's inventory into a variable
                             foreach (IItems i in openRaider.inventory)
                             {
-                                Console.WriteLine($"{i.CallName()}");
-                                Console.WriteLine("Which item would you like to use?");
+                                to.Log($"{i.CallName()}");
+                                to.Log("Which item would you like to use?");
                             }
 
 
@@ -102,16 +108,16 @@ namespace UnitBB
                             break;
                         default:
                             tempRule1 = false;
-                            Console.WriteLine("Please Either Enter (A) or (B)");
+                            to.Log("Please Either Enter (A) or (B)");
                             break;
                     }
                 } while (tempRule1 == false);
 
 
-                Console.WriteLine("--stats--");
-                Console.WriteLine($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
-                Console.WriteLine($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
-                Console.WriteLine("----*----");
+                to.Log("--stats--");
+                to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
+                to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
+                to.Log("----*----");
 
 
 
@@ -122,12 +128,12 @@ namespace UnitBB
 
             if (openRaider.CallKillCount() == 3)
             {
-                Console.WriteLine("You have WON!");
+                to.Log("You have WON!");
                 return;
             }
             else
             {
-                Console.WriteLine("You have Failed");
+                to.Log("You have Failed");
                 return;
             }
 
