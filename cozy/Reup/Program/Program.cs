@@ -1,12 +1,15 @@
 ﻿using Reup.Characters;
 using Reup.Items;
+using Reup.Logger;
+
 namespace Reup.Program
 {
-    public class CozyGame
+    public class Program
     {
         public static Player player;
         public static Stranger stranger;
         public static Bandit bandito;
+        public static ILogger logger;
         public static string choice;
         public static string decision;
         public static int playerPos;
@@ -18,66 +21,65 @@ namespace Reup.Program
             player = new Player();
             bandito = new Bandit();
             stranger = new Stranger();
-            CozyGame.Intro();
-            CozyGame.Begin();
+            logger = new AuditLog();
+            Program.Intro();
+            Program.Begin();
         }
         public static void Intro()
         {
-            Console.WriteLine("Hi, My name is Cozy :)");
+            logger.Log("Hi, My name is Cozy :)");
             Thread.Sleep(1000);
-            Console.WriteLine("Let's play a game");
+            logger.Log("Let's play a game");
             Thread.Sleep(1000);
-            Console.WriteLine("Don't worry, it'll be fun...");
+            logger.Log("Don't worry, it'll be fun...");
             Thread.Sleep(1000);
-            Console.WriteLine("Before we get started, I need to know what to call you.");
+            logger.Log("Before we get started, I need to know what to call you.");
             Thread.Sleep(1000);
-            Console.WriteLine("What is your name?");
+            logger.Log("What is your name?");
             player.playerName = Console.ReadLine();
-            Console.WriteLine($"So your name is {player.playerName}? That's cute lol");
+            logger.Log($"So your name is {player.playerName}? That's cute lol");
             Thread.Sleep(1000);
-            Console.WriteLine($"Today you'll embark on an adventure, {player.playerName}, to decide your fate!");
+            logger.Log($"Today you'll embark on an adventure, {player.playerName}, to decide your fate!");
             Thread.Sleep(1000);
-            Console.WriteLine("Every decision you make will determine the outcome of your story.");
+            logger.Log("Every decision you make will determine the outcome of your story.");
             Thread.Sleep(1000);
-            Console.WriteLine("Do you think you have what it takes to make it to the end?");
-            Console.WriteLine("Please type Yes or No");
+            logger.Log("Do you think you have what it takes to make it to the end?");
+            logger.Log("Please type Yes or No");
             choice = Console.ReadLine().ToLower();
         }
         public static void Begin()
         {
             if (choice == "yes")
             {
-                Console.WriteLine("I thought you looked brave. Let's get started :)");
+                logger.Log("I thought you looked brave. Let's get started :)");
                 do
                 {
-                    CozyGame.Gameplay();
+                    Program.Gameplay();
                 } while (player.alive && playerPos <= 21);
                 if (player.alive == false)
                 {
-                    Console.WriteLine("You Died!");
+                    logger.Log("You Died!", "./gamelog.txt");
                     Thread.Sleep(1000);
-                    Console.WriteLine("Better Luck Next Time!");
+                    logger.Log("Better Luck Next Time!");
                 }
                 else
                 {
-                    Console.WriteLine("Congratulations!");
+                    logger.Log("Congratulations! You have completed the game!", "./gamelog.txt");
                     Thread.Sleep(1000);
-                    Console.WriteLine("You have completed the game!");
-                    Thread.Sleep(1000);
-                    Console.WriteLine("I knew you could do it! :)");
+                    logger.Log("I knew you could do it! :)");
                 }
             }
             else if (choice == "no")
             {
-                Console.WriteLine("That's disappointing.");
+                logger.Log("That's disappointing.");
                 Thread.Sleep(1000);
-                Console.WriteLine("Welp, Goodbye...");
+                logger.Log("Welp, Goodbye...");
             }
             else
             {
-                Console.WriteLine("Please type Yes or No");
+                logger.Log("Please type Yes or No");
                 choice = Console.ReadLine().ToLower();
-                CozyGame.Begin();
+                Program.Begin();
             }
         }
         public static void Gameplay()
@@ -89,10 +91,10 @@ namespace Reup.Program
             //Four different events: Loot, Enemy, Stranger, Hazard
             //Player begins by rolling 6 sided dice
             //player can use an item before and after they decide to roll
-            Console.WriteLine("Enter a number to select an action");
-            Console.WriteLine("");
-            Console.WriteLine("1. View inventory");
-            Console.WriteLine("2. Roll Dice");
+            logger.Log("Enter a number to select an action");
+            logger.Log("");
+            logger.Log("1. View inventory");
+            logger.Log("2. Roll Dice");
             var isDecision = int.TryParse(Console.ReadLine(), out int decision);
 
             if (isDecision)
@@ -100,15 +102,15 @@ namespace Reup.Program
                 switch (decision)
                 {
                     case 1:
-                        Console.WriteLine("");
-                        Console.WriteLine("Here is your inventory: ");
+                        logger.Log("");
+                        logger.Log("Here is your inventory: ");
                         var localInventory = player.inventory;
                         for (var i = 0; i < localInventory.Count; i++)
                         {
-                            Console.WriteLine($"{i}: {localInventory[i].itemName}");
+                            logger.Log($"{i}: {localInventory[i].itemName}");
                         }
-                        Console.WriteLine("");
-                        Console.WriteLine("Select your item number: ");
+                        logger.Log("");
+                        logger.Log("Select your item number: ");
                         var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
 
                         if (isItemChoice)
@@ -127,9 +129,9 @@ namespace Reup.Program
                                 item.Equip(player.damage);
                             }
 
-                            Console.WriteLine("");
-                            Console.WriteLine("Item used successfully");
-                            Console.WriteLine($"{player.ViewStats()}");
+                            logger.Log("");
+                            logger.Log("Item used successfully");
+                            logger.Log($"{player.ViewStats()}");
                         }
                         break;
                     case 2:
@@ -154,7 +156,7 @@ namespace Reup.Program
                 case 18:
                     lootItem = random.Next(5);
                     ItemBase item;
-                    Console.WriteLine("You found an item!");
+                    logger.Log("You found an item!");
 
                     if (lootItem == 0)
                     {
@@ -177,7 +179,7 @@ namespace Reup.Program
                         item = new Potion();
                     }
                     player.inventory.Add(item);
-                    Console.WriteLine($"{item.itemName} was added to your inventory.");
+                    logger.Log($"{item.itemName} was added to your inventory.");
 
                     break;
                 //Stranger
@@ -187,8 +189,8 @@ namespace Reup.Program
                 case 17:
                 case 20:
                     Potion potion = new Potion();
-                    Console.WriteLine("You have encountered a stranger...attack?");
-                    Console.WriteLine("Please type Yes or No");
+                    logger.Log("You have encountered a stranger...attack?");
+                    logger.Log("Please type Yes or No");
                     choice = Console.ReadLine().ToLower();
 
                     if (choice == "yes")
@@ -197,14 +199,14 @@ namespace Reup.Program
                     }
                     else if (choice == "no")
                     {
-                        Console.WriteLine($"Hello, {player.playerName}. I have something for you...");
+                        logger.Log($"Hello, {player.playerName}. I have something for you...");
                         Thread.Sleep(1000);
-                        Console.WriteLine("You gained a potion!");
+                        logger.Log("You gained a potion!");
                         player.inventory.Add(potion);
                     }
                     else
                     {
-                        Console.WriteLine("Please type Yes or No");
+                        logger.Log("Please type Yes or No");
                         choice = Console.ReadLine().ToLower();
                     }
                     break;
@@ -214,8 +216,8 @@ namespace Reup.Program
                 case 13:
                 case 14:
                 case 19:
-                    Console.WriteLine("Rats! You Got Caught in a BoobyTrap!");
-                    Console.WriteLine("You lost 15 HP!");
+                    logger.Log("Rats! You Got Caught in a BoobyTrap!");
+                    logger.Log("You lost 15 HP!");
                     player.health = player.health - 10;
                     break;
                 //Enemy
@@ -224,32 +226,32 @@ namespace Reup.Program
                 case 10:
                 case 15:
                 case 16:
-                    Console.WriteLine("You've encountered an enemy!");
+                    logger.Log("You've encountered an enemy!");
                     Combat(player, bandito);
                     break;
             }
         }
         public static void DiceRoll()
         {
-            Console.WriteLine($"Current Position: {playerPos}");
+            logger.Log($"Current Position: {playerPos}");
             Random random = new Random();
             int sixDice = random.Next(1, 6);
             playerPos = playerPos + sixDice;
-            Console.WriteLine($"You rolled a {sixDice}!");
-            Console.WriteLine($"New Position: {playerPos}");
+            logger.Log($"You rolled a {sixDice}!");
+            logger.Log($"New Position: {playerPos}");
         }
         public static void Combat(Player player, CharacterBase enemy)
         {
             do
             {
-                Console.WriteLine("Get ready for battle!");
-                Console.WriteLine($"Your stats: {player.ViewStats()}");
-                Console.WriteLine($"Enemy stats: {enemy.ViewStats()}");
-                Console.WriteLine("");
-                Console.WriteLine("Enter a number to select an action");
-                Console.WriteLine("");
-                Console.WriteLine("1. Attack");
-                Console.WriteLine("2. Use Item");
+                logger.Log("Get ready for battle!");
+                logger.Log($"Your stats: {player.ViewStats()}");
+                logger.Log($"Enemy stats: {enemy.ViewStats()}");
+                logger.Log("");
+                logger.Log("Enter a number to select an action");
+                logger.Log("");
+                logger.Log("1. Attack");
+                logger.Log("2. Use Item");
                 var isChoice = int.TryParse(Console.ReadLine(), out int choice);
 
                 if (isChoice)
@@ -260,15 +262,15 @@ namespace Reup.Program
                             player.Attack(enemy);
                             break;
                         case 2:
-                            Console.WriteLine("");
-                            Console.WriteLine("Here is your inventory: ");
+                            logger.Log("");
+                            logger.Log("Here is your inventory: ");
                             var localInventory = player.inventory;
                             for (var i = 0; i < localInventory.Count; i++)
                             {
-                                Console.WriteLine($"{i}: {localInventory[i].itemName}");
+                                logger.Log($"{i}: {localInventory[i].itemName}");
                             }
-                            Console.WriteLine("");
-                            Console.WriteLine("Select your item number: ");
+                            logger.Log("");
+                            logger.Log("Select your item number: ");
                             var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
 
                             if (isItemChoice)
@@ -287,9 +289,9 @@ namespace Reup.Program
                                     item.Equip(player.damage);
                                 }
 
-                                Console.WriteLine("");
-                                Console.WriteLine("Item used successfully");
-                                Console.WriteLine($"{player.ViewStats()}");
+                                logger.Log("");
+                                logger.Log("Item used successfully");
+                                logger.Log($"{player.ViewStats()}");
                             }
                             break;
                     }
