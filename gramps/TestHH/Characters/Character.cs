@@ -6,7 +6,7 @@ namespace TestHH.Characters
 
     #region CHARACTERS
 
-    public class Player : ICharacter
+    public class Player : CharacterBase
     {
         public int killCount = 0;
         public Player()
@@ -15,7 +15,7 @@ namespace TestHH.Characters
             _inventory.Add(new Potion());
         }
 
-        public override void Attack(ICharacter victim)
+        public override void Attack(CharacterBase victim)
         {
             var victimIsDead = victim.AttackedBy(this);
             if (victimIsDead)
@@ -36,14 +36,14 @@ namespace TestHH.Characters
         }
     }
 
-    public class TinyMonster : ICharacter
+    public class TinyMonster : CharacterBase
     {
         public TinyMonster()
         {
             _name = "Tiny Monster";
         }
 
-        public override void Attack(ICharacter victim)
+        public override void Attack(CharacterBase victim)
         {
             Console.WriteLine($"[{_name}]: ** in high pitch ** THIS IS GOnNA HURT!!");
             var victimIsDead = victim.AttackedBy(this);
@@ -57,7 +57,7 @@ namespace TestHH.Characters
 
     }
 
-    public class Boss : ICharacter
+    public class Boss : CharacterBase
     {
         public Boss()
         {
@@ -66,7 +66,7 @@ namespace TestHH.Characters
             _hp = 200;
         }
 
-        public override void Attack(ICharacter victim)
+        public override void Attack(CharacterBase victim)
         {
             var victimIsDead = victim.AttackedBy(this);
             if (victimIsDead)

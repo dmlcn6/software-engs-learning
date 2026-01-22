@@ -2,6 +2,16 @@
   "version": 3,
   "targets": {
     "net10.0": {
+      "Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Interfaces.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Interfaces.dll": {}
+        }
+      },
       "Items/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -15,6 +25,11 @@
     }
   },
   "libraries": {
+    "Interfaces/1.0.0": {
+      "type": "project",
+      "path": "../Interfaces/Interfaces.csproj",
+      "msbuildProject": "../Interfaces/Interfaces.csproj"
+    },
     "Items/1.0.0": {
       "type": "project",
       "path": "../Items/Items.csproj",
@@ -23,6 +38,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Interfaces >= 1.0.0",
       "Items >= 1.0.0"
     ]
   },
@@ -51,6 +67,9 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
+            "C:\\Users\\darry\\src\\software-engs-learning\\gramps\\TestHH\\Interfaces\\Interfaces.csproj": {
+              "projectPath": "C:\\Users\\darry\\src\\software-engs-learning\\gramps\\TestHH\\Interfaces\\Interfaces.csproj"
+            },
             "C:\\Users\\darry\\src\\software-engs-learning\\gramps\\TestHH\\Items\\Items.csproj": {
               "projectPath": "C:\\Users\\darry\\src\\software-engs-learning\\gramps\\TestHH\\Items\\Items.csproj"
             }
