@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Characters/Characters.csproj" />
+  <Project Path="Items/Items.csproj" />
+  <Project Path="Program/Program.csproj" />
+</Solution>
