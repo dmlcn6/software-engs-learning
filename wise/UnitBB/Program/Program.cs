@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "File Organization 01/15/26(1)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Adding The Logger 01/21/26(1)"        [RECENT COMMIT NAME]
 
 
 
@@ -32,18 +32,36 @@ namespace UnitBB
     {
         public void TestAA()
         {
+            // Pre-exsisting Objects
             var to = new Logs();
             var openRaider = new Raider();
             var rInventory = openRaider.inventory;
-            to.Log($"Your players health: {openRaider.CallHealthAmount()}");
-            to.Log($"Your players damage: {openRaider.CallDamageAmount()}");
+
+            // Start off information
             to.Log("What is your name?");
             openRaider.NameAdj(Console.ReadLine());
             to.Log($"Is your name {openRaider.CallName()}?");
             to.Log($"Item 3 is {rInventory[2].CallName()}");
 
-            var startNew = new TestB();
-            startNew.TestBB(openRaider);
+            // While the player is alive
+            do
+            {
+                // Inform the player of their stats
+                to.Log($"Your players health: {openRaider.CallHealthAmount()}");
+                to.Log($"Your players damage: {openRaider.CallDamageAmount()}");
+                to.Log($"Your players kill count: {openRaider.CallKillCount()}");
+
+                // What do we do next?
+                to.Log($"What would you like to do {openRaider.CallName()}?");
+                to.Log("(A) Ready Up (B) Go to Inventory (C) Go to WorkBench");
+
+
+
+                // Topside Begins!
+                var startNew = new TestB();
+                startNew.TestBB(openRaider);
+
+            } while (openRaider.IsAlive() == true);
 
         }
     }
