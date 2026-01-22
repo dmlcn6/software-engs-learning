@@ -21,7 +21,7 @@ namespace UnitBB
         static void Main()
         {
             var to = new Logs();
-            to.Log($"Program.Start.Main has begun");
+            to.Log($"Program.Start.Main has begun", "../Inbox/Announcements.txt");
             var startNew = new TestA();
             startNew.TestAA();
         }
