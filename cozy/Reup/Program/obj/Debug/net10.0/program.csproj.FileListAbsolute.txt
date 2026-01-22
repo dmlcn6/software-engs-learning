@@ -19,3 +19,5 @@ C:\Users\albha\src\software-engs-learning\cozy\reup\program\obj\Debug\net10.0\re
 C:\Users\albha\src\software-engs-learning\cozy\reup\program\obj\Debug\net10.0\program.pdb
 C:\Users\albha\src\software-engs-learning\cozy\reup\program\obj\Debug\net10.0\program.genruntimeconfig.cache
 C:\Users\albha\src\software-engs-learning\cozy\reup\program\obj\Debug\net10.0\ref\program.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Program\bin\Debug\net10.0\Logger.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Program\bin\Debug\net10.0\Logger.pdb
