@@ -8,11 +8,11 @@ namespace TestHH
     {
 
         public static Player player1;
-        public static ILogger logger;
+        public static AuditLog logger;
 
         public static void Main(string[] args)
         {
-            logger = new Logger.Logger();
+            logger = new AuditLog();
 
             //i want to fill in the class variable with the new instance
             player1 = new Player();
@@ -23,7 +23,7 @@ namespace TestHH
             do
             {
                 // create a tinymonster for the first 4 kills, then fight the boss for your final battle
-                ICharacter enemy;
+                CharacterBase enemy;
                 if (player1.killCount < 4)
                 {
                     enemy = new TinyMonster();
@@ -47,17 +47,17 @@ namespace TestHH
                 {
                     logger.Log("You've endured your first set of Trials! and deserve a new Weapon");
                     logger.Log("You've won!");
+                    logger.RecordWin();
                     return;
                 }
 
             } while (keepFighting);
 
             logger.Log("You have died! Get a 5 monster kill streak to proceede.");
-            logger.Log("GAMEOVER!");
+            logger.RecordLoss();
         }
 
-
-        private static bool EnemyEncounter(ICharacter enemy)
+        private static bool EnemyEncounter(CharacterBase enemy)
         {
             // I want to alternate attacking/ item use, starting with the player 
             // until someone dies

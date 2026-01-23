@@ -1,7 +1,7 @@
 
 namespace TestHH.Items
 {
-    public class Potion : IUsableItem
+    public class Potion : UsableItemBase
     {
         public override int amountOfEffectToHp { get; set; }
         public override string name { get; set; }
@@ -22,7 +22,7 @@ namespace TestHH.Items
         }
     }
 
-    public class HiPotion : IUsableItem
+    public class HiPotion : UsableItemBase
     {
         public override int amountOfEffectToHp { get; set; }
         public override string name { get; set; }
@@ -43,7 +43,7 @@ namespace TestHH.Items
         }
     }
 
-    public class Sword : IUsableItem
+    public class Sword : UsableItemBase
     {
         public override int amountOfEffectToHp { get; set; }
         public override string name { get; set; }
