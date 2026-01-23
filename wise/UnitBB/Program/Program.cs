@@ -68,7 +68,7 @@ namespace UnitBB
 
     public class TestB
     {
-        public void TestBB(ICharacters openRaider)
+        public void TestBB(CharactersBase openRaider)
         {
             //topLevel
             var to = new Logs();
@@ -114,11 +114,70 @@ namespace UnitBB
                             to.Log("you have chosen B");
 
                             // create and put the raider's inventory into a variable
-                            foreach (IItems i in openRaider.inventory)
+                            foreach (ItemsBase i in openRaider.inventory)
                             {
                                 to.Log($"{i.CallName()}");
-                                to.Log("Which item would you like to use?");
                             }
+
+                            bool escape1 = false;
+                            do
+                            {
+                                var plyrInv = openRaider.inventory;
+                                to.Log("Which item would you like to use?");
+
+                                var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoice1);
+
+                                if (itemChoice1 <= plyrInv.Count && itemChoice1 >= 0)
+                                {
+                                    bool escape2 = false;
+                                    do
+                                    {
+                                        itemChoice1 -= 1;
+                                        to.Log($"Are you sure you want to use {plyrInv[itemChoice1].CallName()}");
+                                        to.Log("(A) Yes (B) No");
+
+                                        switch (Console.ReadLine())
+                                        {
+                                            case "a":
+                                            case "A":
+                                                if (plyrInv[itemChoice1].CallHBuff() > 0 && plyrInv[itemChoice1].CallDBuff() == 0)
+                                                {
+                                                    openRaider.HealthAdj(plyrInv[itemChoice1].Use(), "+");
+                                                    escape2 = true;
+                                                    escape1 = true;
+                                                }
+                                                else if (plyrInv[itemChoice1].CallDBuff() > 0 && plyrInv[itemChoice1].CallHBuff() == 0)
+                                                {
+                                                    openRaider.DamageAdj(plyrInv[itemChoice1].Use(), "+");
+                                                    escape2 = true;
+                                                    escape1 = true;
+                                                }
+                                                break;
+
+                                            case "b":
+                                            case "B":
+                                                to.Log("Please choose the Item you want to use");
+                                                foreach (ItemsBase i in openRaider.inventory)
+                                                {
+                                                    to.Log($"{i.CallName()}");
+                                                }
+                                                escape2 = true;
+                                                escape1 = false;
+
+                                                break;
+
+                                            default:
+                                                to.Log("Something went wrong");
+                                                break;
+                                        }
+                                    } while (escape2 == false);
+                                }
+
+                                //int itemChoice = Console.ReadLine();
+
+
+                            } while (escape1 == false);
+
 
 
                             //// show player the player their inventory and have the enemy attack the player then show stats

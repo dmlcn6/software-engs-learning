@@ -14,3 +14,5 @@ C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\characters\obj\Deb
 C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\bin\Debug\net10.0\Items.dll
 C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\bin\Debug\net10.0\Items.pdb
 C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\Characters\obj\Debug\net10.0\Characters.csproj.Up2Date
+C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\characters\bin\Debug\net10.0\Interfaces.dll
+C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\characters\bin\Debug\net10.0\Interfaces.pdb

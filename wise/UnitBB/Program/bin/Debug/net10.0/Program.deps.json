@@ -18,10 +18,19 @@
       },
       "Characters/1.0.0": {
         "dependencies": {
+          "Interfaces": "1.0.0",
           "Items": "1.0.0"
         },
         "runtime": {
           "Characters.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Interfaces/1.0.0": {
+        "runtime": {
+          "Interfaces.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -52,6 +61,11 @@
       "sha512": ""
     },
     "Characters/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Interfaces/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
