@@ -52,6 +52,7 @@ namespace Reup.Items
             stat = stat + shield;
             return stat;
         }
+
     }
     public class Yercs : ItemBase
     {

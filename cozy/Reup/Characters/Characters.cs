@@ -9,18 +9,7 @@ namespace Reup.Characters
         {
             damage = inventory[0].Equip(damage);
         }
-        public override void Attacked(CharacterBase attacker)
-        {
-            health = health - attacker.damage;
 
-            if (health <= 0)
-            {
-                alive = false;
-                Console.WriteLine("GAME OVER! You have died.");
-                Thread.Sleep(1000);
-                Console.WriteLine("It seems I overestimated you...");
-            }
-        }
     }
     public class Bandit : CharacterBase
     {
@@ -30,15 +19,7 @@ namespace Reup.Characters
             name = "Bandit";
             damage = weapon[0].Equip(damage);
         }
-        public override void Attacked(CharacterBase attacker)
-        {
-            health = health - attacker.damage;
 
-            if (health <= 0)
-            {
-                alive = false;
-            }
-        }
     }
     public class Stranger : CharacterBase
     {
@@ -49,14 +30,6 @@ namespace Reup.Characters
             damage = tote[0].Equip(damage);
             health = tote[1].Equip(health);
         }
-        public override void Attacked(CharacterBase attacker)
-        {
-            health = health - attacker.damage;
-
-            if (health <= 0)
-            {
-                alive = false;
-            }
-        }
     }
 }
+

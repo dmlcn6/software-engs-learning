@@ -16,6 +16,7 @@ namespace Reup.Program
         public int random;
         public string item;
 
+
         public static void Main()
         {
             player = new Player();
@@ -49,6 +50,7 @@ namespace Reup.Program
         }
         public static void Begin()
         {
+            DateTime localTime = DateTime.Now;
             if (choice == "yes")
             {
                 logger.Log("I thought you looked brave. Let's get started :)");
@@ -58,15 +60,17 @@ namespace Reup.Program
                 } while (player.alive && playerPos <= 21);
                 if (player.alive == false)
                 {
-                    logger.Log("You Died!", "./gamelog.txt");
+                    logger.Log("You Died!");
                     Thread.Sleep(1000);
                     logger.Log("Better Luck Next Time!");
+                    logger.Log($"{player.playerName} ain't got the skills for this. {localTime}", "./gamelog.txt");
                 }
                 else
                 {
-                    logger.Log("Congratulations! You have completed the game!", "./gamelog.txt");
+                    logger.Log("Congratulations! You have completed the game!");
                     Thread.Sleep(1000);
                     logger.Log("I knew you could do it! :)");
+                    logger.Log($"{player.playerName} conquered the CozyGame! {localTime}", "./gamelog.txt");
                 }
             }
             else if (choice == "no")
@@ -94,7 +98,8 @@ namespace Reup.Program
             logger.Log("Enter a number to select an action");
             logger.Log("");
             logger.Log("1. View inventory");
-            logger.Log("2. Roll Dice");
+            logger.Log("2. View Stats");
+            logger.Log("3. Roll Dice");
             var isDecision = int.TryParse(Console.ReadLine(), out int decision);
 
             if (isDecision)
@@ -135,6 +140,9 @@ namespace Reup.Program
                         }
                         break;
                     case 2:
+                        logger.Log($"{player.ViewStats()}");
+                        break;
+                    case 3:
                         DiceRoll();
                         BoardEvents();
                         break;
