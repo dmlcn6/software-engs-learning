@@ -105,6 +105,7 @@ namespace TestHH
                             if (isItemChoice)
                             {
                                 var item = player1._inventory[itemChoice];
+                                // TODO: the Use() is on on ConsumableItems, figure it out
                                 player1._hp = item.Use(player1._hp);
 
                                 if (item.isConsumable)

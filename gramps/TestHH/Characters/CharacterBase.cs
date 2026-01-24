@@ -27,7 +27,7 @@ namespace TestHH.Characters
 
         public bool _dead = false;
 
-        UsableItemBase EquippedWeapon { get; set; }
+        EquippableItemBase EquippedWeapon { get; set; }
 
         public CharacterBase()
         {
@@ -53,9 +53,13 @@ namespace TestHH.Characters
 
         private void EquipItem(int inventoryIndex)
         {
-            var firstItem = _inventory[inventoryIndex];
-            EquippedWeapon = firstItem;
-            _inventory.Remove(firstItem);
+            var item = _inventory[inventoryIndex];
+
+            if (item.isConsumable)
+                return;
+
+            EquippedWeapon = (EquippableItemBase)item;
+            _inventory.Remove(item);
         }
 
         public void ApplyDamage(int amount)
@@ -73,6 +77,7 @@ namespace TestHH.Characters
             ViewStats();
             attacker.ViewStats();
 
+            // TODO: change this to getter/setter
             if (_hp <= 0)
             {
                 Dead();
@@ -83,17 +88,20 @@ namespace TestHH.Characters
             return false;
         }
 
+        // TODO: change this to getter/setter
         public int GetDmg()
         {
             return EquippedWeapon.amountOfEffectToHp + _dmg;
         }
 
+        // TODO: change this to getter/setter
         public virtual void Dead()
         {
             Console.WriteLine($"[{_name}]: I i Wait please help me! im Dying ple- Please, i cant fe- .....");
             _dead = true;
         }
 
+        // TODO: change this to getter/setter
         public bool IsAlive()
         {
             return !_dead;

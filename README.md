@@ -116,6 +116,8 @@ here is what we covered so far
         ---
     - 1/19
         - Today we are starting the game v2
+    - 1/24
+        - Getter/Setter, Created 2 new Item Base classes for equippable or consumable items, Add EquippedWeapon to CharBase.
 
 
 
