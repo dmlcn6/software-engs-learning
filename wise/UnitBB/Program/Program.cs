@@ -83,7 +83,7 @@ namespace UnitBB
                     openArc = new Arc();
                 }
 
-                bool? tempRule1 = false;
+                bool? escape1 = false;
                 do
                 {
 
@@ -101,7 +101,7 @@ namespace UnitBB
                     {
                         case "a":
                         case "A":
-                            tempRule1 = true;
+                            escape1 = true;
                             to.Log("you have chosen A");
                             // player's attack qoute and send attack message to attacker to collect damage amount then send damage amount to damage reciever on victim to deliever damage (enemy does the same) then show stats
                             openRaider.AttackBase(openArc);
@@ -110,7 +110,7 @@ namespace UnitBB
                             break;
                         case "b":
                         case "B":
-                            tempRule1 = true;
+                            escape1 = true;
                             to.Log("you have chosen B");
 
                             // create and put the raider's inventory into a variable
@@ -119,7 +119,7 @@ namespace UnitBB
                                 to.Log($"{i.CallName()}");
                             }
 
-                            bool escape1 = false;
+                            bool escape2 = false;
                             do
                             {
                                 var plyrInv = openRaider.inventory;
@@ -129,7 +129,7 @@ namespace UnitBB
 
                                 if (itemChoice1 <= plyrInv.Count && itemChoice1 >= 0)
                                 {
-                                    bool escape2 = false;
+                                    bool escape3 = false;
                                     do
                                     {
                                         itemChoice1 -= 1;
@@ -143,14 +143,14 @@ namespace UnitBB
                                                 if (plyrInv[itemChoice1].CallHBuff() > 0 && plyrInv[itemChoice1].CallDBuff() == 0)
                                                 {
                                                     openRaider.HealthAdj(plyrInv[itemChoice1].Use(), "+");
+                                                    escape3 = true;
                                                     escape2 = true;
-                                                    escape1 = true;
                                                 }
                                                 else if (plyrInv[itemChoice1].CallDBuff() > 0 && plyrInv[itemChoice1].CallHBuff() == 0)
                                                 {
                                                     openRaider.DamageAdj(plyrInv[itemChoice1].Use(), "+");
+                                                    escape3 = true;
                                                     escape2 = true;
-                                                    escape1 = true;
                                                 }
                                                 break;
 
@@ -161,8 +161,8 @@ namespace UnitBB
                                                 {
                                                     to.Log($"{i.CallName()}");
                                                 }
-                                                escape2 = true;
-                                                escape1 = false;
+                                                escape3 = true;
+                                                escape2 = false;
 
                                                 break;
 
@@ -170,13 +170,13 @@ namespace UnitBB
                                                 to.Log("Something went wrong");
                                                 break;
                                         }
-                                    } while (escape2 == false);
+                                    } while (escape3 == false);
                                 }
 
                                 //int itemChoice = Console.ReadLine();
 
 
-                            } while (escape1 == false);
+                            } while (escape2 == false);
 
 
 
@@ -184,11 +184,11 @@ namespace UnitBB
                             openArc.AttackBase(openRaider);
                             break;
                         default:
-                            tempRule1 = false;
+                            escape1 = false;
                             to.Log("Please Either Enter (A) or (B)");
                             break;
                     }
-                } while (tempRule1 == false);
+                } while (escape1 == false);
 
 
                 to.Log("--stats--");
