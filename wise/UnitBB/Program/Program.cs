@@ -5,6 +5,7 @@
 
 
 
+using System.Runtime.CompilerServices;
 using UnitBB.Characters;
 using UnitBB.Items;
 using UnitBB.Logger;
@@ -114,9 +115,11 @@ namespace UnitBB
                             to.Log("you have chosen B");
 
                             // create and put the raider's inventory into a variable
+                            int tempTracker = 1;
                             foreach (ItemsBase i in openRaider.inventory)
                             {
-                                to.Log($"{i.CallName()}");
+                                to.Log($"({tempTracker}){i.CallName()}");
+                                tempTracker++;
                             }
 
                             bool escape2 = false;
@@ -127,50 +130,40 @@ namespace UnitBB
 
                                 var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoice1);
 
-                                if (itemChoice1 <= plyrInv.Count && itemChoice1 >= 0)
+                                if (itemChoice1 <= plyrInv.Count && itemChoice1 >= 1)
                                 {
-                                    bool escape3 = false;
-                                    do
+                                    itemChoice1 -= 1;
+                                    to.Log($"Are you sure you want to use {plyrInv[itemChoice1].CallName()}");
+                                    to.Log("(A) Yes (B) No");
+
+                                    switch (Console.ReadLine())
                                     {
-                                        itemChoice1 -= 1;
-                                        to.Log($"Are you sure you want to use {plyrInv[itemChoice1].CallName()}");
-                                        to.Log("(A) Yes (B) No");
+                                        case "a":
+                                        case "A":
+                                            var itemChoice3 = plyrInv[itemChoice1];
+                                            var results = plyrInv[itemChoice1].Interact();
+                                            openRaider.HDAdj(results.Item1, results.Item2, "+");
+                                            //to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
 
-                                        switch (Console.ReadLine())
-                                        {
-                                            case "a":
-                                            case "A":
-                                                if (plyrInv[itemChoice1].CallHBuff() > 0 && plyrInv[itemChoice1].CallDBuff() == 0)
-                                                {
-                                                    openRaider.HealthAdj(plyrInv[itemChoice1].Use(), "+");
-                                                    escape3 = true;
-                                                    escape2 = true;
-                                                }
-                                                else if (plyrInv[itemChoice1].CallDBuff() > 0 && plyrInv[itemChoice1].CallHBuff() == 0)
-                                                {
-                                                    openRaider.DamageAdj(plyrInv[itemChoice1].Use(), "+");
-                                                    escape3 = true;
-                                                    escape2 = true;
-                                                }
-                                                break;
+                                            escape2 = true;
+                                            break;
 
-                                            case "b":
-                                            case "B":
-                                                to.Log("Please choose the Item you want to use");
-                                                foreach (ItemsBase i in openRaider.inventory)
-                                                {
-                                                    to.Log($"{i.CallName()}");
-                                                }
-                                                escape3 = true;
-                                                escape2 = false;
+                                        case "b":
+                                        case "B":
+                                            to.Log("Please choose the Item you want to use");
+                                            foreach (ItemsBase i in openRaider.inventory)
+                                            {
+                                                to.Log($"{i.CallName()}");
+                                            }
+                                            escape2 = false;
 
-                                                break;
+                                            break;
 
-                                            default:
-                                                to.Log("Something went wrong");
-                                                break;
-                                        }
-                                    } while (escape3 == false);
+                                        default:
+                                            to.Log("Something went wrong");
+                                            break;
+                                    }
+
                                 }
 
                                 //int itemChoice = Console.ReadLine();
