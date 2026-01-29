@@ -7,6 +7,7 @@ namespace Reup.Characters
         public int damage = 7;
         public string name;
         public bool alive = true;
+
         public CharacterBase()
         {
 

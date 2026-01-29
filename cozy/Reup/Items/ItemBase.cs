@@ -5,11 +5,12 @@ namespace Reup.Items
 {
     public abstract class ItemBase : IDamagable
     {
-        public int dmgBuff;
-        public int healing;
-        public int shield;
-        public string itemName;
-        public int playerHP;
+        public abstract int dmgBuff { get; set; }
+        public abstract int healing { get; set; }
+        public abstract int shield { get; set; }
+        public abstract string itemName { get; set; }
+        public abstract bool isConsumable { get; set; }
+        public abstract bool isEquippable { get; set; }
         public abstract int Equip(int stat);
         public void ApplyDamage(int amount)
         {
