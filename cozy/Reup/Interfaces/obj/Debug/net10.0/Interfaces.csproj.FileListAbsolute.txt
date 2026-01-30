@@ -1,0 +1,12 @@
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\bin\Debug\net10.0\Interfaces.deps.json
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\bin\Debug\net10.0\Interfaces.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\bin\Debug\net10.0\Interfaces.pdb
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\obj\Debug\net10.0\Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\obj\Debug\net10.0\Interfaces.AssemblyInfoInputs.cache
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\obj\Debug\net10.0\Interfaces.AssemblyInfo.cs
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\obj\Debug\net10.0\Interfaces.csproj.CoreCompileInputs.cache
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\obj\Debug\net10.0\Interfaces.sourcelink.json
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\obj\Debug\net10.0\Interfaces.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\obj\Debug\net10.0\refint\Interfaces.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\obj\Debug\net10.0\Interfaces.pdb
+C:\Users\albha\src\software-engs-learning\cozy\reup\Interfaces\obj\Debug\net10.0\ref\Interfaces.dll

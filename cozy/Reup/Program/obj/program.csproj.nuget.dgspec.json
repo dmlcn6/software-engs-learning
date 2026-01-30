@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Program\\program.csproj": {}
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\program\\program.csproj": {}
   },
   "projects": {
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj": {
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Characters\\characters.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj",
+        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Characters\\characters.csproj",
         "projectName": "characters",
-        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj",
+        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Characters\\characters.csproj",
         "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\obj\\",
+        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Characters\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj": {
-                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj"
+              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj": {
+                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj"
               },
-              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj": {
-                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj"
+              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj": {
+                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj"
               }
             }
           }
@@ -346,14 +346,14 @@
         }
       }
     },
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj": {
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj",
+        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj",
         "projectName": "Interfaces",
-        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj",
+        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj",
         "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\obj\\",
+        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -681,14 +681,14 @@
         }
       }
     },
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj": {
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj",
+        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj",
         "projectName": "items",
-        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj",
+        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj",
         "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\obj\\",
+        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -705,8 +705,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj": {
-                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj"
+              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj": {
+                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj"
               }
             }
           }
@@ -1020,14 +1020,14 @@
         }
       }
     },
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj": {
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\Logger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj",
+        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\Logger.csproj",
         "projectName": "Logger",
-        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj",
+        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\Logger.csproj",
         "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\obj\\",
+        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1355,14 +1355,14 @@
         }
       }
     },
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Program\\program.csproj": {
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\program\\program.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Program\\program.csproj",
+        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\program\\program.csproj",
         "projectName": "program",
-        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Program\\program.csproj",
+        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\program\\program.csproj",
         "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Program\\obj\\",
+        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\program\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1379,14 +1379,14 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj": {
-                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Characters\\characters.csproj"
+              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Characters\\characters.csproj": {
+                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Characters\\characters.csproj"
               },
-              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj": {
-                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Items\\items.csproj"
+              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj": {
+                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj"
               },
-              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj": {
-                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj"
+              "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\Logger.csproj": {
+                "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\Logger.csproj"
               }
             }
           }

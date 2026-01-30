@@ -1,11 +1,17 @@
+using System.Security.Cryptography.X509Certificates;
+using Reup.Interfaces;
+
 namespace Reup.Items
 {
     public class Knife : EquippableItem
     {
+        public override int dmgBuff { get; set; }
+        public override string itemName { get; set; }
         public Knife()
         {
             itemName = "Knife";
             dmgBuff = 5;
+
         }
         public override int Equip(int stat)
         {
@@ -15,6 +21,8 @@ namespace Reup.Items
     }
     public class Sword : EquippableItem
     {
+        public override int dmgBuff { get; set; }
+        public override string itemName { get; set; }
         public Sword()
         {
             itemName = "Sword";
@@ -28,6 +36,8 @@ namespace Reup.Items
     }
     public class Blick : EquippableItem
     {
+        public override int dmgBuff { get; set; }
+        public override string itemName { get; set; }
         public Blick()
         {
             itemName = "Blick";
@@ -40,8 +50,11 @@ namespace Reup.Items
         }
 
     }
-    public class Armor : ConsumableItem
+    public class Armor : EquippableItem, IDamagable
     {
+        public int shield { get; set; }
+        public override int dmgBuff { get; set => dmgBuff = 0; }
+        public override string itemName { get; set; }
         public Armor()
         {
             itemName = "Armor";
@@ -52,10 +65,16 @@ namespace Reup.Items
             stat = stat + shield;
             return stat;
         }
+        public void ApplyDamage(int amount)
+        {
+            shield -= amount;
+        }
 
     }
     public class Yercs : ConsumableItem
     {
+        public override int healing { get; set; }
+        public override string itemName { get; set; }
         public Yercs()
         {
             itemName = "Yercs";
@@ -69,6 +88,8 @@ namespace Reup.Items
     }
     public class Potion : ConsumableItem
     {
+        public override int healing { get; set; }
+        public override string itemName { get; set; }
         public Potion()
         {
             itemName = "Potion";

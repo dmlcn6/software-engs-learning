@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj": {}
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\Logger.csproj": {}
   },
   "projects": {
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj": {
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\Logger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj",
+        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\Logger.csproj",
         "projectName": "Logger",
-        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj",
+        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\Logger.csproj",
         "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\obj\\",
+        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Logger\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",

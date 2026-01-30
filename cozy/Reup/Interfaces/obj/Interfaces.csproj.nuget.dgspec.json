@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj": {}
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj": {}
   },
   "projects": {
-    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj": {
+    "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj",
+        "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj",
         "projectName": "Interfaces",
-        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\Interfaces.csproj",
+        "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj",
         "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Interfaces\\obj\\",
+        "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",

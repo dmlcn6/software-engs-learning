@@ -10,3 +10,7 @@ C:\Users\albha\src\software-engs-learning\cozy\reup\Items\obj\Debug\net10.0\item
 C:\Users\albha\src\software-engs-learning\cozy\reup\Items\obj\Debug\net10.0\refint\items.dll
 C:\Users\albha\src\software-engs-learning\cozy\reup\Items\obj\Debug\net10.0\items.pdb
 C:\Users\albha\src\software-engs-learning\cozy\reup\Items\obj\Debug\net10.0\ref\items.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Items\bin\Debug\net10.0\Interfaces.dll
+C:\Users\albha\src\software-engs-learning\cozy\reup\Items\bin\Debug\net10.0\Interfaces.pdb
+C:\Users\albha\src\software-engs-learning\cozy\reup\Items\obj\Debug\net10.0\items.csproj.AssemblyReference.cache
+C:\Users\albha\src\software-engs-learning\cozy\reup\Items\obj\Debug\net10.0\items.csproj.Up2Date

@@ -9,6 +9,10 @@ namespace Reup.Characters
         {
             damage = inventory[0].Equip(damage);
         }
+        public int Equip(int stat)
+        {
+            // create the rules for equip function
+        }
 
     }
     public class Bandit : CharacterBase
