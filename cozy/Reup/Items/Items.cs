@@ -1,4 +1,4 @@
-using System.Security.Cryptography.X509Certificates;
+
 using Reup.Interfaces;
 
 namespace Reup.Items
@@ -45,14 +45,14 @@ namespace Reup.Items
         }
         public override int Equip(int stat)
         {
-            stat = stat + dmgBuff;
+             = stat + dmgBuff;
             return stat;
         }
 
     }
-    public class Armor : EquippableItem, IDamagable
+    public class Armor : EquippableItem
     {
-        public int shield { get; set; }
+        public int shield;
         public override int dmgBuff { get; set => dmgBuff = 0; }
         public override string itemName { get; set; }
         public Armor()
@@ -62,12 +62,8 @@ namespace Reup.Items
         }
         public override int Equip(int stat)
         {
-            stat = stat + shield;
-            return stat;
-        }
-        public void ApplyDamage(int amount)
-        {
-            shield -= amount;
+            shield = stat + shield;
+            return shield;
         }
 
     }
