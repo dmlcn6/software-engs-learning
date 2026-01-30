@@ -11,6 +11,8 @@ namespace TestHH.Items
             isConsumable = false;
             isEquippable = true;
         }
+
+
     }
 }
 

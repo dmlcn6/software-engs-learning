@@ -3,49 +3,69 @@ namespace TestHH.Items
 {
     public class Potion : ConsumableItemBase
     {
-        public override int amountOfEffectToHp { get; set; }
+        public override int hp { get; set; }
+        public override int dmg { get; set; }
         public override string name { get; set; }
 
         public Potion()
         {
-            amountOfEffectToHp = 50;
+            hp = 50;
+            dmg = 0;
             name = "Potion";
         }
 
         public override int Use(int stat)
         {
-            stat = amountOfEffectToHp + stat;
+            stat = hp + stat;
             return stat;
         }
     }
 
     public class HiPotion : ConsumableItemBase
     {
-        public override int amountOfEffectToHp { get; set; }
+        public override int hp { get; set; }
+        public override int dmg { get; set; }
         public override string name { get; set; }
 
         public HiPotion()
         {
-            amountOfEffectToHp = 150;
+            hp = 150;
+            dmg = 0;
             name = "Hi Potion";
         }
 
         public override int Use(int stat)
         {
-            stat = amountOfEffectToHp + stat;
+            stat = hp + stat;
             return stat;
         }
     }
 
     public class Sword : EquippableItemBase
     {
-        public override int amountOfEffectToHp { get; set; }
+        public override int hp { get; set; }
+        public override int dmg { get; set; }
         public override string name { get; set; }
 
         public Sword()
         {
-            amountOfEffectToHp = 10;
+            hp = 0;
+            dmg = 12;
             name = "Sword";
+        }
+    }
+
+    public class Armor : EquippableItemBase
+    {
+        public override int hp { get; set; }
+        public override int dmg { get; set; }
+        public override string name { get; set; }
+
+        public Armor()
+        {
+            hp = 10;
+            dmg = 12;
+            name = "Armor";
         }
     }
 }

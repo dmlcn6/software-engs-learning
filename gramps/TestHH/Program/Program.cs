@@ -6,18 +6,13 @@ namespace TestHH
 {
     public class Program
     {
-
-        public static Player player1;
-        public static AuditLog logger;
+        public static Player player1 = new Player();
+        public static AuditLog logger = new AuditLog();
 
         public static void Main(string[] args)
         {
-            logger = new AuditLog();
-
-            //i want to fill in the class variable with the new instance
-            player1 = new Player();
             // i want to know how many enemies the player has killed
-            var killCount = 0;
+            //var killCount = 0;
             // i want the player to fight until the end
             var keepFighting = true;
             do
@@ -105,28 +100,42 @@ namespace TestHH
                             if (isItemChoice)
                             {
                                 var item = player1._inventory[itemChoice];
-                                // TODO: the Use() is on on ConsumableItems, figure it out
-                                player1._hp = item.Use(player1._hp);
 
+                                // TODO: the Use() is on on ConsumableItems, figure it out
                                 if (item.isConsumable)
                                 {
-                                    player1._inventory.Remove(item);
-                                }
+                                    // cast item as ConsumableItem which has the use() on it
+                                    var consumableItem = (ConsumableItemBase)item;
 
-                                logger.Log("");
-                                logger.Log("Item used successfully");
-                                player1.ViewStats();
+                                    // use item and remove from inventory
+                                    player1._hp = consumableItem.Use(player1._hp);
+                                    player1._inventory.Remove(item);
+
+                                    // log
+                                    logger.Log("");
+                                    logger.Log("Item used successfully");
+                                    player1.ViewStats();
+                                }
+                                else
+                                {
+                                    // TODO: TEST THIS PATH
+                                    EnemyEncounter(enemy);
+                                }
                             }
                             else
                             {
+                                // TODO: TEST THIS PATH
                                 // you didnt provide a proper choice
+                                EnemyEncounter(enemy);
                             }
                             break;
                     }
                 }
                 else
                 {
+                    // TODO: TEST THIS PATH
                     // you didnt provide a proper choise
+                    EnemyEncounter(enemy);
                 }
 
                 if (enemy.IsAlive())
