@@ -1,7 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Adding The Logger 01/21/26(1)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Seperating Different Items and Fixing Health/Damage adjustments 01/28/26(1)"        [RECENT COMMIT NAME]
+
+// 1/29/26 - Big loop that leads back to sparanza
 
 
 
@@ -85,15 +87,19 @@ namespace UnitBB
                 }
 
                 bool? escape1 = false;
+                bool? isNew = true;
                 do
                 {
 
-                    to.Log("an enemy has appeared");
-                    to.Log("--stats--");
-                    to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
-                    to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
-                    to.Log("----*----");
-                    to.Log("");
+                    if (isNew == true)
+                    {
+                        to.Log("an enemy has appeared");
+                        to.Log("--stats--");
+                        to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
+                        to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
+                        to.Log("----*----");
+                        to.Log("");
+                    }
                     to.Log("What would you like to do?");
                     to.Log("(A): Attack the enemy");
                     to.Log("(B): Go to your inventory");
@@ -140,9 +146,10 @@ namespace UnitBB
                                     {
                                         case "a":
                                         case "A":
-                                            var itemChoice3 = plyrInv[itemChoice1];
-                                            var results = plyrInv[itemChoice1].Interact();
-                                            openRaider.HDAdj(results.Item1, results.Item2, "+");
+                                            var itemChoice1A = plyrInv[itemChoice1];
+                                            openRaider.ObtainIt(itemChoice1A, "+");
+                                            //var results = plyrInv[itemChoice1].Interact();
+                                            //openRaider.HDAdj(results.Item1, results.Item2, "+");
                                             //to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
 
                                             escape2 = true;
@@ -178,6 +185,7 @@ namespace UnitBB
                             break;
                         default:
                             escape1 = false;
+                            isNew = true;
                             to.Log("Please Either Enter (A) or (B)");
                             break;
                     }

@@ -9,7 +9,8 @@
       "Characters/1.0.0": {
         "dependencies": {
           "Interfaces": "1.0.0",
-          "Items": "1.0.0"
+          "Items": "1.0.0",
+          "Logger": "1.0.0"
         },
         "runtime": {
           "Characters.dll": {}
@@ -30,6 +31,14 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "Logger/1.0.0": {
+        "runtime": {
+          "Logger.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -45,6 +54,11 @@
       "sha512": ""
     },
     "Items/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Logger/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
