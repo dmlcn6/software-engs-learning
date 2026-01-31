@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Fixed some beginning interactions 01/31/26(1)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Finished building out my obtain it function 01/31/26(2)"        [RECENT COMMIT NAME]
 
 // 1/29/26 - Big loop that leads back to sparanza
 
@@ -21,11 +21,9 @@ namespace UnitBB
 
     class Start
     {
-
-
         static void Main()
         {
-            var to = new Logs();
+            Logs to = new();
             to.Log($"Program.Start.Main has begun", "../Inbox/Announcements.txt");
             var startNew = new TestA();
             startNew.TestAA();
@@ -35,10 +33,10 @@ namespace UnitBB
 
     public class TestA
     {
+        Logs to = new();
         public void TestAA()
         {
             // Pre-exsisting Objects
-            var to = new Logs();
             var openRaider = new Raider();
             var rInventory = openRaider.inventory;
 
@@ -82,10 +80,11 @@ namespace UnitBB
 
     public class Topside
     {
+        Logs to = new();
+
         public void TopsideAA(CharactersBase openRaider)
         {
             //topLevel
-            var to = new Logs();
             to.Log("Welcome to Topside");
             var openArc = new Arc();
 
@@ -138,11 +137,17 @@ namespace UnitBB
                             to.Log("you have chosen B");
 
                             // Show the player their inventory
+                            /*
                             int tempTracker = 1;
                             foreach (ItemsBase i in plyrInv)
                             {
                                 to.Log($"({tempTracker}){i.CallName()}");
                                 tempTracker++;
+                            }
+                            */
+                            for (int i = 0; i < plyrInv.Count; i++)
+                            {
+                                to.Log($"({i + 1}){plyrInv[i].CallName()}");
                             }
 
                             // Give the player the option to choose an item
@@ -178,9 +183,9 @@ namespace UnitBB
                                         case "B":
                                             // Give the player another chance to choose their desired item
                                             to.Log("Please choose the Item you want to use");
-                                            foreach (ItemsBase i in openRaider.inventory)
+                                            for (int i = 0; i < plyrInv.Count; i++)
                                             {
-                                                to.Log($"{i.CallName()}");
+                                                to.Log($"({i + 1}){plyrInv[i].CallName()}");
                                             }
                                             escape2 = false;
 
