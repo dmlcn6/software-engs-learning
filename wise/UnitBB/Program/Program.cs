@@ -8,6 +8,8 @@
 
 
 using System.Runtime.CompilerServices;
+using System.Security.Principal;
+using Microsoft.VisualBasic;
 using UnitBB.Characters;
 using UnitBB.Items;
 using UnitBB.Logger;
@@ -41,10 +43,7 @@ namespace UnitBB
             var rInventory = openRaider.inventory;
 
             // Start off information
-            to.Log("What is your name?");
-            openRaider.NameAdj(Console.ReadLine());
-            to.Log($"Is your name {openRaider.CallName()}?");
-            to.Log($"Item 3 is {rInventory[2].CallName()}");
+            openRaider.NameAdj();
 
             // While the player is alive
             do
@@ -57,21 +56,33 @@ namespace UnitBB
                 // What do we do next?
                 to.Log($"What would you like to do {openRaider.CallName()}?");
                 to.Log("(A) Ready Up (B) Go to Inventory (C) Go to WorkBench");
-
-
-
-                // Topside Begins!
-                var startNew = new TestB();
-                startNew.TestBB(openRaider);
-
+                switch (Console.ReadLine())
+                {
+                    case "A":
+                    case "a":
+                        var goTopside = new Topside();
+                        goTopside.TopsideAA(openRaider);
+                        break;
+                    case "B":
+                    case "b":
+                        to.Log("Not yet available");
+                        break;
+                    case "C":
+                    case "c":
+                        to.Log("Not yet available");
+                        break;
+                    default:
+                        to.Log("Something went wrong");
+                        break;
+                }
             } while (openRaider.IsAlive() == true);
 
         }
     }
 
-    public class TestB
+    public class Topside
     {
-        public void TestBB(CharactersBase openRaider)
+        public void TopsideAA(CharactersBase openRaider)
         {
             //topLevel
             var to = new Logs();
@@ -81,13 +92,15 @@ namespace UnitBB
             do
             {
 
+                bool? isNew = false;
                 if (openArc.CallHealthAmount() <= 0)
                 {
                     openArc = new Arc();
+                    isNew = true;
                 }
 
                 bool? escape1 = false;
-                bool? isNew = true;
+
                 do
                 {
 
@@ -151,8 +164,8 @@ namespace UnitBB
                                             //var results = plyrInv[itemChoice1].Interact();
                                             //openRaider.HDAdj(results.Item1, results.Item2, "+");
                                             //to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
-
                                             escape2 = true;
+
                                             break;
 
                                         case "b":
@@ -177,12 +190,8 @@ namespace UnitBB
 
 
                             } while (escape2 == false);
-
-
-
-                            //// show player the player their inventory and have the enemy attack the player then show stats
-                            openArc.AttackBase(openRaider);
                             break;
+
                         default:
                             escape1 = false;
                             isNew = true;
@@ -191,11 +200,15 @@ namespace UnitBB
                     }
                 } while (escape1 == false);
 
+                if (openArc.IsAlive() == true)
+                {
+                    openArc.AttackBase(openRaider);
 
-                to.Log("--stats--");
-                to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
-                to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
-                to.Log("----*----");
+                    to.Log("--stats--");
+                    to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
+                    to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
+                    to.Log("----*----");
+                }
 
 
 
