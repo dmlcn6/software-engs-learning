@@ -1,17 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Finished building out my obtain it function 01/31/26(2)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Finished Path 2 part 2 01/31/26(3)"        [RECENT COMMIT NAME]
 
 // 1/29/26 - Big loop that leads back to sparanza
 
 
 
-using System.Runtime.CompilerServices;
-using System.Security.Principal;
-using Microsoft.VisualBasic;
+
 using UnitBB.Characters;
-using UnitBB.Items;
 using UnitBB.Logger;
 
 
