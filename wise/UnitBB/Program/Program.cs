@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Seperating Different Items and Fixing Health/Damage adjustments 01/28/26(1)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Fixed some beginning interactions 01/31/26(1)"        [RECENT COMMIT NAME]
 
 // 1/29/26 - Big loop that leads back to sparanza
 
@@ -113,6 +113,8 @@ namespace UnitBB
                         to.Log("----*----");
                         to.Log("");
                     }
+
+                    // Give the player an option to attack or go to their inventory
                     to.Log("What would you like to do?");
                     to.Log("(A): Attack the enemy");
                     to.Log("(B): Go to your inventory");
@@ -121,34 +123,37 @@ namespace UnitBB
                     {
                         case "a":
                         case "A":
+                            // Show the player selection feedback and attack the enemy
                             escape1 = true;
                             to.Log("you have chosen A");
-                            // player's attack qoute and send attack message to attacker to collect damage amount then send damage amount to damage reciever on victim to deliever damage (enemy does the same) then show stats
+                            // player's attack qoute and send attack message to attacker to collect damage amount then send damage amount to damage reciever on victim to deliever damage
                             openRaider.AttackBase(openArc);
-                            openArc.AttackBase(openRaider);
 
                             break;
                         case "b":
                         case "B":
+                            // Show the player selection feedback and go to player inventory
                             escape1 = true;
+                            var plyrInv = openRaider.inventory;
                             to.Log("you have chosen B");
 
-                            // create and put the raider's inventory into a variable
+                            // Show the player their inventory
                             int tempTracker = 1;
-                            foreach (ItemsBase i in openRaider.inventory)
+                            foreach (ItemsBase i in plyrInv)
                             {
                                 to.Log($"({tempTracker}){i.CallName()}");
                                 tempTracker++;
                             }
 
+                            // Give the player the option to choose an item
                             bool escape2 = false;
                             do
                             {
-                                var plyrInv = openRaider.inventory;
                                 to.Log("Which item would you like to use?");
 
                                 var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoice1);
 
+                                // Check to see if the item is valid, give the player a selection feedback, then confirm if the choice is correct
                                 if (itemChoice1 <= plyrInv.Count && itemChoice1 >= 1)
                                 {
                                     itemChoice1 -= 1;
@@ -159,6 +164,7 @@ namespace UnitBB
                                     {
                                         case "a":
                                         case "A":
+                                            // Obtain the chosen item
                                             var itemChoice1A = plyrInv[itemChoice1];
                                             openRaider.ObtainIt(itemChoice1A, "+");
                                             //var results = plyrInv[itemChoice1].Interact();
@@ -170,6 +176,7 @@ namespace UnitBB
 
                                         case "b":
                                         case "B":
+                                            // Give the player another chance to choose their desired item
                                             to.Log("Please choose the Item you want to use");
                                             foreach (ItemsBase i in openRaider.inventory)
                                             {
@@ -193,6 +200,7 @@ namespace UnitBB
                             break;
 
                         default:
+                            // Alert the player that they've put in an invalid response
                             escape1 = false;
                             isNew = true;
                             to.Log("Please Either Enter (A) or (B)");
