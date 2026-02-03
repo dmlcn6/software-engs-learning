@@ -4,11 +4,11 @@ namespace Reup.Characters
     public class Player : CharacterBase
     {
         public string playerName;
+        EquippableItem defBuff;
 
-        public List<ItemBase> inventory = new List<ItemBase>() { new Sword() };
         public Player()
         {
-            damage = inventory[0].Equip(damage);
+            damage = Equip(damage);
 
         }
         public virtual int Equip(int stat)
@@ -22,7 +22,6 @@ namespace Reup.Characters
     }
     public class Bandit : CharacterBase
     {
-        public List<ItemBase> weapon = new List<ItemBase>() { new Knife() };
         public Bandit()
         {
             name = "Bandit";
@@ -32,7 +31,6 @@ namespace Reup.Characters
     }
     public class Stranger : CharacterBase
     {
-        public List<ItemBase> tote = new List<ItemBase>() { new Blick(), new Armor() };
         public Stranger()
         {
             name = "???";

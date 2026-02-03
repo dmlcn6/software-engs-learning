@@ -8,7 +8,7 @@ namespace Reup.Items
         public Knife()
         {
             itemName = "Knife";
-            buff = 5;
+            dmgBuff = 5;
 
         }
     }
@@ -17,7 +17,7 @@ namespace Reup.Items
         public Sword()
         {
             itemName = "Sword";
-            buff = 15;
+            dmgBuff = 15;
         }
     }
     public class Blick : EquippableItem
@@ -26,13 +26,13 @@ namespace Reup.Items
         public Blick()
         {
             itemName = "Blick";
-            buff = 30;
+            dmgBuff = 30;
         }
     }
     public class Armor : EquippableItem
     {
         public int shield;
-        public override int buff { get; set => buff = 0; }
+        public override int dmgBuff { get; set => dmgBuff = 0; }
         public Armor()
         {
             itemName = "Armor";

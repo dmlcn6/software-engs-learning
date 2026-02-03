@@ -1,4 +1,5 @@
 ﻿using Reup.Interfaces;
+using Reup.Items;
 namespace Reup.Characters
 {
     public abstract class CharacterBase : IDamagable
@@ -8,10 +9,12 @@ namespace Reup.Characters
         public int shield = 0;
         public string name;
         public bool alive = true;
+        public List<ItemBase> inventory;
+        public EquippableItem? equippedWeapon { get; set; }
 
         public CharacterBase()
         {
-
+            inventory = new List<ItemBase>();
         }
         public string ViewStats()
         {
@@ -35,6 +38,19 @@ namespace Reup.Characters
             {
                 health = health - amount;
             }
+        }
+        public virtual void EquipItem(int inventoryIndex)
+        {
+            if (inventoryIndex >= inventory.Count)
+                return;
+
+            var item = inventory[inventoryIndex];
+
+            if (item.isConsumable)
+                return;
+
+            equippedWeapon = (EquippableItem)item;
+            inventory.Remove(item);
         }
     }
 }
