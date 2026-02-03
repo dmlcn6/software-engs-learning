@@ -5,6 +5,7 @@ namespace Reup.Characters
     {
         public int health = 100;
         public int damage = 7;
+        public int shield = 0;
         public string name;
         public bool alive = true;
 
@@ -26,7 +27,14 @@ namespace Reup.Characters
         }
         public void ApplyDamage(int amount)
         {
-            health -= amount;
+            if (shield > 0)
+            {
+                shield = shield - amount;
+            }
+            else
+            {
+                health = health - amount;
+            }
         }
     }
 }

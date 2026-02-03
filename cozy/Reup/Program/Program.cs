@@ -127,11 +127,11 @@ namespace Reup.Program
                                 item.GetType().ToString().Contains("Armor") ||
                                 item.GetType().ToString().Contains("Yercs"))
                             {
-                                item.Equip(player.health);
+                                player.Equip(player.health);
                             }
                             else
                             {
-                                item.Equip(player.damage);
+                                player.Equip(player.damage);
                             }
 
                             logger.Log("");

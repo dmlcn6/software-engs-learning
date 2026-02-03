@@ -4,14 +4,19 @@ namespace Reup.Characters
     public class Player : CharacterBase
     {
         public string playerName;
+
         public List<ItemBase> inventory = new List<ItemBase>() { new Sword() };
         public Player()
         {
             damage = inventory[0].Equip(damage);
+
         }
-        public int Equip(int stat)
+        public virtual int Equip(int stat)
         {
-            // create the rules for equip function
+            stat = stat + buff;
+
+            return stat;
+
         }
 
     }
