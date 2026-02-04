@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj",
+      "projectUniqueName": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\items\\items.csproj",
       "projectName": "items",
-      "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj",
+      "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\items\\items.csproj",
       "packagesPath": "C:\\Users\\albha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\obj\\",
+      "outputPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\items\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\albha\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -19,6 +19,7 @@
       "characters/1.0.0": {
         "dependencies": {
           "Interfaces": "1.0.0",
+          "Logger": "1.0.0",
           "items": "1.0.0"
         },
         "runtime": {

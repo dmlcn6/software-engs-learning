@@ -24,6 +24,16 @@
         "runtime": {
           "bin/placeholder/items.dll": {}
         }
+      },
+      "Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Logger.dll": {}
+        }
       }
     }
   },
@@ -35,13 +45,19 @@
     },
     "items/1.0.0": {
       "type": "project",
-      "path": "../Items/items.csproj",
-      "msbuildProject": "../Items/items.csproj"
+      "path": "../items/items.csproj",
+      "msbuildProject": "../items/items.csproj"
+    },
+    "Logger/1.0.0": {
+      "type": "project",
+      "path": "../Logger/Logger.csproj",
+      "msbuildProject": "../Logger/Logger.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
       "Interfaces >= 1.0.0",
+      "Logger >= 1.0.0",
       "items >= 1.0.0"
     ]
   },
@@ -75,8 +91,11 @@
             "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj": {
               "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Interfaces\\Interfaces.csproj"
             },
-            "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj": {
-              "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj"
+            "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\items\\items.csproj": {
+              "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\items\\items.csproj"
+            },
+            "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj": {
+              "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj"
             }
           }
         }

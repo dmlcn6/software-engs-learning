@@ -4,8 +4,32 @@ namespace Reup.Characters
 {
     public abstract class CharacterBase : IDamagable
     {
-        public int health = 100;
-        public int damage = 7;
+        private int health;
+        public int _health
+        {
+            get => health;
+            set
+            {
+                if (value > 200)
+                    health = 100;
+                else if (value < 1)
+                {
+                    health = 0;
+                    alive = false;
+                }
+                else
+                    health = value;
+            }
+        }
+        private int damage;
+        public int _damage
+        {
+            get => damage;
+            set
+            {
+                damage = (equippedWeapon?.dmgBuff ?? 0) + value;
+            }
+        }
         public int shield = 0;
         public string name;
         public bool alive = true;
@@ -15,10 +39,12 @@ namespace Reup.Characters
         public CharacterBase()
         {
             inventory = new List<ItemBase>();
+            _health = 100;
+            _damage = 7;
         }
         public string ViewStats()
         {
-            return $"DMG: {damage}, HP: {health}";
+            return $"DMG: {_damage}, HP: {_health}";
         }
         public void Attacked(CharacterBase attacker)
         {

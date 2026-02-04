@@ -127,11 +127,11 @@ namespace Reup.Program
                                 item.GetType().ToString().Contains("Armor") ||
                                 item.GetType().ToString().Contains("Yercs"))
                             {
-                                player.Equip(player.health);
+                                player.EquipItem(player._health);
                             }
                             else
                             {
-                                player.Equip(player.damage);
+                                player.EquipItem(player._damage);
                             }
 
                             logger.Log("");
@@ -226,7 +226,7 @@ namespace Reup.Program
                 case 19:
                     logger.Log("Rats! You Got Caught in a BoobyTrap!");
                     logger.Log("You lost 15 HP!");
-                    player.health = player.health - 10;
+                    player._health = player._health - 10;
                     break;
                 //Enemy
                 case 5:
@@ -290,11 +290,11 @@ namespace Reup.Program
                                     item.GetType().ToString().Contains("Armor") ||
                                     item.GetType().ToString().Contains("Yercs"))
                                 {
-                                    player.Equip(player.health);
+                                    player.EquipItem(player._health);
                                 }
                                 else
                                 {
-                                    player.Equip(player.damage);
+                                    player.EquipItem(player._damage);
                                 }
 
                                 logger.Log("");
