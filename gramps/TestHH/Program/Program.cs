@@ -15,6 +15,10 @@ namespace TestHH
             //var killCount = 0;
             // i want the player to fight until the end
             var keepFighting = true;
+
+
+
+
             do
             {
                 // create a tinymonster for the first 4 kills, then fight the boss for your final battle
@@ -29,8 +33,47 @@ namespace TestHH
                     enemy = new Boss();
                 }
 
+                UsableItemBase loot = new Armor();
+                UsableItemBase loot1 = new Sword();
+                UsableItemBase loot2 = new Potion();
+                UsableItemBase loot3 = new HiPotion();
+
+                // manual init
+                object[,] array2DInitialization =
+                {
+                    { player1, null, null, null },
+                    { loot3, loot, null, null   },
+                    { loot1, null, null , null  },
+                    { loot2, enemy, null, null  }
+                };
+
+
+                //whats your coordinates
+                // player1.x
+                // player1.y
+
+                // before moving player
+                // identify whats in the space they want to move to'
+                // player is at [0,0] and wants to move to [0,1]
+                // grab wahts in [0,1]
+                // check what type of item
+
+                var current = array2DInitialization[0, 1];
+                if (current.GetType().ToString().Contains("Item"))
+                {
+                    //prompt user to Loot() whats in the square before removing it
+                }
+                // move player
+                // and swap null space
+                array2DInitialization[0, 1] = array2DInitialization[0, 0];
+                array2DInitialization[0, 0] = current;
+
+                var result = array2DInitialization[0, 1];
+                logger.Log($"{result.GetType()}");
                 // run the encounter, until someone dies
                 var player1SurvivedFight = EnemyEncounter(enemy);
+
+
 
                 // keepfighting is true when the player survived the encounter and did not get 5 kills yet
                 // if the player died in the enemey encounter or their kills count is 5 or more
