@@ -1,66 +1,71 @@
 
 namespace TestHH.Items
 {
-    public class Potion : IUsableItem
+    public class Potion : ConsumableItemBase
     {
-        public override int amountOfEffectToHp { get; set; }
+        public override int hp { get; set; }
+        public override int dmg { get; set; }
         public override string name { get; set; }
-
-        public override bool isConsumable { get; set; }
 
         public Potion()
         {
-            amountOfEffectToHp = 50;
+            hp = 50;
+            dmg = 0;
             name = "Potion";
-            isConsumable = true;
         }
 
         public override int Use(int stat)
         {
-            stat = amountOfEffectToHp + stat;
+            stat = hp + stat;
             return stat;
         }
     }
 
-    public class HiPotion : IUsableItem
+    public class HiPotion : ConsumableItemBase
     {
-        public override int amountOfEffectToHp { get; set; }
+        public override int hp { get; set; }
+        public override int dmg { get; set; }
         public override string name { get; set; }
-
-        public override bool isConsumable { get; set; }
 
         public HiPotion()
         {
-            amountOfEffectToHp = 150;
+            hp = 150;
+            dmg = 0;
             name = "Hi Potion";
-            isConsumable = true;
         }
 
         public override int Use(int stat)
         {
-            stat = amountOfEffectToHp + stat;
+            stat = hp + stat;
             return stat;
         }
     }
 
-    public class Sword : IUsableItem
+    public class Sword : EquippableItemBase
     {
-        public override int amountOfEffectToHp { get; set; }
+        public override int hp { get; set; }
+        public override int dmg { get; set; }
         public override string name { get; set; }
-
-        public override bool isConsumable { get; set; }
 
         public Sword()
         {
-            amountOfEffectToHp = 10;
+            hp = 0;
+            dmg = 12;
             name = "Sword";
-            isConsumable = false;
         }
+    }
 
-        public override int Use(int stat)
+    public class Armor : EquippableItemBase
+    {
+        public override int hp { get; set; }
+        public override int dmg { get; set; }
+        public override string name { get; set; }
+
+        public Armor()
         {
-            stat -= amountOfEffectToHp;
-            return stat;
+            hp = 10;
+            dmg = 12;
+            name = "Armor";
         }
     }
 }

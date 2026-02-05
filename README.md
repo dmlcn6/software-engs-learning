@@ -61,7 +61,7 @@ here is what we covered so far
         Path 1: The "Architectural" System (Encapsulation & Interfaces)
         1. **Enhance the Logging System** - Ability to log to console and/or local .txt file:
           - Using an ILogger interface and polymorphism on the Send()
-
+        
         2. **Optimization Tasks**
           - Rename Abstract Classes: Change ICharacter to CharacterBase and IUsableItem to ItemBase.
           - Introduce Real Interfaces: Create an actual interface IDamageable that forces anything that can be attacked to have an ApplyDamage(int amount) method.
@@ -116,6 +116,8 @@ here is what we covered so far
         ---
     - 1/19
         - Today we are starting the game v2
+    - 1/24
+        - Getter/Setter, Created 2 new Item Base classes for equippable or consumable items, Add EquippedWeapon to CharBase.
 
 
 

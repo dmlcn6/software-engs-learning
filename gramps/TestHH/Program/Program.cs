@@ -1,25 +1,24 @@
 ﻿using TestHH.Characters;
 using TestHH.Items;
+using TestHH.Logger;
 
 namespace TestHH
 {
     public class Program
     {
-
-        public static Player player1;
+        public static Player player1 = new Player();
+        public static AuditLog logger = new AuditLog();
 
         public static void Main(string[] args)
         {
-            //i want to fill in the class variable with the new instance
-            player1 = new Player();
             // i want to know how many enemies the player has killed
-            var killCount = 0;
+            //var killCount = 0;
             // i want the player to fight until the end
             var keepFighting = true;
             do
             {
                 // create a tinymonster for the first 4 kills, then fight the boss for your final battle
-                ICharacter enemy;
+                CharacterBase enemy;
                 if (player1.killCount < 4)
                 {
                     enemy = new TinyMonster();
@@ -41,30 +40,30 @@ namespace TestHH
                 // after each encounter, checke if the player won
                 if (player1.killCount == 5)
                 {
-                    Console.WriteLine("You've endured your first set of Trials! and deserve a new Weapon");
-                    Console.WriteLine("You've won!");
+                    logger.Log("You've endured your first set of Trials! and deserve a new Weapon");
+                    logger.Log("You've won!");
+                    logger.RecordWin();
                     return;
                 }
 
             } while (keepFighting);
 
-            Console.WriteLine("You have died! Get a 5 monster kill streak to proceede.");
-            Console.WriteLine("GAMEOVER!");
+            logger.Log("You have died! Get a 5 monster kill streak to proceede.");
+            logger.RecordLoss();
         }
 
-
-        private static bool EnemyEncounter(ICharacter enemy)
+        private static bool EnemyEncounter(CharacterBase enemy)
         {
             // I want to alternate attacking/ item use, starting with the player 
             // until someone dies
 
             do
             {
-                Console.WriteLine("");
-                Console.WriteLine("Select your action: number");
-                Console.WriteLine("");
-                Console.WriteLine("1. Attack");
-                Console.WriteLine("2. Use Item");
+                logger.Log("");
+                logger.Log("Select your action: number");
+                logger.Log("");
+                logger.Log("1. Attack");
+                logger.Log("2. Use Item");
 
                 // get the users input w ConsoleReadLine
                 // try to parse it to an integer
@@ -81,8 +80,8 @@ namespace TestHH
                             break;
 
                         case 2:
-                            Console.WriteLine("");
-                            Console.WriteLine("Here is your inventory: ");
+                            logger.Log("");
+                            logger.Log("Here is your inventory: ");
 
 
                             var localInventory = player1._inventory;
@@ -90,10 +89,10 @@ namespace TestHH
 
                             for (var i = 0; i < localInventory.Count; i++)
                             {
-                                Console.WriteLine($"{i}: {localInventory[i].name}");
+                                logger.Log($"{i}: {localInventory[i].name}");
                             }
-                            Console.WriteLine("");
-                            Console.WriteLine("Select your item number: ");
+                            logger.Log("");
+                            logger.Log("Select your item number: ");
 
 
                             var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
@@ -101,27 +100,42 @@ namespace TestHH
                             if (isItemChoice)
                             {
                                 var item = player1._inventory[itemChoice];
-                                player1._hp = item.Use(player1._hp);
 
+                                // TODO: the Use() is on on ConsumableItems, figure it out
                                 if (item.isConsumable)
                                 {
-                                    player1._inventory.Remove(item);
-                                }
+                                    // cast item as ConsumableItem which has the use() on it
+                                    var consumableItem = (ConsumableItemBase)item;
 
-                                Console.WriteLine("");
-                                Console.WriteLine("Item used successfully");
-                                player1.ViewStats();
+                                    // use item and remove from inventory
+                                    player1._hp = consumableItem.Use(player1._hp);
+                                    player1._inventory.Remove(item);
+
+                                    // log
+                                    logger.Log("");
+                                    logger.Log("Item used successfully");
+                                    player1.ViewStats();
+                                }
+                                else
+                                {
+                                    // TODO: TEST THIS PATH
+                                    EnemyEncounter(enemy);
+                                }
                             }
                             else
                             {
+                                // TODO: TEST THIS PATH
                                 // you didnt provide a proper choice
+                                EnemyEncounter(enemy);
                             }
                             break;
                     }
                 }
                 else
                 {
+                    // TODO: TEST THIS PATH
                     // you didnt provide a proper choise
+                    EnemyEncounter(enemy);
                 }
 
                 if (enemy.IsAlive())
