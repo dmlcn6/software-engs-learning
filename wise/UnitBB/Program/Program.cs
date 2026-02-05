@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Starting Path 2! 01/31/26(4)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Cleaning up before the BIG START for path 3 02/04/26(2)"        [RECENT COMMIT NAME]
 
 // 1/29/26 - Big loop that leads back to sparanza
 
@@ -11,7 +11,9 @@
 using UnitBB.Characters;
 using UnitBB.Logger;
 
-
+// object[,] array2DInitialization = { openRaider, Null },
+//                                   { openRaider, Null },
+//                                   { openRaider, Null };
 namespace UnitBB
 {
 
@@ -23,16 +25,16 @@ namespace UnitBB
             Logs to = new();
             var openRaider = new Raider();
             to.Log($"Program.Start.Main has begun", "../Inbox/Announcements.txt");
-            var startNew = new TestA();
-            startNew.TestAA(openRaider);
+            var startNew = new Sparanza();
+            startNew.MainMenu(openRaider);
         }
     }
 
 
-    public class TestA
+    public class Sparanza
     {
         Logs to = new();
-        public void TestAA(CharactersBase openRaider)
+        public void MainMenu(CharactersBase openRaider)
         {
             // Pre-exsisting Objects
             var rInventory = openRaider.inventory;
@@ -235,8 +237,8 @@ namespace UnitBB
                     case "b":
                         to.Log("Going to Sparanza Now.");
                         openRaider.killCountNowRes();
-                        var startNext = new TestA();
-                        startNext.TestAA(openRaider);
+                        var startNext = new Sparanza();
+                        startNext.MainMenu(openRaider);
                         break;
                     default:
                         to.Log("Something went wrong");
