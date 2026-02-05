@@ -6,6 +6,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
+          "Interfaces": "1.0.0",
+          "Logger": "1.0.0",
           "items": "1.0.0"
         },
         "compile": {
@@ -15,14 +17,37 @@
           "bin/placeholder/characters.dll": {}
         }
       },
+      "Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Interfaces.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Interfaces.dll": {}
+        }
+      },
       "items/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Interfaces": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/items.dll": {}
         },
         "runtime": {
           "bin/placeholder/items.dll": {}
+        }
+      },
+      "Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Logger.dll": {}
         }
       }
     }
@@ -33,14 +58,25 @@
       "path": "../Characters/characters.csproj",
       "msbuildProject": "../Characters/characters.csproj"
     },
+    "Interfaces/1.0.0": {
+      "type": "project",
+      "path": "../Interfaces/Interfaces.csproj",
+      "msbuildProject": "../Interfaces/Interfaces.csproj"
+    },
     "items/1.0.0": {
       "type": "project",
-      "path": "../Items/items.csproj",
-      "msbuildProject": "../Items/items.csproj"
+      "path": "../items/items.csproj",
+      "msbuildProject": "../items/items.csproj"
+    },
+    "Logger/1.0.0": {
+      "type": "project",
+      "path": "../Logger/Logger.csproj",
+      "msbuildProject": "../Logger/Logger.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Logger >= 1.0.0",
       "characters >= 1.0.0",
       "items >= 1.0.0"
     ]
@@ -75,8 +111,11 @@
             "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Characters\\characters.csproj": {
               "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Characters\\characters.csproj"
             },
-            "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj": {
-              "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\reup\\Items\\items.csproj"
+            "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\items\\items.csproj": {
+              "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\items\\items.csproj"
+            },
+            "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj": {
+              "projectPath": "C:\\Users\\albha\\src\\software-engs-learning\\cozy\\Reup\\Logger\\Logger.csproj"
             }
           }
         }

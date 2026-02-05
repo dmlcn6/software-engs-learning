@@ -10,5 +10,7 @@
   <Folder Name="/Items/">
     <Project Path="Items/items.csproj" />
   </Folder>
+  <Project Path="Interfaces/Interfaces.csproj" />
+  <Project Path="Logger/Logger.csproj" />
   <Project Path="Program/program.csproj" />
 </Solution>

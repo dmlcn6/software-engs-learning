@@ -1,62 +1,72 @@
 using Reup.Items;
+using Reup.Logger;
 namespace Reup.Characters
 {
-    public class Player : ICharacter
+    public class Player : CharacterBase
     {
+        private ILogger _logger;
         public string playerName;
-        public List<IUsableItems> inventory = new List<IUsableItems>() { new Sword() };
+        EquippableItem defBuff;
+        ItemBase? equippedExtraItem { get; set; }
+
         public Player()
         {
-            damage = inventory[0].Equip(damage);
-        }
-        public override void Attacked(ICharacter attacker)
-        {
-            health = health - attacker.damage;
+            var sword = new Sword();
+            _logger = new AuditLog();
+            inventory.Add(sword);
+            EquipItem(inventory.IndexOf(sword));
 
-            if (health <= 0)
-            {
-                alive = false;
-                Console.WriteLine("GAME OVER! You have died.");
-                Thread.Sleep(1000);
-                Console.WriteLine("It seems I overestimated you...");
-            }
         }
+        public override void EquipItem(int inventoryIndex)
+        {
+            if (inventoryIndex >= inventory.Count)
+                return;
+
+            var item = inventory[inventoryIndex];
+
+            if (item.isConsumable)
+                return;
+
+            if (equippedWeapon == null)
+            {
+                equippedWeapon = (EquippableItem)item;
+                inventory.Remove(item);
+            }
+            else if (equippedExtraItem == null)
+            {
+                equippedExtraItem = (EquippableItem)item;
+                inventory.Remove(item);
+            }
+            else
+            {
+                _logger.Log("You dont have any open slots");
+            }
+            _damage = _damage;
+        }
+
     }
-    public class Bandit : ICharacter
+    public class Bandit : CharacterBase
     {
-        public List<IUsableItems> weapon = new List<IUsableItems>() { new Knife() };
         public Bandit()
         {
             name = "Bandit";
-            damage = weapon[0].Equip(damage);
-        }
-        public override void Attacked(ICharacter attacker)
-        {
-            health = health - attacker.damage;
+            var dagger = new Knife();
+            inventory.Add(dagger);
+            EquipItem(inventory.IndexOf(dagger));
 
-            if (health <= 0)
-            {
-                alive = false;
-            }
         }
+
     }
-    public class Stranger : ICharacter
+    public class Stranger : CharacterBase
     {
-        public List<IUsableItems> tote = new List<IUsableItems>() { new Blick(), new Armor() };
         public Stranger()
         {
             name = "???";
-            damage = tote[0].Equip(damage);
-            health = tote[1].Equip(health);
-        }
-        public override void Attacked(ICharacter attacker)
-        {
-            health = health - attacker.damage;
-
-            if (health <= 0)
-            {
-                alive = false;
-            }
+            var glocky = new Blick();
+            var poshun = new Potion();
+            inventory.Add(glocky);
+            inventory.Add(poshun);
         }
     }
 }
+

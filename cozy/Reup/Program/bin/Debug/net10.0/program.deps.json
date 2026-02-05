@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v10.0": {
       "program/1.0.0": {
         "dependencies": {
+          "Logger": "1.0.0",
           "characters": "1.0.0",
           "items": "1.0.0"
         },
@@ -17,6 +18,8 @@
       },
       "characters/1.0.0": {
         "dependencies": {
+          "Interfaces": "1.0.0",
+          "Logger": "1.0.0",
           "items": "1.0.0"
         },
         "runtime": {
@@ -26,9 +29,28 @@
           }
         }
       },
+      "Interfaces/1.0.0": {
+        "runtime": {
+          "Interfaces.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "items/1.0.0": {
+        "dependencies": {
+          "Interfaces": "1.0.0"
+        },
         "runtime": {
           "items.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Logger/1.0.0": {
+        "runtime": {
+          "Logger.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -47,7 +69,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Interfaces/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "items/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Logger/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

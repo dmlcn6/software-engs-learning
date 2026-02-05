@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Characters\characters.csproj" />
     <ProjectReference Include="..\Items\items.csproj" />
+    <ProjectReference Include="..\Logger\Logger.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
