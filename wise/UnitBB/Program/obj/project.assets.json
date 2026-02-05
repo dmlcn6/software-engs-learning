@@ -6,13 +6,25 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
-          "Items": "1.0.0"
+          "Interfaces": "1.0.0",
+          "Items": "1.0.0",
+          "Logger": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Characters.dll": {}
         },
         "runtime": {
           "bin/placeholder/Characters.dll": {}
+        }
+      },
+      "Interfaces/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Interfaces.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Interfaces.dll": {}
         }
       },
       "Items/1.0.0": {
@@ -42,6 +54,11 @@
       "type": "project",
       "path": "../Characters/Characters.csproj",
       "msbuildProject": "../Characters/Characters.csproj"
+    },
+    "Interfaces/1.0.0": {
+      "type": "project",
+      "path": "../Interfaces/Interfaces.csproj",
+      "msbuildProject": "../Interfaces/Interfaces.csproj"
     },
     "Items/1.0.0": {
       "type": "project",
