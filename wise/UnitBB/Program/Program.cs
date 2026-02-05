@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Finished Path 2 part 2 01/31/26(3)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Starting Path 2! 01/31/26(4)"        [RECENT COMMIT NAME]
 
 // 1/29/26 - Big loop that leads back to sparanza
 
@@ -21,9 +21,10 @@ namespace UnitBB
         static void Main()
         {
             Logs to = new();
+            var openRaider = new Raider();
             to.Log($"Program.Start.Main has begun", "../Inbox/Announcements.txt");
             var startNew = new TestA();
-            startNew.TestAA();
+            startNew.TestAA(openRaider);
         }
     }
 
@@ -31,10 +32,9 @@ namespace UnitBB
     public class TestA
     {
         Logs to = new();
-        public void TestAA()
+        public void TestAA(CharactersBase openRaider)
         {
             // Pre-exsisting Objects
-            var openRaider = new Raider();
             var rInventory = openRaider.inventory;
 
             // Start off information
@@ -83,6 +83,7 @@ namespace UnitBB
         {
             //topLevel
             to.Log("Welcome to Topside");
+            to.Log("an enemy has appeared");
             var openArc = new Arc();
 
             do
@@ -134,14 +135,6 @@ namespace UnitBB
                             to.Log("you have chosen B");
 
                             // Show the player their inventory
-                            /*
-                            int tempTracker = 1;
-                            foreach (ItemsBase i in plyrInv)
-                            {
-                                to.Log($"({tempTracker}){i.CallName()}");
-                                tempTracker++;
-                            }
-                            */
                             for (int i = 0; i < plyrInv.Count; i++)
                             {
                                 to.Log($"({i + 1}){plyrInv[i].CallName()}");
@@ -169,9 +162,7 @@ namespace UnitBB
                                             // Obtain the chosen item
                                             var itemChoice1A = plyrInv[itemChoice1];
                                             openRaider.ObtainIt(itemChoice1A, "+");
-                                            //var results = plyrInv[itemChoice1].Interact();
-                                            //openRaider.HDAdj(results.Item1, results.Item2, "+");
-                                            //to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
+
                                             escape2 = true;
 
                                             break;
@@ -195,7 +186,6 @@ namespace UnitBB
 
                                 }
 
-                                //int itemChoice = Console.ReadLine();
 
 
                             } while (escape2 == false);
@@ -229,9 +219,29 @@ namespace UnitBB
 
             if (openRaider.CallKillCount() == 3)
             {
-                to.Log("You have WON!");
-                return;
+                to.Log("You Have Successfully Completed Your Mission!");
+                to.Log("Would you like to stay topside or go back to Sparanza?");
+                to.Log("(A): Stay topside");
+                to.Log("(B): Go to Sparanza");
             }
+            /* switch (Console.ReadLine())
+            {
+                case "A":
+                case "a":
+                    to.Log("Staying Topside");
+                    TopsideAA(openRaider);
+                    break;
+                case "B":
+                case "b":
+                    to.Log("Going to Sparanza Now.");
+                    var startNext = new TestA();
+                    startNext.TestAA(openRaider);
+                    break;
+                default:
+                    to.Log("Something went wrong");
+                    break;
+            } */
+
             else
             {
                 to.Log("You have Failed");
@@ -240,6 +250,7 @@ namespace UnitBB
 
         }
     }
+
 }
 
 
