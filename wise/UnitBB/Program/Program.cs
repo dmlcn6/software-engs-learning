@@ -223,24 +223,26 @@ namespace UnitBB
                 to.Log("Would you like to stay topside or go back to Sparanza?");
                 to.Log("(A): Stay topside");
                 to.Log("(B): Go to Sparanza");
+                switch (Console.ReadLine())
+                {
+                    case "A":
+                    case "a":
+                        to.Log("Staying Topside");
+                        openRaider.killCountNowRes();
+                        TopsideAA(openRaider);
+                        break;
+                    case "B":
+                    case "b":
+                        to.Log("Going to Sparanza Now.");
+                        openRaider.killCountNowRes();
+                        var startNext = new TestA();
+                        startNext.TestAA(openRaider);
+                        break;
+                    default:
+                        to.Log("Something went wrong");
+                        break;
+                }
             }
-            /* switch (Console.ReadLine())
-            {
-                case "A":
-                case "a":
-                    to.Log("Staying Topside");
-                    TopsideAA(openRaider);
-                    break;
-                case "B":
-                case "b":
-                    to.Log("Going to Sparanza Now.");
-                    var startNext = new TestA();
-                    startNext.TestAA(openRaider);
-                    break;
-                default:
-                    to.Log("Something went wrong");
-                    break;
-            } */
 
             else
             {
