@@ -9,6 +9,9 @@ namespace TestHH.Items
         public abstract int dmg { get; set; }
         public abstract string name { get; set; }
 
+        public int? xCoords;
+        public int? yCoords;
+
         public void Alert()
         {
             Console.WriteLine("Alert");
