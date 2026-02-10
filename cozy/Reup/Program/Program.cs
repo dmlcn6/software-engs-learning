@@ -89,18 +89,16 @@ namespace Reup.Program
         }
         public static void Gameplay()
         {
-            //I need var player 1 to get the game started
-            //Game is built like a board game. Total of 20 spaces
-            //Different events happen on different spaces
-            //Player has 5 Lives to survive until the end
-            //Four different events: Loot, Enemy, Stranger, Hazard
-            //Player begins by rolling 6 sided dice
-            //player can use an item before and after they decide to roll
+            // create loop managing how players will move arround the map
+            // capture the input from the arrow keys to determine the direction the player moves
+            // determine what happens when a player moves around the array
+            // players can use items before moving if they choose.
+
             logger.Log("Enter a number to select an action");
             logger.Log("");
             logger.Log("1. View inventory");
             logger.Log("2. View Stats");
-            logger.Log("3. Roll Dice");
+            logger.Log("3. Move Position");
             var isDecision = int.TryParse(Console.ReadLine(), out int decision);
 
             if (isDecision)
@@ -125,14 +123,20 @@ namespace Reup.Program
                             //compare type of item
                             var item = player.inventory[itemChoice];
                             if (item.GetType().ToString().Contains("Potion") ||
-                                item.GetType().ToString().Contains("Armor") ||
                                 item.GetType().ToString().Contains("Yercs"))
                             {
                                 player.EquipItem(player._health);
+                                player.inventory.Remove(item);
+                            }
+                            else if (item.GetType().ToString().Contains("Armor"))
+                            {
+                                player.EquipItem(player.shield);
+                                player.inventory.Remove(item);
                             }
                             else
                             {
                                 player.EquipItem(player._damage);
+                                player.inventory.Remove(item);
                             }
 
                             logger.Log("");
@@ -144,14 +148,13 @@ namespace Reup.Program
                         logger.Log($"{player.ViewStats()}");
                         break;
                     case 3:
-                        DiceRoll();
-                        BoardEvents();
+                        PlayerMovement();
                         break;
 
                 }
             }
         }
-        public static void BoardEvents()
+        public static void Map()
         {
             // create pieces to go onto the 2D array
 
@@ -345,8 +348,32 @@ namespace Reup.Program
                     break;
             }
         }
-        public static void DiceRoll()
+        public static void PlayerMovement()
         {
+            logger.Log("Please enter the direction you want to move");
+            int newXCoords;
+            int newYCoords;
+            var movement = Console.ReadLine();
+
+            if (movement.ToLower() == "North")
+            {
+
+            }
+            else if (movement.ToLower() == "South")
+            {
+
+            }
+            else if (movement.ToLower() == "East")
+            {
+
+            }
+            else if (movement.ToLower() == "West")
+            {
+
+            }
+
+
+
             logger.Log($"Current Position: {playerPos}");
             Random random = new Random();
             int sixDice = random.Next(1, 6);
