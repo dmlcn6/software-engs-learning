@@ -153,7 +153,7 @@ namespace TestHH
                         EnemyEncounter(enemy);
                         if (player1.IsAlive())
                         {
-                            array2DInitialization[]
+
                         }
                     }
                     else if (theThingInTheSpaceIWantToMoveTo == null)
