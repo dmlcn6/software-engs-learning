@@ -10,7 +10,7 @@ namespace TestHH
         public static Player player1 = new Player();
         public static AuditLog logger = new AuditLog();
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             // i want to know how many enemies the player has killed
             //var killCount = 0;
@@ -110,6 +110,11 @@ namespace TestHH
                     newXCoord = player1.xCoords + 1;
                     newYCoord = player1.yCoords;
                 }
+                else
+                {
+                    newXCoord = 0;
+                    newYCoord = 0;
+                }
 
                 // see if the new spot is occupied
                 var theThingInTheSpaceIWantToMoveTo = array2DInitialization[newXCoord, newYCoord];
@@ -144,7 +149,11 @@ namespace TestHH
             if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Item") ?? false)
             {
                 // user must loot
-                // move player
+                var loot = (UsableItemBase)theThingInTheSpaceIWantToMoveTo;
+                LootEncounter(loot);
+
+                // move the player
+                MoveUserToNullSpace(newXCoord, newYCoord);
             }
             else if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Character") ?? false)
             {
@@ -153,10 +162,9 @@ namespace TestHH
                 // run the encounter, until someone dies
 
                 var enemy = (CharacterBase)theThingInTheSpaceIWantToMoveTo;
-                EnemyEncounter(enemy);
 
-
-                if (player1.IsAlive())
+                // EnemyEncounter returns if player survived
+                if (EnemyEncounter(enemy))
                 {
                     // set old enemy space to null
                     array2DInitialization[enemy.xCoords, enemy.yCoords] = null;
@@ -279,6 +287,20 @@ namespace TestHH
             // returns if the player survived the encounter
             return player1.IsAlive();
         }
+
+        private static void LootEncounter(UsableItemBase loot)
+        {
+            // check that loot is on gameboard
+            if (loot.xCoords == null || loot.yCoords == null)
+                return;
+
+            // add the loot to the player inventory
+            player1._inventory.Add(loot);
+
+            // remove from gameboard
+            array2DInitialization[(int)loot.xCoords!, (int)loot.yCoords!] = null;
+        }
+
     }
 }
 
