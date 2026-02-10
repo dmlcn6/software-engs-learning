@@ -53,7 +53,6 @@ namespace Reup.Characters
             var dagger = new Knife();
             inventory.Add(dagger);
             EquipItem(inventory.IndexOf(dagger));
-
         }
 
     }
@@ -66,6 +65,8 @@ namespace Reup.Characters
             var poshun = new Potion();
             inventory.Add(glocky);
             inventory.Add(poshun);
+            EquipItem(inventory.IndexOf(glocky));
+            EquipItem(inventory.IndexOf(poshun));
         }
     }
 }

@@ -57,4 +57,12 @@ namespace Reup.Items
             healing = 50;
         }
     }
+    public class Hazard : ConsumableItem
+    {
+        public Hazard()
+        {
+            itemName = "Booby Trap";
+            healing = -10;
+        }
+    }
 }

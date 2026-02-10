@@ -8,6 +8,8 @@ namespace Reup.Items
         public virtual string itemName { get; set; }
         public abstract bool isConsumable { get; set; }
         public abstract bool isEquippable { get; set; }
+        public int? xCoords;
+        public int? yCoords;
 
     }
 }
