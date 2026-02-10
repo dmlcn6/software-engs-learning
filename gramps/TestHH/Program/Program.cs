@@ -6,6 +6,7 @@ namespace TestHH
 {
     public class Program
     {
+        public static object[,] array2DInitialization = new object[4, 4];
         public static Player player1 = new Player();
         public static AuditLog logger = new AuditLog();
 
@@ -14,23 +15,11 @@ namespace TestHH
             // i want to know how many enemies the player has killed
             //var killCount = 0;
             // i want the player to fight until the end
-            var keepFighting = true;
+            var keepAdventuring = true;
 
             do
             {
-                // create a tinymonster for the first 4 kills, then fight the boss for your final battle
-
-                /*
-                if (player1.killCount < 4)
-                {
-                    enemy = new TinyMonster();
-                }
-                else
-                {
-                    player1._inventory.Add(new HiPotion());
-                    enemy = new Boss();
-                }
-                */
+                #region  coordiantes
                 CharacterBase enemy = new TinyMonster();
                 CharacterBase enemy1 = new TinyMonster();
 
@@ -40,7 +29,6 @@ namespace TestHH
                 UsableItemBase loot3 = new HiPotion();
 
                 // manual init
-                object[,] array2DInitialization = new object[4, 4];
                 /*
                 {
                     { null, null, null, null },
@@ -52,7 +40,7 @@ namespace TestHH
 
 
 
-                #region  coordiantes
+
                 array2DInitialization[1, 0] = loot3;
                 loot3.xCoords = 1;
                 loot3.yCoords = 0;
@@ -75,11 +63,13 @@ namespace TestHH
                 loot2.yCoords = 0;
                 #endregion
 
-                // grab user input
-                var results = Console.ReadLine();
+                int newXCoord = -1;
+                int newYCoord = -1;
 
+                //get direction the user wants to move
+                var results = Console.ReadLine() ?? "";
 
-                //get direction they want to move
+                // figure outt nwe coords
                 if (results.ToString() == "UpArrow")
                 {
                     if ((player1.xCoords - 1) < 0)
@@ -87,37 +77,8 @@ namespace TestHH
                         // you cant move out of the bounds of the array
                     }
 
-                    //whats your coordinates
-                    // player1.x
-                    // player1.y
-
-                    // before moving player
-                    // identify whats in the space they want to move to'
-
-                    var newXCoord = player1.xCoords - 1;
-                    var newYCoord = player1.yCoords;
-
-                    var theThingInTheSpaceIWantToMoveTo = array2DInitialization[newXCoord, newYCoord];
-
-                    // interact with whatever is in the space
-
-                    if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Item") ?? false)
-                    {
-                        // user must loot
-                        // move player
-                    }
-                    else if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Character") ?? false)
-                    {
-                        // user must fight until someone wins and takes the spot
-                        // if they win, move player
-                        // run the encounter, until someone dies
-                        var player1SurvivedFight = EnemyEncounter(enemy);
-                    }
-                    else if (theThingInTheSpaceIWantToMoveTo == null)
-                    {
-                        // move player
-                        // user turn is over
-                    }
+                    newXCoord = player1.xCoords - 1;
+                    newYCoord = player1.yCoords;
                 }
                 else if (results.ToString() == "RightArrow")
                 {
@@ -126,60 +87,40 @@ namespace TestHH
                         // you cant move out of the bounds of the array
                     }
 
-                    //whats your coordinates
-                    // player1.x
-                    // player1.y
-
-                    // before moving player
-                    // identify whats in the space they want to move to'
-
-                    var newXCoord = player1.xCoords;
-                    var newYCoord = player1.yCoords + 1;
-
-                    var theThingInTheSpaceIWantToMoveTo = array2DInitialization[newXCoord, newYCoord];
-
-                    // interact with whatever is in the space
-
-                    if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Item") ?? false)
+                    newXCoord = player1.xCoords;
+                    newYCoord = player1.yCoords + 1;
+                }
+                else if (results.ToString() == "LeftArrow")
+                {
+                    if ((player1.yCoords - 1) < 0)
                     {
-                        // user must loot
-                        // move player
+                        // you cant move out of the bounds of the array
                     }
-                    else if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Character") ?? false)
+
+                    newXCoord = player1.xCoords;
+                    newYCoord = player1.yCoords - 1;
+                }
+                else if (results.ToString() == "DownArrow")
+                {
+                    if ((player1.xCoords + 1) > 3)
                     {
-                        // user must fight until someone wins and takes the spot
-                        // if they win, move player
-                        // run the encounter, until someone dies
-                        EnemyEncounter(enemy);
-                        if (player1.IsAlive())
-                        {
-
-                        }
+                        // you cant move out of the bounds of the array
                     }
-                    else if (theThingInTheSpaceIWantToMoveTo == null)
-                    {
-                        // move player
-                        // user turn is over
-                        array2DInitialization[player1.xCoords, player1.yCoords] = null;
 
-                        player1.xCoords = newXCoord;
-                        player1.yCoords = newYCoord;
-
-                        array2DInitialization[newXCoord, newYCoord] = player1;
-
-
-                    }
+                    newXCoord = player1.xCoords + 1;
+                    newYCoord = player1.yCoords;
                 }
 
+                // see if the new spot is occupied
+                var theThingInTheSpaceIWantToMoveTo = array2DInitialization[newXCoord, newYCoord];
 
+                // check what character options are, given whatever is in the new space
+                AllCharacterOptions(theThingInTheSpaceIWantToMoveTo, newXCoord, newYCoord);
 
-
-
-
-                // keepfighting is true when the player survived the encounter and did not get 1 kills yet
-                // if the player died in the enemey encounter or their kills count is 5 or more
-                // then keepfighting will be false
-                keepFighting = player1.IsAlive() && player1.killCount < 1;
+                // keepAdventuring is true when the player Is Alive and did not get 1 kills yet
+                // if the player died in the enemey encounter or their kills count is 1 or more
+                // then keepAdventuring will be false
+                keepAdventuring = player1.IsAlive() && player1.killCount < 1;
 
                 // after each encounter, checke if the player won
                 if (player1.killCount == 1)
@@ -190,10 +131,56 @@ namespace TestHH
                     return;
                 }
 
-            } while (keepFighting);
+            } while (keepAdventuring);
 
             logger.Log("You have died! Get a 1 monster kill streak to proceede.");
             logger.RecordLoss();
+        }
+
+        private static void AllCharacterOptions(object theThingInTheSpaceIWantToMoveTo, int newXCoord, int newYCoord)
+        {
+            // interact with whatever is in the space
+
+            if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Item") ?? false)
+            {
+                // user must loot
+                // move player
+            }
+            else if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Character") ?? false)
+            {
+                // user must fight until someone wins and takes the spot
+                // if they win, move player
+                // run the encounter, until someone dies
+
+                var enemy = (CharacterBase)theThingInTheSpaceIWantToMoveTo;
+                EnemyEncounter(enemy);
+
+
+                if (player1.IsAlive())
+                {
+                    // set old enemy space to null
+                    array2DInitialization[enemy.xCoords, enemy.yCoords] = null;
+
+                    // move the player
+                    MoveUserToNullSpace(newXCoord, newYCoord);
+                }
+            }
+            else if (theThingInTheSpaceIWantToMoveTo == null)
+            {
+                MoveUserToNullSpace(newXCoord, newYCoord);
+            }
+        }
+
+        private static void MoveUserToNullSpace(int newXCoord, int newYCoord)
+        {
+            // move player  
+            // user turn is over
+            array2DInitialization[player1.xCoords, player1.yCoords] = null;
+
+            player1.xCoords = newXCoord;
+            player1.yCoords = newYCoord;
+
+            array2DInitialization[newXCoord, newYCoord] = player1;
         }
 
         private static bool EnemyEncounter(CharacterBase enemy)
