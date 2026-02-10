@@ -15,10 +15,12 @@ namespace TestHH
             //var killCount = 0;
             // i want the player to fight until the end
             var keepFighting = true;
+
             do
             {
                 // create a tinymonster for the first 4 kills, then fight the boss for your final battle
-                CharacterBase enemy;
+
+                /*
                 if (player1.killCount < 4)
                 {
                     enemy = new TinyMonster();
@@ -28,17 +30,159 @@ namespace TestHH
                     player1._inventory.Add(new HiPotion());
                     enemy = new Boss();
                 }
+                */
+                CharacterBase enemy = new TinyMonster();
+                CharacterBase enemy1 = new TinyMonster();
 
-                // run the encounter, until someone dies
-                var player1SurvivedFight = EnemyEncounter(enemy);
 
-                // keepfighting is true when the player survived the encounter and did not get 5 kills yet
+                UsableItemBase loot = new Armor();
+                UsableItemBase loot2 = new Potion();
+                UsableItemBase loot3 = new HiPotion();
+
+                // manual init
+                object[,] array2DInitialization = new object[4, 4];
+                /*
+                {
+                    { null, null, null, null },
+                    { loot3, loot, null, null   },
+                    { enemy, player1, null , null  },
+                    { loot2, enemy1, null, null  }
+                };
+                */
+
+
+
+                #region  coordiantes
+                array2DInitialization[1, 0] = loot3;
+                loot3.xCoords = 1;
+                loot3.yCoords = 0;
+
+                array2DInitialization[1, 1] = loot;
+                loot.xCoords = 1;
+                loot.yCoords = 1;
+
+                array2DInitialization[2, 0] = enemy;
+                enemy.xCoords = 2;
+                enemy.yCoords = 0;
+
+                array2DInitialization[2, 1] = player1;
+                player1.xCoords = 2;
+                player1.yCoords = 1;
+
+
+                array2DInitialization[3, 0] = loot2;
+                loot2.xCoords = 3;
+                loot2.yCoords = 0;
+                #endregion
+
+                // grab user input
+                var results = Console.ReadLine();
+
+
+                //get direction they want to move
+                if (results.ToString() == "UpArrow")
+                {
+                    if ((player1.xCoords - 1) < 0)
+                    {
+                        // you cant move out of the bounds of the array
+                    }
+
+                    //whats your coordinates
+                    // player1.x
+                    // player1.y
+
+                    // before moving player
+                    // identify whats in the space they want to move to'
+
+                    var newXCoord = player1.xCoords - 1;
+                    var newYCoord = player1.yCoords;
+
+                    var theThingInTheSpaceIWantToMoveTo = array2DInitialization[newXCoord, newYCoord];
+
+                    // interact with whatever is in the space
+
+                    if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Item") ?? false)
+                    {
+                        // user must loot
+                        // move player
+                    }
+                    else if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Character") ?? false)
+                    {
+                        // user must fight until someone wins and takes the spot
+                        // if they win, move player
+                        // run the encounter, until someone dies
+                        var player1SurvivedFight = EnemyEncounter(enemy);
+                    }
+                    else if (theThingInTheSpaceIWantToMoveTo == null)
+                    {
+                        // move player
+                        // user turn is over
+                    }
+                }
+                else if (results.ToString() == "RightArrow")
+                {
+                    if ((player1.yCoords + 1) > 3)
+                    {
+                        // you cant move out of the bounds of the array
+                    }
+
+                    //whats your coordinates
+                    // player1.x
+                    // player1.y
+
+                    // before moving player
+                    // identify whats in the space they want to move to'
+
+                    var newXCoord = player1.xCoords;
+                    var newYCoord = player1.yCoords + 1;
+
+                    var theThingInTheSpaceIWantToMoveTo = array2DInitialization[newXCoord, newYCoord];
+
+                    // interact with whatever is in the space
+
+                    if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Item") ?? false)
+                    {
+                        // user must loot
+                        // move player
+                    }
+                    else if (theThingInTheSpaceIWantToMoveTo?.GetType().ToString().Contains("Character") ?? false)
+                    {
+                        // user must fight until someone wins and takes the spot
+                        // if they win, move player
+                        // run the encounter, until someone dies
+                        EnemyEncounter(enemy);
+                        if (player1.IsAlive())
+                        {
+
+                        }
+                    }
+                    else if (theThingInTheSpaceIWantToMoveTo == null)
+                    {
+                        // move player
+                        // user turn is over
+                        array2DInitialization[player1.xCoords, player1.yCoords] = null;
+
+                        player1.xCoords = newXCoord;
+                        player1.yCoords = newYCoord;
+
+                        array2DInitialization[newXCoord, newYCoord] = player1;
+
+
+                    }
+                }
+
+
+
+
+
+
+                // keepfighting is true when the player survived the encounter and did not get 1 kills yet
                 // if the player died in the enemey encounter or their kills count is 5 or more
                 // then keepfighting will be false
-                keepFighting = player1SurvivedFight && player1.killCount < 5;
+                keepFighting = player1.IsAlive() && player1.killCount < 1;
 
                 // after each encounter, checke if the player won
-                if (player1.killCount == 5)
+                if (player1.killCount == 1)
                 {
                     logger.Log("You've endured your first set of Trials! and deserve a new Weapon");
                     logger.Log("You've won!");
@@ -48,7 +192,7 @@ namespace TestHH
 
             } while (keepFighting);
 
-            logger.Log("You have died! Get a 5 monster kill streak to proceede.");
+            logger.Log("You have died! Get a 1 monster kill streak to proceede.");
             logger.RecordLoss();
         }
 

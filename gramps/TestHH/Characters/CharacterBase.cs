@@ -54,6 +54,10 @@ namespace TestHH.Characters
 
         public EquippableItemBase? EquippedWeapon { get; set; }
 
+
+        public int xCoords;
+        public int yCoords;
+
         public CharacterBase()
         {
             auditLogger = new AuditLog();
