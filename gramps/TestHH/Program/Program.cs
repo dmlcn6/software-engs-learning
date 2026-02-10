@@ -70,7 +70,7 @@ namespace TestHH
                 var results = Console.ReadLine() ?? "";
 
                 // figure outt nwe coords
-                if (results.ToString() == "UpArrow")
+                if (results == "UpArrow")
                 {
                     if ((player1.xCoords - 1) < 0)
                     {
@@ -80,7 +80,7 @@ namespace TestHH
                     newXCoord = player1.xCoords - 1;
                     newYCoord = player1.yCoords;
                 }
-                else if (results.ToString() == "RightArrow")
+                else if (results == "RightArrow")
                 {
                     if ((player1.yCoords + 1) > 3)
                     {
@@ -90,7 +90,7 @@ namespace TestHH
                     newXCoord = player1.xCoords;
                     newYCoord = player1.yCoords + 1;
                 }
-                else if (results.ToString() == "LeftArrow")
+                else if (results == "LeftArrow")
                 {
                     if ((player1.yCoords - 1) < 0)
                     {
@@ -100,7 +100,7 @@ namespace TestHH
                     newXCoord = player1.xCoords;
                     newYCoord = player1.yCoords - 1;
                 }
-                else if (results.ToString() == "DownArrow")
+                else if (results == "DownArrow")
                 {
                     if ((player1.xCoords + 1) > 3)
                     {
