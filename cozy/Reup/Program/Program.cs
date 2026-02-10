@@ -1,4 +1,5 @@
-﻿using Reup.Characters;
+﻿using System.ComponentModel;
+using Reup.Characters;
 using Reup.Items;
 using Reup.Logger;
 
@@ -152,6 +153,111 @@ namespace Reup.Program
         }
         public static void BoardEvents()
         {
+            // create pieces to go onto the 2D array
+
+            Player player1 = new Player();
+            Stranger stranger1 = new Stranger();
+            Stranger stranger2 = new Stranger();
+            Stranger stranger3 = new Stranger();
+            Stranger stranger4 = new Stranger();
+            Stranger stranger5 = new Stranger();
+            ItemBase loot1 = new Knife();
+            ItemBase loot2 = new Blick();
+            ItemBase loot3 = new Armor();
+            ItemBase loot4 = new Yercs();
+            ItemBase loot5 = new Potion();
+            Bandit bandit1 = new Bandit();
+            Bandit bandit2 = new Bandit();
+            Bandit bandit3 = new Bandit();
+            Bandit bandit4 = new Bandit();
+            Bandit bandit5 = new Bandit();
+            Hazard hazard1 = new Hazard();
+            Hazard hazard2 = new Hazard();
+            Hazard hazard3 = new Hazard();
+            Hazard hazard4 = new Hazard();
+            Hazard hazard5 = new Hazard();
+
+            object[,] array2DInitialization = {{null, hazard1, loot1, stranger3, bandit1},
+                                                {hazard2, stranger1, null, loot2, loot3},
+                                                {bandit2, stranger2, player1, bandit3, hazard3},
+                                                {hazard4, null, loot4, stranger4, bandit4},
+                                                {stranger5, loot5, bandit5, null, hazard5}};
+
+
+
+            player1.xCoords = 2;
+            player1.yCoords = 2;
+
+            stranger1.xCoords = 1;
+            stranger1.yCoords = 1;
+
+            stranger2.xCoords = 2;
+            stranger2.yCoords = 1;
+
+            stranger3.xCoords = 0;
+            stranger3.yCoords = 3;
+
+            stranger4.xCoords = 3;
+            stranger4.yCoords = 3;
+
+            stranger5.xCoords = 4;
+            stranger5.yCoords = 0;
+
+            loot1.xCoords = 0;
+            loot1.yCoords = 2;
+
+            loot2.xCoords = 1;
+            loot2.yCoords = 3;
+
+            loot3.xCoords = 1;
+            loot3.yCoords = 4;
+
+            loot4.xCoords = 3;
+            loot4.yCoords = 2;
+
+            loot5.xCoords = 4;
+            loot5.yCoords = 1;
+
+            bandit1.xCoords = 0;
+            bandit1.yCoords = 4;
+
+            bandit2.xCoords = 2;
+            bandit2.yCoords = 0;
+
+            bandit3.xCoords = 2;
+            bandit3.yCoords = 3;
+
+            bandit4.xCoords = 3;
+            bandit4.yCoords = 4;
+
+            bandit5.xCoords = 4;
+            bandit5.yCoords = 2;
+
+            hazard1.xCoords = 0;
+            hazard1.yCoords = 1;
+
+            hazard2.xCoords = 1;
+            hazard2.yCoords = 0;
+
+            hazard3.xCoords = 2;
+            hazard3.yCoords = 4;
+
+            hazard4.xCoords = 3;
+            hazard4.yCoords = 0;
+
+            hazard5.xCoords = 4;
+            hazard5.yCoords = 4;
+
+
+
+
+
+
+
+
+
+
+
             int lootItem;
             Random random = new Random();
             switch (playerPos)

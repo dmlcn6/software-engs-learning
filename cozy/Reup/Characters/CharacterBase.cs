@@ -4,6 +4,8 @@ namespace Reup.Characters
 {
     public abstract class CharacterBase : IDamagable
     {
+        public int xCoords;
+        public int yCoords;
         private int health;
         public int _health
         {
