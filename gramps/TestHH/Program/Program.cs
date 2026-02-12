@@ -13,114 +13,100 @@ namespace TestHH
         public static void Main()
         {
             // i want to know how many enemies the player has killed
-            //var killCount = 0;
+            // var killCount = 0;
             // i want the player to fight until the end
             var keepAdventuring = true;
 
+            SetupBoard();
+
             do
             {
-                #region  coordiantes
-                CharacterBase enemy = new TinyMonster();
-                CharacterBase enemy1 = new TinyMonster();
-
-
-                UsableItemBase loot = new Armor();
-                UsableItemBase loot2 = new Potion();
-                UsableItemBase loot3 = new HiPotion();
-
-                // manual init
-                /*
-                {
-                    { null, null, null, null },
-                    { loot3, loot, null, null   },
-                    { enemy, player1, null , null  },
-                    { loot2, enemy1, null, null  }
-                };
-                */
-
-
-
-
-                array2DInitialization[1, 0] = loot3;
-                loot3.xCoords = 1;
-                loot3.yCoords = 0;
-
-                array2DInitialization[1, 1] = loot;
-                loot.xCoords = 1;
-                loot.yCoords = 1;
-
-                array2DInitialization[2, 0] = enemy;
-                enemy.xCoords = 2;
-                enemy.yCoords = 0;
-
-                array2DInitialization[2, 1] = player1;
-                player1.xCoords = 2;
-                player1.yCoords = 1;
-
-
-                array2DInitialization[3, 0] = loot2;
-                loot2.xCoords = 3;
-                loot2.yCoords = 0;
-                #endregion
-
                 int newXCoord = -1;
                 int newYCoord = -1;
 
-                //get direction the user wants to move
-                var results = Console.ReadLine() ?? "";
+                logger.Log("");
+                logger.Log("Select your action: number");
+                logger.Log("");
+                logger.Log("1. Move");
+                logger.Log("2. Use Item");
 
-                // figure outt nwe coords
-                if (results == "UpArrow")
+                // get the users input w ConsoleReadLine
+                // try to parse it to an integer
+                // whether the parse is succ or not, the function TryParse() returns a bool the bool is captured in isChoice
+                // if the parse is successful, TryParse() will output the parsed string into the new variable type
+                var isChoice = int.TryParse(Console.ReadLine(), out int choice);
+
+                if (isChoice)
                 {
-                    if ((player1.xCoords - 1) < 0)
+                    switch (choice)
                     {
-                        // you cant move out of the bounds of the array
+                        case 1:
+                            var results = GetMovementDirection().ToLower();
+
+                            // figure outt nwe coords
+                            if (results == "up")
+                            {
+                                if ((player1.xCoords - 1) < 0)
+                                {
+                                    // you cant move out of the bounds of the array
+                                    continue;
+                                }
+
+                                newXCoord = player1.xCoords - 1;
+                                newYCoord = player1.yCoords;
+                            }
+                            else if (results == "right")
+                            {
+                                if ((player1.yCoords + 1) > 3)
+                                {
+                                    // you cant move out of the bounds of the array
+                                    continue;
+                                }
+
+                                newXCoord = player1.xCoords;
+                                newYCoord = player1.yCoords + 1;
+                            }
+                            else if (results == "left")
+                            {
+                                if ((player1.yCoords - 1) < 0)
+                                {
+                                    // you cant move out of the bounds of the array
+                                    continue;
+                                }
+
+                                newXCoord = player1.xCoords;
+                                newYCoord = player1.yCoords - 1;
+                            }
+                            else if (results == "down")
+                            {
+                                if ((player1.xCoords + 1) > 3)
+                                {
+                                    // you cant move out of the bounds of the array
+                                    continue;
+                                }
+
+                                newXCoord = player1.xCoords + 1;
+                                newYCoord = player1.yCoords;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+
+                            // see if the new spot is occupied
+                            var theThingInTheSpaceIWantToMoveTo = array2DInitialization[newXCoord, newYCoord];
+
+                            // check what character options are, given whatever is in the new space
+                            AllCharacterOptions(theThingInTheSpaceIWantToMoveTo, newXCoord, newYCoord);
+
+                            break;
+
+                        case 2:
+                            ShowInventory();
+                            GetInventorySelection();
+                            break;
                     }
-
-                    newXCoord = player1.xCoords - 1;
-                    newYCoord = player1.yCoords;
                 }
-                else if (results == "RightArrow")
-                {
-                    if ((player1.yCoords + 1) > 3)
-                    {
-                        // you cant move out of the bounds of the array
-                    }
-
-                    newXCoord = player1.xCoords;
-                    newYCoord = player1.yCoords + 1;
-                }
-                else if (results == "LeftArrow")
-                {
-                    if ((player1.yCoords - 1) < 0)
-                    {
-                        // you cant move out of the bounds of the array
-                    }
-
-                    newXCoord = player1.xCoords;
-                    newYCoord = player1.yCoords - 1;
-                }
-                else if (results == "DownArrow")
-                {
-                    if ((player1.xCoords + 1) > 3)
-                    {
-                        // you cant move out of the bounds of the array
-                    }
-
-                    newXCoord = player1.xCoords + 1;
-                    newYCoord = player1.yCoords;
-                }
-                else
-                {
-                    newXCoord = 0;
-                    newYCoord = 0;
-                }
-
-                // see if the new spot is occupied
-                var theThingInTheSpaceIWantToMoveTo = array2DInitialization[newXCoord, newYCoord];
-
-                // check what character options are, given whatever is in the new space
-                AllCharacterOptions(theThingInTheSpaceIWantToMoveTo, newXCoord, newYCoord);
 
                 // keepAdventuring is true when the player Is Alive and did not get 1 kills yet
                 // if the player died in the enemey encounter or their kills count is 1 or more
@@ -219,63 +205,12 @@ namespace TestHH
                             break;
 
                         case 2:
-                            logger.Log("");
-                            logger.Log("Here is your inventory: ");
-
-
-                            var localInventory = player1._inventory;
-
-
-                            for (var i = 0; i < localInventory.Count; i++)
-                            {
-                                logger.Log($"{i}: {localInventory[i].name}");
-                            }
-                            logger.Log("");
-                            logger.Log("Select your item number: ");
-
-
-                            var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
-
-                            if (isItemChoice)
-                            {
-                                var item = player1._inventory[itemChoice];
-
-                                // TODO: the Use() is on on ConsumableItems, figure it out
-                                if (item.isConsumable)
-                                {
-                                    // cast item as ConsumableItem which has the use() on it
-                                    var consumableItem = (ConsumableItemBase)item;
-
-                                    // use item and remove from inventory
-                                    player1._hp = consumableItem.Use(player1._hp);
-                                    player1._inventory.Remove(item);
-
-                                    // log
-                                    logger.Log("");
-                                    logger.Log("Item used successfully");
-                                    player1.ViewStats();
-                                }
-                                else
-                                {
-                                    // TODO: TEST THIS PATH
-                                    EnemyEncounter(enemy);
-                                }
-                            }
-                            else
-                            {
-                                // TODO: TEST THIS PATH
-                                // you didnt provide a proper choice
-                                EnemyEncounter(enemy);
-                            }
+                            ShowInventory();
+                            GetInventorySelection();
                             break;
                     }
                 }
-                else
-                {
-                    // TODO: TEST THIS PATH
-                    // you didnt provide a proper choise
-                    EnemyEncounter(enemy);
-                }
+
 
                 if (enemy.IsAlive())
                 {
@@ -297,8 +232,114 @@ namespace TestHH
             // add the loot to the player inventory
             player1._inventory.Add(loot);
 
+            logger.Log($"Picked up {loot.name}");
+
             // remove from gameboard
             array2DInitialization[(int)loot.xCoords!, (int)loot.yCoords!] = null;
+        }
+
+        private static string GetMovementDirection()
+        {
+            Console.WriteLine("Up, Down, Left, or Right?");
+            //get direction the user wants to move
+            return Console.ReadLine() ?? "";
+        }
+
+        private static void SetupBoard()
+        {
+            #region  coordiantes
+            CharacterBase enemy = new TinyMonster();
+            CharacterBase enemy1 = new TinyMonster();
+
+
+            UsableItemBase loot = new Armor();
+            UsableItemBase loot2 = new Potion();
+            UsableItemBase loot3 = new HiPotion();
+
+            // manual init
+            /*
+            {
+                { null, null, null, null },
+                { loot3, loot, null, null   },
+                { enemy, player1, null , null  },
+                { loot2, enemy1, null, null  }
+            };
+            */
+
+
+
+
+            array2DInitialization[1, 0] = loot3;
+            loot3.xCoords = 1;
+            loot3.yCoords = 0;
+
+            array2DInitialization[1, 1] = loot;
+            loot.xCoords = 1;
+            loot.yCoords = 1;
+
+            array2DInitialization[2, 0] = enemy;
+            enemy.xCoords = 2;
+            enemy.yCoords = 0;
+
+            array2DInitialization[2, 1] = player1;
+            player1.xCoords = 2;
+            player1.yCoords = 1;
+
+
+            array2DInitialization[3, 0] = loot2;
+            loot2.xCoords = 3;
+            loot2.yCoords = 0;
+            #endregion
+        }
+
+        private static void ShowInventory()
+        {
+            logger.Log("");
+            logger.Log("Here is your inventory: ");
+
+
+            var localInventory = player1._inventory;
+
+
+            for (var i = 0; i < localInventory.Count; i++)
+            {
+                logger.Log($"{i}: {localInventory[i].name}");
+            }
+        }
+
+        private static void GetInventorySelection()
+        {
+            logger.Log("");
+            logger.Log("Select your item number: ");
+
+
+            var isItemChoice = int.TryParse(Console.ReadLine(), out int itemChoice);
+
+            if (isItemChoice)
+            {
+                var item = player1._inventory[itemChoice];
+
+                // TODO: the Use() is on on ConsumableItems, figure it out
+                if (item.isConsumable)
+                {
+                    // cast item as ConsumableItem which has the use() on it
+                    var consumableItem = (ConsumableItemBase)item;
+
+                    // use item and remove from inventory
+                    player1._hp = consumableItem.Use(player1._hp);
+                    player1._inventory.Remove(item);
+
+                    // log
+                    logger.Log("");
+                    logger.Log($"{item.name} used successfully");
+                    player1.ViewStats();
+                }
+                else if (item.isEquippable)
+                {
+                    player1.EquipItem(itemChoice);
+                    player1.ViewStats();
+                }
+            }
         }
 
     }
