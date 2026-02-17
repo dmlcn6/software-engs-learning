@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Net;
 using Microsoft.VisualBasic;
 using Reup.Characters;
 using Reup.Items;
@@ -196,17 +197,17 @@ namespace Reup.Program
                             if (item.GetType().ToString().Contains("Potion") ||
                                 item.GetType().ToString().Contains("Yercs"))
                             {
-                                player.EquipItem(player._health);
+                                player.UseItem(player._health);
                                 player.inventory.Remove(item);
                             }
                             else if (item.GetType().ToString().Contains("Armor"))
                             {
-                                player.EquipItem(player.shield);
+                                player.UseItem(player.shield);
                                 player.inventory.Remove(item);
                             }
                             else
                             {
-                                player.EquipItem(player._damage);
+                                player.UseItem(player._damage);
                                 player.inventory.Remove(item);
                             }
 
@@ -236,8 +237,7 @@ namespace Reup.Program
                             {
                                 newXCoords = player.xCoords - 1;
                                 newYCoords = player.yCoords;
-
-                                BoardEvents(player.xCoords, player.yCoords);
+                                BoardEvents(newXCoords, newYCoords);
                             }
                         }
                         else if (movement.ToLower() == "south")
@@ -250,8 +250,7 @@ namespace Reup.Program
                             {
                                 newXCoords = player.xCoords + 1;
                                 newYCoords = player.yCoords;
-
-                                BoardEvents(player.xCoords, player.yCoords);
+                                BoardEvents(newXCoords, newYCoords);
                             }
                         }
                         else if (movement.ToLower() == "east")
@@ -264,8 +263,7 @@ namespace Reup.Program
                             {
                                 newXCoords = player.xCoords;
                                 newYCoords = player.yCoords + 1;
-
-                                BoardEvents(player.xCoords, player.yCoords);
+                                BoardEvents(newXCoords, newYCoords);
                             }
                         }
                         else if (movement.ToLower() == "west")
@@ -278,7 +276,6 @@ namespace Reup.Program
                             {
                                 newXCoords = player.xCoords;
                                 newYCoords = player.yCoords - 1;
-
                                 BoardEvents(newXCoords, newYCoords);
                             }
                         }
@@ -295,9 +292,20 @@ namespace Reup.Program
 
             if (newSpace?.GetType().ToString().Contains("Item") ?? false)
             {
-                //is this a hazard?
+                var utility = (ItemBase)newSpace;
                 //identify item on space
                 //add item to iventory
+                //if item is a hazard, use immediately
+                if (newSpace?.GetType().ToString().Contains("Hazard") ?? false)
+                {
+                    player.inventory.Add(utility);
+                    player.UseItem(player.inventory.IndexOf(utility));
+                    logger.Log("You were injured by a booby trap!");
+                    logger.Log($"{player.ViewStats()}");
+                    player.xCoords = newXCoords;
+                    player.yCoords = newYCoords;
+                    logger.Log($"Current Position: {player.xCoords}, {player.yCoords}");
+                }
                 //move player to space and change previous space to null
 
             }
@@ -313,6 +321,10 @@ namespace Reup.Program
             else if (newSpace == null)
             {
                 //move player to new space
+                logger.Log("Pretty quiet over here...");
+                player.xCoords = newXCoords;
+                player.yCoords = newYCoords;
+                logger.Log($"Current Position: {player.xCoords}, {player.yCoords}");
             }
 
 
@@ -360,11 +372,11 @@ namespace Reup.Program
                                     item.GetType().ToString().Contains("Armor") ||
                                     item.GetType().ToString().Contains("Yercs"))
                                 {
-                                    player.EquipItem(player._health);
+                                    player.UseItem(player._health);
                                 }
                                 else
                                 {
-                                    player.EquipItem(player._damage);
+                                    player.UseItem(player._damage);
                                 }
 
                                 logger.Log("");
