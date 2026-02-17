@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Microsoft.VisualBasic;
 using Reup.Characters;
 using Reup.Items;
 using Reup.Logger;
@@ -35,6 +36,7 @@ namespace Reup.Program
                                                 {bandito2, stranger2, player, null, hazard3},
                                                 {hazard4, null, loot4, bandito, null},
                                                 {stranger, loot5, null, null, hazard5}};
+
         public static void Main()
         {
             player = new Player();
@@ -119,6 +121,7 @@ namespace Reup.Program
         public static void Begin()
         {
             DateTime localTime = DateTime.Now;
+            Coordinates();
             if (choice == "yes")
             {
                 logger.Log("I thought you looked brave. Let's get started :)");
@@ -162,7 +165,6 @@ namespace Reup.Program
             // capture the input from the arrow keys to determine the direction the player moves
             // determine what happens when a player moves around the array
             // players can use items before moving if they choose.
-            Coordinates();
             logger.Log("Enter a number to select an action");
             logger.Log("");
             logger.Log("1. View inventory");
@@ -211,6 +213,7 @@ namespace Reup.Program
                             logger.Log("");
                             logger.Log("Item used successfully");
                             logger.Log($"{player.ViewStats()}");
+                            logger.Log("");
                         }
                         break;
                     case 2:
@@ -233,7 +236,8 @@ namespace Reup.Program
                             {
                                 newXCoords = player.xCoords - 1;
                                 newYCoords = player.yCoords;
-                                logger.Log($"Current Position: {player.xCoords},{player.yCoords}");
+
+                                BoardEvents(player.xCoords, player.yCoords);
                             }
                         }
                         else if (movement.ToLower() == "south")
@@ -246,7 +250,8 @@ namespace Reup.Program
                             {
                                 newXCoords = player.xCoords + 1;
                                 newYCoords = player.yCoords;
-                                logger.Log($"Current Position: {player.xCoords},{player.yCoords}");
+
+                                BoardEvents(player.xCoords, player.yCoords);
                             }
                         }
                         else if (movement.ToLower() == "east")
@@ -259,7 +264,8 @@ namespace Reup.Program
                             {
                                 newXCoords = player.xCoords;
                                 newYCoords = player.yCoords + 1;
-                                logger.Log($"Current Position: {player.xCoords},{player.yCoords}");
+
+                                BoardEvents(player.xCoords, player.yCoords);
                             }
                         }
                         else if (movement.ToLower() == "west")
@@ -272,7 +278,8 @@ namespace Reup.Program
                             {
                                 newXCoords = player.xCoords;
                                 newYCoords = player.yCoords - 1;
-                                logger.Log($"Current Position: {player.xCoords},{player.yCoords}");
+
+                                BoardEvents(newXCoords, newYCoords);
                             }
                         }
 
@@ -282,8 +289,32 @@ namespace Reup.Program
                 }
             }
         }
-        public static void BoardEvents()
+        public static void BoardEvents(int newXCoords, int newYCoords)
         {
+            var newSpace = array2DInitialization[newXCoords, newYCoords];
+
+            if (newSpace?.GetType().ToString().Contains("Item") ?? false)
+            {
+                //is this a hazard?
+                //identify item on space
+                //add item to iventory
+                //move player to space and change previous space to null
+
+            }
+            else if (newSpace?.GetType().ToString().Contains("Character") ?? false)
+            {
+                //is the character an enemy or a stranger
+                //if it is an enemy, trigger combat method
+                //if player wins fight, change spot to null
+                //if it is a stranger, determine if you will fight or not
+                //move player to space and change previous spot to null
+
+            }
+            else if (newSpace == null)
+            {
+                //move player to new space
+            }
+
 
         }
 
