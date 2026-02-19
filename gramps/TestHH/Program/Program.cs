@@ -231,6 +231,8 @@ namespace TestHH
 
             // add the loot to the player inventory
             player1._inventory.Add(loot);
+            //player1._inventory.FindIndex(x => x.Equals(loot));
+
 
             logger.Log($"Picked up {loot.name}");
 

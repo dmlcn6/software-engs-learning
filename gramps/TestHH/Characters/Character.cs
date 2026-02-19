@@ -19,7 +19,7 @@ namespace TestHH.Characters
             get => dmg;
             set
             {
-                dmg = (EquippedWeapon?.dmg ?? 0) + (EquippedExtraItem?.dmg ?? 0) + value;
+                dmg = (EquippedWeapon?.dmg ?? 0) + (EquippedExtraItem?.dmg ?? 0) + baseDmg;
 
             }
         }
