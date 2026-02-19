@@ -81,12 +81,207 @@ namespace UnitBB
     {
         Logs to = new();
 
+
         public void TopsideAA(CharactersBase openRaider)
         {
             //topLevel
             to.Log("Welcome to Topside");
             to.Log("an enemy has appeared");
             var openArc = new Arc();
+
+            object[,] WholeMap = new object[3, 3];
+            WholeMap[0, 0] = openRaider;
+            WholeMap[0, 1] = (object)null;
+            WholeMap[0, 2] = (object)null;
+            WholeMap[1, 0] = (object)null;
+            WholeMap[1, 1] = (object)null;
+            WholeMap[1, 2] = (object)null;
+            WholeMap[2, 0] = (object)null;
+            WholeMap[2, 1] = (object)null;
+            WholeMap[2, 2] = openArc;
+
+            while (1 != 2)
+            {
+                var directionChoice = Console.ReadKey();
+                switch (directionChoice.ToString())
+                {
+                    case "UpArrow":
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = null;
+                        openRaider.position.Item1++;
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
+                        to.Log($"{WholeMap[0, 0].ToString},{WholeMap[0, 1].ToString},{WholeMap[0, 2].ToString},");
+                        to.Log($"{WholeMap[1, 0].ToString},{WholeMap[1, 1].ToString},{WholeMap[1, 2].ToString},");
+                        to.Log($"{WholeMap[2, 0].ToString},{WholeMap[2, 1].ToString},{WholeMap[2, 2].ToString},");
+                        break;
+                    case "DownArrow":
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = null;
+                        openRaider.position.Item1 -= 1;
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
+                        to.Log($"{WholeMap[0, 0].ToString},{WholeMap[0, 1].ToString},{WholeMap[0, 2].ToString},");
+                        to.Log($"{WholeMap[1, 0].ToString},{WholeMap[1, 1].ToString},{WholeMap[1, 2].ToString},");
+                        to.Log($"{WholeMap[2, 0].ToString},{WholeMap[2, 1].ToString},{WholeMap[2, 2].ToString},");
+                        break;
+                    case "LeftArrow":
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = null;
+                        openRaider.position.Item2 -= 1;
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
+                        to.Log($"{WholeMap[0, 0].ToString},{WholeMap[0, 1].ToString},{WholeMap[0, 2].ToString},");
+                        to.Log($"{WholeMap[1, 0].ToString},{WholeMap[1, 1].ToString},{WholeMap[1, 2].ToString},");
+                        to.Log($"{WholeMap[2, 0].ToString},{WholeMap[2, 1].ToString},{WholeMap[2, 2].ToString},");
+                        break;
+                    case "RightArrow":
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = null;
+                        if (openRaider.position.Item1++ > 3 || openRaider.position.Item1-- < 0)
+                        {
+                            to.Log("You have reached the edge of the map and can no longer continue in this direction");
+                        }
+                        else if (WholeMap[openRaider.position.Item1++, openRaider.position.Item2] == openArc || WholeMap[openRaider.position.Item1--, openRaider.position.Item2] == openArc)
+                        {
+                            openRaider.AdjEnemyEncountered(true);
+                            openRaider.position.Item1++;
+                        }
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
+                        to.Log($"{WholeMap[0, 0].ToString},{WholeMap[0, 1].ToString},{WholeMap[0, 2].ToString},");
+                        to.Log($"{WholeMap[1, 0].ToString},{WholeMap[1, 1].ToString},{WholeMap[1, 2].ToString},");
+                        to.Log($"{WholeMap[2, 0].ToString},{WholeMap[2, 1].ToString},{WholeMap[2, 2].ToString},");
+                        break;
+                }
+
+                while (openRaider.IsAlive() == true && openArc.IsAlive() == true) ; //(openRaider.IsAlive() == true && openRaider.CallKillCount() < 3);
+                {
+
+                    bool? isNew = false;
+                    if (openArc.CallHealthAmount() <= 0)
+                    {
+                        openArc = new Arc();
+                        isNew = true;
+                    }
+
+                    bool? escape1 = false;
+
+                    do
+                    {
+
+                        if (isNew == true)
+                        {
+                            to.Log("an enemy has appeared");
+                            to.Log("--stats--");
+                            to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
+                            to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
+                            to.Log("----*----");
+                            to.Log("");
+                        }
+
+                        // Give the player an option to attack or go to their inventory
+                        to.Log("What would you like to do?");
+                        to.Log("(A): Attack the enemy");
+                        to.Log("(B): Go to your inventory");
+
+                        switch (Console.ReadLine())
+                        {
+                            case "a":
+                            case "A":
+                                // Show the player selection feedback and attack the enemy
+                                escape1 = true;
+                                to.Log("you have chosen A");
+                                // player's attack qoute and send attack message to attacker to collect damage amount then send damage amount to damage reciever on victim to deliever damage
+                                openRaider.AttackBase(openArc);
+
+                                break;
+                            case "b":
+                            case "B":
+                                // Show the player selection feedback and go to player inventory
+                                escape1 = true;
+                                var plyrInv = openRaider.inventory;
+                                to.Log("you have chosen B");
+
+                                // Show the player their inventory
+                                for (int i = 0; i < plyrInv.Count; i++)
+                                {
+                                    to.Log($"({i + 1}){plyrInv[i].CallName()}");
+                                }
+
+                                // Give the player the option to choose an item
+                                bool escape2 = false;
+                                do
+                                {
+                                    to.Log("Which item would you like to use?");
+
+                                    var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoice1);
+
+                                    // Check to see if the item is valid, give the player a selection feedback, then confirm if the choice is correct
+                                    if (itemChoice1 <= plyrInv.Count && itemChoice1 >= 1)
+                                    {
+                                        itemChoice1 -= 1;
+                                        to.Log($"Are you sure you want to use {plyrInv[itemChoice1].CallName()}");
+                                        to.Log("(A) Yes (B) No");
+
+                                        switch (Console.ReadLine())
+                                        {
+                                            case "a":
+                                            case "A":
+                                                // Obtain the chosen item
+                                                var itemChoice1A = plyrInv[itemChoice1];
+                                                openRaider.ObtainIt(itemChoice1A, "+");
+
+                                                escape2 = true;
+
+                                                break;
+
+                                            case "b":
+                                            case "B":
+                                                // Give the player another chance to choose their desired item
+                                                to.Log("Please choose the Item you want to use");
+                                                for (int i = 0; i < plyrInv.Count; i++)
+                                                {
+                                                    to.Log($"({i + 1}){plyrInv[i].CallName()}");
+                                                }
+                                                escape2 = false;
+
+                                                break;
+
+                                            default:
+                                                to.Log("Something went wrong");
+                                                break;
+                                        }
+
+                                    }
+
+
+
+                                } while (escape2 == false);
+                                break;
+
+                            default:
+                                // Alert the player that they've put in an invalid response
+                                escape1 = false;
+                                isNew = true;
+                                to.Log("Please Either Enter (A) or (B)");
+                                break;
+                        }
+                    } while (escape1 == false);
+
+                    if (openArc.IsAlive() == true)
+                    {
+                        openArc.AttackBase(openRaider);
+
+                        to.Log("--stats--");
+                        to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
+                        to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
+                        to.Log("----*----");
+                    }
+                    else
+                    {
+                        openRaider.AdjEnemyEncountered(false);
+                    }
+
+
+
+
+
+                }
+
+            }
 
             do
             {
@@ -216,10 +411,10 @@ namespace UnitBB
 
 
 
-            } while (openRaider.IsAlive() == true && openRaider.CallKillCount() < 3);
+            } while (openRaider.IsAlive() == true && openArc.IsAlive() == true); //(openRaider.IsAlive() == true && openRaider.CallKillCount() < 3);
 
 
-            if (openRaider.CallKillCount() == 3)
+            if (openRaider.CallKillCount() == 3 && openRaider.IsAlive() == true)
             {
                 to.Log("You Have Successfully Completed Your Mission!");
                 to.Log("Would you like to stay topside or go back to Sparanza?");
@@ -245,7 +440,11 @@ namespace UnitBB
                         break;
                 }
             }
+            else if (openRaider.IsAlive() == true && openArc.IsAlive() == false)
+            {
+                to.Log("You have destoryed the Arc");
 
+            }
             else
             {
                 to.Log("You have Failed");
