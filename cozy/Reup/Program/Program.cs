@@ -37,6 +37,8 @@ namespace Reup.Program
                                                 {bandito2, stranger2, player, null, hazard3},
                                                 {hazard4, null, loot4, bandito, null},
                                                 {stranger, loot5, null, null, hazard5}};
+        public static int newXCoords;
+        public static int newYCoords;
 
         public static void Main()
         {
@@ -44,6 +46,8 @@ namespace Reup.Program
             bandito = new Bandit();
             stranger = new Stranger();
             logger = new AuditLog();
+
+
             Program.Intro();
             Program.Begin();
         }
@@ -222,8 +226,6 @@ namespace Reup.Program
                         break;
                     case 3:
                         logger.Log("Please enter the direction you want to move");
-                        int newXCoords;
-                        int newYCoords;
                         var movement = Console.ReadLine();
 
 
@@ -322,12 +324,21 @@ namespace Reup.Program
             {
                 //move player to new space
                 logger.Log("Pretty quiet over here...");
-                player.xCoords = newXCoords;
-                player.yCoords = newYCoords;
-                logger.Log($"Current Position: {player.xCoords}, {player.yCoords}");
+                MoveToNull();
             }
 
 
+        }
+        private static void MoveToNull()
+        {
+            //move player
+            array2DInitialization[player.xCoords, player.yCoords] = null;
+
+
+            player.xCoords = newXCoords;
+            player.yCoords = newYCoords;
+            array2DInitialization[newXCoords, newYCoords] = player;
+            logger.Log($"Current Position: {player.xCoords}, {player.yCoords}");
         }
 
         public static void Combat(Player player, CharacterBase enemy)
