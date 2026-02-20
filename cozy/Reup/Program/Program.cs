@@ -33,10 +33,10 @@ namespace Reup.Program
         public static Hazard hazard5 = new Hazard();
 
         public static object[,] array2DInitialization = {{null, hazard1, loot1, bandito3, null},
-                                                {hazard2, null, null, loot2, loot3},
-                                                {bandito2, stranger2, player, null, hazard3},
-                                                {hazard4, null, loot4, bandito, null},
-                                                {stranger, loot5, null, null, hazard5}};
+                                                        {hazard2, null, null, loot2, loot3},
+                                                        {bandito2, stranger2, player, null, hazard3},
+                                                        {hazard4, null, loot4, bandito, null},
+                                                        {stranger, loot5, null, null, hazard5}};
         public static int newXCoords;
         public static int newYCoords;
 
@@ -296,6 +296,8 @@ namespace Reup.Program
             {
                 var utility = (ItemBase)newSpace;
                 //identify item on space
+                player.inventory.Add(utility);
+
                 //add item to iventory
                 //if item is a hazard, use immediately
                 if (newSpace?.GetType().ToString().Contains("Hazard") ?? false)
@@ -304,21 +306,50 @@ namespace Reup.Program
                     player.UseItem(player.inventory.IndexOf(utility));
                     logger.Log("You were injured by a booby trap!");
                     logger.Log($"{player.ViewStats()}");
-                    player.xCoords = newXCoords;
-                    player.yCoords = newYCoords;
-                    logger.Log($"Current Position: {player.xCoords}, {player.yCoords}");
+
+                    //move player to space and change previous space to null
+                    MoveToNull();
                 }
-                //move player to space and change previous space to null
+
 
             }
             else if (newSpace?.GetType().ToString().Contains("Character") ?? false)
             {
+                CharacterBase enemy = (Stranger)newSpace;
                 //is the character an enemy or a stranger
                 //if it is an enemy, trigger combat method
-                //if player wins fight, change spot to null
-                //if it is a stranger, determine if you will fight or not
-                //move player to space and change previous spot to null
+                Potion potion = new Potion();
+                logger.Log("You have encountered a stranger...attack?");
+                logger.Log("Please type Yes or No");
+                choice = Console.ReadLine().ToLower();
 
+                if (choice == "yes")
+                {
+                    Combat(player, enemy);
+                }
+                else if (choice == "no")
+                {
+                    logger.Log($"Hello, {player.playerName}. I have something for you...");
+                    Thread.Sleep(1000);
+                    logger.Log("You gained a potion!");
+                    player.inventory.Add(potion);
+                }
+                else
+                {
+                    logger.Log("Please type Yes or No");
+                    choice = Console.ReadLine().ToLower();
+                    MoveToNull();
+
+                    if (newSpace?.GetType().ToString().Contains("Bandit") ?? false)
+                    {
+                        enemy = (Bandit)newSpace;
+                        Combat(player, enemy);
+                        MoveToNull();
+                    }
+                    //if player wins fight, change spot to null
+                    //if it is a stranger, determine if you will fight or not
+                    //move player to space and change previous spot to null
+                }
             }
             else if (newSpace == null)
             {
