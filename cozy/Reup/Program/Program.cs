@@ -127,6 +127,7 @@ namespace Reup.Program
         {
             DateTime localTime = DateTime.Now;
             Coordinates();
+            int killCount = 0;
             if (choice == "yes")
             {
                 logger.Log("I thought you looked brave. Let's get started :)");
@@ -135,7 +136,7 @@ namespace Reup.Program
                 do
                 {
                     Program.Gameplay();
-                } while (player.alive);
+                } while (player.alive && killCount < 3);
                 if (player.alive == false)
                 {
                     logger.Log("You Died!");
@@ -297,6 +298,9 @@ namespace Reup.Program
                 var utility = (ItemBase)newSpace;
                 //identify item on space
                 player.inventory.Add(utility);
+                logger.Log("LOOT!!");
+                Thread.Sleep(1000);
+                logger.Log($"You found {utility.itemName}!");
 
                 //add item to iventory
                 //if item is a hazard, use immediately
@@ -310,8 +314,6 @@ namespace Reup.Program
                     //move player to space and change previous space to null
                     MoveToNull();
                 }
-
-
             }
             else if (newSpace?.GetType().ToString().Contains("Character") ?? false)
             {
