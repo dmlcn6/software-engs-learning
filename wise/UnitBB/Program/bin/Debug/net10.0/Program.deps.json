@@ -10,7 +10,8 @@
         "dependencies": {
           "Characters": "1.0.0",
           "Items": "1.0.0",
-          "Logger": "1.0.0"
+          "Logger": "1.0.0",
+          "terrain": "1.0.0"
         },
         "runtime": {
           "Program.dll": {}
@@ -38,6 +39,9 @@
         }
       },
       "Items/1.0.0": {
+        "dependencies": {
+          "Interfaces": "1.0.0"
+        },
         "runtime": {
           "Items.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -48,6 +52,17 @@
       "Logger/1.0.0": {
         "runtime": {
           "Logger.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "terrain/1.0.0": {
+        "dependencies": {
+          "Interfaces": "1.0.0"
+        },
+        "runtime": {
+          "terrain.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -77,6 +92,11 @@
       "sha512": ""
     },
     "Logger/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "terrain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -4,6 +4,7 @@
     <ProjectReference Include="..\Characters\Characters.csproj" />
     <ProjectReference Include="..\Items\Items.csproj" />
     <ProjectReference Include="..\Logger\Logger.csproj" />
+    <ProjectReference Include="..\terrain\terrain.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

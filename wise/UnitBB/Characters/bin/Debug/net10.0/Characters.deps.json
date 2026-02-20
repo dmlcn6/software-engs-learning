@@ -25,6 +25,9 @@
         }
       },
       "Items/1.0.0": {
+        "dependencies": {
+          "Interfaces": "1.0.0"
+        },
         "runtime": {
           "Items.dll": {
             "assemblyVersion": "1.0.0.0",

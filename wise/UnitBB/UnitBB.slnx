@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/interfaces/" />
+  <Folder Name="/Terrain/">
+    <Project Path="Terrain/terrain.csproj" />
+  </Folder>
   <Project Path="Characters/Characters.csproj" />
   <Project Path="Interfaces/Interfaces.csproj" />
   <Project Path="Items/Items.csproj" />
