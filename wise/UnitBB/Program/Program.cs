@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Changed the map declaration type and replaced the movement function from readkey to readline 02/19/26(1)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Updated the win scenario to include nutral map movements & Changed the movement checker from "--,++" to "+1,-1" 02/21/26(1)"        [RECENT COMMIT NAME]
 
 // 1/29/26 - Big loop that leads back to sparanza
 
@@ -27,7 +27,7 @@ namespace UnitBB
         {
             Logs to = new();
             var openRaider = new Raider();
-            to.Log($"Program.Start.Main has begun", "../Inbox/Announcements.txt");
+            to.Log($"Program.Start.Main has begun", "C:/Users/Tyree/SWE01/Proj1/software-engs-learning/wise/UnitBB/Inbox/Announcements.txt");
             var startNew = new Sparanza();
             startNew.MainMenu(openRaider);
         }
@@ -95,7 +95,7 @@ namespace UnitBB
             var tGrass = new Grass();
 
             IBoardPiece[,] WholeMap = new IBoardPiece[3, 3];
-            WholeMap[0, 0] = openRaider;
+            WholeMap[0, 0] = tGrass;
             WholeMap[0, 1] = tGrass;
             WholeMap[0, 2] = tGrass;
             WholeMap[1, 0] = tGrass;
@@ -103,7 +103,10 @@ namespace UnitBB
             WholeMap[1, 2] = tGrass;
             WholeMap[2, 0] = tGrass;
             WholeMap[2, 1] = tGrass;
-            WholeMap[2, 2] = tGrass;                        //(object, object, object, object, object, object, object, object, object) bSlot = ((IBoardPiece)WholeMap[0, 0], (IBoardPiece)WholeMap[0, 1], (IBoardPiece)WholeMap[0, 2], (IBoardPiece)WholeMap[1, 0], (IBoardPiece)WholeMap[1, 1], (IBoardPiece)WholeMap[1, 2], (IBoardPiece)WholeMap[2, 0], (IBoardPiece)WholeMap[2, 1], (IBoardPiece)WholeMap[2, 2]);
+            WholeMap[2, 2] = tGrass;
+
+            WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider; //(object, object, object, object, object, object, object, object, object) bSlot = ((IBoardPiece)WholeMap[0, 0], (IBoardPiece)WholeMap[0, 1], (IBoardPiece)WholeMap[0, 2], (IBoardPiece)WholeMap[1, 0], (IBoardPiece)WholeMap[1, 1], (IBoardPiece)WholeMap[1, 2], (IBoardPiece)WholeMap[2, 0], (IBoardPiece)WholeMap[2, 1], (IBoardPiece)WholeMap[2, 2]);
+
             to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
             to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
             to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
@@ -115,67 +118,35 @@ namespace UnitBB
                 to.Log("");
 
                 to.Log($">>{directionChoice}<<");                                   //to.Log($">>{directionChoice.Key}<<");
-                switch (directionChoice)                                   //switch (directionChoice.Key)
+                switch (directionChoice.ToLower())                                   //switch (directionChoice.Key)
                 {
                     case "w":                                         //case ConsoleKey.W:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
-                        if (openRaider.position.Item2-- < 0)
+                        if (openRaider.position.Item1 - 1 < 0)
                         {
                             to.Log("You have reached the edge of the map and can no longer continue in this direction");
                         }
-                        if (WholeMap[openRaider.position.Item1, openRaider.position.Item2--] == openArc)
-                        {
-                            openRaider.AdjEnemyEncountered(true);
-                            openRaider.position.Item2--;
-                        }
-                        else
-                        {
-                            openRaider.position.Item2--;
-                        }
-                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
-                        //to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
-                        //to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
-                        //to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
-                        break;
-                    case "s":                                         //case ConsoleKey.S:
-                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
-                        if (openRaider.position.Item2++ < 3)
-                        {
-                            to.Log("You have reached the edge of the map and can no longer continue in this direction");
-                        }
-                        else if (WholeMap[openRaider.position.Item1, openRaider.position.Item2++] == openArc)
-                        {
-                            openRaider.AdjEnemyEncountered(true);
-                            openRaider.position.Item2++;
-                        }
-                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
-                        //to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
-                        //to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
-                        //to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
-                        break;
-                    case "a":                                         //case ConsoleKey.A:
-                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
-                        if (openRaider.position.Item1-- < 0)
-                        {
-                            to.Log("You have reached the edge of the map and can no longer continue in this direction");
-                        }
-                        else if (WholeMap[openRaider.position.Item1--, openRaider.position.Item2] == openArc)
+                        else if (WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2] == openArc)
                         {
                             openRaider.AdjEnemyEncountered(true);
                             openRaider.position.Item1--;
                         }
+                        else
+                        {
+                            openRaider.position.Item1--;
+                        }
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
-                        //to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
-                        //to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
-                        //to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
+                        to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
+                        to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
+                        to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
                         break;
-                    case "d":                                         //case ConsoleKey.D:
+                    case "s":                                         //case ConsoleKey.S:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
-                        if (openRaider.position.Item1++ > 3)
+                        if (openRaider.position.Item1 + 1 > 3)
                         {
                             to.Log("You have reached the edge of the map and can no longer continue in this direction");
                         }
-                        if (WholeMap[openRaider.position.Item1++, openRaider.position.Item2] == openArc)
+                        else if (WholeMap[openRaider.position.Item1 + 1, openRaider.position.Item2] == openArc)
                         {
                             openRaider.AdjEnemyEncountered(true);
                             openRaider.position.Item1++;
@@ -185,12 +156,52 @@ namespace UnitBB
                             openRaider.position.Item1++;
                         }
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
-                        //to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
-                        //to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
-                        //to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
+                        to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
+                        to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
+                        to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
+                        break;
+                    case "a":                                         //case ConsoleKey.A:
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
+                        if (openRaider.position.Item2 - 1 < 0)
+                        {
+                            to.Log("You have reached the edge of the map and can no longer continue in this direction");
+                        }
+                        else if (WholeMap[openRaider.position.Item1, openRaider.position.Item2 - 1] == openArc)
+                        {
+                            openRaider.AdjEnemyEncountered(true);
+                            openRaider.position.Item2--;
+                        }
+                        else
+                        {
+                            openRaider.position.Item2--;
+                        }
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
+                        to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
+                        to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
+                        to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
+                        break;
+                    case "d":                                         //case ConsoleKey.D:
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
+                        if (openRaider.position.Item2 + 1 > 3)
+                        {
+                            to.Log("You have reached the edge of the map and can no longer continue in this direction");
+                        }
+                        if (WholeMap[openRaider.position.Item1, openRaider.position.Item2 + 1] == openArc)
+                        {
+                            openRaider.AdjEnemyEncountered(true);
+                            openRaider.position.Item2++;
+                        }
+                        else
+                        {
+                            openRaider.position.Item2++;
+                        }
+                        WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
+                        to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
+                        to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
+                        to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
                         break;
                     default:
-                        to.Log("something went wrong");
+                        to.Log("Not cases met");
                         break;
                 }
 
@@ -288,7 +299,7 @@ namespace UnitBB
                                                 break;
 
                                             default:
-                                                to.Log("Something went wrong");
+                                                to.Log("Something went wrong in the Inventory");
                                                 break;
                                         }
 
@@ -346,7 +357,7 @@ namespace UnitBB
                             startNext.MainMenu(openRaider);
                             break;
                         default:
-                            to.Log("Something went wrong");
+                            to.Log("Something went wrong when choosing menu action");
                             break;
                     }
                 }
@@ -360,9 +371,13 @@ namespace UnitBB
                     to.Log("You have Failed");
                     return;
                 }
+                else if (openRaider.IsAlive() == true && openArc.IsAlive() == true)
+                {
+                    continue;
+                }
                 else
                 {
-                    to.Log("something went wrong");
+                    to.Log("Cannot detect if either you or arc is alive");
                 }
                 to.Log("you have reached the end");
 
