@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Net;
+using Microsoft.VisualBasic;
 using Reup.Characters;
 using Reup.Items;
 using Reup.Logger;
@@ -16,7 +18,27 @@ namespace Reup.Program
         public static int playerPos;
         public int random;
         public string item;
+        public static Stranger stranger2 = new Stranger();
+        public static ItemBase loot1 = new Knife();
+        public static ItemBase loot2 = new Blick();
+        public static ItemBase loot3 = new Armor();
+        public static ItemBase loot4 = new Yercs();
+        public static ItemBase loot5 = new Potion();
+        public static Bandit bandito2 = new Bandit();
+        public static Bandit bandito3 = new Bandit();
+        public static Hazard hazard1 = new Hazard();
+        public static Hazard hazard2 = new Hazard();
+        public static Hazard hazard3 = new Hazard();
+        public static Hazard hazard4 = new Hazard();
+        public static Hazard hazard5 = new Hazard();
 
+        public static object[,] array2DInitialization = {{null, hazard1, loot1, bandito3, null},
+                                                        {hazard2, null, null, loot2, loot3},
+                                                        {bandito2, stranger2, player, null, hazard3},
+                                                        {hazard4, null, loot4, bandito, null},
+                                                        {stranger, loot5, null, null, hazard5}};
+        public static int newXCoords;
+        public static int newYCoords;
 
         public static void Main()
         {
@@ -24,8 +46,60 @@ namespace Reup.Program
             bandito = new Bandit();
             stranger = new Stranger();
             logger = new AuditLog();
+
+
             Program.Intro();
             Program.Begin();
+        }
+        public static void Coordinates()
+        {
+            player.xCoords = 2;
+            player.yCoords = 2;
+
+            bandito3.xCoords = 0;
+            bandito3.yCoords = 3;
+
+            loot1.xCoords = 0;
+            loot1.yCoords = 2;
+
+            hazard1.xCoords = 0;
+            hazard1.yCoords = 1;
+
+            loot2.xCoords = 1;
+            loot2.yCoords = 3;
+
+            loot3.xCoords = 1;
+            loot3.yCoords = 4;
+
+            hazard2.xCoords = 1;
+            hazard2.yCoords = 0;
+
+            bandito2.xCoords = 2;
+            bandito2.yCoords = 0;
+
+            stranger2.xCoords = 2;
+            stranger2.yCoords = 1;
+
+            hazard3.xCoords = 2;
+            hazard3.yCoords = 4;
+
+            hazard4.xCoords = 3;
+            hazard4.yCoords = 0;
+
+            loot4.xCoords = 3;
+            loot4.yCoords = 2;
+
+            bandito.xCoords = 3;
+            bandito.yCoords = 1;
+
+            stranger.xCoords = 4;
+            stranger.yCoords = 0;
+
+            loot5.xCoords = 4;
+            loot5.yCoords = 1;
+
+            hazard5.xCoords = 4;
+            hazard5.yCoords = 4;
         }
         public static void Intro()
         {
@@ -52,13 +126,17 @@ namespace Reup.Program
         public static void Begin()
         {
             DateTime localTime = DateTime.Now;
+            Coordinates();
+            int killCount = 0;
             if (choice == "yes")
             {
                 logger.Log("I thought you looked brave. Let's get started :)");
+                Thread.Sleep(1000);
+                logger.Log("Rid the land of all the bandits.");
                 do
                 {
                     Program.Gameplay();
-                } while (player.alive && playerPos <= 21);
+                } while (player.alive && killCount < 3);
                 if (player.alive == false)
                 {
                     logger.Log("You Died!");
@@ -89,18 +167,15 @@ namespace Reup.Program
         }
         public static void Gameplay()
         {
-            //I need var player 1 to get the game started
-            //Game is built like a board game. Total of 20 spaces
-            //Different events happen on different spaces
-            //Player has 5 Lives to survive until the end
-            //Four different events: Loot, Enemy, Stranger, Hazard
-            //Player begins by rolling 6 sided dice
-            //player can use an item before and after they decide to roll
+            // create loop managing how players will move arround the map
+            // capture the input from the arrow keys to determine the direction the player moves
+            // determine what happens when a player moves around the array
+            // players can use items before moving if they choose.
             logger.Log("Enter a number to select an action");
             logger.Log("");
             logger.Log("1. View inventory");
             logger.Log("2. View Stats");
-            logger.Log("3. Roll Dice");
+            logger.Log("3. Move Position");
             var isDecision = int.TryParse(Console.ReadLine(), out int decision);
 
             if (isDecision)
@@ -125,235 +200,179 @@ namespace Reup.Program
                             //compare type of item
                             var item = player.inventory[itemChoice];
                             if (item.GetType().ToString().Contains("Potion") ||
-                                item.GetType().ToString().Contains("Armor") ||
                                 item.GetType().ToString().Contains("Yercs"))
                             {
-                                player.EquipItem(player._health);
+                                player.UseItem(player._health);
+                                player.inventory.Remove(item);
+                            }
+                            else if (item.GetType().ToString().Contains("Armor"))
+                            {
+                                player.UseItem(player.shield);
+                                player.inventory.Remove(item);
                             }
                             else
                             {
-                                player.EquipItem(player._damage);
+                                player.UseItem(player._damage);
+                                player.inventory.Remove(item);
                             }
 
                             logger.Log("");
                             logger.Log("Item used successfully");
                             logger.Log($"{player.ViewStats()}");
+                            logger.Log("");
                         }
                         break;
                     case 2:
                         logger.Log($"{player.ViewStats()}");
                         break;
                     case 3:
-                        DiceRoll();
-                        BoardEvents();
+                        logger.Log("Please enter the direction you want to move");
+                        var movement = Console.ReadLine();
+
+
+                        if (movement.ToLower() == "north")
+                        {
+                            if (player.xCoords - 1 < 0)
+                            {
+                                logger.Log("You can't go that way.");
+                            }
+                            else
+                            {
+                                newXCoords = player.xCoords - 1;
+                                newYCoords = player.yCoords;
+                                BoardEvents(newXCoords, newYCoords);
+                            }
+                        }
+                        else if (movement.ToLower() == "south")
+                        {
+                            if (player.xCoords + 1 > 4)
+                            {
+                                logger.Log("You can't go that way.");
+                            }
+                            else
+                            {
+                                newXCoords = player.xCoords + 1;
+                                newYCoords = player.yCoords;
+                                BoardEvents(newXCoords, newYCoords);
+                            }
+                        }
+                        else if (movement.ToLower() == "east")
+                        {
+                            if (player.yCoords + 1 > 4)
+                            {
+                                logger.Log("You can't go that way.");
+                            }
+                            else
+                            {
+                                newXCoords = player.xCoords;
+                                newYCoords = player.yCoords + 1;
+                                BoardEvents(newXCoords, newYCoords);
+                            }
+                        }
+                        else if (movement.ToLower() == "west")
+                        {
+                            if (player.yCoords - 1 < 0)
+                            {
+                                logger.Log("You can't go that way.");
+                            }
+                            else
+                            {
+                                newXCoords = player.xCoords;
+                                newYCoords = player.yCoords - 1;
+                                BoardEvents(newXCoords, newYCoords);
+                            }
+                        }
+
+
                         break;
 
                 }
             }
         }
-        public static void BoardEvents()
+        public static void BoardEvents(int newXCoords, int newYCoords)
         {
-            // create pieces to go onto the 2D array
+            var newSpace = array2DInitialization[newXCoords, newYCoords];
 
-            Player player1 = new Player();
-            Stranger stranger1 = new Stranger();
-            Stranger stranger2 = new Stranger();
-            Stranger stranger3 = new Stranger();
-            Stranger stranger4 = new Stranger();
-            Stranger stranger5 = new Stranger();
-            ItemBase loot1 = new Knife();
-            ItemBase loot2 = new Blick();
-            ItemBase loot3 = new Armor();
-            ItemBase loot4 = new Yercs();
-            ItemBase loot5 = new Potion();
-            Bandit bandit1 = new Bandit();
-            Bandit bandit2 = new Bandit();
-            Bandit bandit3 = new Bandit();
-            Bandit bandit4 = new Bandit();
-            Bandit bandit5 = new Bandit();
-            Hazard hazard1 = new Hazard();
-            Hazard hazard2 = new Hazard();
-            Hazard hazard3 = new Hazard();
-            Hazard hazard4 = new Hazard();
-            Hazard hazard5 = new Hazard();
-
-            object[,] array2DInitialization = {{null, hazard1, loot1, stranger3, bandit1},
-                                                {hazard2, stranger1, null, loot2, loot3},
-                                                {bandit2, stranger2, player1, bandit3, hazard3},
-                                                {hazard4, null, loot4, stranger4, bandit4},
-                                                {stranger5, loot5, bandit5, null, hazard5}};
-
-
-
-            player1.xCoords = 2;
-            player1.yCoords = 2;
-
-            stranger1.xCoords = 1;
-            stranger1.yCoords = 1;
-
-            stranger2.xCoords = 2;
-            stranger2.yCoords = 1;
-
-            stranger3.xCoords = 0;
-            stranger3.yCoords = 3;
-
-            stranger4.xCoords = 3;
-            stranger4.yCoords = 3;
-
-            stranger5.xCoords = 4;
-            stranger5.yCoords = 0;
-
-            loot1.xCoords = 0;
-            loot1.yCoords = 2;
-
-            loot2.xCoords = 1;
-            loot2.yCoords = 3;
-
-            loot3.xCoords = 1;
-            loot3.yCoords = 4;
-
-            loot4.xCoords = 3;
-            loot4.yCoords = 2;
-
-            loot5.xCoords = 4;
-            loot5.yCoords = 1;
-
-            bandit1.xCoords = 0;
-            bandit1.yCoords = 4;
-
-            bandit2.xCoords = 2;
-            bandit2.yCoords = 0;
-
-            bandit3.xCoords = 2;
-            bandit3.yCoords = 3;
-
-            bandit4.xCoords = 3;
-            bandit4.yCoords = 4;
-
-            bandit5.xCoords = 4;
-            bandit5.yCoords = 2;
-
-            hazard1.xCoords = 0;
-            hazard1.yCoords = 1;
-
-            hazard2.xCoords = 1;
-            hazard2.yCoords = 0;
-
-            hazard3.xCoords = 2;
-            hazard3.yCoords = 4;
-
-            hazard4.xCoords = 3;
-            hazard4.yCoords = 0;
-
-            hazard5.xCoords = 4;
-            hazard5.yCoords = 4;
-
-
-
-
-
-
-
-
-
-
-
-            int lootItem;
-            Random random = new Random();
-            switch (playerPos)
+            if (newSpace?.GetType().ToString().Contains("Item") ?? false)
             {
-                //Loot
-                case 2:
-                case 3:
-                case 7:
-                case 12:
-                case 18:
-                    lootItem = random.Next(5);
-                    ItemBase item;
-                    logger.Log("You found an item!");
+                var utility = (ItemBase)newSpace;
+                //identify item on space
+                player.inventory.Add(utility);
+                logger.Log("LOOT!!");
+                Thread.Sleep(1000);
+                logger.Log($"You found {utility.itemName}!");
 
-                    if (lootItem == 0)
-                    {
-                        item = new Yercs();
-                    }
-                    else if (lootItem == 1)
-                    {
-                        item = new Armor();
-                    }
-                    else if (lootItem == 2)
-                    {
-                        item = new Sword();
-                    }
-                    else if (lootItem == 3)
-                    {
-                        item = new Blick();
-                    }
-                    else
-                    {
-                        item = new Potion();
-                    }
-                    player.inventory.Add(item);
-                    logger.Log($"{item.itemName} was added to your inventory.");
+                //add item to iventory
+                //if item is a hazard, use immediately
+                if (newSpace?.GetType().ToString().Contains("Hazard") ?? false)
+                {
+                    player.inventory.Add(utility);
+                    player.UseItem(player.inventory.IndexOf(utility));
+                    logger.Log("You were injured by a booby trap!");
+                    logger.Log($"{player.ViewStats()}");
+                }
+                //move player to space and change previous space to null
+                MoveToNull();
+            }
+            else if (newSpace?.GetType().ToString().Contains("Character") ?? false)
+            {
+                CharacterBase enemy = (Stranger)newSpace;
+                //is the character an enemy or a stranger
+                //if it is an enemy, trigger combat method
+                Potion potion = new Potion();
+                logger.Log("You have encountered a stranger...attack?");
+                logger.Log("Please type Yes or No");
+                choice = Console.ReadLine().ToLower();
 
-                    break;
-                //Stranger
-                case 4:
-                case 9:
-                case 11:
-                case 17:
-                case 20:
-                    Potion potion = new Potion();
-                    logger.Log("You have encountered a stranger...attack?");
+                if (choice == "yes")
+                {
+                    Combat(player, enemy);
+                }
+                else if (choice == "no")
+                {
+                    logger.Log($"Hello, {player.playerName}. I have something for you...");
+                    Thread.Sleep(1000);
+                    logger.Log("You gained a potion!");
+                    player.inventory.Add(potion);
+                }
+                else
+                {
                     logger.Log("Please type Yes or No");
                     choice = Console.ReadLine().ToLower();
+                    MoveToNull();
 
-                    if (choice == "yes")
+                    if (newSpace?.GetType().ToString().Contains("Bandit") ?? false)
                     {
-                        Combat(player, stranger);
+                        enemy = (Bandit)newSpace;
+                        Combat(player, enemy);
+                        MoveToNull();
                     }
-                    else if (choice == "no")
-                    {
-                        logger.Log($"Hello, {player.playerName}. I have something for you...");
-                        Thread.Sleep(1000);
-                        logger.Log("You gained a potion!");
-                        player.inventory.Add(potion);
-                    }
-                    else
-                    {
-                        logger.Log("Please type Yes or No");
-                        choice = Console.ReadLine().ToLower();
-                    }
-                    break;
-                //Hazard
-                case 1:
-                case 8:
-                case 13:
-                case 14:
-                case 19:
-                    logger.Log("Rats! You Got Caught in a BoobyTrap!");
-                    logger.Log("You lost 15 HP!");
-                    player._health = player._health - 10;
-                    break;
-                //Enemy
-                case 5:
-                case 6:
-                case 10:
-                case 15:
-                case 16:
-                    logger.Log("You've encountered an enemy!");
-                    Combat(player, bandito);
-                    break;
+                    //if player wins fight, change spot to null
+                    //if it is a stranger, determine if you will fight or not
+                    //move player to space and change previous spot to null
+                }
             }
+            else if (newSpace == null)
+            {
+                //move player to new space
+                logger.Log("Pretty quiet over here...");
+                MoveToNull();
+            }
+
+
         }
-        public static void DiceRoll()
+        private static void MoveToNull()
         {
-            logger.Log($"Current Position: {playerPos}");
-            Random random = new Random();
-            int sixDice = random.Next(1, 6);
-            playerPos = playerPos + sixDice;
-            logger.Log($"You rolled a {sixDice}!");
-            logger.Log($"New Position: {playerPos}");
+            //move player
+            array2DInitialization[player.xCoords, player.yCoords] = null;
+
+
+            player.xCoords = newXCoords;
+            player.yCoords = newYCoords;
+            array2DInitialization[newXCoords, newYCoords] = player;
+            logger.Log($"Current Position: {player.xCoords}, {player.yCoords}");
         }
+
         public static void Combat(Player player, CharacterBase enemy)
         {
             do
@@ -396,11 +415,11 @@ namespace Reup.Program
                                     item.GetType().ToString().Contains("Armor") ||
                                     item.GetType().ToString().Contains("Yercs"))
                                 {
-                                    player.EquipItem(player._health);
+                                    player.UseItem(player._health);
                                 }
                                 else
                                 {
-                                    player.EquipItem(player._damage);
+                                    player.UseItem(player._damage);
                                 }
 
                                 logger.Log("");

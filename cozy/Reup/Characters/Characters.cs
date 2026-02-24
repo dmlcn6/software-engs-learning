@@ -14,10 +14,10 @@ namespace Reup.Characters
             var sword = new Sword();
             _logger = new AuditLog();
             inventory.Add(sword);
-            EquipItem(inventory.IndexOf(sword));
+            UseItem(inventory.IndexOf(sword));
 
         }
-        public override void EquipItem(int inventoryIndex)
+        public override void UseItem(int inventoryIndex)
         {
             if (inventoryIndex >= inventory.Count)
                 return;
@@ -25,9 +25,13 @@ namespace Reup.Characters
             var item = inventory[inventoryIndex];
 
             if (item.isConsumable)
-                return;
+            {
+                var consumable = (ConsumableItem)item;
+                _health = consumable.healing + _health;
+                inventory.Remove(item);
+            }
 
-            if (equippedWeapon == null)
+            else if (equippedWeapon == null)
             {
                 equippedWeapon = (EquippableItem)item;
                 inventory.Remove(item);
@@ -52,7 +56,7 @@ namespace Reup.Characters
             name = "Bandit";
             var dagger = new Knife();
             inventory.Add(dagger);
-            EquipItem(inventory.IndexOf(dagger));
+            UseItem(inventory.IndexOf(dagger));
         }
 
     }
@@ -65,9 +69,8 @@ namespace Reup.Characters
             var poshun = new Potion();
             inventory.Add(glocky);
             inventory.Add(poshun);
-            EquipItem(inventory.IndexOf(glocky));
-            EquipItem(inventory.IndexOf(poshun));
+            UseItem(inventory.IndexOf(glocky));
+            UseItem(inventory.IndexOf(poshun));
         }
     }
 }
-

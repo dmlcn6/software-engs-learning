@@ -67,7 +67,7 @@ namespace Reup.Characters
                 health = health - amount;
             }
         }
-        public virtual void EquipItem(int inventoryIndex)
+        public virtual void UseItem(int inventoryIndex)
         {
             if (inventoryIndex >= inventory.Count)
                 return;
@@ -75,10 +75,15 @@ namespace Reup.Characters
             var item = inventory[inventoryIndex];
 
             if (item.isConsumable)
-                return;
-
-            equippedWeapon = (EquippableItem)item;
-            inventory.Remove(item);
+            {
+                var consumable = (ConsumableItem)item;
+                inventory.Remove(item);
+            }
+            else
+            {
+                equippedWeapon = (EquippableItem)item;
+                inventory.Remove(item);
+            }
         }
     }
 }
