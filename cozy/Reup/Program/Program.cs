@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualBasic;
 using Reup.Characters;
 using Reup.Items;
@@ -10,14 +12,15 @@ namespace Reup.Program
     public class Program
     {
         public static Player player;
-        public static Stranger stranger;
-        public static Bandit bandito;
+        public static Stranger stranger = new Stranger();
+        public static Bandit bandito = new Bandit();
         public static ILogger logger;
         public static string choice;
         public static string decision;
         public static int playerPos;
         public int random;
         public string item;
+        public static int killCount = 0;
         public static Stranger stranger2 = new Stranger();
         public static ItemBase loot1 = new Knife();
         public static ItemBase loot2 = new Blick();
@@ -90,7 +93,7 @@ namespace Reup.Program
             loot4.yCoords = 2;
 
             bandito.xCoords = 3;
-            bandito.yCoords = 1;
+            bandito.yCoords = 3;
 
             stranger.xCoords = 4;
             stranger.yCoords = 0;
@@ -127,7 +130,7 @@ namespace Reup.Program
         {
             DateTime localTime = DateTime.Now;
             Coordinates();
-            int killCount = 0;
+            //int killCount = 0;
             if (choice == "yes")
             {
                 logger.Log("I thought you looked brave. Let's get started :)");
@@ -341,9 +344,11 @@ namespace Reup.Program
                     choice = Console.ReadLine().ToLower();
                     MoveToNull();
 
+
                     if (newSpace?.GetType().ToString().Contains("Bandit") ?? false)
                     {
                         enemy = (Bandit)newSpace;
+                        logger.Log($"Bandit! Get ready for battle!");
                         Combat(player, enemy);
                         MoveToNull();
                     }
@@ -351,6 +356,7 @@ namespace Reup.Program
                     //if it is a stranger, determine if you will fight or not
                     //move player to space and change previous spot to null
                 }
+
             }
             else if (newSpace == null)
             {
@@ -432,6 +438,10 @@ namespace Reup.Program
                 if (enemy.alive)
                 {
                     enemy.Attack(player);
+                }
+                else
+                {
+                    killCount += 1;
                 }
             } while (player.alive && enemy.alive);
         }
