@@ -310,10 +310,9 @@ namespace Reup.Program
                     player.UseItem(player.inventory.IndexOf(utility));
                     logger.Log("You were injured by a booby trap!");
                     logger.Log($"{player.ViewStats()}");
-
-                    //move player to space and change previous space to null
-                    MoveToNull();
                 }
+                //move player to space and change previous space to null
+                MoveToNull();
             }
             else if (newSpace?.GetType().ToString().Contains("Character") ?? false)
             {
