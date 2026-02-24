@@ -19,7 +19,7 @@ namespace TestHH.Characters
             get => dmg;
             set
             {
-                dmg = (EquippedWeapon?.dmg ?? 0) + (EquippedExtraItem?.dmg ?? 0) + value;
+                dmg = (EquippedWeapon?.dmg ?? 0) + (EquippedExtraItem?.dmg ?? 0) + baseDmg;
 
             }
         }
@@ -56,6 +56,8 @@ namespace TestHH.Characters
 
         public override void EquipItem(int inventoryIndex)
         {
+            var message = "You dont have any open slots";
+
             if (inventoryIndex >= _inventory.Count)
                 return;
 
@@ -68,18 +70,17 @@ namespace TestHH.Characters
             {
                 EquippedWeapon = (EquippableItemBase)item;
                 _inventory.Remove(item);
-
+                message = $"{item.name} was equipped to the first slot";
             }
             else if (EquippedExtraItem == null)
             {
                 EquippedExtraItem = (EquippableItemBase)item;
                 _inventory.Remove(item);
-            }
-            else
-            {
-                auditLogger.Log("You dont have any open slots");
+                message = $"{item.name} was equipped to the second slot";
             }
             _dmg = _dmg;
+
+            auditLogger.Log(message);
         }
     }
 
