@@ -11,7 +11,7 @@ namespace Reup.Program
 {
     public class Program
     {
-        public static Player player;
+        public static Player player = new Player();
         public static Stranger stranger = new Stranger();
         public static Bandit bandito = new Bandit();
         public static ILogger logger;
