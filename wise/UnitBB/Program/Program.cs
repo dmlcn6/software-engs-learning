@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Updated the win scenario to include nutral map movements & Changed the movement checker from "--,++" to "+1,-1" 02/21/26(1)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Began trying to build out the base Menu. Currently attempting to add a feature that allows the player to move items between inventory REMEMBER TO CHECK IF EITHER INVENTORIES ARE FULL BEFORE RUNNING THE TASK"        [RECENT COMMIT NAME]
 
 // 1/29/26 - Big loop that leads back to sparanza
 
