@@ -20,6 +20,7 @@ using UnitBB.Logger;
 using UnitBB.Interfaces;
 using UnitBB.Terrain;
 using System.IO.Compression;
+using System.Formats.Asn1;
 
 // object[,] array2DInitialization = { openRaider, Null },
 //                                   { openRaider, Null },
@@ -36,6 +37,11 @@ namespace UnitBB
             var openRaider = new Raider();
             to.Log($"Program.Start.Main has begun", "C:/Users/Tyree/SWE01/Proj1/software-engs-learning/wise/UnitBB/Inbox/Announcements.txt");
             var startNew = new Sparanza();
+
+            // Start off information
+            openRaider.NameAdj();
+
+            // Load the game
             startNew.MainMenu(openRaider);
         }
     }
@@ -48,9 +54,6 @@ namespace UnitBB
         {
             // Pre-exsisting Objects
             var rInventory = openRaider.inventory;
-
-            // Start off information
-            openRaider.NameAdj();
 
             // While the player is alive
             do
@@ -95,16 +98,18 @@ namespace UnitBB
         public void TopsideAA(CharactersBase openRaider)
         {
             //topLevel
-            to.Log("Welcome to Topside");
-            to.Log("blank");
+            to.Log($"Welcome to Topside {openRaider.CallName()}");
+            to.Log("");
             bool exitTicket = false;
-            var openArc = new Arc();
+            var openArc1 = new Arc();
+            var openArc2 = new Arc();
+            var openArc3 = new Arc();
             var tGrass = new Grass();
 
             IBoardPiece[,] WholeMap = new IBoardPiece[3, 3];
-            WholeMap[0, 0] = openArc;
-            WholeMap[0, 1] = tGrass;
-            WholeMap[0, 2] = tGrass;
+            WholeMap[0, 0] = openArc1;
+            WholeMap[0, 1] = openArc2;
+            WholeMap[0, 2] = openArc3;
             WholeMap[1, 0] = tGrass;
             WholeMap[1, 1] = tGrass;
             WholeMap[1, 2] = tGrass;
@@ -114,26 +119,28 @@ namespace UnitBB
 
             WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider; //(object, object, object, object, object, object, object, object, object) bSlot = ((IBoardPiece)WholeMap[0, 0], (IBoardPiece)WholeMap[0, 1], (IBoardPiece)WholeMap[0, 2], (IBoardPiece)WholeMap[1, 0], (IBoardPiece)WholeMap[1, 1], (IBoardPiece)WholeMap[1, 2], (IBoardPiece)WholeMap[2, 0], (IBoardPiece)WholeMap[2, 1], (IBoardPiece)WholeMap[2, 2]);
 
-            to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
-            to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
-            to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
-
             do
             {
-                var directionChoice = Console.ReadLine();                 //var directionChoice = Console.ReadKey();
+                to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
+                to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
+                to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
+
+                to.Log("Please Chose a direction to walk in Using W,A,S,D");
+
+                var directionChoice = Console.ReadKey();                 //var directionChoice = Console.ReadKey();
                 //var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoice1);
                 to.Log("");
 
-                to.Log($">>{directionChoice}<<");                                   //to.Log($">>{directionChoice.Key}<<");
-                switch (directionChoice.ToLower())                                   //switch (directionChoice.Key)
+                to.Log($">>{directionChoice.Key}<<");                                   //to.Log($">>{directionChoice.Key}<<");
+                switch (directionChoice.Key)                                   //switch (directionChoice.Key)
                 {
-                    case "w":                                         //case ConsoleKey.W:
+                    case ConsoleKey.W:                                         //case ConsoleKey.W:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
                         if (openRaider.position.Item1 - 1 < 0)
                         {
                             to.Log("You have reached the edge of the map and can no longer continue in this direction");
                         }
-                        else if (WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2] == openArc)
+                        else if (WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2] == openArc1 || WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2] == openArc2 || WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2] == openArc3)
                         {
                             openRaider.AdjEnemyEncountered(true);
                             openRaider.position.Item1--;
@@ -143,17 +150,14 @@ namespace UnitBB
                             openRaider.position.Item1--;
                         }
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
-                        to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
-                        to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
-                        to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
                         break;
-                    case "s":                                         //case ConsoleKey.S:
+                    case ConsoleKey.S:                                         //case ConsoleKey.S:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
                         if (openRaider.position.Item1 + 1 > 3)
                         {
                             to.Log("You have reached the edge of the map and can no longer continue in this direction");
                         }
-                        else if (WholeMap[openRaider.position.Item1 + 1, openRaider.position.Item2] == openArc)
+                        else if (WholeMap[openRaider.position.Item1 + 1, openRaider.position.Item2] == openArc1 || WholeMap[openRaider.position.Item1 + 1, openRaider.position.Item2] == openArc2 || WholeMap[openRaider.position.Item1 + 1, openRaider.position.Item2] == openArc3)
                         {
                             openRaider.AdjEnemyEncountered(true);
                             openRaider.position.Item1++;
@@ -163,17 +167,14 @@ namespace UnitBB
                             openRaider.position.Item1++;
                         }
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
-                        to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
-                        to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
-                        to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
                         break;
-                    case "a":                                         //case ConsoleKey.A:
+                    case ConsoleKey.A:                                         //case ConsoleKey.A:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
                         if (openRaider.position.Item2 - 1 < 0)
                         {
                             to.Log("You have reached the edge of the map and can no longer continue in this direction");
                         }
-                        else if (WholeMap[openRaider.position.Item1, openRaider.position.Item2 - 1] == openArc)
+                        else if (WholeMap[openRaider.position.Item1, openRaider.position.Item2 - 1] == openArc1 || WholeMap[openRaider.position.Item1, openRaider.position.Item2 - 1] == openArc2 || WholeMap[openRaider.position.Item1, openRaider.position.Item2 - 1] == openArc3)
                         {
                             openRaider.AdjEnemyEncountered(true);
                             openRaider.position.Item2--;
@@ -183,17 +184,14 @@ namespace UnitBB
                             openRaider.position.Item2--;
                         }
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
-                        to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
-                        to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
-                        to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
                         break;
-                    case "d":                                         //case ConsoleKey.D:
+                    case ConsoleKey.D:                                         //case ConsoleKey.D:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
                         if (openRaider.position.Item2 + 1 > 3)
                         {
                             to.Log("You have reached the edge of the map and can no longer continue in this direction");
                         }
-                        if (WholeMap[openRaider.position.Item1, openRaider.position.Item2 + 1] == openArc)
+                        if (WholeMap[openRaider.position.Item1, openRaider.position.Item2 + 1] == openArc1 || WholeMap[openRaider.position.Item1, openRaider.position.Item2 + 1] == openArc1 || WholeMap[openRaider.position.Item1, openRaider.position.Item2 + 1] == openArc1)
                         {
                             openRaider.AdjEnemyEncountered(true);
                             openRaider.position.Item2++;
@@ -203,22 +201,19 @@ namespace UnitBB
                             openRaider.position.Item2++;
                         }
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
-                        to.Log($"{WholeMap[0, 0].CallName()},{WholeMap[0, 1].CallName()},{WholeMap[0, 2].CallName()}.");
-                        to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
-                        to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
                         break;
                     default:
                         to.Log("Not cases met");
                         break;
                 }
 
-                while (openRaider.CallEnemyEncountered() == true && openRaider.IsAlive() == true && openArc.IsAlive() == true) //(openRaider.IsAlive() == true && openRaider.CallKillCount() < 3);
+                while (openRaider.CallEnemyEncountered() == true && openRaider.IsAlive() == true) //(openRaider.IsAlive() == true && openRaider.CallKillCount() < 3);
                 {
 
                     bool? isNew = false;
-                    if (openArc.CallHealthAmount() <= 0)
+                    if (openArc1.CallHealthAmount() <= 0)
                     {
-                        openArc = new Arc();
+                        openArc1 = new Arc();
                         isNew = true;
                     }
 
@@ -232,7 +227,7 @@ namespace UnitBB
                             to.Log("an enemy has appeared");
                             to.Log("--stats--");
                             to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
-                            to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
+                            to.Log($"The Arc's stats HP:{openArc1.CallHealthAmount()} DMG:{openArc1.CallDamageAmount()}");
                             to.Log("----*----");
                             to.Log("");
                         }
@@ -250,7 +245,7 @@ namespace UnitBB
                                 escape1 = true;
                                 to.Log("you have chosen A");
                                 // player's attack qoute and send attack message to attacker to collect damage amount then send damage amount to damage reciever on victim to deliever damage
-                                openRaider.AttackBase(openArc);
+                                openRaider.AttackBase(openArc1);
 
                                 break;
                             case "b":
@@ -326,67 +321,58 @@ namespace UnitBB
                         }
                     } while (escape1 == false);
 
-                    if (openArc.IsAlive() == true)
+                    if (openArc1.IsAlive())
                     {
-                        openArc.AttackBase(openRaider);
+                        openArc1.AttackBase(openRaider);
 
                         to.Log("--stats--");
                         to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
-                        to.Log($"The Arc's stats HP:{openArc.CallHealthAmount()} DMG:{openArc.CallDamageAmount()}");
+                        to.Log($"The Arc's stats HP:{openArc1.CallHealthAmount()} DMG:{openArc1.CallDamageAmount()}");
                         to.Log("----*----");
                     }
-                    else
+                    else if (!openArc1.IsAlive() && openRaider.IsAlive() && openRaider.CallKillCount() == 3) // If the player destroys the enemy AND NOW has 3 total kills in sparanza they get to choose to go home or stay topside
                     {
                         openRaider.AdjEnemyEncountered(false);
+                        to.Log("You Have Successfully Completed Your Mission!");
+                        to.Log("Would you like to stay topside or go back to Sparanza?");
+                        to.Log("(A): Stay topside");
+                        to.Log("(B): Go to Sparanza");
+                        switch (Console.ReadLine())
+                        {
+                            case "A":
+                            case "a":
+                                to.Log("Staying Topside");
+                                openRaider.killCountNowRes();
+                                TopsideAA(openRaider);
+                                break;
+                            case "B":
+                            case "b":
+                                to.Log("Going to Sparanza Now.");
+                                openRaider.killCountNowRes();
+                                var startNext = new Sparanza();
+                                startNext.MainMenu(openRaider);
+                                break;
+                            default:
+                                to.Log("Something went wrong when choosing menu action");
+                                break;
+                        }
                     }
-
-                }
-
-                if (openRaider.CallKillCount() == 3 && openRaider.IsAlive() == true)
-                {
-                    to.Log("You Have Successfully Completed Your Mission!");
-                    to.Log("Would you like to stay topside or go back to Sparanza?");
-                    to.Log("(A): Stay topside");
-                    to.Log("(B): Go to Sparanza");
-                    switch (Console.ReadLine())
+                    else if (!openArc1.IsAlive() && openRaider.IsAlive() && openRaider.CallKillCount() < 3) // If the player destroys the enemy AND NOW has LESS than 3 kills they go back to the map
                     {
-                        case "A":
-                        case "a":
-                            to.Log("Staying Topside");
-                            openRaider.killCountNowRes();
-                            TopsideAA(openRaider);
-                            break;
-                        case "B":
-                        case "b":
-                            to.Log("Going to Sparanza Now.");
-                            openRaider.killCountNowRes();
-                            var startNext = new Sparanza();
-                            startNext.MainMenu(openRaider);
-                            break;
-                        default:
-                            to.Log("Something went wrong when choosing menu action");
-                            break;
+                        openRaider.AdjEnemyEncountered(false);
+                        to.Log("You have destoryed the Arc");
+                    }
+                    else if (!openRaider.IsAlive()) // If the player dies they go back to the menu without any loot
+                    {
+                        openRaider.AdjEnemyEncountered(false);
+                        to.Log("You Have Died");
+                        return;
+                    }
+                    else // If something goes wrong
+                    {
+                        to.Log("Something went wrong when trying to detect if the player or the arc came out of combat alive");
                     }
                 }
-                else if (openRaider.IsAlive() == true && openArc.IsAlive() == false)
-                {
-                    to.Log("You have destoryed the Arc");
-
-                }
-                else if (openRaider.IsAlive() == false && openArc.IsAlive() == true)
-                {
-                    to.Log("You have Failed");
-                    return;
-                }
-                else if (openRaider.IsAlive() == true && openArc.IsAlive() == true)
-                {
-                    continue;
-                }
-                else
-                {
-                    to.Log("Cannot detect if either you or arc is alive");
-                }
-                to.Log("you have reached the end");
 
             } while (exitTicket == false);
 
