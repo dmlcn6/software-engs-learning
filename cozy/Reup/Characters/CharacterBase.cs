@@ -64,7 +64,7 @@ namespace Reup.Characters
             }
             else
             {
-                health = health - amount;
+                _health = _health - amount;
             }
         }
         public virtual void UseItem(int inventoryIndex)
@@ -84,6 +84,7 @@ namespace Reup.Characters
                 equippedWeapon = (EquippableItem)item;
                 inventory.Remove(item);
             }
+            _damage = _damage;
         }
     }
 }

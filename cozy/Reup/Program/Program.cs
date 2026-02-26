@@ -285,10 +285,7 @@ namespace Reup.Program
                                 BoardEvents(newXCoords, newYCoords);
                             }
                         }
-
-
                         break;
-
                 }
             }
         }
@@ -319,44 +316,23 @@ namespace Reup.Program
             }
             else if (newSpace?.GetType().ToString().Contains("Character") ?? false)
             {
-                CharacterBase enemy = (Stranger)newSpace;
-                //is the character an enemy or a stranger
-                //if it is an enemy, trigger combat method
-                Potion potion = new Potion();
-                logger.Log("You have encountered a stranger...attack?");
-                logger.Log("Please type Yes or No");
-                choice = Console.ReadLine().ToLower();
+                if (newSpace?.GetType().ToString().Contains("Stranger") ?? false)
+                {
 
-                if (choice == "yes")
-                {
-                    Combat(player, enemy);
-                }
-                else if (choice == "no")
-                {
-                    logger.Log($"Hello, {player.playerName}. I have something for you...");
-                    Thread.Sleep(1000);
-                    logger.Log("You gained a potion!");
-                    player.inventory.Add(potion);
-                }
-                else
-                {
-                    logger.Log("Please type Yes or No");
-                    choice = Console.ReadLine().ToLower();
+                    //is the character an enemy or a stranger
+                    //if it is an enemy, trigger combat method
+                    StrangerEncounter((Stranger)newSpace);
                     MoveToNull();
-
-
-                    if (newSpace?.GetType().ToString().Contains("Bandit") ?? false)
-                    {
-                        enemy = (Bandit)newSpace;
-                        logger.Log($"Bandit! Get ready for battle!");
-                        Combat(player, enemy);
-                        MoveToNull();
-                    }
+                }
+                else if (newSpace?.GetType().ToString().Contains("Bandit") ?? false)
+                {
                     //if player wins fight, change spot to null
                     //if it is a stranger, determine if you will fight or not
                     //move player to space and change previous spot to null
+                    logger.Log($"Bandit! Get ready for battle!");
+                    Combat(player, (Bandit)newSpace);
+                    MoveToNull();
                 }
-
             }
             else if (newSpace == null)
             {
@@ -364,8 +340,6 @@ namespace Reup.Program
                 logger.Log("Pretty quiet over here...");
                 MoveToNull();
             }
-
-
         }
         private static void MoveToNull()
         {
@@ -378,6 +352,32 @@ namespace Reup.Program
             array2DInitialization[newXCoords, newYCoords] = player;
             logger.Log($"Current Position: {player.xCoords}, {player.yCoords}");
         }
+
+
+        public static void StrangerEncounter(Stranger enemy)
+        {
+            Potion potion = new Potion();
+            logger.Log("You have encountered a stranger...attack?");
+            logger.Log("Please type Yes or No");
+            choice = Console.ReadLine().ToLower();
+
+            if (choice == "yes")
+            {
+                Combat(player, enemy);
+            }
+            else if (choice == "no")
+            {
+                logger.Log($"Hello, {player.playerName}. I have something for you...");
+                Thread.Sleep(1000);
+                logger.Log("You gained a potion!");
+                player.inventory.Add(potion);
+            }
+            else
+            {
+                StrangerEncounter((Stranger)enemy);
+            }
+        }
+
 
         public static void Combat(Player player, CharacterBase enemy)
         {
