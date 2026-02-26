@@ -7,5 +7,6 @@
   <Project Path="Interfaces/Interfaces.csproj" />
   <Project Path="Items/Items.csproj" />
   <Project Path="Logger/Logger.csproj" />
+  <Project Path="Menu/Menu.csproj" />
   <Project Path="Program/Program.csproj" />
 </Solution>

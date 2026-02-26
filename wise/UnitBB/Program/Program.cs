@@ -5,6 +5,13 @@
 
 // 1/29/26 - Big loop that leads back to sparanza
 
+// TO-DO
+// - Create an inventory that does not live on the player and can be accessed in the menu
+// - When a player uses an item in the inventory. The items resort to fill the earlier slots if they are available
+// - Give the player an option to get out of inventory without interacting with an item
+// - When a player selects an item in their inventory it gives them a description and the effects before they confirm to interact
+// - Give the player the option to unequip an item
+
 
 
 
@@ -95,7 +102,7 @@ namespace UnitBB
             var tGrass = new Grass();
 
             IBoardPiece[,] WholeMap = new IBoardPiece[3, 3];
-            WholeMap[0, 0] = tGrass;
+            WholeMap[0, 0] = openArc;
             WholeMap[0, 1] = tGrass;
             WholeMap[0, 2] = tGrass;
             WholeMap[1, 0] = tGrass;
