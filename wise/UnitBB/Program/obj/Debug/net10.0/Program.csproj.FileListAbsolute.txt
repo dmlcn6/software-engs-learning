@@ -25,3 +25,5 @@ C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\program\bin\Debug\
 C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\UnitBB\program\bin\Debug\net10.0\Interfaces.pdb
 C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\unitbb\program\bin\Debug\net10.0\terrain.dll
 C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\unitbb\program\bin\Debug\net10.0\terrain.pdb
+C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\unitbb\program\bin\Debug\net10.0\Menu.dll
+C:\Users\Tyree\SWE01\Proj1\software-engs-learning\wise\unitbb\program\bin\Debug\net10.0\Menu.pdb

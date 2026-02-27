@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Began trying to build out the base Menu. Currently attempting to add a feature that allows the player to move items between inventory REMEMBER TO CHECK IF EITHER INVENTORIES ARE FULL BEFORE RUNNING THE TASK"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "Added readkey for movement directions and added movement feedback 02/26/26(1)"        [RECENT COMMIT NAME]
 
 // 1/29/26 - Big loop that leads back to sparanza
 
@@ -19,8 +19,11 @@ using UnitBB.Characters;
 using UnitBB.Logger;
 using UnitBB.Interfaces;
 using UnitBB.Terrain;
+using UnitBB.Menu;
 using System.IO.Compression;
 using System.Formats.Asn1;
+using System.ComponentModel.Design;
+using Microsoft.VisualBasic;
 
 // object[,] array2DInitialization = { openRaider, Null },
 //                                   { openRaider, Null },
@@ -37,12 +40,14 @@ namespace UnitBB
             var openRaider = new Raider();
             to.Log($"Program.Start.Main has begun", "C:/Users/Tyree/SWE01/Proj1/software-engs-learning/wise/UnitBB/Inbox/Announcements.txt");
             var startNew = new Sparanza();
+            //var startTest = new TheLab();  // Test Scenario01
 
             // Start off information
             openRaider.NameAdj();
 
             // Load the game
             startNew.MainMenu(openRaider);
+            //startTest.TestMenu(openRaider);  // Test Scenario01
         }
     }
 
@@ -50,6 +55,7 @@ namespace UnitBB
     public class Sparanza
     {
         Logs to = new();
+        MenuData menu = new MenuData();
         public void MainMenu(CharactersBase openRaider)
         {
             // Pre-exsisting Objects
@@ -65,19 +71,16 @@ namespace UnitBB
 
                 // What do we do next?
                 to.Log($"What would you like to do {openRaider.CallName()}?");
-                to.Log("(A) Ready Up (B) Go to Inventory (C) Go to WorkBench");
-                switch (Console.ReadLine())
+                to.Log("(A) Ready Up (B) Go to Safe (C) Go to WorkBench");
+                switch (Console.ReadLine().ToLower())
                 {
-                    case "A":
                     case "a":
                         var goTopside = new Topside();
                         goTopside.TopsideAA(openRaider);
                         break;
-                    case "B":
                     case "b":
-                        to.Log("Not yet available");
+                        menu.OpenSafe(openRaider);
                         break;
-                    case "C":
                     case "c":
                         to.Log("Not yet available");
                         break;
@@ -236,11 +239,11 @@ namespace UnitBB
                         to.Log("What would you like to do?");
                         to.Log("(A): Attack the enemy");
                         to.Log("(B): Go to your inventory");
+                        to.Log("(C): Go to your Gear");
 
-                        switch (Console.ReadLine())
+                        switch (Console.ReadLine().ToLower())
                         {
                             case "a":
-                            case "A":
                                 // Show the player selection feedback and attack the enemy
                                 escape1 = true;
                                 to.Log("you have chosen A");
@@ -249,31 +252,30 @@ namespace UnitBB
 
                                 break;
                             case "b":
-                            case "B":
                                 // Show the player selection feedback and go to player inventory
                                 escape1 = true;
-                                var plyrInv = openRaider.inventory;
+                                var plyrInv1 = openRaider.inventory;
                                 to.Log("you have chosen B");
 
                                 // Show the player their inventory
-                                for (int i = 0; i < plyrInv.Count; i++)
+                                for (int i = 0; i < plyrInv1.Count; i++)
                                 {
-                                    to.Log($"({i + 1}){plyrInv[i].CallName()}");
+                                    to.Log($"({i + 1}){plyrInv1[i].CallName()}");
                                 }
 
                                 // Give the player the option to choose an item
-                                bool escape2 = false;
+                                bool escape2a = false;
                                 do
                                 {
-                                    to.Log("Which item would you like to use?");
+                                    to.Log("Which item would you like to interact with?");
 
-                                    var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoice1);
+                                    var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoiceA);
 
                                     // Check to see if the item is valid, give the player a selection feedback, then confirm if the choice is correct
-                                    if (itemChoice1 <= plyrInv.Count && itemChoice1 >= 1)
+                                    if (itemChoiceA <= plyrInv1.Count && itemChoiceA >= 1)
                                     {
-                                        itemChoice1 -= 1;
-                                        to.Log($"Are you sure you want to use {plyrInv[itemChoice1].CallName()}");
+                                        itemChoiceA -= 1;
+                                        to.Log($"Are you sure you want to use {plyrInv1[itemChoiceA].CallName()}");
                                         to.Log("(A) Yes (B) No");
 
                                         switch (Console.ReadLine())
@@ -281,10 +283,10 @@ namespace UnitBB
                                             case "a":
                                             case "A":
                                                 // Obtain the chosen item
-                                                var itemChoice1A = plyrInv[itemChoice1];
+                                                var itemChoice1A = plyrInv1[itemChoiceA];
                                                 openRaider.ObtainIt(itemChoice1A, "+");
 
-                                                escape2 = true;
+                                                escape2a = true;
 
                                                 break;
 
@@ -292,11 +294,11 @@ namespace UnitBB
                                             case "B":
                                                 // Give the player another chance to choose their desired item
                                                 to.Log("Please choose the Item you want to use");
-                                                for (int i = 0; i < plyrInv.Count; i++)
+                                                for (int i = 0; i < plyrInv1.Count; i++)
                                                 {
-                                                    to.Log($"({i + 1}){plyrInv[i].CallName()}");
+                                                    to.Log($"({i + 1}){plyrInv1[i].CallName()}");
                                                 }
-                                                escape2 = false;
+                                                escape2a = false;
 
                                                 break;
 
@@ -309,7 +311,75 @@ namespace UnitBB
 
 
 
-                                } while (escape2 == false);
+                                } while (escape2a == false);
+                                break;
+                            case "c":
+                                // Show the player selection feedback and go to player inventory
+                                escape1 = true;
+                                var plyrInv2 = openRaider.Equipped;
+                                to.Log("you have chosen C");
+
+                                // Show the player their equpped
+                                to.Log($"(1){plyrInv2[0].CallName()}");
+                                to.Log($"(2){plyrInv2[1].CallName()}");
+
+                                // Give the player the option to choose an item
+                                bool escape2b = false;
+                                do
+                                {
+                                    to.Log("Which weapon would you like to unequip?");
+
+                                    var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoiceB);
+
+                                    // Check to see if the item is valid, give the player a selection feedback, then confirm if the choice is correct
+                                    if (itemChoiceB == 1 || itemChoiceB == 2 && !plyrInv2[itemChoiceB].GetType().ToString().Contains("Available"))
+                                    {
+                                        if (!openRaider.InventoryFull())
+                                        {
+
+                                            itemChoiceB -= 1;
+                                            to.Log($"Are you sure you want to unequip {plyrInv2[itemChoiceB].CallName()}");
+                                            to.Log("(A) Yes (B) No (C) leave");
+
+                                            switch (Console.ReadLine().ToLower())
+                                            {
+                                                case "a":
+                                                    // unequip the chosen weapon
+                                                    to.Log($"You have chose to unequip {openRaider.Equipped[itemChoiceB].CallName()}");
+                                                    openRaider.UnequipIt(itemChoiceB);
+                                                    escape2b = true;
+
+                                                    break;
+
+                                                case "b":
+                                                    // Give the player another chance to choose their desired item
+                                                    to.Log("Please choose the Item you want to unequip");
+                                                    to.Log($"(1){plyrInv2[0].CallName()}");
+                                                    to.Log($"(2){plyrInv2[1].CallName()}");
+                                                    escape2b = false;
+
+                                                    break;
+
+                                                case "c":
+                                                    to.Log("You have chose to leave your inventory");
+                                                    return;
+
+                                                default:
+                                                    to.Log("You can only enter (A), (B), (C).");
+                                                    break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            to.Log("You do not have enough room in your inventory");
+                                            return;
+                                        }
+
+                                    }
+
+
+
+                                } while (escape2b == false);
                                 break;
 
                             default:
@@ -382,11 +452,110 @@ namespace UnitBB
         }
     }
 
+
+
+
+
+
+
+
+    // [RECENT COMMIT NAME]         git commit UnitBB -m "File Organization 01/15/26(1)"        [RECENT COMMIT NAME]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public class TheLab
+    {
+        Logs to = new();
+        public void TestMenu(CharactersBase openRaider)
+        {
+            // Pre-exsisting Objects
+            var rInventory = openRaider.inventory;
+
+            // While the player is alive
+            do
+            {
+                // Inform the player of their stats
+                to.Log($"Your players health: {openRaider.CallHealthAmount()}");
+                to.Log($"Your players damage: {openRaider.CallDamageAmount()}");
+                to.Log($"Your players kill count: {openRaider.CallKillCount()}");
+
+                // What do we do next?
+                to.Log($"What would you like to do {openRaider.CallName()}?");
+                to.Log("(A) Check Inventory (B) Resort Inventory");
+                switch (Console.ReadLine())
+                {
+                    case "A":
+                    case "a":
+                        // Show the player selection feedback and go to player inventory
+                        var plyrInv = openRaider.inventory;
+                        to.Log("you have chosen B");
+
+                        // Show the player their inventory
+                        for (int i = 0; i < plyrInv.Count; i++)
+                        {
+                            to.Log($"({i + 1}){plyrInv[i].CallName()}");
+                        }
+                        break;
+                    case "B":
+                    case "b":
+                        openRaider.ResortInventory();
+                        break;
+                    default:
+                        to.Log("Something went wrong");
+                        break;
+                }
+            } while (openRaider.IsAlive() == true);
+
+        }
+    }
+
+
 }
-
-
-
-
-
-
-// [RECENT COMMIT NAME]         git commit UnitBB -m "File Organization 01/15/26(1)"        [RECENT COMMIT NAME]
