@@ -6,8 +6,16 @@ namespace Reup.Characters
     {
         private ILogger _logger;
         public string playerName;
-        EquippableItem defBuff;
-        ItemBase? equippedExtraItem { get; set; }
+        EquippableItem? equippedExtraItem { get; set; }
+        private int damage;
+        public override int _damage
+        {
+            get => damage;
+            set
+            {
+                damage = (equippedWeapon?.dmgBuff ?? 0) + (equippedExtraItem?.dmgBuff ?? 0) + baseDmg;
+            }
+        }
 
         public Player()
         {

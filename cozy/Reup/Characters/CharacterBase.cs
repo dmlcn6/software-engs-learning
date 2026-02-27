@@ -23,13 +23,14 @@ namespace Reup.Characters
                     health = value;
             }
         }
+        public int baseDmg { get => 7; }
         private int damage;
-        public int _damage
+        public virtual int _damage
         {
             get => damage;
             set
             {
-                damage = (equippedWeapon?.dmgBuff ?? 0) + value;
+                damage = (equippedWeapon?.dmgBuff ?? 0) + baseDmg;
             }
         }
         public int shield = 0;
@@ -42,7 +43,7 @@ namespace Reup.Characters
         {
             inventory = new List<ItemBase>();
             _health = 100;
-            _damage = 7;
+            _damage = baseDmg;
         }
         public string ViewStats()
         {
@@ -50,7 +51,7 @@ namespace Reup.Characters
         }
         public void Attacked(CharacterBase attacker)
         {
-            ApplyDamage(attacker.damage);
+            ApplyDamage(attacker._damage);
         }
         public void Attack(CharacterBase victim)
         {

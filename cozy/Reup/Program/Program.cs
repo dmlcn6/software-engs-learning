@@ -293,25 +293,23 @@ namespace Reup.Program
         {
             var newSpace = array2DInitialization[newXCoords, newYCoords];
 
-            if (newSpace?.GetType().ToString().Contains("Item") ?? false)
+            if (newSpace?.GetType().ToString().Contains("Hazard") ?? false)
+            {
+                var trap = (ItemBase)newSpace;
+                player.inventory.Add(trap);
+                player.UseItem(player.inventory.IndexOf(trap));
+                logger.Log("OUCH! You were injured by a booby trap!");
+                logger.Log($"{player.ViewStats()}");
+                MoveToNull();
+            }
+            else if (newSpace?.GetType().ToString().Contains("Item") ?? false)
             {
                 var utility = (ItemBase)newSpace;
                 //identify item on space
                 player.inventory.Add(utility);
-                logger.Log("LOOT!!");
+                logger.Log("What's this?");
                 Thread.Sleep(1000);
-                logger.Log($"You found {utility.itemName}!");
-
-                //add item to iventory
-                //if item is a hazard, use immediately
-                if (newSpace?.GetType().ToString().Contains("Hazard") ?? false)
-                {
-                    player.inventory.Add(utility);
-                    player.UseItem(player.inventory.IndexOf(utility));
-                    logger.Log("You were injured by a booby trap!");
-                    logger.Log($"{player.ViewStats()}");
-                }
-                //move player to space and change previous space to null
+                logger.Log($"NICE! You found {utility.itemName}!");
                 MoveToNull();
             }
             else if (newSpace?.GetType().ToString().Contains("Character") ?? false)
@@ -352,8 +350,6 @@ namespace Reup.Program
             array2DInitialization[newXCoords, newYCoords] = player;
             logger.Log($"Current Position: {player.xCoords}, {player.yCoords}");
         }
-
-
         public static void StrangerEncounter(Stranger enemy)
         {
             Potion potion = new Potion();
@@ -377,8 +373,6 @@ namespace Reup.Program
                 StrangerEncounter((Stranger)enemy);
             }
         }
-
-
         public static void Combat(Player player, CharacterBase enemy)
         {
             do
