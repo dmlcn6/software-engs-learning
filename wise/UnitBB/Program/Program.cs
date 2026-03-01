@@ -1,16 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-// [RECENT COMMIT NAME]         git commit UnitBB -m "Added readkey for movement directions and added movement feedback 02/26/26(1)"        [RECENT COMMIT NAME]
+// [RECENT COMMIT NAME]         git commit UnitBB -m "All Files have been tracked. Saving For checkpoint. Kill bugs later 03/1/26(1)"        [RECENT COMMIT NAME]
 
 // 1/29/26 - Big loop that leads back to sparanza
 
 // TO-DO
-// - Create an inventory that does not live on the player and can be accessed in the menu
-// - When a player uses an item in the inventory. The items resort to fill the earlier slots if they are available
-// - Give the player an option to get out of inventory without interacting with an item
-// - When a player selects an item in their inventory it gives them a description and the effects before they confirm to interact
-// - Give the player the option to unequip an item
+// - Create an inventory that does not live on the player and can be accessed in the menu. **
+// - When a player uses an item in the inventory. The items resort to fill the earlier slots if they are available. (maybe later)
+// - Give the player an option to get out of inventory, gear, and safe without interacting with an item. **
+// - When a player selects an item in their inventory it gives them a description and the effects before they confirm to interact. (maybe later)
+// - Give the player the option to unequip an item. **
 
 
 
@@ -257,7 +257,8 @@ namespace UnitBB
                                 var plyrInv1 = openRaider.inventory;
                                 to.Log("you have chosen B");
 
-                                // Show the player their inventory
+                                // Show the player their inventory and an exit choice
+                                to.Log("(0)~Leave (THIS WILL USE YOUR TURN)");
                                 for (int i = 0; i < plyrInv1.Count; i++)
                                 {
                                     to.Log($"({i + 1}){plyrInv1[i].CallName()}");
@@ -272,7 +273,12 @@ namespace UnitBB
                                     var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoiceA);
 
                                     // Check to see if the item is valid, give the player a selection feedback, then confirm if the choice is correct
-                                    if (itemChoiceA <= plyrInv1.Count && itemChoiceA >= 1)
+                                    if (itemChoiceA == 0)
+                                    {
+                                        to.Log("You have chosen to leave your inventory");
+                                        escape2a = true;
+                                    }
+                                    else if (itemChoiceA <= plyrInv1.Count && itemChoiceA >= 1 && !plyrInv1[itemChoiceA].GetType().ToString().Contains("Available"))
                                     {
                                         itemChoiceA -= 1;
                                         to.Log($"Are you sure you want to use {plyrInv1[itemChoiceA].CallName()}");
@@ -308,6 +314,11 @@ namespace UnitBB
                                         }
 
                                     }
+                                    else
+                                    {
+                                        to.Log("This slot is empty");
+                                        escape2a = false;
+                                    }
 
 
 
@@ -319,7 +330,8 @@ namespace UnitBB
                                 var plyrInv2 = openRaider.Equipped;
                                 to.Log("you have chosen C");
 
-                                // Show the player their equpped
+                                // Show the player their equpped and an exit option
+                                to.Log($"(0)~Leave (THIS WILL USE YOUR TURN)");
                                 to.Log($"(1){plyrInv2[0].CallName()}");
                                 to.Log($"(2){plyrInv2[1].CallName()}");
 
@@ -329,17 +341,23 @@ namespace UnitBB
                                 {
                                     to.Log("Which weapon would you like to unequip?");
 
+
                                     var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoiceB);
 
                                     // Check to see if the item is valid, give the player a selection feedback, then confirm if the choice is correct
-                                    if (itemChoiceB == 1 || itemChoiceB == 2 && !plyrInv2[itemChoiceB].GetType().ToString().Contains("Available"))
+                                    if (itemChoiceB == 0)
+                                    {
+                                        to.Log("You have chose to leave");
+                                        escape2b = true;
+                                    }
+                                    else if (itemChoiceB == 1 || itemChoiceB == 2 && !plyrInv2[itemChoiceB].GetType().ToString().Contains("Available"))
                                     {
                                         if (!openRaider.InventoryFull())
                                         {
 
                                             itemChoiceB -= 1;
                                             to.Log($"Are you sure you want to unequip {plyrInv2[itemChoiceB].CallName()}");
-                                            to.Log("(A) Yes (B) No (C) leave");
+                                            to.Log("(A) Yes (B) No");
 
                                             switch (Console.ReadLine().ToLower())
                                             {
@@ -400,7 +418,7 @@ namespace UnitBB
                         to.Log($"The Arc's stats HP:{openArc1.CallHealthAmount()} DMG:{openArc1.CallDamageAmount()}");
                         to.Log("----*----");
                     }
-                    else if (!openArc1.IsAlive() && openRaider.IsAlive() && openRaider.CallKillCount() == 3) // If the player destroys the enemy AND NOW has 3 total kills in sparanza they get to choose to go home or stay topside
+                    else if (!openArc1.IsAlive() && openRaider.IsAlive() && openRaider.CallKillCount() == 3) // If the player destroys the enemy AND NOW has 3 total kills in sparanza they get to choose to go home or stay topside.
                     {
                         openRaider.AdjEnemyEncountered(false);
                         to.Log("You Have Successfully Completed Your Mission!");
