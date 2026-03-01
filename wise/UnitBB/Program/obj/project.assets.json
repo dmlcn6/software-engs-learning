@@ -65,17 +65,17 @@
           "bin/placeholder/Menu.dll": {}
         }
       },
-      "Terrain/1.0.0": {
+      "terrain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
           "Interfaces": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Terrain.dll": {}
+          "bin/placeholder/terrain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Terrain.dll": {}
+          "bin/placeholder/terrain.dll": {}
         }
       }
     }
@@ -106,10 +106,10 @@
       "path": "../Menu/Menu.csproj",
       "msbuildProject": "../Menu/Menu.csproj"
     },
-    "Terrain/1.0.0": {
+    "terrain/1.0.0": {
       "type": "project",
-      "path": "../Terrain/Terrain.csproj",
-      "msbuildProject": "../Terrain/Terrain.csproj"
+      "path": "../terrain/terrain.csproj",
+      "msbuildProject": "../terrain/terrain.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -118,7 +118,7 @@
       "Items >= 1.0.0",
       "Logger >= 1.0.0",
       "Menu >= 1.0.0",
-      "Terrain >= 1.0.0"
+      "terrain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -127,11 +127,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Program\\Program.csproj",
+      "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\program\\Program.csproj",
       "projectName": "Program",
-      "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Program\\Program.csproj",
+      "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\program\\Program.csproj",
       "packagesPath": "C:\\Users\\Tyree\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Program\\obj\\",
+      "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\program\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Tyree\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -146,11 +146,11 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Characters\\Characters.csproj": {
-              "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Characters\\Characters.csproj"
+            "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Characters\\Characters.csproj": {
+              "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Characters\\Characters.csproj"
             },
-            "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\Items.csproj": {
-              "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\Items.csproj"
+            "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Items\\Items.csproj": {
+              "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Items\\Items.csproj"
             },
             "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Logger\\Logger.csproj": {
               "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Logger\\Logger.csproj"
@@ -158,8 +158,8 @@
             "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Menu\\Menu.csproj": {
               "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Menu\\Menu.csproj"
             },
-            "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Terrain\\Terrain.csproj": {
-              "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Terrain\\Terrain.csproj"
+            "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\terrain\\terrain.csproj": {
+              "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\terrain\\terrain.csproj"
             }
           }
         }

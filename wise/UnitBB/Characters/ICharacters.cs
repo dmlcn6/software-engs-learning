@@ -12,7 +12,7 @@ namespace UnitBB.Characters
         private int health = 0;
         private int damage = 0;
         private int killcount = 0;
-        public List<IItems> inventory = new() { new Available(), new Available(), new Available(), new Available(), new Available() };
+        public List<ItemsBase> inventory = new() { new Available(), new Available(), new Available(), new Available(), new Available() };
 
 
         public string Initname(string createdName)
