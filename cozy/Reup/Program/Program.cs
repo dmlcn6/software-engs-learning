@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualBasic;
 using Reup.Characters;
 using Reup.Items;
@@ -9,15 +11,16 @@ namespace Reup.Program
 {
     public class Program
     {
-        public static Player player;
-        public static Stranger stranger;
-        public static Bandit bandito;
+        public static Player player = new Player();
+        public static Stranger stranger = new Stranger();
+        public static Bandit bandito = new Bandit();
         public static ILogger logger;
         public static string choice;
         public static string decision;
         public static int playerPos;
         public int random;
         public string item;
+        public static int killCount = 0;
         public static Stranger stranger2 = new Stranger();
         public static ItemBase loot1 = new Knife();
         public static ItemBase loot2 = new Blick();
@@ -90,7 +93,7 @@ namespace Reup.Program
             loot4.yCoords = 2;
 
             bandito.xCoords = 3;
-            bandito.yCoords = 1;
+            bandito.yCoords = 3;
 
             stranger.xCoords = 4;
             stranger.yCoords = 0;
@@ -127,7 +130,7 @@ namespace Reup.Program
         {
             DateTime localTime = DateTime.Now;
             Coordinates();
-            int killCount = 0;
+            //int killCount = 0;
             if (choice == "yes")
             {
                 logger.Log("I thought you looked brave. Let's get started :)");
@@ -202,17 +205,17 @@ namespace Reup.Program
                             if (item.GetType().ToString().Contains("Potion") ||
                                 item.GetType().ToString().Contains("Yercs"))
                             {
-                                player.UseItem(player._health);
+                                player.UseItem(itemChoice);
                                 player.inventory.Remove(item);
                             }
                             else if (item.GetType().ToString().Contains("Armor"))
                             {
-                                player.UseItem(player.shield);
+                                player.UseItem(itemChoice);
                                 player.inventory.Remove(item);
                             }
                             else
                             {
-                                player.UseItem(player._damage);
+                                player.UseItem(itemChoice);
                                 player.inventory.Remove(item);
                             }
 
@@ -282,10 +285,7 @@ namespace Reup.Program
                                 BoardEvents(newXCoords, newYCoords);
                             }
                         }
-
-
                         break;
-
                 }
             }
         }
@@ -293,63 +293,43 @@ namespace Reup.Program
         {
             var newSpace = array2DInitialization[newXCoords, newYCoords];
 
-            if (newSpace?.GetType().ToString().Contains("Item") ?? false)
+            if (newSpace?.GetType().ToString().Contains("Hazard") ?? false)
+            {
+                var trap = (ItemBase)newSpace;
+                player.inventory.Add(trap);
+                player.UseItem(player.inventory.IndexOf(trap));
+                logger.Log("OUCH! You were injured by a booby trap!");
+                logger.Log($"{player.ViewStats()}");
+                MoveToNull();
+            }
+            else if (newSpace?.GetType().ToString().Contains("Item") ?? false)
             {
                 var utility = (ItemBase)newSpace;
                 //identify item on space
                 player.inventory.Add(utility);
-                logger.Log("LOOT!!");
+                logger.Log("What's this?");
                 Thread.Sleep(1000);
-                logger.Log($"You found {utility.itemName}!");
-
-                //add item to iventory
-                //if item is a hazard, use immediately
-                if (newSpace?.GetType().ToString().Contains("Hazard") ?? false)
-                {
-                    player.inventory.Add(utility);
-                    player.UseItem(player.inventory.IndexOf(utility));
-                    logger.Log("You were injured by a booby trap!");
-                    logger.Log($"{player.ViewStats()}");
-                }
-                //move player to space and change previous space to null
+                logger.Log($"NICE! You found {utility.itemName}!");
                 MoveToNull();
             }
             else if (newSpace?.GetType().ToString().Contains("Character") ?? false)
             {
-                CharacterBase enemy = (Stranger)newSpace;
-                //is the character an enemy or a stranger
-                //if it is an enemy, trigger combat method
-                Potion potion = new Potion();
-                logger.Log("You have encountered a stranger...attack?");
-                logger.Log("Please type Yes or No");
-                choice = Console.ReadLine().ToLower();
+                if (newSpace?.GetType().ToString().Contains("Stranger") ?? false)
+                {
 
-                if (choice == "yes")
-                {
-                    Combat(player, enemy);
-                }
-                else if (choice == "no")
-                {
-                    logger.Log($"Hello, {player.playerName}. I have something for you...");
-                    Thread.Sleep(1000);
-                    logger.Log("You gained a potion!");
-                    player.inventory.Add(potion);
-                }
-                else
-                {
-                    logger.Log("Please type Yes or No");
-                    choice = Console.ReadLine().ToLower();
+                    //is the character an enemy or a stranger
+                    //if it is an enemy, trigger combat method
+                    StrangerEncounter((Stranger)newSpace);
                     MoveToNull();
-
-                    if (newSpace?.GetType().ToString().Contains("Bandit") ?? false)
-                    {
-                        enemy = (Bandit)newSpace;
-                        Combat(player, enemy);
-                        MoveToNull();
-                    }
+                }
+                else if (newSpace?.GetType().ToString().Contains("Bandit") ?? false)
+                {
                     //if player wins fight, change spot to null
                     //if it is a stranger, determine if you will fight or not
                     //move player to space and change previous spot to null
+                    logger.Log($"Bandit! Get ready for battle!");
+                    Combat(player, (Bandit)newSpace);
+                    MoveToNull();
                 }
             }
             else if (newSpace == null)
@@ -358,8 +338,6 @@ namespace Reup.Program
                 logger.Log("Pretty quiet over here...");
                 MoveToNull();
             }
-
-
         }
         private static void MoveToNull()
         {
@@ -372,7 +350,29 @@ namespace Reup.Program
             array2DInitialization[newXCoords, newYCoords] = player;
             logger.Log($"Current Position: {player.xCoords}, {player.yCoords}");
         }
+        public static void StrangerEncounter(Stranger enemy)
+        {
+            Potion potion = new Potion();
+            logger.Log("You have encountered a stranger...attack?");
+            logger.Log("Please type Yes or No");
+            choice = Console.ReadLine().ToLower();
 
+            if (choice == "yes")
+            {
+                Combat(player, enemy);
+            }
+            else if (choice == "no")
+            {
+                logger.Log($"Hello, {player.playerName}. I have something for you...");
+                Thread.Sleep(1000);
+                logger.Log("You gained a potion!");
+                player.inventory.Add(potion);
+            }
+            else
+            {
+                StrangerEncounter((Stranger)enemy);
+            }
+        }
         public static void Combat(Player player, CharacterBase enemy)
         {
             do
@@ -432,6 +432,10 @@ namespace Reup.Program
                 if (enemy.alive)
                 {
                     enemy.Attack(player);
+                }
+                else
+                {
+                    killCount += 1;
                 }
             } while (player.alive && enemy.alive);
         }

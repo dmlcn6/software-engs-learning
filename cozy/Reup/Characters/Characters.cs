@@ -6,8 +6,16 @@ namespace Reup.Characters
     {
         private ILogger _logger;
         public string playerName;
-        EquippableItem defBuff;
-        ItemBase? equippedExtraItem { get; set; }
+        EquippableItem? equippedExtraItem { get; set; }
+        private int damage;
+        public override int _damage
+        {
+            get => damage;
+            set
+            {
+                damage = (equippedWeapon?.dmgBuff ?? 0) + (equippedExtraItem?.dmgBuff ?? 0) + baseDmg;
+            }
+        }
 
         public Player()
         {
@@ -43,6 +51,9 @@ namespace Reup.Characters
             }
             else
             {
+                // let player know equipment slots are full
+                // let player choose the item they would like to swap
+                // place swapped item back in player inventory
                 _logger.Log("You dont have any open slots");
             }
             _damage = _damage;
