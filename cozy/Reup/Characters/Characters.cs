@@ -51,6 +51,9 @@ namespace Reup.Characters
             }
             else
             {
+                // let player know equipment slots are full
+                // let player choose the item they would like to swap
+                // place swapped item back in player inventory
                 _logger.Log("You dont have any open slots");
             }
             _damage = _damage;

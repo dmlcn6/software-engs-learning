@@ -205,17 +205,17 @@ namespace Reup.Program
                             if (item.GetType().ToString().Contains("Potion") ||
                                 item.GetType().ToString().Contains("Yercs"))
                             {
-                                player.UseItem(player._health);
+                                player.UseItem(itemChoice);
                                 player.inventory.Remove(item);
                             }
                             else if (item.GetType().ToString().Contains("Armor"))
                             {
-                                player.UseItem(player.shield);
+                                player.UseItem(itemChoice);
                                 player.inventory.Remove(item);
                             }
                             else
                             {
-                                player.UseItem(player._damage);
+                                player.UseItem(itemChoice);
                                 player.inventory.Remove(item);
                             }
 
