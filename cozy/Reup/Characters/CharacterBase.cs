@@ -47,7 +47,7 @@ namespace Reup.Characters
         }
         public string ViewStats()
         {
-            return $"DMG: {_damage}, HP: {_health}";
+            return $"DMG: {_damage}, HP: {_health} , Shield: {shield}";
         }
         public void Attacked(CharacterBase attacker)
         {
