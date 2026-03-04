@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Characters\\Characters.csproj": {}
+    "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Characters\\Characters.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Characters\\Characters.csproj": {
+    "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Characters\\Characters.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Characters\\Characters.csproj",
+        "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Characters\\Characters.csproj",
         "projectName": "Characters",
-        "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Characters\\Characters.csproj",
+        "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Characters\\Characters.csproj",
         "packagesPath": "C:\\Users\\Tyree\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Characters\\obj\\",
+        "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Characters\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Tyree\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -32,8 +32,8 @@
               "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Items\\Items.csproj": {
                 "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Items\\Items.csproj"
               },
-              "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Logger\\Logger.csproj": {
-                "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Logger\\Logger.csproj"
+              "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Logger\\Logger.csproj": {
+                "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Logger\\Logger.csproj"
               }
             }
           }
@@ -1017,14 +1017,14 @@
         }
       }
     },
-    "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Logger\\Logger.csproj": {
+    "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Logger\\Logger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Logger\\Logger.csproj",
+        "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Logger\\Logger.csproj",
         "projectName": "Logger",
-        "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Logger\\Logger.csproj",
+        "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Logger\\Logger.csproj",
         "packagesPath": "C:\\Users\\Tyree\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Logger\\obj\\",
+        "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Logger\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Tyree\\AppData\\Roaming\\NuGet\\NuGet.Config"
