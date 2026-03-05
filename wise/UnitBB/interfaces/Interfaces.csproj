@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\interfaces\Interfaces.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
