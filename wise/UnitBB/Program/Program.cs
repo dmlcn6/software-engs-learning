@@ -24,6 +24,7 @@ using System.IO.Compression;
 using System.Formats.Asn1;
 using System.ComponentModel.Design;
 using Microsoft.VisualBasic;
+using UnitBB.Items;
 
 // object[,] array2DInitialization = { openRaider, Null },
 //                                   { openRaider, Null },
@@ -108,10 +109,11 @@ namespace UnitBB
             var openArc2 = new Arc();
             var openArc3 = new Arc();
             var tGrass = new Grass();
+            var loot = new ArcCell();
 
             IBoardPiece[,] WholeMap = new IBoardPiece[3, 3];
             WholeMap[0, 0] = openArc1;
-            WholeMap[0, 1] = openArc2;
+            WholeMap[0, 1] = loot;
             WholeMap[0, 2] = openArc3;
             WholeMap[1, 0] = tGrass;
             WholeMap[1, 1] = tGrass;
@@ -128,25 +130,30 @@ namespace UnitBB
                 to.Log($"{WholeMap[1, 0].CallName()},{WholeMap[1, 1].CallName()},{WholeMap[1, 2].CallName()}.");
                 to.Log($"{WholeMap[2, 0].CallName()},{WholeMap[2, 1].CallName()},{WholeMap[2, 2].CallName()}.");
 
-                to.Log("Please Chose a direction to walk in Using W,A,S,D");
+                to.Log("Please Choose a direction to walk in Using W,A,S,D");
 
-                var directionChoice = Console.ReadKey();                 //var directionChoice = Console.ReadKey();
+                var directionChoice = Console.ReadLine();                 //var directionChoice = Console.ReadKey();
                 //var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoice1);
                 to.Log("");
 
-                to.Log($">>{directionChoice.Key}<<");                                   //to.Log($">>{directionChoice.Key}<<");
-                switch (directionChoice.Key)                                   //switch (directionChoice.Key)
+                to.Log($">>{directionChoice}<<");                                   //to.Log($">>{directionChoice.Key}<<");
+                switch (directionChoice.ToLower())                                   //switch (directionChoice.Key)
                 {
-                    case ConsoleKey.W:                                         //case ConsoleKey.W:
+                    case "w":                                         //case ConsoleKey.W:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
                         if (openRaider.position.Item1 - 1 < 0)
                         {
                             to.Log("You have reached the edge of the map and can no longer continue in this direction");
                         }
-                        else if (WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2] == openArc1 || WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2] == openArc2 || WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2] == openArc3)
+                        else if (WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2].GetType().ToString().Contains("Characters.Arc"))
                         {
-                            //openRaider.AdjEnemyEncountered(true);
-                            TestEnemyInteraction(openRaider, openArc1);
+                            EnemyInteraction(openRaider, openArc1);
+                            openRaider.position.Item1--;
+                        }
+                        else if (WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2].GetType().ToString().Contains("Items"))
+                        {
+                            IBoardPiece activeItem = WholeMap[openRaider.position.Item1 - 1, openRaider.position.Item2];
+                            openRaider.GainIt((ItemsBase)activeItem);
                             openRaider.position.Item1--;
                         }
                         else
@@ -155,7 +162,7 @@ namespace UnitBB
                         }
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
                         break;
-                    case ConsoleKey.S:                                         //case ConsoleKey.S:
+                    case "s":                                         //case ConsoleKey.S:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
                         if (openRaider.position.Item1 + 1 > 3)
                         {
@@ -163,8 +170,7 @@ namespace UnitBB
                         }
                         else if (WholeMap[openRaider.position.Item1 + 1, openRaider.position.Item2] == openArc1 || WholeMap[openRaider.position.Item1 + 1, openRaider.position.Item2] == openArc2 || WholeMap[openRaider.position.Item1 + 1, openRaider.position.Item2] == openArc3)
                         {
-                            //openRaider.AdjEnemyEncountered(true);
-                            TestEnemyInteraction(openRaider, openArc1);
+                            EnemyInteraction(openRaider, openArc1);
                             openRaider.position.Item1++;
                         }
                         else
@@ -173,7 +179,7 @@ namespace UnitBB
                         }
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
                         break;
-                    case ConsoleKey.A:                                         //case ConsoleKey.A:
+                    case "a":                                         //case ConsoleKey.A:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
                         if (openRaider.position.Item2 - 1 < 0)
                         {
@@ -181,8 +187,7 @@ namespace UnitBB
                         }
                         else if (WholeMap[openRaider.position.Item1, openRaider.position.Item2 - 1] == openArc1 || WholeMap[openRaider.position.Item1, openRaider.position.Item2 - 1] == openArc2 || WholeMap[openRaider.position.Item1, openRaider.position.Item2 - 1] == openArc3)
                         {
-                            //openRaider.AdjEnemyEncountered(true);
-                            TestEnemyInteraction(openRaider, openArc1);
+                            EnemyInteraction(openRaider, openArc1);
                             openRaider.position.Item2--;
                         }
                         else
@@ -191,7 +196,7 @@ namespace UnitBB
                         }
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = openRaider;
                         break;
-                    case ConsoleKey.D:                                         //case ConsoleKey.D:
+                    case "d":                                         //case ConsoleKey.D:
                         WholeMap[openRaider.position.Item1, openRaider.position.Item2] = tGrass;
                         if (openRaider.position.Item2 + 1 > 3)
                         {
@@ -199,8 +204,7 @@ namespace UnitBB
                         }
                         if (WholeMap[openRaider.position.Item1, openRaider.position.Item2 + 1] == openArc1 || WholeMap[openRaider.position.Item1, openRaider.position.Item2 + 1] == openArc1 || WholeMap[openRaider.position.Item1, openRaider.position.Item2 + 1] == openArc1)
                         {
-                            //openRaider.AdjEnemyEncountered(true);
-                            TestEnemyInteraction(openRaider, openArc1);
+                            EnemyInteraction(openRaider, openArc1);
                             openRaider.position.Item2++;
                         }
                         else
@@ -215,284 +219,13 @@ namespace UnitBB
                 }
 
 
-
-
-
-
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-                //==============================================================================================================================================
-
-                while (openRaider.CallEnemyEncountered() == true && openRaider.IsAlive() == true) //(openRaider.IsAlive() == true && openRaider.CallKillCount() < 3);
-                {
-
-                    bool? isNew = false;
-                    if (openArc1.CallHealthAmount() <= 0)
-                    {
-                        openArc1 = new Arc();
-                        isNew = true;
-                    }
-
-                    bool? escape1 = false;
-
-                    do
-                    {
-
-                        if (isNew == true)
-                        {
-                            to.Log("an enemy has appeared");
-                            to.Log("--stats--");
-                            to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
-                            to.Log($"The Arc's stats HP:{openArc1.CallHealthAmount()} DMG:{openArc1.CallDamageAmount()}");
-                            to.Log("----*----");
-                            to.Log("");
-                        }
-
-                        // Give the player an option to attack or go to their inventory
-                        to.Log("What would you like to do?");
-                        to.Log("(A): Attack the enemy");
-                        to.Log("(B): Go to your inventory");
-                        to.Log("(C): Go to your Gear");
-
-                        switch (Console.ReadLine().ToLower())
-                        {
-                            case "a":
-                                // Show the player selection feedback and attack the enemy
-                                escape1 = true;
-                                to.Log("you have chosen A");
-                                // player's attack qoute and send attack message to attacker to collect damage amount then send damage amount to damage reciever on victim to deliever damage
-                                openRaider.AttackBase(openArc1);
-
-                                break;
-                            case "b":
-                                // Show the player selection feedback and go to player inventory
-                                escape1 = true;
-                                var plyrInv1 = openRaider.inventory;
-                                to.Log("you have chosen B");
-
-                                // Show the player their inventory and an exit choice
-                                to.Log("(0)~Leave (THIS WILL USE YOUR TURN)");
-                                for (int i = 0; i < plyrInv1.Count; i++)
-                                {
-                                    to.Log($"({i + 1}){plyrInv1[i].CallName()}");
-                                }
-
-                                // Give the player the option to choose an item
-                                bool escape2a = false;
-                                do
-                                {
-                                    to.Log("Which item would you like to interact with?");
-
-                                    var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoiceA);
-
-                                    // Check to see if the item is valid, give the player a selection feedback, then confirm if the choice is correct
-                                    if (itemChoiceA == 0)
-                                    {
-                                        to.Log("You have chosen to leave your inventory");
-                                        escape2a = true;
-                                    }
-                                    else if (itemChoiceA <= plyrInv1.Count && itemChoiceA >= 1 && !plyrInv1[itemChoiceA].GetType().ToString().Contains("Available"))
-                                    {
-                                        itemChoiceA -= 1;
-                                        to.Log($"Are you sure you want to use {plyrInv1[itemChoiceA].CallName()}");
-                                        to.Log("(A) Yes (B) No");
-
-                                        switch (Console.ReadLine())
-                                        {
-                                            case "a":
-                                            case "A":
-                                                // Obtain the chosen item
-                                                var itemChoice1A = plyrInv1[itemChoiceA];
-                                                openRaider.ObtainIt(itemChoice1A, "+");
-
-                                                escape2a = true;
-
-                                                break;
-
-                                            case "b":
-                                            case "B":
-                                                // Give the player another chance to choose their desired item
-                                                to.Log("Please choose the Item you want to use");
-                                                for (int i = 0; i < plyrInv1.Count; i++)
-                                                {
-                                                    to.Log($"({i + 1}){plyrInv1[i].CallName()}");
-                                                }
-                                                escape2a = false;
-
-                                                break;
-
-                                            default:
-                                                to.Log("Something went wrong in the Inventory");
-                                                break;
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        to.Log("This slot is empty");
-                                        escape2a = false;
-                                    }
-
-
-
-                                } while (escape2a == false);
-                                break;
-                            case "c":
-                                // Show the player selection feedback and go to player inventory
-                                escape1 = true;
-                                var plyrInv2 = openRaider.Equipped;
-                                to.Log("you have chosen C");
-
-                                // Show the player their equpped and an exit option
-                                to.Log($"(0)~Leave (THIS WILL USE YOUR TURN)");
-                                to.Log($"(1){plyrInv2[0].CallName()}");
-                                to.Log($"(2){plyrInv2[1].CallName()}");
-
-                                // Give the player the option to choose an item
-                                bool escape2b = false;
-                                do
-                                {
-                                    to.Log("Which weapon would you like to unequip?");
-
-
-                                    var itemChoice0 = int.TryParse(Console.ReadLine(), out int itemChoiceB);
-
-                                    // Check to see if the item is valid, give the player a selection feedback, then confirm if the choice is correct
-                                    if (itemChoiceB == 0)
-                                    {
-                                        to.Log("You have chose to leave");
-                                        escape2b = true;
-                                    }
-                                    else if (itemChoiceB == 1 || itemChoiceB == 2 && !plyrInv2[itemChoiceB].GetType().ToString().Contains("Available"))
-                                    {
-                                        if (!openRaider.InventoryFull())
-                                        {
-
-                                            itemChoiceB -= 1;
-                                            to.Log($"Are you sure you want to unequip {plyrInv2[itemChoiceB].CallName()}");
-                                            to.Log("(A) Yes (B) No");
-
-                                            switch (Console.ReadLine().ToLower())
-                                            {
-                                                case "a":
-                                                    // unequip the chosen weapon
-                                                    to.Log($"You have chose to unequip {openRaider.Equipped[itemChoiceB].CallName()}");
-                                                    openRaider.UnequipIt(itemChoiceB);
-                                                    escape2b = true;
-
-                                                    break;
-
-                                                case "b":
-                                                    // Give the player another chance to choose their desired item
-                                                    to.Log("Please choose the Item you want to unequip");
-                                                    to.Log($"(1){plyrInv2[0].CallName()}");
-                                                    to.Log($"(2){plyrInv2[1].CallName()}");
-                                                    escape2b = false;
-
-                                                    break;
-
-                                                case "c":
-                                                    to.Log("You have chose to leave your inventory");
-                                                    return;
-
-                                                default:
-                                                    to.Log("You can only enter (A), (B), (C).");
-                                                    break;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            to.Log("You do not have enough room in your inventory");
-                                            return;
-                                        }
-
-                                    }
-
-
-
-                                } while (escape2b == false);
-                                break;
-
-                            default:
-                                // Alert the player that they've put in an invalid response
-                                escape1 = false;
-                                isNew = true;
-                                to.Log("Please Either Enter (A) or (B)");
-                                break;
-                        }
-                    } while (escape1 == false);
-
-                    if (openArc1.IsAlive())
-                    {
-                        openArc1.AttackBase(openRaider);
-
-                        to.Log("--stats--");
-                        to.Log($"Your stats HP:{openRaider.CallHealthAmount()} DMG:{openRaider.CallDamageAmount()}");
-                        to.Log($"The Arc's stats HP:{openArc1.CallHealthAmount()} DMG:{openArc1.CallDamageAmount()}");
-                        to.Log("----*----");
-                    }
-                    else if (!openArc1.IsAlive() && openRaider.IsAlive() && openRaider.CallKillCount() == 3) // If the player destroys the enemy AND NOW has 3 total kills in sparanza they get to choose to go home or stay topside.
-                    {
-                        openRaider.AdjEnemyEncountered(false);
-                        to.Log("You Have Successfully Completed Your Mission!");
-                        to.Log("Would you like to stay topside or go back to Sparanza?");
-                        to.Log("(A): Stay topside");
-                        to.Log("(B): Go to Sparanza");
-                        switch (Console.ReadLine())
-                        {
-                            case "A":
-                            case "a":
-                                to.Log("Staying Topside");
-                                openRaider.killCountNowRes();
-                                TopsideAA(openRaider);
-                                break;
-                            case "B":
-                            case "b":
-                                to.Log("Going to Sparanza Now.");
-                                openRaider.killCountNowRes();
-                                var startNext = new Sparanza();
-                                startNext.MainMenu(openRaider);
-                                break;
-                            default:
-                                to.Log("Something went wrong when choosing menu action");
-                                break;
-                        }
-                    }
-                    else if (!openArc1.IsAlive() && openRaider.IsAlive() && openRaider.CallKillCount() < 3) // If the player destroys the enemy AND NOW has LESS than 3 kills they go back to the map
-                    {
-                        openRaider.AdjEnemyEncountered(false);
-                        to.Log("You have destoryed the Arc");
-                    }
-                    else if (!openRaider.IsAlive()) // If the player dies they go back to the menu without any loot
-                    {
-                        openRaider.AdjEnemyEncountered(false);
-                        to.Log("You Have Died");
-                        return;
-                    }
-                    else // If something goes wrong
-                    {
-                        to.Log("Something went wrong when trying to detect if the player or the arc came out of combat alive");
-                    }
-                }
-
             } while (exitTicket == false);
 
 
         }
 
 
-        private void TestEnemyInteraction(CharactersBase openRaider, CharactersBase openArc1)
+        private void EnemyInteraction(CharactersBase openRaider, CharactersBase openArc1)
         {
             if (openArc1.CallHealthAmount() <= 0)
             {

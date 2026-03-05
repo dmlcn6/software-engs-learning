@@ -25,7 +25,11 @@ namespace UnitBB.Terrain
             Initname("Wall");
         }
     }
-
-
-
+    public class Chest : TerrainBase
+    {
+        public Chest()
+        {
+            Initname("Wall");
+        }
+    }
 }

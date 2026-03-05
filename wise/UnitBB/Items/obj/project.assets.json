@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Items\\Items.csproj",
+      "projectUniqueName": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\Items.csproj",
       "projectName": "Items",
-      "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Items\\Items.csproj",
+      "projectPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\Items.csproj",
       "packagesPath": "C:\\Users\\Tyree\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\unitbb\\Items\\obj\\",
+      "outputPath": "C:\\Users\\Tyree\\SWE01\\Proj1\\software-engs-learning\\wise\\UnitBB\\Items\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Tyree\\AppData\\Roaming\\NuGet\\NuGet.Config"
