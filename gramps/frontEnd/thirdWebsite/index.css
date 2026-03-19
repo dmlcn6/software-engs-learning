@@ -1,0 +1,15 @@
+.container {
+    margin: 50px;
+    background-color: blue;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.child {
+    border: 5px solid gold;
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    font-size: x-large;
+}
+
