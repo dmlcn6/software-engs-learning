@@ -14,10 +14,10 @@
 
 .content {}
 
-.manga {
+#content-news {
     border-right: 2px solid black;
 }
 
-.anime {
+#content-video {
     border-left: 2px solid blue;
 }
