@@ -1,0 +1,5 @@
+.header-container {
+    background-color: aquamarine;
+    display: grid;
+    grid-template-columns: 15% 30% 30%;
+}
