@@ -1,0 +1,25 @@
+.header-container{
+    background-color: blue;
+    display: grid;
+    grid-template-columns: 15% 60% 25%;
+}
+
+#searchBar {
+    margin-left: 120px;
+}
+
+
+.content-container {
+    background-color: aquamarine;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.current-video-container {
+    border: 5px double black;
+    margin-right: 20px;
+}
+
+.next-video-container {
+    text-align: center;
+}
