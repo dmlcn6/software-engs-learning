@@ -1,7 +1,11 @@
 .header-container{
-    background-color: blue;
+  
     display: grid;
     grid-template-columns: 15% 60% 25%;
+}
+
+.header-child{
+    background-color: lightgray;
 }
 
 #searchBar {
@@ -22,4 +26,16 @@
 
 .next-video-container {
     text-align: center;
+    border-color: 1px solid black;
+    display: grid;
+}
+
+.next-video {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.rec-vid-data-container {
+    display: grid;
+    grid-template-rows: 10% 10% 10%;
 }
