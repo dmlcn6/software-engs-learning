@@ -1,0 +1,21 @@
+.header {
+    display: grid;
+    padding: 5px;
+}
+
+.brand {
+    grid-row: 1;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1;
+    gap: 10%;
+
+}
+
+.posts {
+    background-color: bisque;
+    border: 2px solid black
+}
