@@ -119,7 +119,30 @@ here is what we covered so far
     - 1/24
         - Getter/Setter, Created 2 new Item Base classes for equippable or consumable items, Add EquippedWeapon to CharBase.
 
+- ** Spint 8: Develop a Blog**
+    - 3/28 - Wise & Gramps played a CSS game called "Grid Attack"
+    - 3/29 - Cozy & Gramps played "Grid Attack" as well.
+    - AC - Accemptance Criteria
+      Title, Must stand out from rest of text. Clearly recognizable as the title.
+        - Import a Google font
+      Logo, in Top Left or Middle. (Can be sourced from wherever)
+      Grid
+        - Use a container for the group of posts
+        - Use a container for the header, logo, title, and "about" links
+        - Use row/column gaps
+      "About" page
+        - Linked-to from Homepage and can link back-to homepage
+      Each Post
+        - Distinct rows
+        - Date/Time Logging
+        - Title
+        - Location
+        - Images
+        - Text Passage
+        - Share Button (using html anchors)
+        - Tags for each topic
 
+    
 
 
 
