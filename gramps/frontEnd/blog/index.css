@@ -1,0 +1,41 @@
+.header-container {
+    display: grid;
+    grid-template-columns: 25% 1fr 1fr;
+    background-color: azure;
+    text-align: center;
+    height: 75px;
+}
+
+.header-content {
+    border: 1px solid black;
+}
+
+.blog-container {
+    border: 1px solid black;
+    margin-top: 100px;
+    display: grid;
+    row-gap: 10px;
+}
+
+.blog-post {
+    border: 1px solid blue;
+    display: grid;
+    grid-template-columns: 25% 70%;
+}
+
+.blog-media-container {
+    border: 2px solid darkgoldenrod;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.blog-media-content {
+    padding: 10px
+}
+
+.blog-media-content img {
+    object-fit: cover;   
+    width: 100%;
+    height: 100%;
+}
