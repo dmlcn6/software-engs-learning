@@ -10,12 +10,25 @@
 .container {
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 1;
-    gap: 10%;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 5%;
 
+}
+
+.blog-container {
+    display: grid;
+    gap: 10%;
 }
 
 .posts {
     background-color: bisque;
-    border: 2px solid black
+    border: 2px solid black;
+}
+
+.side-panel-left {
+    border: 1px solid black
+}
+
+.side-panel-right {
+    border: 1px solid black
 }
