@@ -3,8 +3,19 @@
     padding: 5px;
 }
 
+.header #title {
+    font-family: "DynaPuff", system-ui;
+    font-size: 128px;
+    color: steelblue;
+}
+
 .brand {
-    grid-row: 1;
+    grid-row-start: 1;
+}
+
+.brand img {
+    max-width: 100%;
+    height: auto;
 }
 
 .container {
