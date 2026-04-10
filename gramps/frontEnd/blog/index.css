@@ -23,13 +23,19 @@
 .blog-post {
     border: 1px solid blue;
     display: grid;
-    grid-template-columns: 25% 70%;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+.blog-title {
+    text-align:center;
+    font-size: xx-large;
 }
 
 .blog-media-container {
     border: 2px solid darkgoldenrod;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
 }
 
@@ -38,9 +44,8 @@
 }
 
 .blog-media-content img {
-    object-fit: cover;   
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 /*
