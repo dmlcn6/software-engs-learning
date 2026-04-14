@@ -1,6 +1,9 @@
 .header {
     display: grid;
     padding: 5px;
+    grid-template-columns: 25% 50% 25%;
+    align-items: center;
+    justify-content: center;
 }
 
 .header #title {
@@ -9,8 +12,8 @@
     color: steelblue;
 }
 
-.brand {
-    grid-row-start: 1;
+.header #About {
+    padding-top: 150px;
 }
 
 .brand img {
@@ -33,6 +36,10 @@
 
 .blog-title {
     text-align: center;
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
 }
 
 .blog-media-container {
