@@ -1,0 +1,64 @@
+.header {
+    display: grid;
+    padding: 5px;
+    grid-template-columns: 25% 50% 25%;
+    align-items: center;
+    justify-content: center;
+}
+
+.header #title {
+    font-family: "DynaPuff", system-ui;
+    font-size: 128px;
+    color: steelblue;
+}
+
+.header #About {
+    padding-top: 150px;
+}
+
+.brand img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 80% 1fr;
+
+}
+
+.blog-container {
+    display: grid;
+    gap: 5%;
+
+}
+
+.blog-title {
+    text-align: center;
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+}
+
+.blog-media-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.blog-posts {
+    padding: 10px;
+    background-color: bisque;
+    border: 2px solid black;
+}
+
+/*
+.side-panel-left {
+    border: 1px solid black
+}
+
+.side-panel-right {
+    border: 1px solid black
+}
+*/

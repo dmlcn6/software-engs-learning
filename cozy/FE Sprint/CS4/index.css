@@ -1,0 +1,23 @@
+.header {
+    display: grid;
+    padding: 10px;
+}
+
+.subs {
+    grid-row: 1;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.content {}
+
+#content-news {
+    border-right: 2px solid black;
+}
+
+#content-video {
+    border-left: 2px solid blue;
+}

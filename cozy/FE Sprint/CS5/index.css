@@ -1,0 +1,18 @@
+.header {
+    display: grid;
+    padding: 5px
+}
+
+.tops {
+    grid-row: 1;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+#video {
+    padding: 10px;
+    background-color: blanchedalmond;
+}
