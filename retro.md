@@ -158,3 +158,26 @@ Things to think about?
 - monday, will be class to replace wednesday for New Years
 
 ---
+
+04/15 Retro
+
+What went well?
+- Timely sprint
+- planning 
+- AC picked by students
+- applied AC
+- Gained great understanding 
+- applicable skills
+- Wide focus on html and CSS
+- Sprint difficulty just right
+
+What didnt go well?
+- nesting needed more explaination and reps
+- positioning/sizing needed more explaination and reps
+	- use Tumblr as example project 
+
+Things to think about?
+- 
+
+motavation?
+- STAY THE COURSE
