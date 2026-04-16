@@ -1,0 +1,41 @@
+.header-container{
+  
+    display: grid;
+    grid-template-columns: 15% 60% 25%;
+}
+
+.header-child{
+    background-color: lightgray;
+}
+
+#searchBar {
+    margin-left: 120px;
+}
+
+
+.content-container {
+    background-color: aquamarine;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.current-video-container {
+    border: 5px double black;
+    margin-right: 20px;
+}
+
+.next-video-container {
+    text-align: center;
+    border-color: 1px solid black;
+    display: grid;
+}
+
+.next-video {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.rec-vid-data-container {
+    display: grid;
+    grid-template-rows: 10% 10% 10%;
+}
