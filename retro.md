@@ -158,3 +158,14 @@ Things to think about?
 - monday, will be class to replace wednesday for New Years
 
 ---
+
+04/15 Retro
+
+What went well?
+- 
+
+What didnt do well?
+- 
+
+Things to think about?
+- 
