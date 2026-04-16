@@ -1,0 +1,15 @@
+html {
+    background-color: darkslategray;
+}
+
+li {
+    border: 1px solid teal;
+}
+
+ol {
+    font-family: "Pacifico";
+}
+
+img {
+    size-adjust: 4px;
+}

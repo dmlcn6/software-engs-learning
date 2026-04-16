@@ -1,0 +1,45 @@
+.header {
+    background-image: url('../Media/Images/Banner\ Grid.png');
+    color: bisque;
+}
+
+.header-1 {
+    display: grid;
+    grid-template-columns: 45% 50%;
+}
+
+#header-logo {
+    padding-left: 10px;
+    padding-top: 10px;
+    max-width: auto;
+    max-height: 40px;
+}
+
+#header-title {
+    padding-top: 0px;
+    font-size: x-large;
+    position: relative;
+    right: 50px;
+}
+
+.header-2 {
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    color: bisque;
+    padding-top: 30px;
+}
+
+#portfolio {
+    text-align: center;
+}
+
+.all-sections {
+    background-image: url(../Media/Images/Banner\ Grid.png);
+    color: bisque;
+    font-size: 20px;
+}
+
+.section-1 {
+    padding-top: 100px;
+    text-align: center;
+}
