@@ -1,3 +1,7 @@
+.done {
+    color: yellow;
+}
+
 .header {
     background-image: url('../Media/Images/Banner\ Grid.png');
     color: bisque;
