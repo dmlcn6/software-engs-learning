@@ -1,3 +1,7 @@
+.done {
+    color:aqua;
+    font-size: 100px;
+}
 
 .header-container {
     display: grid;
