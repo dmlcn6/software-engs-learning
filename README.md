@@ -141,7 +141,7 @@ here is what we covered so far
         - Text Passage
         - Share Button (using html anchors)
         - Tags for each topic
--- 4/22 : Discussed Coding Principles
+- ** 4/22 : Discussed Coding Principles **
   - "Review every line of every Pull Request"
   - "After every session, commit all changes"
 
