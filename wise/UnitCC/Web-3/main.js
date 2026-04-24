@@ -1,17 +1,16 @@
-const listItems = document.querySelectorAll("div");
+const PostImages = document.querySelectorAll(".post-image");
 
-let previousClassName = "";
-
-function toggleDone(e) {
-    console.log("the previous class name was" + previousClassName);
-    if (e.target.className != "done") {
-        e.target.className = "done";
-    } else {
-        e.target.className = previousClassName;
-    }
-}
-
-listItems.forEach((item) => {
-    previousClassName = item.className;
-    item.addEventListener("click", toggleDone);
+PostImages.forEach((image) => {
+    image.addEventListener("click", changeImage);
 });
+
+function changeImage(e) {
+    const mySrc = e.target.getAttribute("src");
+    if (mySrc === "../Media/Images/PlaceHolderImage1.jpg") {
+        e.target.setAttribute("src", "../Media/Images/PlaceHolderImage2.jpg");
+    } else if (mySrc === "../Media/Images/PlaceHolderImage2.jpg") {
+        e.target.setAttribute("src", "../Media/Images/PlaceHolderImage3.jpg");
+    } else {
+        e.target.setAttribute("src", "../Media/Images/PlaceHolderImage1.jpg");
+    }
+};
