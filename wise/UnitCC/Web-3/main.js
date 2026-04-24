@@ -13,5 +13,5 @@ function toggleDone(e) {
 
 listItems.forEach((item) => {
     previousClassName = item.className;
-    item.addEventListener("mouseenter", toggleDone);
+    item.addEventListener("click", toggleDone);
 });
