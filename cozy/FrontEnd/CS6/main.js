@@ -1,16 +1,19 @@
-const listItems = document.querySelectorAll("div");
+const myImage = document.querySelector("img");
 
-let previousClassName = ""
-
-function toggleDone(e) {
-    if (!e.target.className) {
-        e.target.className = "done";
+myImage.addEventListener("mouseenter", () => {
+    const mySrc = myImage.getAttribute("src");
+    if (mySrc === "../CS6/BlogImages/DropoutBear.png") {
+        myImage.setAttribute("src", "../CS6/BlogImages/DropoutBearBW.png")
     } else {
-        e.target.className = previousClassName;
+        myImage.setAttribute("src", "../CS6/BlogImages/DropoutBear.png");
     }
-}
+})
 
-listItems.forEach((item) => {
-    previousClassName = item.className;
-    item.addEventListener("click", toggleDone);
-});
+myImage.addEventListener("mouseleave", () => {
+    const mySrc = myImage.getAttribute("src");
+    if (mySrc === "../CS6/BlogImages/DropoutBearBW.png") {
+        myImage.setAttribute("src", "../CS6/BlogImages/DropoutBear.png")
+    } else {
+        myImage.setAttribute("src", "../CS6/BlogImages/DropoutBearBW.png")
+    }
+}) 
