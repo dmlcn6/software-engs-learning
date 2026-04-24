@@ -1,16 +1,14 @@
-const listItems = document.querySelectorAll("div");
-let previousClassName = "";
+const myImages = document.querySelectorAll(".blog-media-content img");
 
-function toggleDone(e) {
-  if (e.target.className != "done") {
-    previousClassName = e.target.className;
-    e.target.className = "done";
-  } else {
-    console.log("previous class name = " + previousClassName);
-    e.target.className = previousClassName;
-  }
-}
+myImages.forEach((image) => {
+  image.addEventListener("click", () => {
+    const mySrc = image.getAttribute("src");
 
-listItems.forEach((item) => {
-  item.addEventListener("mouseenter", toggleDone);
-});
+    if (mySrc === '../blog/images/greek-island.jpg') {
+      image.setAttribute("src", '../blog/images/beehive.jpg')
+    }
+    else {
+      image.setAttribute("src", '../blog/images/greek-island.jpg');
+    }
+  });
+}); 
