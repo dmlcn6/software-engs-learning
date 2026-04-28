@@ -144,7 +144,9 @@ here is what we covered so far
 - ** 4/22 : Discussed Coding Principles **
   - "Review every line of every Pull Request"
   - "After every session, commit all changes"
-
+- ** 4/27 : How to teach new subjects **
+  - What is it? ex What is JavaScript
+  -
 
 
 Tyree made this Change 11/14/25+
