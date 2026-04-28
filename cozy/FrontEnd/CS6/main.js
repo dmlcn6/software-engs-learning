@@ -1,3 +1,13 @@
+function setUserName() {
+    const myName = prompt("Please enter your name.");
+    if (!myName) {
+        setUserName();
+    } else {
+        localStorage.setItem("name", myName);
+        myHeading.textContent = `COZY BLOG is cool, ${myName}`;
+    }
+}
+
 const myImage = document.querySelector("img");
 
 myImage.addEventListener("mouseenter", () => {
@@ -16,4 +26,17 @@ myImage.addEventListener("mouseleave", () => {
     } else {
         myImage.setAttribute("src", "../CS6/BlogImages/DropoutBearBW.png")
     }
-}) 
+})
+let myButton = document.querySelector("button");
+let myHeading = document.querySelector("#title");
+
+if (!localStorage.getItem("name")) {
+    setUserName();
+} else {
+    const storedName = localStorage.getItem("name");
+    myHeading.textContent = `COZY BLOG is cool, ${storedName}`;
+}
+
+myButton.addEventListener("click", () => {
+    setUserName();
+});
