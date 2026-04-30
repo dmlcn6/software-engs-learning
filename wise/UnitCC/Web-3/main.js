@@ -1,7 +1,7 @@
 const PostImages = document.querySelectorAll(".post-image");
 
 PostImages.forEach((image) => {
-    image.addEventListener("click", changeImage);
+    image.addEventListener("mouseenter", changeImage);
 });
 
 function changeImage(e) {
