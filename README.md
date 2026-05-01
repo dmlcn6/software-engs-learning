@@ -146,7 +146,10 @@ here is what we covered so far
   - "After every session, commit all changes"
 - ** 4/27 : How to teach new subjects **
   - What is it? ex What is JavaScript
-  -
+  - Provide basic syntax for fundementals
+  - Go thru exmaple modules with documentation
+  - REPS REPS REPS
+  - Project with AC
 
 
 Tyree made this Change 11/14/25+
