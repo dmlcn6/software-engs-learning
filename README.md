@@ -150,7 +150,7 @@ here is what we covered so far
   - Go thru exmaple modules with documentation
   - REPS REPS REPS
   - Project with AC
-- ** Spint 10: Roulette** - link to board design in group DMs
+- ** 4/30 - Spint 10: Roulette** - link to board design in group DMs
   - Dozen Bet – Pays 2 to 1,
   - Odd or Even – Pays 1 to 1,
   - Red or Black – Pays 1 to 1,
