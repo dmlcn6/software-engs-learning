@@ -150,7 +150,8 @@ here is what we covered so far
   - Go thru exmaple modules with documentation
   - REPS REPS REPS
   - Project with AC
-
+- ** 5/2 : Starting the Roulette game pt 1. setting up the board and basic highlighting
+- ** 5/4 : Roulette pt 1. setting up the board and basic highlighting. Grab free audio int software for cozy
 
 Tyree made this Change 11/14/25+
 
