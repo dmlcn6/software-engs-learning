@@ -5,7 +5,8 @@ html {
 .roulette-board-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-
+    border: solid gold 2px;
+    color: white
 }
 
 .column {
@@ -16,12 +17,12 @@ html {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 10px;
 
 }
 
 .number {
     text-align: center;
+    border: solid gold 2px;
 
 }
 
@@ -34,5 +35,21 @@ html {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     text-align: center;
-    border: solid
+    border: solid gold 2px;
+
+}
+
+.top-bet,
+.bet {
+    display: grid;
+    border: solid gold 2px;
+    margin: 25px;
+}
+
+.black {
+    background-color: black;
+}
+
+.red {
+    background-color: red;
 }
