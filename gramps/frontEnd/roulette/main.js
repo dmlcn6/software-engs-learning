@@ -1,4 +1,5 @@
 import { placeBet, dragstartHandler, dragoverHandler, dropHandler } from "../roulette/player.js";
+import { generateRandomColor, generateRandomNumber } from "./number.js";
 
 function highlightSquares(e){
     let target = e.target;
@@ -55,4 +56,6 @@ allBetableSpots.forEach( (betSpot) => {
 
 
 placeBet();
+let color = generateRandomColor();
+let number = generateRandomNumber();
 

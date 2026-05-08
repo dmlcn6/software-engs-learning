@@ -6,19 +6,31 @@ export function placeBet() {
 }
 
 export function dragstartHandler(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
+  // sets the data that is being dragged
+  ev.dataTransfer.setData("text", ev.target.className);
+
+  // allows copy operation, instead of replace
   ev.dataTransfer.effectAllowed = 'copy';
 }
 
 export function dragoverHandler(ev) {
+  // prevents default behavior of an element disabling another element to be dragged in it
   ev.preventDefault();
+
+  // allows copy on drop
   ev.dataTransfer.dropEffect = 'copy';
 }
 
 export function dropHandler(ev) {
   ev.preventDefault();
+
+  // grabs the dragged data
   const data = ev.dataTransfer.getData("text");
-  const ogElement = document.querySelector(`#${data}`);
+
+  // queries the element from teh dragged data(className)
+  const ogElement = document.querySelector(`.${data}`);
+  
+  // clones the element and appends to target 
   const copyElement = ogElement.cloneNode(true);
   ev.target.appendChild(copyElement);
 }
