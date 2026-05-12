@@ -1,5 +1,43 @@
 import { generateRandomColor, generateRandomNumber } from "./board.js";
 
-let bets = document.querySelectorAll(".side-bets");
+function highlightSquares(e) {
+    let target = e.target;
+
+    let idName = target.id;
+
+    const searchQuery = `.${idName}`
+
+    const highlightedTags = document.querySelectorAll(searchQuery);
+    highlightedTags.forEach((item) => {
+        item.style.backgroundColor = 'yellow'
+    });
+}
+
+function unhighlightSquares(e) {
+    let target = e.target;
+
+    let idName = target.id;
+    const searchQuery = `.${idName}`
+
+    const unhighlightedTags = document.querySelectorAll(searchQuery);
+    unhighlightedTags.forEach((item) => {
+        item.style.backgroundColor = '';
+    });
+}
+
+const highlights = document.querySelectorAll(".bet");
+highlights.forEach((item) => {
+    item.addEventListener("mouseenter", function (e) {
+        highlightSquares(e);
+    });
+
+    item.addEventListener("mouseleave", function (e) {
+        unhighlightSquares(e);
+    });
+});
+
+// create the logic for chips
+// 
+
 let color = generateRandomColor();
 let number = generateRandomNumber();
