@@ -36,8 +36,12 @@ highlights.forEach((item) => {
     });
 });
 
-// create the logic for chips
-// 
+// grab all chip html elements
+const chips = document.querySelectorAll(".roulette-chips-container img");
+
+
+
+
 
 let color = generateRandomColor();
 let number = generateRandomNumber();
