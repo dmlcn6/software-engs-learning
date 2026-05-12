@@ -1,5 +1,5 @@
 let wallet = 1000;
-let bets = [];
+const bets = new Map();
 
 export function placeBet() {
     let allBetableSpots = document.querySelectorAll(".number,.bet");
@@ -21,10 +21,12 @@ export function dragoverHandler(ev) {
   ev.dataTransfer.dropEffect = 'copy';
 }
 
+
+// placing a chip on a bet spot
 export function dropHandler(ev) {
   ev.preventDefault();
 
-  // grabs the dragged data
+  // grabs the dragged data, the chip to bet
   const data = ev.dataTransfer.getData("text");
 
   // queries the element from teh dragged data(className)
@@ -33,4 +35,17 @@ export function dropHandler(ev) {
   // clones the element and appends to target 
   const copyElement = ogElement.cloneNode(true);
   ev.target.appendChild(copyElement);
+
+  let targetId = ev.target.id;
+  // going to add the bet to the dict of bets, using key
+  // before setting new key, check if key exists
+  if (targetId in bets) {
+    // the user has placed a bet on this target
+    // so lets grab the previous bets and append
+    let targetBets = bets.targetId;
+    targetBets.push(data); 
+    return;
+  }
+  
+  bets.set(targetId, [data]);
 }

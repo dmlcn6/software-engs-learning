@@ -26,7 +26,7 @@ function unhighlightSquares(e){
 }
 
 
-
+// grab and add un/highlight events to the side bets
 const highlightButtons = document.querySelectorAll(".bet");
 highlightButtons.forEach((item) => {
     item.addEventListener("mouseenter", function(e) {
@@ -38,24 +38,24 @@ highlightButtons.forEach((item) => {
     });
 });
 
-// grab all chip html elements
+// grab and add drag ability to chips
 const chips = document.querySelectorAll(".roulette-chips-container img");
-// add drag start event to them
 chips.forEach((item) => {
     item.addEventListener("dragstart", dragstartHandler);
 });
 
 
-// grab all the spots for a chip to be placed
+// grab and drop ability to all the spots for a chip to be placed
 const allBetableSpots = document.querySelectorAll(".number,.bet");
 allBetableSpots.forEach( (betSpot) => {
     betSpot.addEventListener("dragover", dragoverHandler);
     betSpot.addEventListener("drop", dropHandler);
 } );
 
+// board set up is complete
 
 
-placeBet();
+// now generate the winning number
 let color = generateRandomColor();
 let number = generateRandomNumber();
 
