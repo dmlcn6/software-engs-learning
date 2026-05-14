@@ -4,14 +4,14 @@ html {
 
 .roulette-board-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    border: solid gold 2px;
+    grid-template-columns: 3% 1fr 1fr 1fr;
     color: white
 }
 
 .column {
     font-size: 30px
 }
+
 
 .numbers {
     display: grid;
@@ -28,6 +28,14 @@ html {
 
 .top-bet {
     grid-column: 1/3;
+}
+
+.leftside-bets {
+    display: grid;
+    text-align: right;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row: 1/4;
+    border: solid gold 2px;
 }
 
 .side-bets {

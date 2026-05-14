@@ -1,4 +1,4 @@
-import { generateRandomColor, generateRandomNumber } from "./board.js";
+import { generateRandomNumber } from "./board.js";
 
 function highlightSquares(e) {
     let target = e.target;
@@ -40,8 +40,4 @@ highlights.forEach((item) => {
 const chips = document.querySelectorAll(".roulette-chips-container img");
 
 
-
-
-
-let color = generateRandomColor();
 let number = generateRandomNumber();
