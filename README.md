@@ -163,7 +163,7 @@ here is what we covered so far
   - Hover animations over each rule
     - highlight the appropriate squares
   - Betting on a square will show the chosen chip
-  - undo and clear functionality
+  - clear functionality
   - start 1000 chips
   - History of past numbers hit
 
