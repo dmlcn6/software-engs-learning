@@ -1,5 +1,7 @@
-import { placeBet, dragstartHandler, dragoverHandler, dropHandler } from "../roulette/player.js";
+import { placeBet, dragstartHandler, dragoverHandler, dropHandler, wallet, bets, spin } from "./player.js";
 import { generateRandomColor, generateRandomNumber } from "./number.js";
+import { GameLoop } from "./board.js";
+
 
 function highlightSquares(e){
     let target = e.target;
@@ -9,7 +11,7 @@ function highlightSquares(e){
 
     const allHTMLTagsToHighlight = document.querySelectorAll(searchQuery);
     allHTMLTagsToHighlight.forEach((item) => { 
-        item.style.backgroundColor = 'blue';
+        item.style.backgroundColor = 'yellow';
     });
 }
 
@@ -52,10 +54,8 @@ allBetableSpots.forEach( (betSpot) => {
     betSpot.addEventListener("drop", dropHandler);
 } );
 
-// board set up is complete
+const spinButton = document.querySelector("#spin-button");
+spinButton.addEventListener("click", spin)
 
 
-// now generate the winning number
-let color = generateRandomColor();
-let number = generateRandomNumber();
 
