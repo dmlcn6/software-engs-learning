@@ -1,4 +1,4 @@
-import { generateRandomNumber } from "./board.js";
+import { dragoverHandler, dragstartHandler, dropHandler } from "./player.js";
 
 function highlightSquares(e) {
     let target = e.target;
@@ -38,6 +38,15 @@ highlights.forEach((item) => {
 
 // grab all chip html elements
 const chips = document.querySelectorAll(".roulette-chips-container img");
+chips.forEach((item) => {
+    item.addEventListener("dragstart", dragstartHandler);
+});
 
+// grab and drop ability to all the spots for a chip to be placed
+const allBetableSpots = document.querySelectorAll(".number,.bet");
+allBetableSpots.forEach((betSpot) => {
+    betSpot.addEventListener("dragover", dragoverHandler);
+    betSpot.addEventListener("drop", dropHandler);
+});
 
-let number = generateRandomNumber();
+//let number = generateRandomNumber();
