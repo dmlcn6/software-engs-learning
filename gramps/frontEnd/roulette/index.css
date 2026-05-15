@@ -3,10 +3,17 @@ html, .bet{
 
 }
 
+.roulette-table-container {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr 5fr;
+    color: white;
+}
+
 .roulette-board-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    color: white;
+    
 }
 
 .column {
@@ -35,12 +42,6 @@ html, .bet{
     gap: 1px;
 }
 
-
-.betty{
-    border: solid #d1c041 2px;
-    
-}
-
 .top-bet {
     grid-column: 1/3;
 }
@@ -56,6 +57,13 @@ html, .bet{
 
 .red {
     background-color: red;
+}
+
+.roulette-history-container {
+    display: grid;
+    grid-template-columns: repeat(32, 4fr);
+    grid-column: 1/5;
+    grid-template-rows: repeat(32, 4fr);
 }
 
 /*
