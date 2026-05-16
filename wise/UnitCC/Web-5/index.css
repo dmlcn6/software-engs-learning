@@ -2,13 +2,11 @@ body {
     background-color: green;
 }
 
-.odd-Container {
-    color: white;
+.selection-Category-Red {
     background-color: red;
 }
 
-.even-Container {
-    color: white;
+.selection-Category-Black {
     background-color: black;
 }
 
@@ -48,12 +46,13 @@ body {
 }
 
 
-
+.chip-Pieces-Container {
+    color: white;
+}
 
 .slot {
-    color: white;
     text-align: center;
-    border: 2px, solid, yellow;
+    border: 2px, solid, blue;
 }
 
 ._1to12Slots {
@@ -86,5 +85,5 @@ body {
 }
 
 .category-Option {
-    border: solid yellow;
+    border: solid rgb(0, 140, 255)
 }
