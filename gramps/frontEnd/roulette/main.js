@@ -1,7 +1,5 @@
 import { placeBet, dragstartHandler, dragoverHandler, dropHandler, wallet, bets, spin } from "./player.js";
-import { generateRandomColor, generateRandomNumber } from "./number.js";
-import { GameLoop } from "./board.js";
-
+import { generateRandomColor, generateRandomNumber } from "./number.js";7
 
 function highlightSquares(e){
     let target = e.target;
@@ -27,7 +25,6 @@ function unhighlightSquares(e){
     });
 }
 
-
 // grab and add un/highlight events to the side bets
 const highlightButtons = document.querySelectorAll(".bet");
 highlightButtons.forEach((item) => {
@@ -46,13 +43,12 @@ chips.forEach((item) => {
     item.addEventListener("dragstart", dragstartHandler);
 });
 
-
 // grab and drop ability to all the spots for a chip to be placed
 const allBetableSpots = document.querySelectorAll(".number,.bet");
 allBetableSpots.forEach( (betSpot) => {
     betSpot.addEventListener("dragover", dragoverHandler);
     betSpot.addEventListener("drop", dropHandler);
-} );
+});
 
 const spinButton = document.querySelector("#spin-button");
 spinButton.addEventListener("click", spin)
