@@ -1,4 +1,4 @@
-import { dragoverHandler, dragstartHandler, dropHandler } from "./player.js";
+import { dragoverHandler, dragstartHandler, dropHandler, wallet, bets } from "./player.js";
 
 function highlightSquares(e) {
     let target = e.target;
@@ -43,7 +43,7 @@ chips.forEach((item) => {
 });
 
 // grab and drop ability to all the spots for a chip to be placed
-const allBetableSpots = document.querySelectorAll(".number,.bet");
+const allBetableSpots = document.querySelectorAll(".number,.bet,.left-side-bets");
 allBetableSpots.forEach((betSpot) => {
     betSpot.addEventListener("dragover", dragoverHandler);
     betSpot.addEventListener("drop", dropHandler);

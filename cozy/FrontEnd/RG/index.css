@@ -5,32 +5,35 @@ html {
 .roulette-board-container {
     display: grid;
     grid-template-columns: 3% 1fr 1fr 1fr;
-    color: white
+    color: white;
 }
 
 .column {
     font-size: 30px
 }
 
+#column1,
+#column2,
+#column3 {
+    display: grid;
+    border: solid gold 1px;
+}
 
 .numbers {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-
 }
 
 .number {
     text-align: center;
-
-
 }
 
 .top-bet {
     grid-column: 1/3;
 }
 
-.leftside-bets {
+.left-side-bets {
     display: grid;
     text-align: right;
     grid-template-rows: 1fr 1fr 1fr;
@@ -44,7 +47,6 @@ html {
     grid-template-rows: 1fr;
     text-align: center;
     border: solid gold 2px;
-
 }
 
 .top-bet,
