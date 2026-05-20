@@ -43,11 +43,42 @@ export function dropHandler(ev) {
     // the user has placed a bet on this target
     // so lets grab the previous bets and append
     let targetBets = bets.targetId;
-    targetBets.push(data); 
-    return;
+
+    // check if its a bet on a single  numbner
+    // remove underscore
+    data.replace("_", "");
+
+
+    // if (+data)
+    // if (Number(data))
+    // thesse try to parse data as an integer and return NaN (not a num, if not)
+
+    if (Number(data)){
+
+      let number = Number(data);
+      
+      targetBets.push(number);
+      return;
+    }
+    else if(data === "red" || data === "black"){
+
+      targetColorBets.push(data);
+
+      return;
+    }else {
+
+      targetBets.push(data); 
+
+      return;
+    }
   }
   
-  bets.set(targetId, [data]);
+  if(data === "red" || data === "black"){
+    colorBets.set(targetId, [data]);
+  }
+  else {
+    bets.set(targetId, [data]);
+  }
 
   // once a bet has been placed, enable the spin button
   const spinButtonSelector = `#spin-button`
