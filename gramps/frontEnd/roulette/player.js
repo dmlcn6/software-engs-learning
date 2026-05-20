@@ -78,6 +78,106 @@ function addWinningNumberToHistory(numberTag) {
   historyTag.appendChild(numberTag);
 }
 
+function compareGroupings() {
+
+}
+
+function findHits(color, number) {
+  let is1st12 = false;
+  let is2nd12 = false;
+  let is3rd12 = false;
+  let is1to18 = false;
+  let is19to36 = false;
+  let isEven = false;
+  let isOdd = false;
+  let isRed = false;
+  let isBlack = false;
+
+  if (color === "red"){
+    isRed = true;
+  }
+  else {
+    isBlack = true;
+  }
+
+  if (number % 2 === 0) {
+    isEven = true;
+  }
+  else {
+    isOdd = true;
+  }
+
+  if (number < 19) {
+    is1to18 = true;
+  }
+  else {
+    is19to36 = true;
+  }
+
+  if ( Math.ceil(number/12) === 1){
+    is1st12 = true;
+  }
+  else if ( Math.ceil(number/12) === 2){
+    is2nd12 = true;
+  }
+  else if ( Math.ceil(number/12) === 3){
+    is3rd12 = true;
+  }
+
+  for (const [key, value] of bets.entries())  {
+    
+    let k = key;
+    let v = value;
+
+
+    let betNum = -1;
+    try {
+      betNum = parseInt(k);
+    }
+    catch {
+      // cant parse
+    }
+
+    if (betNum > -1) {
+      // its a bet on a number, handle slightly diff
+
+    }
+    else {
+      // its a side bet
+      if(k.contains("1st12") && is1st12) {
+        // win
+      }
+      
+      if (k.contains("2nd12") && is2nd12) {
+        // win
+      }
+      
+      if (k.contains("3rd12") && is3rd12) {
+        //win
+      }
+      
+      if (k.contains("1to18") && is1to18) {
+        // win
+      } 
+      
+      if (k.contains("19to36") && is19to36) {
+        // win
+      }
+
+      if (k.contains("odd") && isOdd) {
+        // win
+      }
+      
+      if (k.contains("even") && isEven) {
+        // win
+      }
+      
+    }
+  }
+
+  // compare groupings of bets to winning groups
+};
+
 export function spin(ev) {
   // let winner = getNumber(); same as below
   let (color, number, numberTag) = getWinningNumber();
@@ -85,6 +185,7 @@ export function spin(ev) {
   addWinningNumberToHistory(numberTag);
 
 
+  findHits(color, number);
   
 }
 
