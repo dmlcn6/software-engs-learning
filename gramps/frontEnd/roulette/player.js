@@ -66,7 +66,7 @@ function getWinningNumber() {
         color = 'red'
     }
 
-    return [color, number, copyOfNumberTag];
+    return (color, number, copyOfNumberTag);
 }
 
 function addWinningNumberToHistory(numberTag) {
@@ -80,9 +80,18 @@ function addWinningNumberToHistory(numberTag) {
 
 function compareGroupings() {
 
+  (is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd) = findNumberHits(number);
+  (isBlack, isRed) = findColorHits(color);
+
+  // compare groupings of bets to winning groups
+  bets.forEach(playerBet => {
+    
+  });
+
 }
 
-function findHits(color, number) {
+
+function findNumberHits(number) {
   let is1st12 = false;
   let is2nd12 = false;
   let is3rd12 = false;
@@ -90,15 +99,6 @@ function findHits(color, number) {
   let is19to36 = false;
   let isEven = false;
   let isOdd = false;
-  let isRed = false;
-  let isBlack = false;
-
-  if (color === "red"){
-    isRed = true;
-  }
-  else {
-    isBlack = true;
-  }
 
   if (number % 2 === 0) {
     isEven = true;
@@ -175,8 +175,78 @@ function findHits(color, number) {
     }
   }
 
-  // compare groupings of bets to winning groups
+  return (is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd);
+  
 };
+
+
+function findColorHits(color) {
+  
+  let isRed = false;
+  let isBlack = false;
+
+  if (color === "red"){
+    isRed = true;
+  }
+  else {
+    isBlack = true;
+  }
+
+  for (const [key, value] of bets.entries())  {
+    
+    let k = key;
+    let v = value;
+
+
+    let betNum = -1;
+    try {
+      betNum = parseInt(k);
+    }
+    catch {
+      // cant parse
+    }
+
+    if (betNum > -1) {
+      // its a bet on a number, handle slightly diff
+
+    }
+    else {
+      // its a side bet
+      if(k.contains("1st12") && is1st12) {
+        // win
+      }
+      
+      if (k.contains("2nd12") && is2nd12) {
+        // win
+      }
+      
+      if (k.contains("3rd12") && is3rd12) {
+        //win
+      }
+      
+      if (k.contains("1to18") && is1to18) {
+        // win
+      } 
+      
+      if (k.contains("19to36") && is19to36) {
+        // win
+      }
+
+      if (k.contains("odd") && isOdd) {
+        // win
+      }
+      
+      if (k.contains("even") && isEven) {
+        // win
+      }
+      
+    }
+  }
+
+  return (is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd, isRed, isBlack);
+  
+};
+
 
 export function spin(ev) {
   // let winner = getNumber(); same as below
@@ -185,7 +255,7 @@ export function spin(ev) {
   addWinningNumberToHistory(numberTag);
 
 
-  findHits(color, number);
+  
   
 }
 
