@@ -49,4 +49,4 @@ allBetableSpots.forEach((betSpot) => {
     betSpot.addEventListener("drop", dropHandler);
 });
 
-//let number = generateRandomNumber();
+let number = generateRandomNumber();

@@ -1,7 +1,7 @@
-
+import { generateRandomNumber } from "./board";
 
 export let wallet = 1000;
-export let bets = [];
+export const bets = new Map();
 
 //determine the data to grab
 export function dragstartHandler(e) {
@@ -10,7 +10,6 @@ export function dragstartHandler(e) {
     // allows copy operation, instead of replace
     e.dataTransfer.effectAllowed = 'copy';
 }
-
 
 export function dragoverHandler(e) {
     //prevents the default behavior of an element. Allows element to be placed onto another
@@ -35,3 +34,11 @@ export function dropHandler(e) {
     e.target.appendChild(ogCopy);
 }
 
+let targetId = e.target.id;
+
+if (targetId in bets) {
+
+    let targetBets = bets.targetId;
+
+    data.replace("_", "");
+}
