@@ -1,6 +1,9 @@
-import { generateRandomColor, generateRandomNumber } from "./number.js";
+import { generateRandomNumber } from "./number.js";
 export let wallet = 1000;
 export const bets = new Map();
+
+// {key: value} - > {_1st12: [1,1], _1: [1,1,1,]}
+export const color = new Map(); 
 
 export function placeBet() {
     let allBetableSpots = document.querySelectorAll(".number,.bet");
@@ -27,7 +30,7 @@ export function dropHandler(ev) {
   ev.preventDefault();
 
   // grabs the dragged data, the chip to bet
-  const data = ev.dataTransfer.getData("text");
+  let data = ev.dataTransfer.getData("text");
 
   // queries the element from teh dragged data(className)
   const ogElement = document.querySelector(`.${data}`);
@@ -36,23 +39,28 @@ export function dropHandler(ev) {
   const copyElement = ogElement.cloneNode(true);
   ev.target.appendChild(copyElement);
 
+  data = data.replace("_", "");
+  data = Number(data);
+
   let targetId = ev.target.id;
   // going to add the bet to the dict of bets, using key
   // before setting new key, check if key exists
-  if (targetId in bets) {
+  
+  if (bets.has(targetId)) {
     // the user has placed a bet on this target
     // so lets grab the previous bets and append
-    let targetBets = bets.targetId;
-
+    let targetBets = bets.get(targetId);
+    targetBets.push(data);
     // check if its a bet on a single  numbner
     // remove underscore
-    data.replace("_", "");
-
+    // this is the chip amount
+    
 
     // if (+data)
     // if (Number(data))
     // thesse try to parse data as an integer and return NaN (not a num, if not)
 
+    /*
     if (Number(data)){
 
       let number = Number(data);
@@ -62,7 +70,7 @@ export function dropHandler(ev) {
     }
     else if(data === "red" || data === "black"){
 
-      targetColorBets.push(data);
+      targetBets.push(data);
 
       return;
     }else {
@@ -71,10 +79,7 @@ export function dropHandler(ev) {
 
       return;
     }
-  }
-  
-  if(data === "red" || data === "black"){
-    colorBets.set(targetId, [data]);
+    */
   }
   else {
     bets.set(targetId, [data]);
@@ -111,12 +116,18 @@ function addWinningNumberToHistory(numberTag) {
 
 function compareGroupings() {
 
-  (is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd) = findNumberHits(number);
-  (isBlack, isRed) = findColorHits(color);
+  [is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOd] = findNumberHits(number);
+  [isBlack, isRed] = findColorHits(color);
 
   // compare groupings of bets to winning groups
   bets.forEach(playerBet => {
+    // grab key
     
+    // find grouping
+    // check if grouping is marked as true in winning set
+    // if true, grab value from key (list), sum of elements 
+    // multply sum of bets * multiplier -> winnnigns
+    // add original bet
   });
 
 }
@@ -281,7 +292,7 @@ function findColorHits(color) {
 
 export function spin(ev) {
   // let winner = getNumber(); same as below
-  let (color, number, numberTag) = getWinningNumber();
+  let [color, number, numberTag] = getWinningNumber();
   
   addWinningNumberToHistory(numberTag);
 

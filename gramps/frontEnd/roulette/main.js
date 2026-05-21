@@ -1,5 +1,5 @@
 import { placeBet, dragstartHandler, dragoverHandler, dropHandler, wallet, bets, spin } from "./player.js";
-import { generateRandomColor, generateRandomNumber } from "./number.js";7
+import { generateRandomNumber } from "./number.js";7
 
 function highlightSquares(e){
     let target = e.target;
