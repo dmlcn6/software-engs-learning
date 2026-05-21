@@ -2,11 +2,15 @@ import { generateRandomColor, generateRandomNumber } from "./board.js";
 
 const slotOptions = document.querySelectorAll(".slot");
 const categoryOptions = document.querySelectorAll(".category-Option");
+const chipContainer = document.querySelectorAll(".chip-Pieces-Container")
 const _1to12slots = document.querySelectorAll("._1to12Slots");
 const _13to24slots = document.querySelectorAll("._13to24Slots");
 const _25to36slots = document.querySelectorAll("._25to36Slots");
+const playerWallet = document.querySelector("#money-Count");
 
 const betAction = new Map();
+let moneyAvailable = 1000;
+
 
 
 

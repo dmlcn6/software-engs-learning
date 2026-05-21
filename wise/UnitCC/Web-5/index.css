@@ -87,3 +87,20 @@ body {
 .category-Option {
     border: solid rgb(0, 140, 255)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+#money-Count {
+    display: grid;
+    grid-template-columns: 20% 1fr
+}
