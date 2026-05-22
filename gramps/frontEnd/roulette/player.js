@@ -3,7 +3,7 @@ export let wallet = 1000;
 export const bets = new Map();
 
 // {key: value} - > {_1st12: [1,1], _1: [1,1,1,]}
-export const color = new Map(); 
+export const colors = new Map(); 
 
 export function placeBet() {
     let allBetableSpots = document.querySelectorAll(".number,.bet");
@@ -102,7 +102,7 @@ function getWinningNumber() {
         color = 'red'
     }
 
-    return (color, number, copyOfNumberTag);
+    return [color, number, copyOfNumberTag];
 }
 
 function addWinningNumberToHistory(numberTag) {
@@ -114,20 +114,85 @@ function addWinningNumberToHistory(numberTag) {
   historyTag.appendChild(numberTag);
 }
 
-function compareGroupings() {
+function compareGroupings(color, number) {
 
-  [is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOd] = findNumberHits(number);
+  [is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd] = findNumberHits(number);
   [isBlack, isRed] = findColorHits(color);
 
   // compare groupings of bets to winning groups
-  bets.forEach(playerBet => {
-    // grab key
+  bets.forEach((value, playerBet) => {
+    let penalty = 0;
+    let winning = 0;
+    let stakeAmount = value.reduce((sum, current) => sum + current, 0);
+
+    if (playerBet.contains("odd")) {
+      if(isOdd){
+        winning += stakeAmount * 1;
+      }
+    }
+
+    if (playerBet.contains("even")) {
+      if(isEven){
+        winning += stakeAmount * 1;
+      }
+    }
+
+    // find grouping for key
+    if (playerBet === 'red') {
+      if (isRed === true) {  
+        winning += stakeAmount * 1;
+      }
+    }
+
+    // find grouping for key
+    if (playerBet === 'black') {
+      if (isBlack) {  
+        winning += stakeAmount * 1;
+      }
+    }
+
+    if (playerBet.contains("1st12")) {
+      if (is1st12) {
+        winning += stakeAmount * 2;
+      }
+    }
+
+    if (playerBet.contains("2nd12")) {
+      if (is2nd12) {
+        winning += stakeAmount * 2;
+      }
+    }
+
+    if (playerBet.contains("3rd12")) {
+      if (is3rd12) {
+        winning += stakeAmount * 2;
+      }
+    }
+
+    if (playerBet instanceof Number) {
+      if (playerBet === number) {
+        // straight up is 35:1 
+        winning += stakeAmount * 35;
+      }
+    }
     
-    // find grouping
+    if (playerBet.contains("1to18")) {
+      if (is1to18) {
+        winning += stakeAmount * 3;
+      }
+    }
+
+    if (playerBet.contains("19to36")) {
+      if (is19to36) {
+        winning += stakeAmount * 3;
+      }
+    }
+    
     // check if grouping is marked as true in winning set
     // if true, grab value from key (list), sum of elements 
     // multply sum of bets * multiplier -> winnnigns
     // add original bet
+    return winning;
   });
 
 }
@@ -296,8 +361,15 @@ export function spin(ev) {
   
   addWinningNumberToHistory(numberTag);
 
+  let fullStakeAmount = 0;
+  bets.forEach((value, key) => {
+    // find grouping for key
+    fullStakeAmount += value.reduce((sum, current) => sum + current, 0)
+  });
 
-  
+
+  wallet -= fullStakeAmount;
+  wallet += compareGroupings(color, number);
   
 }
 
