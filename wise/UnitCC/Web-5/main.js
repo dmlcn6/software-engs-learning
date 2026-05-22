@@ -86,7 +86,7 @@ function dropHandler(e) {
     const dupliObj = originObj.cloneNode(true);
     e.target.appendChild(dupliObj);
 
-    let objID = e.target.id;
+    let objID = e.target.id; //
 
     if (objID in betAction) {
         let objbets = betAction.objID;
