@@ -8,8 +8,9 @@ const _13to24slots = document.querySelectorAll("._13to24Slots");
 const _25to36slots = document.querySelectorAll("._25to36Slots");
 const playerWallet = document.querySelector("#money-Count");
 
-const betAction = new Map();
+
 let moneyAvailable = 1000;
+let PlyrChoices = { turn: 0, optiontype0: "Empty", option: "Empty", color0: "color", amount0: "0" }
 
 
 
@@ -82,19 +83,26 @@ function dropHandler(e) {
     // queries the element from the dragged data (classname) (i need review)
     const originObj = document.querySelector(`.${data}`);
 
+
+    PlyrChoices.turn++;
+    switch (true) {
+        case e.target.classList.contains("slot"):
+            PlyrChoices = { ...PlyrChoices, [`option${PlyrChoices.turn}`]: e.target.textContent, color1: "red" }
+            break;
+        default:
+            break;
+    }
+
     // duplicates the obj and attaches it to the target
     const dupliObj = originObj.cloneNode(true);
     e.target.appendChild(dupliObj);
 
-    let objID = e.target.id; //
 
-    if (objID in betAction) {
-        let objbets = betAction.objID;
-        objbets.push(data);
-        return;
-    }
 
-    betAction.set(objID, [data]);
+
+    // add the chip value to the chip slot
+
+    //
 }
 
 //----------------------------------------------------------
