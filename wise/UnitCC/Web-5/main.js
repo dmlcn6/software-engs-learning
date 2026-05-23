@@ -10,7 +10,7 @@ const playerWallet = document.querySelector("#money-Count");
 
 
 let moneyAvailable = 1000;
-let PlyrChoices = { turn: 0, optiontype0: "Empty", option: "Empty", color0: "color", amount0: "0" }
+let PlyrChoices = { turn: 0, amount0: "0", optiontype0: "Empty", option0: "Empty", }
 
 
 
@@ -84,36 +84,61 @@ function dropHandler(e) {
     const originObj = document.querySelector(`.${data}`);
 
 
-    PlyrChoices.turn++;
-    switch (true) {
-        case e.target.classList.contains("slot"):
-            PlyrChoices = { ...PlyrChoices, [`option${PlyrChoices.turn}`]: e.target.textContent, color1: "red" }
-            break;
-        default:
-            break;
-    }
-
     // duplicates the obj and attaches it to the target
     const dupliObj = originObj.cloneNode(true);
     e.target.appendChild(dupliObj);
 
 
-
+    choiceUpdater(originObj, e.target)
 
     // add the chip value to the chip slot
 
     //
 }
 
+
+
+function choiceUpdater(choiceChip, choiceLocation) {
+    PlyrChoices.turn++;
+    PlyrChoices = { ...PlyrChoices, [`amount${PlyrChoices.turn}`]: choiceChip.classList[0], [`optiontype${PlyrChoices.turn}`]: choiceLocation.classList[0], [`option${PlyrChoices.turn}`]: choiceLocation.textContent };
+
+}
+function winGenerator() {
+    let number = Math.floor(Math.random() * 37);
+
+    let amount = PlyrChoices[`${amount[i]}`]
+    let optionType = PlyrChoices[`${optionType[i]}`]
+    let option = PlyrChoices[`${option[i]}`]
+
+    for (let i = 0; i <= PlyrChoices.turn; i++)
+        switch (PlyrChoices.optiontype[{ i }.toString()]) {
+            case "slot":
+                if (number == PlyrChoices.option[{ i }]) {
+                    outcomeCalculator("won", PlyrChoices.amount[{ i }])
+                }
+                else if (number != PlyrChoices.option[{ i }]) {
+                    outcomeCalculator("lost", PlyrChoices.amount[{ i }])
+                }
+                else {
+                    console.log("something went wrong1")
+                }
+                break;
+
+            default:
+                console.log("something went wrong2")
+                break;
+        }
+}
+function outcomeCalculator(status, amount) {
+    if (status == "won") {
+        moneyAvailable += amount;
+    }
+    else {
+        moneyAvailable -= amount;
+    }
+}
+
 //----------------------------------------------------------
-
-
-
-//----------------------------------------------------------
-
-let number = generateRandomNumber();
-
-//--------------------------------------------------------
 
 
 
@@ -129,6 +154,15 @@ possibleBetSlot.forEach((betSlot) => {
     betSlot.addEventListener("dragover", dragDuringHandler);
     betSlot.addEventListener("drop", dropHandler);
 });
+
+//--------------------------------------------------------
+
+
+
+//--------------------------------------------------------
+
+const spinButton = document.querySelector("#feelingLucky");
+spinButton.addEventListener("click", winGenerator);
 
 //--------------------------------------------------------
 
