@@ -5,9 +5,11 @@ export const bets = new Map();
 // {key: value} - > {_1st12: [1,1], _1: [1,1,1,]}
 export const colors = new Map(); 
 
+
 export function placeBet() {
     let allBetableSpots = document.querySelectorAll(".number,.bet");
 }
+
 
 export function dragstartHandler(ev) {
   // sets the data that is being dragged
@@ -17,6 +19,7 @@ export function dragstartHandler(ev) {
   ev.dataTransfer.effectAllowed = 'copy';
 }
 
+
 export function dragoverHandler(ev) {
   // prevents default behavior of an element disabling another element to be dragged in it
   ev.preventDefault();
@@ -24,6 +27,7 @@ export function dragoverHandler(ev) {
   // allows copy on drop
   ev.dataTransfer.dropEffect = 'copy';
 }
+
 
 // placing a chip on a bet spot
 export function dropHandler(ev) {
@@ -91,6 +95,7 @@ export function dropHandler(ev) {
   spinButton.disabled = false;
 }
 
+
 function getWinningNumber() {
     // now generate the winning number
     let number = generateRandomNumber();
@@ -105,6 +110,7 @@ function getWinningNumber() {
     return [color, number, copyOfNumberTag];
 }
 
+
 function addWinningNumberToHistory(numberTag) {
   // add winner to history
   let historyTagSelector = `.roulette-history-container`;
@@ -113,6 +119,7 @@ function addWinningNumberToHistory(numberTag) {
   // historyTag.appendChild(winner[2]); same as below
   historyTag.appendChild(numberTag);
 }
+
 
 function compareGroupings(color, number) {
 
