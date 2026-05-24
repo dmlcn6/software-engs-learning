@@ -1,5 +1,24 @@
 import { generateRandomNumber } from "./number.js";
-export let wallet = 1000;
+//export let wallet = 1000;
+export let wallet = {
+  internalValue: 1000,
+  
+  set value(newValue) {
+    this.internalValue = newValue;
+    onValueChange();
+  },
+  get value() {
+    return this.internalValue;
+  }
+};
+
+function onValueChange() {
+  const currentMoneyHTMLTag = document.querySelector("#money-amount");
+  currentMoneyHTMLTag.innerHTML = wallet.value;
+}
+
+
+
 export const bets = new Map();
 
 // {key: value} - > {_1st12: [1,1], _1: [1,1,1,]}
@@ -123,22 +142,21 @@ function addWinningNumberToHistory(numberTag) {
 
 function compareGroupings(color, number) {
 
-  [is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd] = findNumberHits(number);
-  [isBlack, isRed] = findColorHits(color);
-
+  let [is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd] = findNumberHits(number);
+  let [isRed, isBlack] = findColorHits(color);
+  let winning = 0;
   // compare groupings of bets to winning groups
   bets.forEach((value, playerBet) => {
     let penalty = 0;
-    let winning = 0;
     let stakeAmount = value.reduce((sum, current) => sum + current, 0);
 
-    if (playerBet.contains("odd")) {
+    if (playerBet.includes("odd")) {
       if(isOdd){
         winning += stakeAmount * 1;
       }
     }
 
-    if (playerBet.contains("even")) {
+    if (playerBet.includes("even")) {
       if(isEven){
         winning += stakeAmount * 1;
       }
@@ -158,19 +176,19 @@ function compareGroupings(color, number) {
       }
     }
 
-    if (playerBet.contains("1st12")) {
+    if (playerBet.includes("1st12")) {
       if (is1st12) {
         winning += stakeAmount * 2;
       }
     }
 
-    if (playerBet.contains("2nd12")) {
+    if (playerBet.includes("2nd12")) {
       if (is2nd12) {
         winning += stakeAmount * 2;
       }
     }
 
-    if (playerBet.contains("3rd12")) {
+    if (playerBet.includes("3rd12")) {
       if (is3rd12) {
         winning += stakeAmount * 2;
       }
@@ -183,13 +201,13 @@ function compareGroupings(color, number) {
       }
     }
     
-    if (playerBet.contains("1to18")) {
+    if (playerBet.includes("1to18")) {
       if (is1to18) {
         winning += stakeAmount * 3;
       }
     }
 
-    if (playerBet.contains("19to36")) {
+    if (playerBet.includes("19to36")) {
       if (is19to36) {
         winning += stakeAmount * 3;
       }
@@ -199,9 +217,9 @@ function compareGroupings(color, number) {
     // if true, grab value from key (list), sum of elements 
     // multply sum of bets * multiplier -> winnnigns
     // add original bet
-    return winning;
   });
-
+  
+  return winning;
 }
 
 
@@ -238,7 +256,8 @@ function findNumberHits(number) {
     is3rd12 = true;
   }
 
-  for (const [key, value] of bets.entries())  {
+  /*
+  for (const [key, value] of bets)  {
     
     let k = key;
     let v = value;
@@ -258,38 +277,38 @@ function findNumberHits(number) {
     }
     else {
       // its a side bet
-      if(k.contains("1st12") && is1st12) {
+      if(k.includes("1st12") && is1st12) {
         // win
       }
       
-      if (k.contains("2nd12") && is2nd12) {
+      if (k.includes("2nd12") && is2nd12) {
         // win
       }
       
-      if (k.contains("3rd12") && is3rd12) {
+      if (k.includes("3rd12") && is3rd12) {
         //win
       }
       
-      if (k.contains("1to18") && is1to18) {
+      if (k.includes("1to18") && is1to18) {
         // win
       } 
       
-      if (k.contains("19to36") && is19to36) {
+      if (k.includes("19to36") && is19to36) {
         // win
       }
 
-      if (k.contains("odd") && isOdd) {
+      if (k.includes("odd") && isOdd) {
         // win
       }
       
-      if (k.contains("even") && isEven) {
+      if (k.includes("even") && isEven) {
         // win
       }
       
     }
   }
-
-  return (is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd);
+  */
+  return [is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd];
   
 };
 
@@ -306,7 +325,8 @@ function findColorHits(color) {
     isBlack = true;
   }
 
-  for (const [key, value] of bets.entries())  {
+  /*
+  for (const [key, value] of bets)  {
     
     let k = key;
     let v = value;
@@ -326,38 +346,39 @@ function findColorHits(color) {
     }
     else {
       // its a side bet
-      if(k.contains("1st12") && is1st12) {
+      if(k.includes("1st12") && is1st12) {
         // win
       }
       
-      if (k.contains("2nd12") && is2nd12) {
+      if (k.includes("2nd12") && is2nd12) {
         // win
       }
       
-      if (k.contains("3rd12") && is3rd12) {
+      if (k.includes("3rd12") && is3rd12) {
         //win
       }
       
-      if (k.contains("1to18") && is1to18) {
+      if (k.includes("1to18") && is1to18) {
         // win
       } 
       
-      if (k.contains("19to36") && is19to36) {
+      if (k.includes("19to36") && is19to36) {
         // win
       }
 
-      if (k.contains("odd") && isOdd) {
+      if (k.includes("odd") && isOdd) {
         // win
       }
       
-      if (k.contains("even") && isEven) {
+      if (k.includes("even") && isEven) {
         // win
       }
       
     }
   }
+  */
 
-  return (is1st12, is2nd12, is3rd12, is1to18, is19to36, isEven, isOdd, isRed, isBlack);
+  return [isRed, isBlack];
   
 };
 
@@ -375,8 +396,10 @@ export function spin(ev) {
   });
 
 
-  wallet -= fullStakeAmount;
-  wallet += compareGroupings(color, number);
+  wallet.value -= fullStakeAmount;
+  wallet.value += compareGroupings(color, number);
+
+  
   
 }
 
