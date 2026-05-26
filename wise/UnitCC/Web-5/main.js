@@ -100,24 +100,26 @@ function dropHandler(e) {
 
 function choiceUpdater(choiceChip, choiceLocation) {
     PlyrChoices.turn++;
-    PlyrChoices = { ...PlyrChoices, [`amount${PlyrChoices.turn}`]: choiceChip.classList[0], [`optiontype${PlyrChoices.turn}`]: choiceLocation.classList[0], [`option${PlyrChoices.turn}`]: choiceLocation.textContent };
+    PlyrChoices = { ...PlyrChoices, [`amount${PlyrChoices.turn}`]: parseInt(choiceChip.classList[0].replace(/_/g, "")), [`optiontype${PlyrChoices.turn}`]: choiceLocation.classList[0], [`option${PlyrChoices.turn}`]: choiceLocation.textContent };
 
 }
 function winGenerator() {
-    let number = Math.floor(Math.random() * 37);
+    //let luckyNum = Math.floor(Math.random() * 37);
+    let luckyNum = 9
 
-    let amount = PlyrChoices[`${amount[i]}`]
-    let optionType = PlyrChoices[`${optionType[i]}`]
-    let option = PlyrChoices[`${option[i]}`]
 
-    for (let i = 0; i <= PlyrChoices.turn; i++)
-        switch (PlyrChoices.optiontype[{ i }.toString()]) {
+    for (let i = 1; i <= PlyrChoices.turn; i++) {
+        let amount = PlyrChoices[`amount${i}`];
+        let optiontype = PlyrChoices[`optiontype${i}`];
+        let option = PlyrChoices[`option${i}`];
+
+        switch (optiontype) {
             case "slot":
-                if (number == PlyrChoices.option[{ i }]) {
-                    outcomeCalculator("won", PlyrChoices.amount[{ i }])
+                if (luckyNum == parseInt(option)) {
+                    outcomeCalculator("won", amount)
                 }
-                else if (number != PlyrChoices.option[{ i }]) {
-                    outcomeCalculator("lost", PlyrChoices.amount[{ i }])
+                else if (luckyNum != option) {
+                    outcomeCalculator("lost", amount)
                 }
                 else {
                     console.log("something went wrong1")
@@ -128,6 +130,7 @@ function winGenerator() {
                 console.log("something went wrong2")
                 break;
         }
+    }
 }
 function outcomeCalculator(status, amount) {
     if (status == "won") {

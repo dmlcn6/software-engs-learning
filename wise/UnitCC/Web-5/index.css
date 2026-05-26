@@ -88,6 +88,10 @@ body {
     border: solid rgb(0, 140, 255)
 }
 
+.history-Container {
+    display: grid;
+    grid-template-rows: 1fr;
+}
 
 
 
