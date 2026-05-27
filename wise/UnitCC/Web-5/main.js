@@ -6,10 +6,11 @@ const chipContainer = document.querySelectorAll(".chip-Pieces-Container")
 const _1to12slots = document.querySelectorAll("._1to12Slots");
 const _13to24slots = document.querySelectorAll("._13to24Slots");
 const _25to36slots = document.querySelectorAll("._25to36Slots");
-const playerWallet = document.querySelector("#money-Count");
+const playerWallet = document.querySelector("#walletValue");
 
 
-let moneyAvailable = 1000;
+let moneyAvailable = 5000;
+playerWallet.textContent = [`$${moneyAvailable}`];
 let PlyrChoices = { turn: 0, amount0: "0", optiontype0: "Empty", option0: "Empty", }
 
 
@@ -95,17 +96,19 @@ function dropHandler(e) {
 
     //
 }
-
-
-
-function choiceUpdater(choiceChip, choiceLocation) {
-    PlyrChoices.turn++;
-    PlyrChoices = { ...PlyrChoices, [`amount${PlyrChoices.turn}`]: parseInt(choiceChip.classList[0].replace(/_/g, "")), [`optiontype${PlyrChoices.turn}`]: choiceLocation.classList[0], [`option${PlyrChoices.turn}`]: choiceLocation.textContent };
-
+function clearHandler(e) {
+    location.reload(true);
 }
+
+//----------------------------------------------------------
+
+
+
+//----------------------------------------------------------
+
 function winGenerator() {
-    //let luckyNum = Math.floor(Math.random() * 37);
-    let luckyNum = 9
+    let luckyNum = Math.floor(Math.random() * 37);
+    //let luckyNum = 9
 
 
     for (let i = 1; i <= PlyrChoices.turn; i++) {
@@ -131,6 +134,10 @@ function winGenerator() {
                 break;
         }
     }
+
+    PlyrChoices = { turn: 0, amount0: "0", optiontype0: "Empty", option0: "Empty", };
+    historyUpdater(luckyNum);
+
 }
 function outcomeCalculator(status, amount) {
     if (status == "won") {
@@ -139,6 +146,46 @@ function outcomeCalculator(status, amount) {
     else {
         moneyAvailable -= amount;
     }
+}
+
+//----------------------------------------------------------
+
+
+
+//----------------------------------------------------------
+
+function choiceUpdater(choiceChip, choiceLocation) {
+    PlyrChoices.turn++;
+    PlyrChoices = { ...PlyrChoices, [`amount${PlyrChoices.turn}`]: parseInt(choiceChip.classList[0].replace(/_/g, "")), [`optiontype${PlyrChoices.turn}`]: choiceLocation.classList[0], [`option${PlyrChoices.turn}`]: choiceLocation.textContent };
+
+    informationUpdater(PlyrChoices.turn)
+}
+function historyUpdater(winNum) {
+
+    const history = document.querySelector(".history-Container")
+    let newAddition = document.createElement("div");
+
+    newAddition.textContent = winNum.toString();
+    if (winNum == 1 || 3 || 5 || 7 || 9 || 12 || 14 || 16 || 18 || 19 || 21 || 23 || 25 || 27 || 30 || 32 || 36 || 34) {
+        newAddition.style.color = "red"
+    }
+
+    history.appendChild(newAddition);
+
+}
+function informationUpdater(locator) {
+    const betCount = document.querySelector("#bet-Count");
+    let betAmount = 0
+
+    moneyAvailable -= PlyrChoices[`amount${locator}`];
+    playerWallet.textContent = [`$${moneyAvailable}`];
+
+
+    for (let i = 1; i <= PlyrChoices.turn; i++) {
+        betAmount += PlyrChoices[`amount${i}`]
+    }
+    betCount.textContent = [`bet ct: $${betAmount}`]
+
 }
 
 //----------------------------------------------------------
@@ -165,7 +212,9 @@ possibleBetSlot.forEach((betSlot) => {
 //--------------------------------------------------------
 
 const spinButton = document.querySelector("#feelingLucky");
+const clearButton = document.querySelector("#feelingDoubtful")
 spinButton.addEventListener("click", winGenerator);
+clearButton.addEventListener("click", clearHandler)
 
 //--------------------------------------------------------
 

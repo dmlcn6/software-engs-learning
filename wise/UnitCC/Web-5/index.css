@@ -109,7 +109,7 @@ body {
     grid-template-columns: 20% 1fr
 }
 
-#feelingLucky {
+.custButtons {
     background-color: black;
     border: solid yellow;
 }
