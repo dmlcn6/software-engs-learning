@@ -109,9 +109,13 @@ export function dropHandler(ev) {
   }
 
   // once a bet has been placed, enable the spin button
-  const spinButtonSelector = `#spin-button`
+  const spinButtonSelector = '#spin-button';
   let spinButton = document.querySelector(spinButtonSelector);
   spinButton.disabled = false;
+  
+  const clearButtonSelector = '#clear-button';
+  let clearButton = document.querySelector(clearButtonSelector);
+  clearButton.disabled = false;
 }
 
 
@@ -403,6 +407,22 @@ export function spin(ev) {
   
 }
 
+export function clear(ev) {
+  let all1ChipsOnBoard = document.querySelectorAll("._1");
+  let all100ChipsOnBoard = document.querySelectorAll("._100");
+  
+  all1ChipsOnBoard.forEach(e => {
+    if(e.parentElement.className !== 'roulette-chips-container') {
+      e.remove()
+    }
+  });
+  all100ChipsOnBoard.forEach(e => {
+    if(e.parentElement.className !== 'roulette-chips-container') {
+      e.remove()
+    }
+  });
+}
+
 
 //we want to know how much the player has bet
 // we need a list of bets from the player
@@ -422,3 +442,12 @@ export function spin(ev) {
 // compare player groupings
 
 // calculate winning money, if any (still need more psuedocode)
+
+
+
+// we have a board with chips on numbers and sidebets
+// we have a Map() of the location and amount of bets
+// add a button to html
+// add an event to button, then clear all bets, 
+// identify all chips that are  not in the chip container, delete
+// clear the Map() of bets
