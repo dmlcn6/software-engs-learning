@@ -1,4 +1,5 @@
-import { dragoverHandler, dragstartHandler, dropHandler, wallet, bets } from "./player.js";
+import { dragoverHandler, dragstartHandler, dropHandler, wallet, bets, spin } from "./player.js";
+import { generateRandomNumber } from "./board.js";
 
 function highlightSquares(e) {
     let target = e.target;
@@ -49,4 +50,5 @@ allBetableSpots.forEach((betSpot) => {
     betSpot.addEventListener("drop", dropHandler);
 });
 
-let number = generateRandomNumber();
+const spinButton = document.querySelector(`#spin-button`);
+spinButton.addEventListener("click", spin);

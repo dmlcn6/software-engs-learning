@@ -1,4 +1,4 @@
-import { generateRandomNumber } from "./board";
+import { generateRandomNumber } from "./board.js";
 
 export let wallet = 1000;
 export const bets = new Map();
@@ -24,7 +24,7 @@ export function dropHandler(e) {
     e.preventDefault();
 
     //grabs the data being dragged(the chip we are betting)
-    const data = e.dataTransfer.getData("text");
+    let data = e.dataTransfer.getData("text");
 
     //quieries the targeted element
     const original = document.querySelector(`.${data}`);
@@ -32,13 +32,31 @@ export function dropHandler(e) {
     //clones the targeted element and appends to destination
     const ogCopy = original.cloneNode(true);
     e.target.appendChild(ogCopy);
+
+    data = data.replace("_", "");
+    data = Number(data);
+
+    let targetId = e.target.id;
+    //adds bet to the dictionary of bets, using key
+    // before setting new key, check if key exists
+
+    if (bets.has(targetId)) {
+        //grabs users bet on target
+        let targetBets = bets.get(targetId);
+        targetBets.push(data);
+        //checks if bet is a single number
+
+    }
+    else {
+        bets.set(targetId, [data])
+    }
+
+    //spin button enables after bet has been placed
+    const spinButtonSelector = `#spin-button`;
+    let spinButton = document.querySelector(spinButtonSelector);
+    spinButton.disabled = false;
 }
 
-let targetId = e.target.id;
+export function spin(e) {
 
-if (targetId in bets) {
-
-    let targetBets = bets.targetId;
-
-    data.replace("_", "");
 }
