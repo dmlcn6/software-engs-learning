@@ -150,6 +150,7 @@ here is what we covered so far
   - Go thru exmaple modules with documentation
   - REPS REPS REPS
   - Project with AC
+
 - ** 4/30 - Spint 10: Roulette** - link to board design in group DMs
   - Dozen Bet – Pays 2 to 1,
   - Odd or Even – Pays 1 to 1,
@@ -162,9 +163,12 @@ here is what we covered so far
   - Hover animations over each rule
     - highlight the appropriate squares
   - Betting on a square will show the chosen chip
-  - undo and clear functionality
+  - clear functionality
   - start 1000 chips
   - History of past numbers hit
+
+- ** 5/2 : Starting the Roulette game pt 1. setting up the board and basic highlighting
+- ** 5/4 : Roulette pt 1. setting up the board and basic highlighting. Grab free audio int software for cozy
 
 Tyree made this Change 11/14/25+
 
