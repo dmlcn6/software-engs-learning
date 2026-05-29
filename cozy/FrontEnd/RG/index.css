@@ -63,3 +63,12 @@ html {
 .red {
     background-color: red;
 }
+
+.roulette-history-container {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 1/5;
+    width: 400px;
+    height: 400px;
+}

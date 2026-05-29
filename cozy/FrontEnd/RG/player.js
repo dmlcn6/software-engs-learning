@@ -55,8 +55,44 @@ export function dropHandler(e) {
     const spinButtonSelector = `#spin-button`;
     let spinButton = document.querySelector(spinButtonSelector);
     spinButton.disabled = false;
+
+    //once a bet has been placed, clear button can be used to remove all bets
+    const clearButtonSelector = `#clear-button`;
+    let clearButton = document.querySelector(clearButtonSelector);
+    clearButton.disabled = false;
+}
+
+function winningNumber() {
+    let number = generateRandomNumber();
+    let query = `#_${number}`;
+    let numberTag = document.querySelector(query);
+    let copyOfNumberTag = numberTag.cloneNode();
+    let color = 'black';
+    if (numberTag.classList.contains("red")) {
+        color = 'red'
+    }
+    return [color, number, copyOfNumberTag];
+}
+
+function numberHistory(numberTag) {
+    let historyTagSelector = `.roulette-history-container`;
+    let historyTag = document.querySelector(historyTagSelector);
+
+    historyTag.appendChild(numberTag)
 }
 
 export function spin(e) {
+    let [color, number, numberTag] = winningNumber();
 
+    numberHistory(numberTag);
+}
+
+export function clear(e) {
+    let oneChip = document.querySelectorAll("_1");
+
+    oneChip.forEach(e => {
+        if (e.parentElement.className !== 'roulette-chips-container') {
+            e.remove()
+        }
+    })
 }
