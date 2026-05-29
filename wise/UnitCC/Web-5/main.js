@@ -7,9 +7,10 @@ const _1to12slots = document.querySelectorAll("._1to12Slots");
 const _13to24slots = document.querySelectorAll("._13to24Slots");
 const _25to36slots = document.querySelectorAll("._25to36Slots");
 const playerWallet = document.querySelector("#walletValue");
+const betCount = document.querySelector("#bet-Count");
 
 
-let moneyAvailable = 5000;
+let moneyAvailable = 1000;
 playerWallet.textContent = [`$${moneyAvailable}`];
 let PlyrChoices = { turn: 0, amount0: "0", optiontype0: "Empty", option0: "Empty", }
 
@@ -87,6 +88,7 @@ function dropHandler(e) {
 
     // duplicates the obj and attaches it to the target
     const dupliObj = originObj.cloneNode(true);
+    dupliObj.classList.add("clonedchip");
     e.target.appendChild(dupliObj);
 
 
@@ -96,8 +98,18 @@ function dropHandler(e) {
 
     //
 }
-function clearHandler(e) {
-    location.reload(true);
+function clearHandler() {
+    //location.reload(true);
+
+    let boardchips = document.querySelectorAll(".clonedchip");
+    boardchips.forEach((item) => {
+        item.remove();
+    });
+
+    betCount.textContent = "bet ct: $0";
+
+
+
 }
 
 //----------------------------------------------------------
@@ -167,14 +179,17 @@ function historyUpdater(winNum) {
 
     newAddition.textContent = winNum.toString();
     if (winNum == 1 || 3 || 5 || 7 || 9 || 12 || 14 || 16 || 18 || 19 || 21 || 23 || 25 || 27 || 30 || 32 || 36 || 34) {
-        newAddition.style.color = "red"
+        newAddition.style.color = "red";
+    }
+    else {
+        newAddition.style.color = "black";
     }
 
     history.appendChild(newAddition);
 
 }
 function informationUpdater(locator) {
-    const betCount = document.querySelector("#bet-Count");
+
     let betAmount = 0
 
     moneyAvailable -= PlyrChoices[`amount${locator}`];
