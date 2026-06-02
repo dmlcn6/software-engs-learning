@@ -66,7 +66,10 @@ function winningNumber() {
     let number = generateRandomNumber();
     let query = `#_${number}`;
     let numberTag = document.querySelector(query);
-    let copyOfNumberTag = numberTag.cloneNode();
+    // create a clean copy that preserves classes and text but omits child nodes (e.g., chips)
+    let copyOfNumberTag = document.createElement(numberTag.tagName);
+    copyOfNumberTag.className = numberTag.className;
+    copyOfNumberTag.textContent = numberTag.textContent;
     let color = 'black';
     if (numberTag.classList.contains("red")) {
         color = 'red'
@@ -88,11 +91,23 @@ export function spin(e) {
 }
 
 export function clear(e) {
-    let oneChip = document.querySelectorAll("_1");
+    // remove any chip elements placed on the board (but keep the originals in the chips container)
+    const table = document.querySelector('.roulette-table-container');
+    if (table) {
+        const imgs = table.querySelectorAll('img');
+        imgs.forEach(img => {
+            if (!img.closest('.roulette-chips-container')) {
+                img.remove();
+            }
+        });
+    }
 
-    oneChip.forEach(e => {
-        if (e.parentElement.className !== 'roulette-chips-container') {
-            e.remove()
-        }
-    })
+    // clear in-memory bets
+    bets.clear();
+
+    // disable spin and clear buttons until new bets are placed
+    const spinButton = document.querySelector('#spin-button');
+    const clearButton = document.querySelector('#clear-button');
+    if (spinButton) spinButton.disabled = true;
+    if (clearButton) clearButton.disabled = true;
 }

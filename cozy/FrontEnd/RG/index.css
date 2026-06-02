@@ -2,11 +2,16 @@ html {
     background-color: seagreen;
 }
 
+.roulette-table-container {
+    display: grid;
+}
+
 .roulette-board-container {
     display: grid;
     grid-template-columns: 3% 1fr 1fr 1fr;
     color: white;
 }
+
 
 .column {
     font-size: 30px
@@ -66,9 +71,8 @@ html {
 
 .roulette-history-container {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(2, 1fr);
-    grid-column: 1/5;
-    width: 400px;
-    height: 400px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    color: white;
+    font-size: medium;
 }
