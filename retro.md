@@ -181,3 +181,22 @@ Things to think about?
 
 motavation?
 - STAY THE COURSE
+
+---
+
+06/04 Retro
+
+What went well?
+- Great AC Criteria Planning
+- Collaborative
+- Gained experiences using multiple web technologies together
+
+What didnt go well?
+- setting realistic goals that dont over extend
+- finding the similarities between C# and js
+- low number of reps caused 
+
+Things to think about?
+- validate reps more
+- hone in on the ac
+- hone in on key aspects
