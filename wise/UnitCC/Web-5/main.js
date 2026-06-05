@@ -2,7 +2,7 @@ import { generateRandomColor, generateRandomNumber } from "./board.js";
 
 const slotOptions = document.querySelectorAll(".slot");
 const categoryOptions = document.querySelectorAll(".category-Option");
-const chipContainer = document.querySelectorAll(".chip-Pieces-Container")
+const chipContainer = document.querySelectorAll(".chip-Pieces-Container");
 const _1to12slots = document.querySelectorAll("._1to12Slots");
 const _13to24slots = document.querySelectorAll("._13to24Slots");
 const _25to36slots = document.querySelectorAll("._25to36Slots");
@@ -12,7 +12,7 @@ const betCount = document.querySelector("#bet-Count");
 
 let moneyAvailable = 1000;
 playerWallet.textContent = [`$${moneyAvailable}`];
-let PlyrChoices = { turn: 0, amount0: "0", optiontype0: "Empty", option0: "Empty", }
+let PlyrChoices = { turn: 0, amount0: "0", optiontype0: "Empty", option0: "Empty", };
 
 
 
@@ -44,7 +44,7 @@ function HoverResetSlot(e) {
 function HoverFeedbackCategory(e) {
     e.target.setAttribute('style', 'background-color: #0051ff;');
     let objID = e.target.id;
-    const objSeeker = `.${objID}`
+    const objSeeker = `.${objID}`;
 
     const objSeekerResults = document.querySelectorAll(objSeeker);
     objSeekerResults.forEach((item) => {
@@ -54,7 +54,7 @@ function HoverFeedbackCategory(e) {
 function HoverResetCategory(e) {
     e.target.setAttribute('style', '');
     let objID = e.target.id;
-    const objSeeker = `.${objID}`
+    const objSeeker = `.${objID}`;
 
     const objSeekerResults = document.querySelectorAll(objSeeker)
     objSeekerResults.forEach((item) => {
@@ -92,7 +92,7 @@ function dropHandler(e) {
     e.target.appendChild(dupliObj);
 
 
-    choiceUpdater(originObj, e.target)
+    choiceUpdater(originObj, e.target);
 
     // add the chip value to the chip slot
 
@@ -131,10 +131,10 @@ function winGenerator() {
         switch (optiontype) {
             case "slot":
                 if (luckyNum == parseInt(option)) {
-                    outcomeCalculator("won", amount)
+                    outcomeCalculator("won", amount);
                 }
                 else if (luckyNum != option) {
-                    outcomeCalculator("lost", amount)
+                    outcomeCalculator("lost", amount);
                 }
                 else {
                     console.log("something went wrong1")
@@ -170,11 +170,11 @@ function choiceUpdater(choiceChip, choiceLocation) {
     PlyrChoices.turn++;
     PlyrChoices = { ...PlyrChoices, [`amount${PlyrChoices.turn}`]: parseInt(choiceChip.classList[0].replace(/_/g, "")), [`optiontype${PlyrChoices.turn}`]: choiceLocation.classList[0], [`option${PlyrChoices.turn}`]: choiceLocation.textContent };
 
-    informationUpdater(PlyrChoices.turn)
+    informationUpdater(PlyrChoices.turn);
 }
 function historyUpdater(winNum) {
 
-    const history = document.querySelector(".history-Container")
+    const history = document.querySelector(".history-Container");
     let newAddition = document.createElement("div");
 
     newAddition.textContent = winNum.toString();
@@ -227,9 +227,9 @@ possibleBetSlot.forEach((betSlot) => {
 //--------------------------------------------------------
 
 const spinButton = document.querySelector("#feelingLucky");
-const clearButton = document.querySelector("#feelingDoubtful")
+const clearButton = document.querySelector("#feelingDoubtful");
 spinButton.addEventListener("click", winGenerator);
-clearButton.addEventListener("click", clearHandler)
+clearButton.addEventListener("click", clearHandler);
 
 //--------------------------------------------------------
 
