@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link href="../RG/index.css" rel="stylesheet">
+    <script async type="module" src="../RG/main.js"></script>
+</head>
+
+<body>
+    <div class="roulette-title-container">
+        <div class="currency-tab" id="money">
+            <div id="money-label">MONEY</div>
+            <div id="money-amount"></div>
+        </div>
+        <div class="currency-tab" id="bet">
+            <div id="bet-label">BET</div>
+        </div>
+        <div class="currency-tab" id="minmax">
+            <div>MIN BET: 1</div>
+            <div>MAX BET: 1000</div>
+        </div>
+        <div class="title">
+            <h2>ROULETTE</h2>
+            <h4>with Cozy</h4>
+        </div>
+    </div>
+
+    <div class="roulette-table-container">
+        <div class="roulette-chips-container">
+            <img class="_1" draggable="true" src="..//RG/images/1-pokerchip_small.png" alt="test">
+        </div>
+        <div class="roulette-board-container">
+            <div class="column" id="column0">
+                <div class="left-side-bets">
+                    <div class="number zero" id="_0">0</div>
+                </div>
+            </div>
+            <div class="column" id="column1">
+                <div class="numbers">
+                    <div class="number _1st12 _1to18 odd red" id="_3">3</div>
+                    <div class="number _1st12 _1to18 even black" id="_6">6</div>
+                    <div class="number _1st12 _1to18 odd red" id="_9">9</div>
+                    <div class="number _1st12 _1to18 even red" id="_12">12</div>
+
+                    <div class="number _1st12 _1to18 even black" id="_2">2</div>
+                    <div class="number _1st12 _1to18 odd red" id="_5">5</div>
+                    <div class="number _1st12 _1to18 even black" id="_8">8</div>
+                    <div class="number _1st12 _1to18 odd black" id="_11">11</div>
+
+                    <div class="number _1st12 _1to18 odd red" id="_1">1</div>
+                    <div class="number _1st12 _1to18 even black" id="_4">4</div>
+                    <div class="number _1st12 _1to18 odd red" id="_7">7</div>
+                    <div class="number _1st12 _1to18 even black" id="_10">10</div>
+                </div>
+                <div class="side-bets">
+                    <div class="bet top-bet" id="_1st12">1st 12</div>
+                    <div class="bet" id="_1to18">1 to 18</div>
+                    <div class="bet" id="even">EVEN</div>
+                </div>
+            </div>
+            <div class="column" id="column2">
+                <div class="numbers">
+                    <div class="number _2nd12 _1to18 odd black" id="_15">15</div>
+                    <div class="number _2nd12 _1to18 even red" id="_18">18</div>
+                    <div class="number _2nd12 _19to36 odd red" id="_21">21</div>
+                    <div class="number _2nd12 _19to36 even black" id="_24">24</div>
+
+                    <div class="number _2nd12 _1to18 even red" id="_14">14</div>
+                    <div class="number _2nd12 _1to18 odd black" id="_17">17</div>
+                    <div class="number _2nd12 _19to36 even black" id="_20">20</div>
+                    <div class="number _2nd12 _19to36 odd red" id="_23">23</div>
+
+                    <div class="number _2nd12 _1to18 odd black" id="_13">13</div>
+                    <div class="number _2nd12 _1to18 even red" id="_16">16</div>
+                    <div class="number _2nd12 _19to36 odd red" id="_19">19</div>
+                    <div class="number _2nd12 _19to36 even black" id="_21">22</div>
+                </div>
+                <div class="side-bets">
+                    <div class="bet top-bet" id="_2nd12">2nd 12</div>
+                    <div class="bet black" id="black">BLACK</div>
+                    <div class="bet red" id="red">RED</div>
+                </div>
+            </div>
+            <div class="column" id="column3">
+                <div class="numbers">
+                    <div class="number _3rd12 _19to36 odd red" id="_27">27</div>
+                    <div class="number _3rd12 _19to36 even red" id="_30">30</div>
+                    <div class="number _3rd12 _19to36 odd black" id="_33">33</div>
+                    <div class="number _3rd12 _19to36 even red" id="_36">36</div>
+
+                    <div class="number _3rd12 _19to36 even black" id="_26">26</div>
+                    <div class="number _3rd12 _19to36 odd black" id="_29">29</div>
+                    <div class="number _3rd12 _19to36 even red" id="_32">32</div>
+                    <div class="number _3rd12 _19to36 odd black" id="_35">35</div>
+
+                    <div class="number _3rd12 _19to36 odd red" id="_25">25</div>
+                    <div class="number _3rd12 _19to36 even black" id="_28">28</div>
+                    <div class="number _3rd12 _19to36 odd black" id="_31">31</div>
+                    <div class="number _3rd12 _19to36 even red" id="_34">34</div>
+                </div>
+                <div class="side-bets">
+                    <div class="bet top-bet" id="_3rd12">3rd 12</div>
+                    <div class="bet" id="odd">ODD</div>
+                    <div class="bet" id="_19to36">19 to 36</div>
+                </div>
+            </div>
+        </div>
+        <div class="spin-button">
+            <button disabled id="spin-button">SPIN</button>
+        </div>
+        <div class="clear-button">
+            <button disabled id="clear-button">CLEAR</button>
+        </div>
+        <div class="roulette-history-container">
+
+        </div>
+    </div>
+</body>
+
+</html>

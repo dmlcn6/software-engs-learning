@@ -1,0 +1,78 @@
+html {
+    background-color: seagreen;
+}
+
+.roulette-table-container {
+    display: grid;
+}
+
+.roulette-board-container {
+    display: grid;
+    grid-template-columns: 3% 1fr 1fr 1fr;
+    color: white;
+}
+
+
+.column {
+    font-size: 30px
+}
+
+#column1,
+#column2,
+#column3 {
+    display: grid;
+    border: solid gold 1px;
+}
+
+.numbers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.number {
+    text-align: center;
+}
+
+.top-bet {
+    grid-column: 1/3;
+}
+
+.left-side-bets {
+    display: grid;
+    text-align: right;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row: 1/4;
+    border: solid gold 2px;
+}
+
+.side-bets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    text-align: center;
+    border: solid gold 2px;
+}
+
+.top-bet,
+.bet {
+    display: grid;
+    border: solid gold 2px;
+    margin: 25px;
+}
+
+.black {
+    background-color: black;
+}
+
+.red {
+    background-color: red;
+}
+
+.roulette-history-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    color: white;
+    font-size: medium;
+}
