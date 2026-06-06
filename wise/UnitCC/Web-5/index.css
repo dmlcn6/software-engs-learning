@@ -1,0 +1,115 @@
+body {
+    background-color: green;
+}
+
+.selection-Category-Red {
+    background-color: red;
+}
+
+.selection-Category-Black {
+    background-color: black;
+}
+
+.information-Container {
+    display: grid;
+    grid-template-columns: 15% 15% 15% 55%;
+}
+
+.gameboard-Container1 {
+    display: grid;
+    grid-template-columns: 5% 5% 60% 10%;
+    grid-template-rows: 248px;
+}
+
+.gameboard-Container2 {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 100%;
+}
+
+.activeboard-Container {
+    display: grid;
+    grid-template-rows: 280% 100%;
+    color: white;
+    text-align: center;
+}
+
+.playboard-Container {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+}
+
+.selectionboard-Container {
+    display: grid;
+    grid-template-columns: 91%;
+    grid-template-rows: 50% 100%;
+}
+
+
+.chip-Pieces-Container {
+    color: white;
+}
+
+.slot {
+    text-align: center;
+    border: 2px, solid, blue;
+}
+
+._1to12Slots {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 125% 125% 125% 125%;
+}
+
+._13to24Slots {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 125% 125% 125% 125%;
+}
+
+._25to36Slots {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 125% 125% 125% 125%;
+}
+
+
+.category-Selections-Row-1 {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.category-Selections-Row-2 {
+    display: grid;
+    grid-template-columns: 16.5% 16.5% 16.5% 16.5% 16.5% 16.5%;
+}
+
+.category-Option {
+    border: solid rgb(0, 140, 255)
+}
+
+.history-Container {
+    display: grid;
+    grid-template-rows: 1fr;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#money-Count {
+    display: grid;
+    grid-template-columns: 20% 1fr
+}
+
+.custButtons {
+    background-color: black;
+    border: solid yellow;
+}
