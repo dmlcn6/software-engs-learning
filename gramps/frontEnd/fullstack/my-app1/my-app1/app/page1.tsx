@@ -1,5 +1,5 @@
 function MyButton() {
-    const result = [92,892,563];
+    const result = [91,892,563];
 
 
     return (
@@ -9,16 +9,13 @@ function MyButton() {
                 return (
                     <h1 key={x}>Hot Day {sum}</h1>
                 )
-            })}
 
-          <button>
-             IMMA
-          </button>
+            })}
         </div>
     )
 }
 
-function add(x:number, y:number) {
+function add(x, y) {
     return x+y;
 }
 
