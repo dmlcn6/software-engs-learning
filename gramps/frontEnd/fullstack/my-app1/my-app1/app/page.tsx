@@ -1,32 +1,47 @@
+"use client";
+
+import { JSX } from "react/jsx-runtime";
+
 function MyButton() {
-    const result = [92,892,563];
 
+  function handleClick() {
+    alert("AYAOOO");
+  }
 
-    return (
-        <div className="weather-data-hottest-2026">
-            {result.map(x => {
-                const sum = add(x,x);
-                return (
-                    <h1 key={x}>Hot Day {sum}</h1>
-                )
-            })}
-
-          <button>
-             IMMA
-          </button>
-        </div>
-    )
+  return (<button onClick={handleClick} className="bg-blue-500 rounded-md"> TEst </button>);
 }
 
-function add(x:number, y:number) {
-    return x+y;
+
+function basic() {
+  return "Kay!"
+}
+
+function MyComponent({header}: {header:string}) {
+
+  const products: {title:string, id:number}[] = [
+  { title: 'Cabbage', id: 1 },
+  { title: 'Garlic', id: 2 },
+  { title: 'Apple', id: 3 },
+];
+
+  const items: JSX.Element[] = products.map(element => 
+    <p key={element.id}>{element.title}</p>
+  )
+
+  return ( <div> <h1>{header}</h1> {items} </div> );
 }
 
 export default function MyApp() {
-    return (
-        <div>
-            <h1> Welcome</h1>
-            <MyButton />
-        </div>
-    )
+
+  const result = basic();
+
+  
+
+  return (
+    <div >
+      <p>{result}</p>
+      <MyButton />
+      <MyComponent header="WASSUP"/>
+    </div>
+  );
 }
