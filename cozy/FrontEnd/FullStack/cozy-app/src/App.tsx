@@ -23,13 +23,13 @@ const weekDays = ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat']
 
 function Day ({weekDay, dayNumber}: {weekDay: string, dayNumber: number}) {
   return (
-    <h3> {weekDay} {dayNumber}</h3>
+    <h3 className='day-component'> {weekDay} {dayNumber}</h3>
   )
 }
 
 function Weekdays() {
   return (
-    <div className='daysOfWeek'>
+    <div className='week-component'>
       {weekDays.map((day: string) => {
         return (<p> {day} </p>)
       })}
@@ -39,7 +39,7 @@ function Weekdays() {
 
 function Month({monthName, year}: {monthName: string, year: number}) {
   return (
-    <h1>{monthName} {year}</h1>
+    <h1 className='month-component'>{monthName} {year}</h1>
   )
 }
 
@@ -60,7 +60,7 @@ function Calendar() {
     <>
       <Month monthName={monthName} year={year}></Month>
       <Weekdays></Weekdays>
-      {dayComponentsList}
+      <div id='day-grid'>{dayComponentsList}</div>
     </>
   )
 }
