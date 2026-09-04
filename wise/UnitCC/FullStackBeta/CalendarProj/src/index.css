@@ -3,6 +3,16 @@
   color: white;
 }
 
+#mainContext{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#sideContext{
+  display: grid;
+  grid-template-columns: repeat(2, 50px);
+}
+
 #day-grid{
   display: grid;
   grid-template-columns: repeat(7, 1fr);

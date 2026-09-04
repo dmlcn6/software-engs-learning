@@ -30,6 +30,7 @@ function Selector({direction}: {direction: string}) {
   
   const arrow = direction === 'west' ? '<' : '>';
 
+
   return (
     <>
       <h6>{arrow}</h6>
@@ -62,31 +63,33 @@ function DaysOfWeek() {
   )
 }
 
-function Month({ month, year }: {month: string, year: number} ) {
+function Month({ month, year }: {month: string, year: number } ) {
   return (
-    <>
+    <div id='mainContext'>
       <h3>{month} {year}</h3>
-      <Selector direction='west'></Selector>
-      <Selector direction='east'></Selector>
-    </>
+      <div id='sideContext'>
+        <Selector direction='west'></Selector>
+        <Selector direction='east'></Selector>
+      </div>
+    </div>
   )
 }
 
 function Calendar() {
-  const [monthIndex, setMonthIndex] = useState(7);
+  const [monthIndex, setMonthIndex] = useState(1);
   // duplicative - const [numberOfDays, setNumOfDays] = useState(7);
 
-  //const monthIndex = 7
+  //const monthIndex = 7 -- (!! THIS IS NO LONGER NEEDED BECAUSE WERE USING STATE !!)
   const year = 2026
   const monthName = months[monthIndex]
   const numDays = monthsDays[monthIndex]
 
   return (
-    <CalendarContext value={monthIndex}>
+    <>
       <Month month={monthName} year={year}></Month>   
       <DaysOfWeek></DaysOfWeek>
       <Days numDays={numDays}></Days>
-    </CalendarContext>
+    </>
   )
 }
 
