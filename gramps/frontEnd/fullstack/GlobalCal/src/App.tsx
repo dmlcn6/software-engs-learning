@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './App.css'
+import CalendarContext from './CalendarContext';
 
 
 //1. identify your components
@@ -92,6 +93,30 @@ function DaysOfWeek() {
   )
 }
 
+function UsernameInput() {
+
+  function handleSubmitForm(e: React.SubmitEvent<HTMLFormElement>): void {
+    e.preventDefault();
+    const inputElement = e.target.elements.namedItem('uname') ?? null ;
+    let value = '';
+
+    if (inputElement) {
+      value = inputElement.value;
+    }
+    localStorage.setItem('uname', value);
+  }
+
+  // use context for username
+  const uname = useContext(CalendarContext);
+
+  return (
+    <form onSubmit={(e) => handleSubmitForm(e)}>
+      {uname}
+      <input name='uname'></input>
+    </form>
+  )
+}
+
 function Month({i, monthName, year, updateMonthIndex}: {i:number, monthName:string, year:number, updateMonthIndex: (x:number) => void}) {
 
   return (
@@ -99,6 +124,7 @@ function Month({i, monthName, year, updateMonthIndex}: {i:number, monthName:stri
       <h1 className='month-comp'> {monthName} {year} </h1>
       <Selector i={i} direction={0} updateMonthIndex={updateMonthIndex}></Selector>
       <Selector i={i} direction={1} updateMonthIndex={updateMonthIndex}></Selector>
+      <UsernameInput></UsernameInput>
     </div>
   )
 }
@@ -127,10 +153,15 @@ function Calendar() {
 }
 
 function App() {
+  //first load in localstorage username
+  const uname = localStorage.getItem('uname') ?? 'testing12';
+  
+  
   return (
-    <>
+    // store it in the context
+    <CalendarContext value={uname}>
       <Calendar></Calendar>
-    </>
+    </CalendarContext>
   )
 }
 

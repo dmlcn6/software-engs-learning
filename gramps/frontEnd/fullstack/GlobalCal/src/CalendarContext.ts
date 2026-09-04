@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const CalendarContext = createContext(0);
+const CalendarContext = createContext('test');
 
 export default CalendarContext;
