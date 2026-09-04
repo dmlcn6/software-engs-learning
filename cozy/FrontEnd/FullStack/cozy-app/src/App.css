@@ -9,4 +9,9 @@
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(1, 7fr);
 }
+.month-selector-component {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+}
 
