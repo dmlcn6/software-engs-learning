@@ -15,7 +15,7 @@ import CalendarContext from './CalendarContext.ts'
  Use components
  use arrays / list / objects
  parent child nesting
- use state and reducer / context
+ use state 
  input form to take in a username
  local storage api - save a user session once they have inputted the form 
  (even if the user has closed out and reopened the webpage)
@@ -34,10 +34,18 @@ function Selector({direction, currentMonth, updateMonth}: {direction: string, cu
     if (direction == "west")
     {
       //decrement month state
-      updateMonth(currentMonth - 1);
+      if (currentMonth == 0) {
+        updateMonth(11);
+      } else {
+        updateMonth(currentMonth - 1);
+      }
     } else {
       //increment month state
-      updateMonth(currentMonth + 1);
+      if (currentMonth == 11) {
+        updateMonth(0);
+      } else {
+        updateMonth(currentMonth + 1);
+      }
     }
   }
 
