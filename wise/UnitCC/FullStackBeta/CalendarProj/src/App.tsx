@@ -26,14 +26,25 @@ const months = ['January','February', 'March', 'April', 'May', 'June', 'July', '
 const monthsDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
 
-function Selector({direction}: {direction: string}) {
+function Selector({direction, currentMonth, updateMonth}: {direction: string, currentMonth: number, updateMonth: (x:number) => void}) {
   
   const arrow = direction === 'west' ? '<' : '>';
+
+  function clickHandler() {
+    if (direction == "west")
+    {
+      //decrement month state
+      updateMonth(currentMonth - 1);
+    } else {
+      //increment month state
+      updateMonth(currentMonth + 1);
+    }
+  }
 
 
   return (
     <>
-      <h6>{arrow}</h6>
+      <h6 onClick={ () => clickHandler() }>{arrow}</h6>
     </>
   )
 }
@@ -63,13 +74,16 @@ function DaysOfWeek() {
   )
 }
 
-function Month({ month, year }: {month: string, year: number } ) {
+function Month({ monthIndex, year, updateMonth }: {monthIndex: number, year: number, updateMonth: (x:number) => void } ) {
+  
+  const monthName = months[monthIndex]
+  
   return (
     <div id='mainContext'>
-      <h3>{month} {year}</h3>
+      <h3>{monthName} {year}</h3>
       <div id='sideContext'>
-        <Selector direction='west'></Selector>
-        <Selector direction='east'></Selector>
+        <Selector direction='west' currentMonth={monthIndex} updateMonth={updateMonth}></Selector>
+        <Selector direction='east' currentMonth={monthIndex} updateMonth={updateMonth}></Selector>
       </div>
     </div>
   )
@@ -81,12 +95,11 @@ function Calendar() {
 
   //const monthIndex = 7 -- (!! THIS IS NO LONGER NEEDED BECAUSE WERE USING STATE !!)
   const year = 2026
-  const monthName = months[monthIndex]
   const numDays = monthsDays[monthIndex]
 
   return (
     <>
-      <Month month={monthName} year={year}></Month>   
+      <Month monthIndex={monthIndex} year={year} updateMonth={setMonthIndex}></Month>  
       <DaysOfWeek></DaysOfWeek>
       <Days numDays={numDays}></Days>
     </>
