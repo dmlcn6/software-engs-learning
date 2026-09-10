@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import './App.css'
-import CalendarContext from './CalendarContext.ts'
+import CalendarContext from './CalendarContext'
 
 //1. identify your components
 //2. identify your behaviours/states
@@ -26,7 +26,32 @@ const months = ['January','February', 'March', 'April', 'May', 'June', 'July', '
 const monthsDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
 
-function Selector({direction, currentMonth, updateMonth}: {direction: string, currentMonth: number, updateMonth: (x:number) => void}) {
+function UsernameEntry() {
+
+  function handleForm(e: React.SubmitEvent<HTMLFormElement>): void {
+    e.preventDefault();
+    const entryElement = e.target.elements.namedItem('username') ?? null ;
+    let value = '';
+
+    if (entryElement) {
+      value = entryElement.value ;
+    }
+    localStorage.setItem('username', value);
+  }
+
+  // using the context for username
+  const username = useContext(CalendarContext);
+
+  return (
+    <form onSubmit={(e) => handleForm(e)}>
+      {username}
+      <input name='username'></input>
+    </form>
+  )
+
+}
+
+function Selector({ direction, currentMonth, updateMonth }: { direction: string, currentMonth: number, updateMonth: (x: number) => void }) {
   
   const arrow = direction === 'west' ? '<' : '>';
 
@@ -92,6 +117,7 @@ function Month({ monthIndex, year, updateMonth }: {monthIndex: number, year: num
       <div id='sideContext'>
         <Selector direction='west' currentMonth={monthIndex} updateMonth={updateMonth}></Selector>
         <Selector direction='east' currentMonth={monthIndex} updateMonth={updateMonth}></Selector>
+        <UsernameEntry></UsernameEntry>
       </div>
     </div>
   )
@@ -115,10 +141,12 @@ function Calendar() {
 }
 
 function App() {
+  const username = localStorage.getItem('username') ?? 'John'
+  
   return (
-    <>
+    <CalendarContext value={username}>
       <Calendar></Calendar>
-    </>
+    </CalendarContext>
   )
 }
 

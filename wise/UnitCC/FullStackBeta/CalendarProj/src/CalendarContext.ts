@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const CalendarContext = createContext(0);
+const CalendarContext = createContext('John Smith');
 
 export default CalendarContext;
