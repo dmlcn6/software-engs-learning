@@ -1,0 +1,17 @@
+#day-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+#week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows:  repeat(1, 7fr);
+}
+
+#month-grid {
+    display: grid;
+    grid-template-columns: 4fr 2fr 1fr 1fr;
+    grid-template-rows: 8fr;
+}
