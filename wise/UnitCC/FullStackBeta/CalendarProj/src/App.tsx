@@ -141,7 +141,7 @@ function Calendar() {
 }
 
 function App() {
-  const username = localStorage.getItem('username') ?? 'John'
+  const username = localStorage.getItem('username') ?? 'Enter your name here'
   
   return (
     <CalendarContext value={username}>
