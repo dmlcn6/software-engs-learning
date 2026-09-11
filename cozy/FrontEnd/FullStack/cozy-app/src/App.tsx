@@ -15,7 +15,7 @@ import { useState } from "react";
  --parent child nesting
  --use state and reducer / context
  --input form to take in a username
- local storage api - save a user session once they have inputted the form 
+ --local storage api - save a user session once they have inputted the form 
  (even if the user has closed out and reopened the webpage)
 */
 
@@ -28,8 +28,13 @@ function UsernameInput() {
 
   function handleSubmitForm(e: React.SubmitEvent<HTMLFormElement>): void {
     e.preventDefault();
-    const inputElement = e.target.elements.namedItem('uname')
-    console.log(inputElement.value)
+    const inputElement = e.target.elements.namedItem('uname');
+    let value = '';
+    
+    if (inputElement) {
+      value = inputElement.value;
+    }
+    localStorage.setItem('uname', value )
   }
   return (
     <form onSubmit={(e) => handleSubmitForm(e)}>
