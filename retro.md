@@ -181,3 +181,22 @@ Things to think about?
 
 motavation?
 - STAY THE COURSE
+
+
+
+went 7 weeks learning deep diving into react concepts and paradigms
+
+sprint 18 - 8/27 - 9/10
+- what went well
+	- no hiccups with schedule
+	- stress free
+	- Thinking in React module helped
+	- AC were targeted to what we learned
+	- creative project idea
+- what didnt go well
+	- slow start to mocking up the project
+	- lets stick closer to AC, 
+- what to think about
+	- use excalidraw more
+	- React modules all in pure JS, then we built the proj in React w TS was a bit jarring, but was slightly familar because we had transitioned from js -> ts
+	- steam game - 1970s coder, looking for a ; in the game

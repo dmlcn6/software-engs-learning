@@ -29,24 +29,26 @@ const monthsDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
 
 function Selector({i, direction, updateMonthIndex}: {i: number, direction: number, updateMonthIndex: (x:number) =>  void}) {
+  const func = useContext(CalendarContext);
+  
   function handleClick() {
     if (direction) {
       if (i == 11) {
-        updateMonthIndex(0)
+        func(0)
       
       }else {
         // increment month index
-        updateMonthIndex(i+1)
+        func(i+1)
       }
       
     }
     else {
       if (i == 0) {
-        updateMonthIndex(11)
+        func(11)
       }
       else {
       // decrement month index
-      updateMonthIndex(i-1)
+      func(i-1)
       }
 
     }
@@ -129,8 +131,8 @@ function Month({i, monthName, year, updateMonthIndex}: {i:number, monthName:stri
   )
 }
 
-function Calendar() {
-    const [monthIndex, setMonthIndex] = useState(7);
+function Calendar({monthIndex}: {monthIndex:number}) {
+    //const [monthIndex, setMonthIndex] = useState(7);
     // duplicative - const [numberOfDays, setNumOfDays] = useState(7);
 
     //change static data that will flow between comps into state
@@ -143,7 +145,7 @@ function Calendar() {
 
     return (
       <>
-        <Month i={monthIndex} monthName={monthName} year={year} updateMonthIndex={setMonthIndex}></Month>
+        <Month i={monthIndex} monthName={monthName} year={year} updateMonthIndex={() => {}}></Month>
 
         <DaysOfWeek></DaysOfWeek>
 
@@ -154,13 +156,13 @@ function Calendar() {
 
 function App() {
   //first load in localstorage username
-  const uname = localStorage.getItem('uname') ?? 'testing12';
-  
+  //const uname = localStorage.getItem('uname') ?? 'testing12';
+  const [monthIndex, setMonthIndex] = useState(7);
   
   return (
     // store it in the context
-    <CalendarContext value={uname}>
-      <Calendar></Calendar>
+    <CalendarContext value={setMonthIndex}>
+      <Calendar monthIndex={monthIndex}></Calendar>
     </CalendarContext>
   )
 }
