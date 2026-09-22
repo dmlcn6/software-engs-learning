@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 
 //1. identify your components
 //2. identify your behaviours/states
@@ -22,6 +22,23 @@ import { useState } from "react";
 const months = ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 const monthsDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 const weekDays = ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat']
+
+type CalendarState = { monthIndex: number };
+
+type CalendarAction =
+  | { type: 'NEXT_MONTH' }
+  | { type: 'PREV_MONTH' };
+
+function calendarReducer(state: CalendarState, action: CalendarAction): CalendarState {
+  switch (action.type) {
+    case 'NEXT_MONTH':
+      return { monthIndex: state.monthIndex === 11 ? 0 : state.monthIndex + 1 };
+    case 'PREV_MONTH':
+      return { monthIndex: state.monthIndex === 0 ? 11 : state.monthIndex - 1 };
+    default:
+      return state;
+  }
+}
  
 
 function UsernameInput() {
@@ -31,7 +48,7 @@ function UsernameInput() {
     const inputElement = e.target.elements.namedItem('uname');
     let value = '';
     
-    if (inputElement) {
+    if (inputElement instanceof HTMLInputElement) {
       value = inputElement.value;
     }
     localStorage.setItem('uname', value )
@@ -43,27 +60,11 @@ function UsernameInput() {
   )
 }
 
-function MonthSelector({i, direction, updateMonthIndex}: {i: number, direction: number, updateMonthIndex: (x:number) => void}) {
+function MonthSelector({direction, dispatch}: {direction: number, dispatch: React.Dispatch<CalendarAction>}) {
   
   function handleClick() {
-    if (direction) {
-      if (i == 11) {
-        updateMonthIndex(0)
-      } else {
-        // increment month index
-        updateMonthIndex(i+1)
-      }
-    } else {
-      if (i==0) {
-        updateMonthIndex(11)
-      } else {
-        // decrement month index
-        updateMonthIndex(i-1)
-      }
-    }
+    dispatch({ type: direction ? 'NEXT_MONTH' : 'PREV_MONTH' });
   }
-  
-  
   
   const arrow = direction == 0 ? '<' : '>';
   return (
@@ -89,12 +90,12 @@ function Weekdays() {
   )
 }
 
-function Month({i, monthName, year, updateMonthIndex}: {i:number, monthName: string, year: number, updateMonthIndex: (x:number) => void}) {
+function Month({monthName, year, dispatch}: {monthName: string, year: number, dispatch: React.Dispatch<CalendarAction>}) {
   return (
     <div>
       <h1 className='month-component'>{monthName} {year}</h1>
-      <MonthSelector i={i} direction={0} updateMonthIndex={updateMonthIndex}></MonthSelector>
-      <MonthSelector i={i} direction={1} updateMonthIndex={updateMonthIndex}></MonthSelector>
+      <MonthSelector direction={0} dispatch={dispatch}></MonthSelector>
+      <MonthSelector direction={1} dispatch={dispatch}></MonthSelector>
       <UsernameInput></UsernameInput>
     </div>
   )
@@ -102,10 +103,11 @@ function Month({i, monthName, year, updateMonthIndex}: {i:number, monthName: str
 
 function Calendar() {
 
-  const [monthIndex, setMonthIndex] = useState(7);
+  const [state, dispatch] = useReducer(calendarReducer, { monthIndex: 7 });
+  const { monthIndex } = state;
+  const [year] = useState(2026);
   const monthName = months[monthIndex];
   const days = monthsDays[monthIndex];
-  const year = 2026
   const dayComponentsList = [];
 
   for (let index = 0; index < days; index++) {
@@ -115,7 +117,7 @@ function Calendar() {
 
   return (
     <>
-      <Month i={monthIndex} monthName={monthName} year={year} updateMonthIndex={setMonthIndex}></Month>
+      <Month monthName={monthName} year={year} dispatch={dispatch}></Month>
       <Weekdays></Weekdays>
       <div id='day-grid'>{dayComponentsList}</div>
     </>
