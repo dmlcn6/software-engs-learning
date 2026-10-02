@@ -5,16 +5,86 @@
 --CREATE DATABASE expenses;
 USE expenses;
 
+---------------------------------------------
+---------------------------------------------
 --CREATE TABLE users (
 --    name   VARCHAR (20),
 --    Income INT         ,
 --    ID     INT          IDENTITY (1, 1) PRIMARY KEY
 --);
-CREATE TABLE services (
-    name     VARCHAR (50),
-    category VARCHAR (50),
-    price    INT         ,
-    dueDate  DATE        ,
-    UserID   INT         ,
-    CONSTRAINT fk_users FOREIGN KEY (userID) REFERENCES users (ID)
-);
+---------------------------------------------
+---------------------------------------------
+-- INSERT  INTO users
+-- VALUES ('user1', 5000);
+---------------------------------------------
+--ALTER TABLE users
+--ADD occupation varchar(50);
+---------------------------------------------
+--UPDATE users
+--SET    occupation = 'Plumber'
+--WHERE  ID = 1;
+---------------------------------------------
+--ALTER TABLE users 
+--ALTER COLUMN occupation VARCHAR (50) NOT NULL
+---------------------------------------------
+--INSERT  INTO users
+--VALUES ('user2', 1000, 'Cashier')
+---------------------------------------------
+--INSERT INTO users
+--VALUES ('user3', 50000, 'Napper')
+---------------------------------------------
+--INSERT INTO users
+--VALUES ('user4', 35, 'Doctor')
+---------------------------------------------
+---------------------------------------------
+--SELECT *
+--FROM   users;
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+--CREATE TABLE services (
+--    ID       INT          IDENTITY (1, 1) PRIMARY KEY,
+--    name     VARCHAR (50),
+--    category VARCHAR (50),
+--    price    INT         ,
+--    dueDate  DATE        ,
+--    UserID   INT         ,
+--    CONSTRAINT fk_users FOREIGN KEY (userID) REFERENCES users (ID)
+--);
+---------------------------------------------
+---------------------------------------------
+--INSERT  INTO services
+--VALUES ('Nord', 'Personal', 30, '2026-07-25', 1),
+--       ('CarWash', 'Personal', 15, '2026-07-01', 4);
+---------------------------------------------
+---------------------------------------------
+--DELETE services;
+--WHERE  ID > 2;
+---------------------------------------------
+---------------------------------------------
+--SELECT *
+--FROM   users;
+--
+SELECT *
+FROM   services;
+
+
+--
+--SELECT u.Name,
+--       u.Income,
+--       s.name,
+--       s.category,
+--       s.price
+--FROM   services AS s
+--       INNER JOIN
+--       users AS u
+--       ON s.UserID = u.ID;
