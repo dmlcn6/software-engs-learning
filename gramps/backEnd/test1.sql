@@ -51,8 +51,10 @@ USE expenses;
 --         ('\"Party Favors \"', 'Leisure', 200, '2026-01-01' , 3);
 
 
-select * from services;
-select * from users;
+select * from services; -- a uncountable amount of users 
+select * from users; -- a user will have a countable amount of services
+
+-- bound on one side, users
 
 SELECT  u.name,
         u.income,
@@ -61,3 +63,5 @@ SELECT  u.name,
         s.price FROM SERVICES AS s
 INNER JOIN users AS u ON s.userId = u.id
 WHERE u.id = 4;
+
+
