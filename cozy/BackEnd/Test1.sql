@@ -47,8 +47,6 @@ SELECT *
 FROM   Services;
 
 SELECT u.Name,
-       u.Income,
-       s.NameOfService,
        s.Category,
        s.Price
 FROM   Services AS s
