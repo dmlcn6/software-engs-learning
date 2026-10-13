@@ -14,9 +14,21 @@ const pool = {
    driver: "ODBC Driver 18 for SQL Server", // Uncomment to use specific driver
 };
 
+const config1 = {
+  server: 'localhost',
+  connectionString:
+    'Driver={ODBC Driver 18 for SQL Server};' +
+    'Server=localhost;' +
+    'Database=expenses;' +
+    'Trusted_Connection=Yes;' +
+    'Encrypt=Yes;' +
+    'TrustServerCertificate=Yes;',
+  requestTimeout: 30000
+};
+
 (async () => {
   try {
-    await sql.connect(pool);
+    await sql.connect(config1);
     const result = await sql.query`select * from services`;
     console.dir(result);
   } catch (err) {
@@ -35,6 +47,24 @@ app.get('/bingbong',
             "apiVersion": "1.0.0"
         });
     }
+);
+
+app.get(
+  '/api/users',
+  async (req, res) => {
+    try{
+      const result = await sql.query`select * from users`;
+
+      res.status(200).send(result);
+    }
+    catch (error) {
+      // log to internal logs
+      // log stack trace
+      // show generic message to users
+      // wont expose data/paths/stack trace
+      res.status(500).send({"error": "server not responding"})
+    }
+  }
 );
 
 //post call for api/id
