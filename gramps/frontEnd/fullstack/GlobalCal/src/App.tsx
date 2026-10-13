@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import axios from 'axios';
 import './App.css'
 import CalendarContext from './CalendarContext';
 
@@ -22,6 +23,26 @@ import CalendarContext from './CalendarContext';
  local storage api - save a user session once they have inputted the form 
  (even if the user has closed out and reopened the webpage)
 */
+
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  timeout: 10000,
+});
+
+const fetchUsers = async () => {
+  try {
+    const data = await api.get('/api/users');
+
+    console.dir(data);
+  }
+  catch (error) {
+    console.log(error);   
+  }
+}
+
 
 // we want to start small, display one month
 const months = ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
@@ -155,6 +176,8 @@ function Calendar({monthIndex}: {monthIndex:number}) {
 }
 
 function App() {
+  fetchUsers();
+
   //first load in localstorage username
   //const uname = localStorage.getItem('uname') ?? 'testing12';
   const [monthIndex, setMonthIndex] = useState(7);

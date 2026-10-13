@@ -15,6 +15,7 @@ const config = {
   },
     driver: 'msnodesqlv8',
 };
+
 const config1 = {
   server: 'localhost',
   connectionString:
@@ -29,14 +30,23 @@ const config1 = {
 (async () => {
   try {
     await sql.connect(config1);
-    const result = await sql.query`select * from users`;
-    console.dir(result);
   } catch (err) {
     console.error(err);
   }
 })();
 
 
+// we want to add  middleware forthe CORS FE error
+// npm install cors
+/*
+
+// Enable CORS for your specific frontend origin
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true // Include this if your frontend requests cookies/sessions
+}));
+*/
 
 app.use(express.json());
 
@@ -48,6 +58,27 @@ app.get(
         });
     }
 );
+
+app.get(
+    '/api/users',
+    async (req, res) => {
+
+        try {
+            const result = await sql.query`select * from users`;
+            
+            res.status(200).send(result);
+        }
+        catch{
+            // log to our internal logs
+            // log stack trace 
+
+
+            // show a generic error message to user
+            // wont expose server data/paths/stack trace
+            res.status(500).send({"error": "maybe your server is down? try starting ithhhmm?"})
+        }
+    }
+)
 
 
 // post call for api/version
@@ -73,7 +104,7 @@ app.post(
 );
 
 app.listen(
-    PORT, 
+    PORT,
     () => console.log(`hello from http://127.0.0.1:${PORT}`)
 );
 
