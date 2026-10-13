@@ -12,6 +12,11 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "msnodesqlv8": "^5.5.0",
+    "mssql": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/mssql": "^12.3.0"
   }
 }
