@@ -1,5 +1,6 @@
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PORT = 8000;
 
@@ -41,12 +42,13 @@ const config1 = {
 /*
 
 // Enable CORS for your specific frontend origin
+*/
 app.use(cors({
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true // Include this if your frontend requests cookies/sessions
+  //credentials: true // Include this if your frontend requests cookies/sessions
 }));
-*/
+
 
 app.use(express.json());
 
