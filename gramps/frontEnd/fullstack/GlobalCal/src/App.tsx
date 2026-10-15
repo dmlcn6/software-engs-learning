@@ -32,15 +32,28 @@ const api = axios.create({
   timeout: 10000,
 });
 
-const fetchUsers = async () => {
+const fetchUsers = async ():Promise<Array<unknown>> => {
+  
+  let users = [];
+
   try {
     const data = await api.get('/api/users');
+    
 
+    // this is nice, but not enough
     console.dir(data);
+
+    users = data.data.recordset;
+    
+    console.dir(users)
+
+    
   }
   catch (error) {
     console.log(error);   
   }
+  
+  return users;
 }
 
 
@@ -152,7 +165,7 @@ function Month({i, monthName, year, updateMonthIndex}: {i:number, monthName:stri
   )
 }
 
-function Calendar({monthIndex}: {monthIndex:number}) {
+function Calendar({monthIndex, monthData}: {monthIndex:number, monthData: unknown[]}) {
     //const [monthIndex, setMonthIndex] = useState(7);
     // duplicative - const [numberOfDays, setNumOfDays] = useState(7);
 
@@ -176,7 +189,9 @@ function Calendar({monthIndex}: {monthIndex:number}) {
 }
 
 function App() {
-  fetchUsers();
+  const results = fetchUsers();
+
+  console.dir(`results are ${results}`);
 
   //first load in localstorage username
   //const uname = localStorage.getItem('uname') ?? 'testing12';
@@ -185,7 +200,7 @@ function App() {
   return (
     // store it in the context
     <CalendarContext value={setMonthIndex}>
-      <Calendar monthIndex={monthIndex}></Calendar>
+      <Calendar monthData={results} monthIndex={monthIndex}></Calendar>
     </CalendarContext>
   )
 }
