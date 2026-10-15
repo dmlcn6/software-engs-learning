@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import axios from 'axios';
 import './App.css'
 import CalendarContext from './CalendarContext';
 
@@ -22,6 +23,39 @@ import CalendarContext from './CalendarContext';
  local storage api - save a user session once they have inputted the form 
  (even if the user has closed out and reopened the webpage)
 */
+
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  timeout: 10000,
+});
+
+const fetchUsers = async ():Promise<Array<unknown>> => {
+  
+  let users = [];
+
+  try {
+    const data = await api.get('/api/users');
+    
+
+    // this is nice, but not enough
+    console.dir(data);
+
+    users = data.data.recordset;
+    
+    console.dir(users)
+
+    
+  }
+  catch (error) {
+    console.log(error);   
+  }
+  
+  return users;
+}
+
 
 // we want to start small, display one month
 const months = ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
@@ -131,7 +165,7 @@ function Month({i, monthName, year, updateMonthIndex}: {i:number, monthName:stri
   )
 }
 
-function Calendar({monthIndex}: {monthIndex:number}) {
+function Calendar({monthIndex, monthData}: {monthIndex:number, monthData: unknown[]}) {
     //const [monthIndex, setMonthIndex] = useState(7);
     // duplicative - const [numberOfDays, setNumOfDays] = useState(7);
 
@@ -155,6 +189,10 @@ function Calendar({monthIndex}: {monthIndex:number}) {
 }
 
 function App() {
+  const results = fetchUsers();
+
+  console.dir(`results are ${results}`);
+
   //first load in localstorage username
   //const uname = localStorage.getItem('uname') ?? 'testing12';
   const [monthIndex, setMonthIndex] = useState(7);
@@ -162,7 +200,7 @@ function App() {
   return (
     // store it in the context
     <CalendarContext value={setMonthIndex}>
-      <Calendar monthIndex={monthIndex}></Calendar>
+      <Calendar monthData={results} monthIndex={monthIndex}></Calendar>
     </CalendarContext>
   )
 }
