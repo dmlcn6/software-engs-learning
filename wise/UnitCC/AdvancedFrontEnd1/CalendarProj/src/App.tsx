@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import axios from 'axios';
 import './App.css'
 import CalendarContext from './CalendarContext'
 
@@ -8,7 +9,7 @@ import CalendarContext from './CalendarContext'
 // ^^^^^^^^ THATS ALL MOCK UP ^^^^^^^
 //4. build simple static version with mock data.  do not use state yet, only component props when needed
 //5. identify your minimal state data (minimal set of changing data that your app needs to remember)
-//6. identify where your state lives 
+//6. identify where your state lives
 
 
 /* AC
@@ -20,6 +21,25 @@ import CalendarContext from './CalendarContext'
  local storage api - save a user session once they have inputted the form 
  (even if the user has closed out and reopened the webpage)
 */
+
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  timeout: 10000,
+});
+
+const fetchUsers = async () => {
+  try {
+    const data = await api.get('/api/users');
+
+    console.dir(data);
+  }
+  catch (error) {
+    console.dir(error);
+  };
+}
 
 // we want to start small, display one month
 const months = ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
@@ -34,7 +54,7 @@ function UsernameEntry() {
     let value = '';
 
     if (entryElement) {
-      value = entryElement.value ;
+      value = entryElement.value;
     }
     localStorage.setItem('username', value);
   }
@@ -141,6 +161,7 @@ function Calendar() {
 }
 
 function App() {
+  fetchUsers()
   const username = localStorage.getItem('username') ?? 'Enter your name here'
   
   return (
