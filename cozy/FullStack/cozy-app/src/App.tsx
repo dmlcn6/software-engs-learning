@@ -1,4 +1,5 @@
 import { useReducer, useState } from "react";
+import axios from 'axios';
 
 //1. identify your components
 //2. identify your behaviours/states
@@ -18,6 +19,35 @@ import { useReducer, useState } from "react";
  --local storage api - save a user session once they have inputted the form 
  (even if the user has closed out and reopened the webpage)
 */
+
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  timeout: 10000,
+});
+
+const fetchUsers = async (): Promise<Array<unknown>> => {
+
+  let users = [];
+
+  try {
+    const data = await api.get('/api/users')
+
+    console.dir(data);
+
+    users = data.data.recordset;
+    console.dir(users);
+
+    return users;
+  }
+  catch (error) {
+    console.dir(error)
+  }
+
+  return users;
+}
 
 const months = ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 const monthsDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
@@ -125,6 +155,10 @@ function Calendar() {
 }
 
 export default function App() {
+  const results = fetchUsers();
+
+  console.dir(`results are ${results}`)
+
   return (
     <>
       <Calendar></Calendar>
