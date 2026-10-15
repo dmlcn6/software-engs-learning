@@ -28,15 +28,25 @@ const api = axios.create({
   timeout: 10000,
 });
 
-const fetchUsers = async () => {
+const fetchUsers = async (): Promise<Array<unknown>> => {
+
+  let users = [];
+
   try {
     const data = await api.get('/api/users')
 
     console.dir(data);
+
+    users = data.data.recordset;
+    console.dir(users);
+
+    return users;
   }
   catch (error) {
-    console.log(error)
+    console.dir(error)
   }
+
+  return users;
 }
 
 const months = ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
@@ -145,7 +155,9 @@ function Calendar() {
 }
 
 export default function App() {
-  fetchUsers()
+  const results = fetchUsers();
+
+  console.dir(`results are ${results}`)
 
   return (
     <>

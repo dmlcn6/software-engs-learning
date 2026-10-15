@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PORT = 8000;
 
@@ -29,8 +30,7 @@ const config1 = {
 (async () => {
   try {
     await sql.connect(config1);
-    const result = await sql.query`select * from services`;
-    console.dir(result);
+    
   } catch (err) {
     console.dir(err);
   }
@@ -38,6 +38,13 @@ const config1 = {
   
   }
 })();
+
+
+//enables cors for front end origin
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 
 app.use(express.json())
 
