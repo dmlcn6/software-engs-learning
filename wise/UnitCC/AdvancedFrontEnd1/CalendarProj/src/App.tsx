@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import axios from 'axios';
 import './App.css'
 import CalendarContext from './CalendarContext'
 
@@ -22,7 +23,7 @@ import CalendarContext from './CalendarContext'
 */
 
 const api = axios.create({
-  baseURL: 'localhost:8000',
+  baseURL: 'http://127.0.0.1:8000',
   headers: {
     'Content-Type': 'application/json'
   },
@@ -35,9 +36,9 @@ const fetchUsers = async () => {
 
     console.dir(data);
   }
-  catch {
-    console.log(error);
-  }
+  catch (error) {
+    console.dir(error);
+  };
 }
 
 // we want to start small, display one month
@@ -53,7 +54,7 @@ function UsernameEntry() {
     let value = '';
 
     if (entryElement) {
-      value = entryElement.value ;
+      value = entryElement.value;
     }
     localStorage.setItem('username', value);
   }

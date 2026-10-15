@@ -1,6 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const PORT = 8080;
+const PORT = 8000;
 
 
 const sql = require('mssql/msnodesqlv8');
@@ -23,6 +24,13 @@ const config1 = {
         console.error(err)
     }
 })();
+
+
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
+
 
 app.use(express.json());
 
